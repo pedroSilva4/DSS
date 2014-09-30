@@ -9,9 +9,12 @@ package business_layer;
  */
 
 import business_layer.ComparatorNome;
+import data_layer.EmpresaDAO;
 import java.util.*;
 import java.io.*;
 import java.lang.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EmpresaZeca implements Serializable {
   
@@ -242,31 +245,22 @@ public class EmpresaZeca implements Serializable {
     return new EmpresaZeca(this);
   }
   
-  
-  //Métodos para gravar em ficheiro de objecto e de texto
-  /*
-  public void gravaObj(String fich) throws IOException {
-      ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fich));
-      
-      oos.writeObject(this);
-      oos.flush(); //limpa o buff
-      oos.close(); //fecha o ficheiro
+  public void save() throws IOException 
+  {
+     
+          EmpresaDAO.save(this, "empresa.dat");   
   }
   
-  public void readObj()throws IOException{
-      EmpresaZeca ez;
-      ObjectInputStream is = new ObjectInputStream(new FileInputStream("Empresa"));
-      
-      ez = (EmpresaZeca) is.readObject();
-      is.close();
-    
-    }
-  
-    public void gravaTxt(String fich) throws IOException {
-      PrintWriter pw = new PrintWriter(fich);
-      pw.print(this);
-      pw.flush(); pw.close();
+  public static EmpresaZeca load() throws IOException, FileNotFoundException, ClassNotFoundException
+  {
+     EmpresaZeca emp = new EmpresaZeca(EmpresaDAO.load("empresa.dat"));
+      return emp;
   }
-  */
+  
+  
+  
+  
+  
+  
     
 }
