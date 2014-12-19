@@ -34,11 +34,11 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setCandidatura(Object aCandidatura) {
+	public void setCandidatura(Candidatura aCand) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void addCandidatura(Object aCandidatura) {
+	public void addCandidatura(Candidatura aCand) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -114,11 +114,11 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean addVolunt‡rio(String aNome, String aRua, String aLocal, String aCod_postal, String aProfissao, String aContacto) {
+	public boolean addVoluntario(String aNome, String aRua, String aLocal, String aCod_postal, String aProfissao, String aContacto) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Voluntario getVolunt‡rio(Object aId) {
+	public Voluntario getVoluntario(String aId) {
 		throw new UnsupportedOperationException();
 	}
 

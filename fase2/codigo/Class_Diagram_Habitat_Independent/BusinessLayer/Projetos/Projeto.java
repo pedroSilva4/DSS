@@ -35,27 +35,19 @@ public class Projeto {
 		throw new UnsupportedOperationException();
 	}
 
-	public Projeto(Object aDescricao) {
+	public Projeto(String aDescricao) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Date getDataI() {
-		return this._dataI;
-	}
-
-	public void getDataF() {
+	public Callendar getDataI() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setDataF(Object aDataF) {
+	public Callendar getDataF() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void getAttribute() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void setAttribute(Object aAttribute) {
+	public void setDataF(Callendar aDataF) {
 		throw new UnsupportedOperationException();
 	}
 }

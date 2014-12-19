@@ -8,11 +8,11 @@ public class VoluntarioDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean contains(Object aId) {
+	public boolean contains(String aId) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Voluntario get(Object aId) {
+	public Voluntario get(String aId) {
 		throw new UnsupportedOperationException();
 	}
 

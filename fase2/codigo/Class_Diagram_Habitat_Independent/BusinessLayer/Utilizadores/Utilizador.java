@@ -46,8 +46,8 @@ public class Utilizador {
 		return this._morada;
 	}
 
-	public void setMorada(Object aMorada_m) {
-		throw new UnsupportedOperationException();
+	public void setMorada(Morada aM) {
+		this._morada = aM;
 	}
 
 	public String getTipo() {

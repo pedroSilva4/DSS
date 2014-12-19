@@ -5,7 +5,7 @@ import Class_Diagram_Habitat_Independent.BusinessLayer.Eventos.*;
 
 public class EventosDAO {
 
-	public boolean__ contains(String aCod) {
+	public boolean contains(String aCod) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -13,7 +13,7 @@ public class EventosDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean__ update(Evento aEvento) {
+	public boolean update(Evento aEvento) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -21,7 +21,7 @@ public class EventosDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean__ associarDoador(String aCod) {
+	public boolean associarDoador(String aCod) {
 		throw new UnsupportedOperationException();
 	}
 

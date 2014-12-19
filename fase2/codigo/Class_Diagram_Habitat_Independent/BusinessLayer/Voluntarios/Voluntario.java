@@ -24,8 +24,8 @@ public class Voluntario {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setMorada(Object aMorada_m) {
-		throw new UnsupportedOperationException();
+	public void setMorada(Morada aM) {
+		this._morada = aM;
 	}
 
 	public String getNome() {

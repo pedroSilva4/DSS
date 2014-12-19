@@ -20,7 +20,7 @@ public class UtilizadorDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean remove(Object aUsername) {
+	public boolean remove(String aUsername) {
 		throw new UnsupportedOperationException();
 	}
 

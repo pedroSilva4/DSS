@@ -1,11 +1,11 @@
 package Class_Diagram_Habitat_Independent.DataLayer;
 
-import Class_Diagram_Evento.Doadores.Doador__;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Doadores.Doador;
+// import Class_Diagram_Evento.Doadores.Doador;
+// import Class_Diagram_Habitat_Independent.BusinessLayer.Doadores.Doador;
 
 public class DoadoresDAO {
 
-	public boolean__ contains(String aCod) {
+	public boolean contains(String aCod) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -13,11 +13,11 @@ public class DoadoresDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public Doador__ get(String aCod) {
+	public Doador get(String aCod) {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean__ update(Doador aDoador) {
+	public boolean update(Class_Diagram_Habitat_Independent.BusinessLayer.Doadores.Doador aDoador) {
 		throw new UnsupportedOperationException();
 	}
 }

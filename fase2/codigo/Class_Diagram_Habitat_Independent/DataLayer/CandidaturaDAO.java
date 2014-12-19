@@ -12,11 +12,11 @@ public class CandidaturaDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public void set(Object aCandidatura) {
+	public void set(Candidatura aC) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void add(Object aCandidatura) {
+	public void add(Candidatura aC) {
 		throw new UnsupportedOperationException();
 	}
 }
