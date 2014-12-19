@@ -39,48 +39,98 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
         main_tabs = new javax.swing.JTabbedPane();
         Home_jp = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        name_label = new javax.swing.JLabel();
         funcionarios_jp = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         candidaturas_jpanel = new javax.swing.JPanel();
         eventos_jp = new javax.swing.JPanel();
         doacoes_jp = new javax.swing.JPanel();
         voluntarios_jp = new javax.swing.JPanel();
         inventario_jp = new javax.swing.JPanel();
-        logout = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        logout_bt = new javax.swing.JMenuItem();
+        exit_bt = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         main_tabs.setToolTipText("");
-        main_tabs.setAlignmentX(10.0F);
-        main_tabs.setAlignmentY(10.0F);
+        main_tabs.setAlignmentX(0.0F);
+        main_tabs.setAlignmentY(0.0F);
+        main_tabs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         main_tabs.setFocusable(false);
         main_tabs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        main_tabs.setMaximumSize(new java.awt.Dimension(327670000, 327670000));
         main_tabs.setMinimumSize(new java.awt.Dimension(109, 148));
+
+        jLabel1.setText("Funcionário : ");
+
+        name_label.setText("nome asdasd");
 
         javax.swing.GroupLayout Home_jpLayout = new javax.swing.GroupLayout(Home_jp);
         Home_jp.setLayout(Home_jpLayout);
         Home_jpLayout.setHorizontalGroup(
             Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGroup(Home_jpLayout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(name_label)
+                .addContainerGap(612, Short.MAX_VALUE))
         );
         Home_jpLayout.setVerticalGroup(
             Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Home_jpLayout.createSequentialGroup()
+                .addContainerGap(356, Short.MAX_VALUE)
+                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(name_label))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         main_tabs.addTab("Home", Home_jp);
+
+        funcionarios_jp.setMaximumSize(new java.awt.Dimension(32767000, 32767000));
+
+        jButton1.setText("Adicionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
 
         javax.swing.GroupLayout funcionarios_jpLayout = new javax.swing.GroupLayout(funcionarios_jp);
         funcionarios_jp.setLayout(funcionarios_jpLayout);
         funcionarios_jpLayout.setHorizontalGroup(
             funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGroup(funcionarios_jpLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addGroup(funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+                .addContainerGap(641, Short.MAX_VALUE))
         );
         funcionarios_jpLayout.setVerticalGroup(
             funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGroup(funcionarios_jpLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         main_tabs.addTab("Funcionários", funcionarios_jp);
@@ -89,11 +139,11 @@ public class MainView extends javax.swing.JFrame {
         candidaturas_jpanel.setLayout(candidaturas_jpanelLayout);
         candidaturas_jpanelLayout.setHorizontalGroup(
             candidaturas_jpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGap(0, 882, Short.MAX_VALUE)
         );
         candidaturas_jpanelLayout.setVerticalGroup(
             candidaturas_jpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGap(0, 481, Short.MAX_VALUE)
         );
 
         main_tabs.addTab("Candidaturas", candidaturas_jpanel);
@@ -102,11 +152,11 @@ public class MainView extends javax.swing.JFrame {
         eventos_jp.setLayout(eventos_jpLayout);
         eventos_jpLayout.setHorizontalGroup(
             eventos_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGap(0, 882, Short.MAX_VALUE)
         );
         eventos_jpLayout.setVerticalGroup(
             eventos_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGap(0, 481, Short.MAX_VALUE)
         );
 
         main_tabs.addTab("Eventos", eventos_jp);
@@ -115,11 +165,11 @@ public class MainView extends javax.swing.JFrame {
         doacoes_jp.setLayout(doacoes_jpLayout);
         doacoes_jpLayout.setHorizontalGroup(
             doacoes_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGap(0, 882, Short.MAX_VALUE)
         );
         doacoes_jpLayout.setVerticalGroup(
             doacoes_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGap(0, 481, Short.MAX_VALUE)
         );
 
         main_tabs.addTab("Doações", doacoes_jp);
@@ -128,11 +178,11 @@ public class MainView extends javax.swing.JFrame {
         voluntarios_jp.setLayout(voluntarios_jpLayout);
         voluntarios_jpLayout.setHorizontalGroup(
             voluntarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGap(0, 882, Short.MAX_VALUE)
         );
         voluntarios_jpLayout.setVerticalGroup(
             voluntarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGap(0, 481, Short.MAX_VALUE)
         );
 
         main_tabs.addTab("Voluntários", voluntarios_jp);
@@ -141,70 +191,68 @@ public class MainView extends javax.swing.JFrame {
         inventario_jp.setLayout(inventario_jpLayout);
         inventario_jpLayout.setHorizontalGroup(
             inventario_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 873, Short.MAX_VALUE)
+            .addGap(0, 882, Short.MAX_VALUE)
         );
         inventario_jpLayout.setVerticalGroup(
             inventario_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGap(0, 481, Short.MAX_VALUE)
         );
 
         main_tabs.addTab("Inventário", inventario_jp);
 
-        logout.setText("Logout");
-        logout.setFocusPainted(false);
-        logout.setFocusable(false);
-        logout.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setText("Menu");
+
+        logout_bt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        logout_bt.setText("Logout");
+        logout_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutActionPerformed(evt);
+                logout_btActionPerformed(evt);
             }
         });
+        jMenu1.add(logout_bt);
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                .addGap(0, 781, Short.MAX_VALUE)
-                .addComponent(logout, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE))
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(logout)
-                .addGap(0, 511, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
-        );
-        jLayeredPane1.setLayer(main_tabs, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(logout, javax.swing.JLayeredPane.PALETTE_LAYER);
+        exit_bt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        exit_bt.setText("Sair");
+        exit_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exit_btActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exit_bt);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Login login =  new Login();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void logout_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_btActionPerformed
+        // TODO add your handling code here:
+        Login login = new Login();
         login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_logoutActionPerformed
+    }//GEN-LAST:event_logout_btActionPerformed
+
+    private void exit_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_btActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_exit_btActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,11 +295,18 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel candidaturas_jpanel;
     private javax.swing.JPanel doacoes_jp;
     private javax.swing.JPanel eventos_jp;
+    private javax.swing.JMenuItem exit_bt;
     private javax.swing.JPanel funcionarios_jp;
     private javax.swing.JPanel inventario_jp;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JButton logout;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem logout_bt;
     private javax.swing.JTabbedPane main_tabs;
+    private javax.swing.JLabel name_label;
     private javax.swing.JPanel voluntarios_jp;
     // End of variables declaration//GEN-END:variables
 }
