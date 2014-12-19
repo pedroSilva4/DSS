@@ -7,6 +7,10 @@
 package com.habitat.PresentationLayer;
 
 import com.alee.laf.WebLookAndFeel;
+import com.habitat.PresentationLayer.Candidaturas.CandidaturaJP;
+import com.habitat.PresentationLayer.Funcionarios.FuncionariosJP;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -21,12 +25,14 @@ public class MainView extends javax.swing.JFrame {
     public MainView(String username) {
         this.setTitle("Habitat");
         initComponents();
-       
+        this.initByType();
     }
     
     public MainView() {
+        
         this.setTitle("Habitat");
         initComponents();
+        this.initByType();
        
     }
 
@@ -44,9 +50,6 @@ public class MainView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         name_label = new javax.swing.JLabel();
         funcionarios_jp = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         candidaturas_jpanel = new javax.swing.JPanel();
         eventos_jp = new javax.swing.JPanel();
         doacoes_jp = new javax.swing.JPanel();
@@ -96,108 +99,22 @@ public class MainView extends javax.swing.JFrame {
         main_tabs.addTab("Home", Home_jp);
 
         funcionarios_jp.setMaximumSize(new java.awt.Dimension(32767000, 32767000));
-
-        jButton1.setText("Adicionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("jButton2");
-
-        jButton3.setText("jButton3");
-
-        javax.swing.GroupLayout funcionarios_jpLayout = new javax.swing.GroupLayout(funcionarios_jp);
-        funcionarios_jp.setLayout(funcionarios_jpLayout);
-        funcionarios_jpLayout.setHorizontalGroup(
-            funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(funcionarios_jpLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addGroup(funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
-                .addContainerGap(641, Short.MAX_VALUE))
-        );
-        funcionarios_jpLayout.setVerticalGroup(
-            funcionarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(funcionarios_jpLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
+        funcionarios_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Funcionários", funcionarios_jp);
 
-        javax.swing.GroupLayout candidaturas_jpanelLayout = new javax.swing.GroupLayout(candidaturas_jpanel);
-        candidaturas_jpanel.setLayout(candidaturas_jpanelLayout);
-        candidaturas_jpanelLayout.setHorizontalGroup(
-            candidaturas_jpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
-        );
-        candidaturas_jpanelLayout.setVerticalGroup(
-            candidaturas_jpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-
+        candidaturas_jpanel.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Candidaturas", candidaturas_jpanel);
 
-        javax.swing.GroupLayout eventos_jpLayout = new javax.swing.GroupLayout(eventos_jp);
-        eventos_jp.setLayout(eventos_jpLayout);
-        eventos_jpLayout.setHorizontalGroup(
-            eventos_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
-        );
-        eventos_jpLayout.setVerticalGroup(
-            eventos_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-
+        eventos_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Eventos", eventos_jp);
 
-        javax.swing.GroupLayout doacoes_jpLayout = new javax.swing.GroupLayout(doacoes_jp);
-        doacoes_jp.setLayout(doacoes_jpLayout);
-        doacoes_jpLayout.setHorizontalGroup(
-            doacoes_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
-        );
-        doacoes_jpLayout.setVerticalGroup(
-            doacoes_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-
+        doacoes_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Doações", doacoes_jp);
 
-        javax.swing.GroupLayout voluntarios_jpLayout = new javax.swing.GroupLayout(voluntarios_jp);
-        voluntarios_jp.setLayout(voluntarios_jpLayout);
-        voluntarios_jpLayout.setHorizontalGroup(
-            voluntarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
-        );
-        voluntarios_jpLayout.setVerticalGroup(
-            voluntarios_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-
+        voluntarios_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Voluntários", voluntarios_jp);
 
-        javax.swing.GroupLayout inventario_jpLayout = new javax.swing.GroupLayout(inventario_jp);
-        inventario_jp.setLayout(inventario_jpLayout);
-        inventario_jpLayout.setHorizontalGroup(
-            inventario_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
-        );
-        inventario_jpLayout.setVerticalGroup(
-            inventario_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-
+        inventario_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Inventário", inventario_jp);
 
         jMenu1.setText("Menu");
@@ -237,10 +154,6 @@ public class MainView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void logout_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_btActionPerformed
         // TODO add your handling code here:
@@ -298,9 +211,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem exit_bt;
     private javax.swing.JPanel funcionarios_jp;
     private javax.swing.JPanel inventario_jp;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -309,4 +219,14 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel name_label;
     private javax.swing.JPanel voluntarios_jp;
     // End of variables declaration//GEN-END:variables
+
+
+    public final void initByType(/** String tipo**/)
+    {
+        //incializa coisas nice consante o tipo
+       this.funcionarios_jp.add(new FuncionariosJP());
+       this.candidaturas_jpanel.add(new CandidaturaJP());
+       // this.groupBox_func.setVisible(false);
+    }
+
 }
