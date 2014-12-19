@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build">
+	<path id="build.classpath">
+		<pathelement location="classes"/>
+	</path>
+	<target name="init">
+		<mkdir dir="classes"/>
+	</target>
+	<target name="clean">
+		<delete dir="classes"/>
+	</target>
+	<target depends="init" name="build">
+		<javac srcdir="." destdir="classes" source="1.5" target="1.5" fork="yes">
+			<classpath refid="build.classpath"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Eventos/Evento.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Candidaturas/Elemento.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Candidaturas/Questao.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Candidaturas/Candidatura.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Doadores/Empresa.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Doadores/Doador.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Doadores/Monetario.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Doadores/Servicos.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Doadores/Material.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Doadores/Doacao.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Material/Material.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Utilizadores/Utilizador.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Voluntarios/Morada.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Voluntarios/Voluntario.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Projetos/Projeto.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/Tarefas/Tarefa.java"/>
+			<include name="Class_Diagram_Habitat_Independent/BusinessLayer/BusinessFacade.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/DoadoresDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/DoacoesDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/MaterialDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/UtilizadorDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/VoluntarioDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/ProjetosDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/TarefasDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/EventosDAO.java"/>
+			<include name="Class_Diagram_Habitat_Independent/DataLayer/CandidaturaDAO.java"/>
+		</javac>
+	</target>
+</project>
