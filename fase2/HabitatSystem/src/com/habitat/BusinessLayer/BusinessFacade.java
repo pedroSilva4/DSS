@@ -120,23 +120,23 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public Utilizador getUtilizador(String aUsername) {
+	public Utilizador getUtilizador(String aUsername) throws SQLException {
 		boolean b = this._utilizadores.contains(aUsername);
                 if(b == false) return null;
                 Utilizador ut = _utilizadores.get(aUsername);
                 return ut;
 	}
 
-	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String email, String tipo ,String aRua, String aLocal, String aCod_postal) throws SQLException {
+	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String tipo ,String aRua, String aLocal, String aCod_postal) throws SQLException {
 		Utilizador u = new Utilizador(aNome,aPassword,aUsername,aNif,tipo,aRua,aLocal,aCod_postal);
                 return this._utilizadores.add(u);
 	}
 
-	public boolean rmvUtilizador(String aUsername) {
+	public boolean rmvUtilizador(String aUsername) throws SQLException {
 		return this._utilizadores.remove(aUsername);
 	}
 
-	public void updateUtilizador(Utilizador aUt) {
+	public void updateUtilizador(Utilizador aUt) throws SQLException {
 		this._utilizadores.update(aUt);
 	}
 

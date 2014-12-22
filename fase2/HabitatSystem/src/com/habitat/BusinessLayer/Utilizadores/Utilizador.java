@@ -7,6 +7,7 @@ public class Utilizador {
 	private String _password;
 	private String _username;
 	private String _nif;
+        private String _email;
 	private String _tipo;
 	private Morada _morada;
         
