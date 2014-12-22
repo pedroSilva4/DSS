@@ -7,6 +7,7 @@
 package com.habitat.PresentationLayer;
 
 import com.alee.laf.WebLookAndFeel;
+import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.PresentationLayer.Candidaturas.CandidaturaJP;
 import com.habitat.PresentationLayer.Funcionarios.FuncionariosJP;
 import java.awt.CardLayout;
@@ -22,7 +23,10 @@ public class MainView extends javax.swing.JFrame {
      * Creates new form HomeView
      * @param username
      */
-    public MainView(String username) {
+    
+    BusinessFacade businessFacade;
+    public MainView(BusinessFacade bus) {
+        this.businessFacade = bus;
         this.setTitle("Habitat");
         initComponents();
         this.initByType();
@@ -49,6 +53,8 @@ public class MainView extends javax.swing.JFrame {
         Home_jp = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         name_label = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        type_label = new javax.swing.JLabel();
         funcionarios_jp = new javax.swing.JPanel();
         candidaturas_jpanel = new javax.swing.JPanel();
         eventos_jp = new javax.swing.JPanel();
@@ -75,15 +81,23 @@ public class MainView extends javax.swing.JFrame {
 
         name_label.setText("nome asdasd");
 
+        jLabel2.setText("Tipo :");
+
+        type_label.setText("jLabel3");
+
         javax.swing.GroupLayout Home_jpLayout = new javax.swing.GroupLayout(Home_jp);
         Home_jp.setLayout(Home_jpLayout);
         Home_jpLayout.setHorizontalGroup(
             Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Home_jpLayout.createSequentialGroup()
                 .addContainerGap(124, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(name_label)
+                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(type_label)
+                    .addComponent(name_label))
                 .addContainerGap(612, Short.MAX_VALUE))
         );
         Home_jpLayout.setVerticalGroup(
@@ -93,7 +107,11 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(name_label))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(type_label))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         main_tabs.addTab("Home", Home_jp);
@@ -212,20 +230,24 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel funcionarios_jp;
     private javax.swing.JPanel inventario_jp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem logout_bt;
     private javax.swing.JTabbedPane main_tabs;
     private javax.swing.JLabel name_label;
+    private javax.swing.JLabel type_label;
     private javax.swing.JPanel voluntarios_jp;
     // End of variables declaration//GEN-END:variables
 
 
-    public final void initByType(/** String tipo**/)
+    public final void initByType()
     {
         //incializa coisas nice consante o tipo
-       this.funcionarios_jp.add(new FuncionariosJP());
-       this.candidaturas_jpanel.add(new CandidaturaJP());
+       this.name_label.setText(this.businessFacade.getActiveUser().getNome());
+       this.type_label.setText(this.businessFacade.getActiveUser().getTipo());
+       this.funcionarios_jp.add(new FuncionariosJP(businessFacade));
+       //this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
        // this.groupBox_func.setVisible(false);
     }
 

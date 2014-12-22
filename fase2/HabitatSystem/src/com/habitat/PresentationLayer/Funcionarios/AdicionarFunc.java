@@ -1,5 +1,7 @@
 package com.habitat.PresentationLayer.Funcionarios;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +19,9 @@ public class AdicionarFunc extends javax.swing.JPanel {
     /**
      * Creates new form AdicionarFunc
      */
-    public AdicionarFunc() {
+    private BusinessFacade businessFacade;
+    public AdicionarFunc(BusinessFacade bus) {
+        businessFacade =bus;
         initComponents();
         setVisible(true);
     }
@@ -192,8 +196,11 @@ public class AdicionarFunc extends javax.swing.JPanel {
         String password ="";
         for(char c : this.password_pf.getPassword())
             password+=c; 
+        String rua = this.street_tf.getText();
+        String local = this.local_tf.getText();
+        String cod_postal = this.postal_tf.getText();
         
-        //this.businessFacade.addUtilizador(nome,username,email,tipo,password);
+        this.businessFacade.addUtilizador(username, password, name, nif, email,tipo, rua, local, cod_postal);
         
     }//GEN-LAST:event_sub_bttActionPerformed
 

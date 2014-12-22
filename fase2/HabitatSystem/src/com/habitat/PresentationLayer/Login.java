@@ -129,7 +129,7 @@ public class Login extends javax.swing.JFrame{
              this.businessFacade = new BusinessFacade();
              boolean  b = this.businessFacade.login(username, password);
              if(b){
-             MainView hv = new MainView(username);
+             MainView hv = new MainView(businessFacade);
              hv.setVisible(true);
              this.dispose();
              }

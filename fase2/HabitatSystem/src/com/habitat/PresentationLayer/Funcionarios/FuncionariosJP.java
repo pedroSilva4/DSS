@@ -6,6 +6,7 @@
 
 package com.habitat.PresentationLayer.Funcionarios;
 
+import com.habitat.BusinessLayer.BusinessFacade;
 import java.awt.CardLayout;
 
 /**
@@ -17,7 +18,9 @@ public class FuncionariosJP extends javax.swing.JPanel {
     /**
      * Creates new form FuncionariosJP
      */
-    public FuncionariosJP() {
+    BusinessFacade businessFacade;
+    public FuncionariosJP(BusinessFacade bus) {
+        businessFacade = bus;
         initComponents();
         myInit();
     }
@@ -118,11 +121,23 @@ public class FuncionariosJP extends javax.swing.JPanel {
     private javax.swing.JButton rm_bt;
     // End of variables declaration//GEN-END:variables
 
-    public void myInit(/**tipo**/)
+    public void myInit()
     {
-        this.container.add(new AdicionarFunc(),"add");
-        this.container.add(new removerFunc(),"rm");
-        this.container.add(new ConsultarFunc(),"cons");
+        String type = this.businessFacade.getActiveUser().getTipo();
+        if(type.equals("admin")){
+            
+                this.container.add(new AdicionarFunc(businessFacade),"add");
+                this.container.add(new removerFunc(businessFacade),"rm");
+                this.con_bt.setText("Consultar/Atualizar");
+        }
+        else{
+            
+            this.add_bt.setEnabled(false);
+            this.rm_bt.setEnabled(false);
+           
+        }
+        
+        this.container.add(new ConsultarFunc(businessFacade),"cons");
         this.container.setVisible(false);
     }
 }
