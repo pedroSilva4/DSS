@@ -4,6 +4,12 @@ public class Morada {
 	private String _rua;
 	private String _localidade;
 	private String _codigo_postal;
+        
+        public Morada(String rua, String localidade, String codPostal){
+            this._rua = rua;
+            this._localidade = localidade;
+            this._codigo_postal = codPostal;
+        }
 
 	public String getRua() {
 		return this._rua;

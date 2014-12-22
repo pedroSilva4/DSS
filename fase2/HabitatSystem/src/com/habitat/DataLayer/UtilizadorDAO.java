@@ -2,6 +2,7 @@ package com.habitat.DataLayer;
 
 import com.habitat.BusinessLayer.Utilizadores.Utilizador;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,18 +36,25 @@ public class UtilizadorDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean login(String aUser, String aPasswd) throws SQLException {
-            PreparedStatement st;
+	public Utilizador login(String aUser, String aPasswd) throws SQLException {
+            Statement st;
             ResultSet res;
-            String sql;
-            sql = "select password from Funcionarios where username = '?';";
-            st = conn.prepareStatement(sql);
-            st.setString(1, aUser);
-            res = st.executeQuery();
-            if(res==null) return false;
-            if(res.getString(1).equals(aPasswd)) return true;
-            return false;
+            String sql; 
+            sql = "select * from Habitat.Funcionarios where username = '"+aUser+"';";
+            st = conn.createStatement();
+           // st.setString(1, aUser);
+            res = st.executeQuery(sql);
             
+            if(res.next()){
+                if(res.getString(2).equals(aPasswd)){
+            // (String nome, String password, String username, String nif, 
+            // String tipo, String rua, String localidade,String codPostal)
+                    return new Utilizador(res.getString(3),res.getString(2),
+                            res.getString(1),res.getString(4),res.getString(8),res.getString(5),
+                            res.getString(6),res.getString(7));
+                }
+            }
+            return null;
 	}
 
 	public void logout() {

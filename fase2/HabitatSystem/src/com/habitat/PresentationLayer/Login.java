@@ -120,9 +120,9 @@ public class Login extends javax.swing.JFrame{
         // TODO add your handling code here:
         //tentar o login!
         String username =  this.username_tf.getText();
-        String password ="";
+        String password = "";
         for(char c : this.password_pf.getPassword())
-            password+=c; 
+           password = password +""+c;
         
         //se conseguido  abrir nova janela  Main view e dispose esta    
         try {

@@ -35,21 +35,21 @@ public class BusinessFacade {
 	public VoluntarioDAO _voluntarios;
 	public ProjetosDAO _projetos;
 	public TarefasDAO _tarefas;
-        
+        private Utilizador activeUser;
         /*Constructor*/
         public BusinessFacade() throws SQLException{
             Connection conn = null;
             conn = DriverManager.getConnection("jdbc:mysql://localhost/Habitat?" +
                                            "user=h_user&password=mypass");
-            _candidaturas = new CandidaturaDAO(conn);
+           /* _candidaturas = new CandidaturaDAO(conn);
             _eventos = new EventosDAO(conn);
             _doadores = new DoadoresDAO(conn);
             _doacoes = new DoacoesDAO(conn);
-            _materiais = new MaterialDAO(conn);
+            _materiais = new MaterialDAO(conn);*/
             _utilizadores = new UtilizadorDAO(conn);
-            _voluntarios = new VoluntarioDAO(conn);
+           /* _voluntarios = new VoluntarioDAO(conn);
             _projetos = new ProjetosDAO(conn);
-            _tarefas = new TarefasDAO(conn);
+            _tarefas = new TarefasDAO(conn);*/
         }
 
 	public Candidatura getCandidatura(String aCod) {
@@ -182,8 +182,12 @@ public class BusinessFacade {
 
 	public boolean login(String aUser, String aPasswd) {
             try{
-		return _utilizadores.login(aUser, aPasswd);
-            }catch(SQLException e){return false;}
+                this.activeUser = _utilizadores.login(aUser, aPasswd);
+		if(this.activeUser!=null) return true;
+                else return false;
+            }catch(SQLException e){
+                e.printStackTrace();
+                return false;}
 	}
 
 	public void logout() {

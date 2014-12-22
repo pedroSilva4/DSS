@@ -9,6 +9,15 @@ public class Utilizador {
 	private String _nif;
 	private String _tipo;
 	private Morada _morada;
+        
+        public Utilizador(String nome, String password, String username, String nif, String tipo, String rua, String localidade,String codPostal){
+            this._nome = nome;
+            this._nif = nif;
+            this._password = password;
+            this._tipo= tipo;
+            this._username = username;
+            this._morada = new Morada(rua,localidade,codPostal);
+        }
 
 	public String getNome() {
 		return this._nome;
