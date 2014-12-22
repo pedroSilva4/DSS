@@ -6,6 +6,8 @@
 
 package com.habitat.PresentationLayer.Funcionarios;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+
 /**
  *
  * @author Pedro
@@ -15,8 +17,19 @@ public class removerFunc extends javax.swing.JPanel {
     /**
      * Creates new form removerFunc
      */
-    public removerFunc() {
+    private BusinessFacade businessFacade;
+    public removerFunc(BusinessFacade bus) {
+        this.businessFacade = bus;
         initComponents();
+        this.jButton1.setEnabled(false);
+    }
+    
+    public void update()
+    {
+        if(this.username_tf.getText() == null || this.username_tf.getText().equals(""))
+             this.jButton1.setEnabled(false);
+        
+        else this.jButton1.setEnabled(true);
     }
 
     /**
@@ -36,9 +49,9 @@ public class removerFunc extends javax.swing.JPanel {
 
         jLabel1.setText("Username :");
 
-        username_tf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                username_tfActionPerformed(evt);
+        username_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                username_tfKeyPressed(evt);
             }
         });
 
@@ -75,13 +88,17 @@ public class removerFunc extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void username_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_tfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_username_tfActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String username = this.username_tf.getText();
+        businessFacade.rmvUtilizador(username);
+        this.username_tf.setText("");
+        update();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void username_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_username_tfKeyPressed
+        update();
+    }//GEN-LAST:event_username_tfKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
