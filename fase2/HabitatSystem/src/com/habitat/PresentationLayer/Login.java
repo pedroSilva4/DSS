@@ -8,6 +8,7 @@ package com.habitat.PresentationLayer;
 
 import com.alee.laf.WebLookAndFeel;
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -134,11 +135,11 @@ public class Login extends javax.swing.JFrame{
              this.dispose();
              }
              else{
-                 System.out.println("Dados de Utilizador errados");
+                new ErrorWindow("USER","DADOS DE UTILIZADOR ERRADOS" , "warning",this).wshow();
              }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            System.out.println("impossivel ligar a BD");
+            new ErrorWindow("DATABASE CONNECTION","IMPOSSIVEL LIGAR A BASE DE DADOS" , "error",this).wshow();
         }
         
        

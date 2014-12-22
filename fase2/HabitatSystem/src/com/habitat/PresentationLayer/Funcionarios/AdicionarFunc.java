@@ -27,6 +27,20 @@ public class AdicionarFunc extends javax.swing.JPanel {
         businessFacade =bus;
         initComponents();
         setVisible(true);
+        this.sub_btt.setEnabled(false);
+    }
+    
+    public void update()
+    {
+        boolean b = true;
+        for(Component c : this.getComponents()){
+           if(c.getClass()==JTextField.class)
+               if(((JTextField)c).getText()==null || ((JTextField)c).getText().equals("")) {
+                   b= false;
+                   break;
+               }
+        }
+        this.sub_btt.setEnabled(b);
     }
 
     /**
@@ -59,6 +73,16 @@ public class AdicionarFunc extends javax.swing.JPanel {
         local_tf = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Adicionar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Tipo :");
 
@@ -220,6 +244,16 @@ public class AdicionarFunc extends javax.swing.JPanel {
     private void nif_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nif_tfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nif_tfActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_formMouseMoved
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_formKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

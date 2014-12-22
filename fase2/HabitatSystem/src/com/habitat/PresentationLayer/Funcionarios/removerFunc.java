@@ -93,7 +93,7 @@ public class removerFunc extends javax.swing.JPanel {
         businessFacade.rmvUtilizador(username);
         this.username_tf.setText("");
         update();
-        this.setVisible(false);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void username_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_username_tfKeyPressed
