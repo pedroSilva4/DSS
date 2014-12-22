@@ -121,10 +121,10 @@ public class BusinessFacade {
 	}
 
 	public Utilizador getUtilizador(String aUsername) {
-		throw new UnsupportedOperationException();
+		//this._utilizadores.get(aUsername)
 	}
 
-	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String aRua, String aLocal, String aCod_postal) {
+	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String email ,String aRua, String aLocal, String aCod_postal) {
 		throw new UnsupportedOperationException();
 	}
 
