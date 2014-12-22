@@ -20,7 +20,7 @@ public class UtilizadorDAO {
             PreparedStatement st;
             ResultSet res;
             String sql; 
-            sql = "select id from Habitat.Funcionarios where username = ?;";
+            sql = "select username from Habitat.Funcionarios where username = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUt.getNome());
             res = st.executeQuery();
