@@ -147,20 +147,20 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean addVoluntario(String nome, Date dataNasc,Date dataAssoc,String tipo, String contacto, String equipa,String profissao,Morada m) {
+	public boolean addVoluntario(String nome, Date dataNasc,Date dataAssoc,String tipo, String contacto, String equipa,String profissao,Morada m) throws SQLException {
             Voluntario vol = new Voluntario(null,nome,dataNasc,dataAssoc,tipo,contacto,equipa,profissao,m);
             boolean b = this._voluntarios.add(vol);
             return b;
 	}
 
-	public Voluntario getVoluntario(String aId) {
+	public Voluntario getVoluntario(String aId) throws SQLException {
             boolean b = this._voluntarios.contains(aId);
             if(b == false) return null;
             Voluntario v = this._voluntarios.get(aId);
             return v;
 	}
 
-	public void updateVoluntario(Voluntario aVol) {
+	public void updateVoluntario(Voluntario aVol) throws SQLException {
 		this._voluntarios.update(aVol);
 	}
 
