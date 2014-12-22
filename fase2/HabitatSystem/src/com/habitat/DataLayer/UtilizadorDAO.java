@@ -20,12 +20,12 @@ public class UtilizadorDAO {
             PreparedStatement st;
             ResultSet res;
             String sql; 
-            sql = "select id from Habitat.Funcionarios where username = '?';";
+            sql = "select id from Habitat.Funcionarios where username = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUt.getNome());
             res = st.executeQuery();
             if(res.next()) return false;
-            sql = "insert into Habitat.Funcionarios values('?','?','?','?','?','?','?','?');";
+            sql = "insert into Habitat.Funcionarios values(?,?,?,?,?,?,?,?);";
             st = conn.prepareStatement(sql);
             st.setString(1, aUt.getUsername());
             st.setString(2, aUt.getPassword());
@@ -44,13 +44,13 @@ public class UtilizadorDAO {
             ResultSet res;
             String sql; 
             sql = "UPDATE Habitat.Funcionarios SET"
-                    + "password = '?',"
-                    + "nome = '?',"
-                    + "NIF = '?',"
-                    + "rua = '?',"
-                    + "localidade = '?',"
-                    + "codPostal = '?',"
-                    + "tipo = '?';";
+                    + "password = ?,"
+                    + "nome = ?,"
+                    + "NIF = ?,"
+                    + "rua = ?,"
+                    + "localidade = ?,"
+                    + "codPostal = ?,"
+                    + "tipo = ?;";
             st = conn.prepareStatement(sql);
             st.setString(2, aUt.getPassword());
             st.setString(3,aUt.getNome());
@@ -66,7 +66,7 @@ public class UtilizadorDAO {
             PreparedStatement st;
             ResultSet res;
             String sql; 
-            sql = "select * from Habitat.Funcionarios where username = '?';";
+            sql = "select * from Habitat.Funcionarios where username = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUsr);
             res = st.executeQuery();
@@ -77,7 +77,7 @@ public class UtilizadorDAO {
             PreparedStatement st;
             ResultSet res;
             String sql; 
-            sql = "select * from Habitat.Funcionarios where username = '?';";
+            sql = "select * from Habitat.Funcionarios where username = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUsr);
             res = st.executeQuery();
@@ -96,13 +96,13 @@ public class UtilizadorDAO {
             ResultSet res;
             String sql;
             
-            sql = "select * from Habitat.Funcionarios where username = '?';";
+            sql = "select * from Habitat.Funcionarios where username = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUsername);
             res = st.executeQuery();
             if(res.next() == false) return false;
             
-            sql = "DELETE FROM Habitat.Funcionarios where username = '?';";
+            sql = "DELETE FROM Habitat.Funcionarios where username = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUsername);
             st.executeUpdate();
@@ -114,7 +114,7 @@ public class UtilizadorDAO {
             PreparedStatement st;
             ResultSet res;
             String sql; 
-            sql = "select * from Habitat.Funcionarios where username = '?';";
+            sql = "select * from Habitat.Funcionarios where username = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUser);
             res = st.executeQuery();
