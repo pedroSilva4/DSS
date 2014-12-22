@@ -137,7 +137,7 @@ public class FuncionariosJP extends javax.swing.JPanel {
            
         }
         
-        this.container.add(new ConsultarFunc(businessFacade),"cons");
+        //this.container.add(new ConsultarFunc(businessFacade),"cons");
         this.container.setVisible(false);
     }
 }

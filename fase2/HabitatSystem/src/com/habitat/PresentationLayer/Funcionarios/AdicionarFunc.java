@@ -1,6 +1,9 @@
 package com.habitat.PresentationLayer.Funcionarios;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import java.awt.Component;
+import javax.swing.JComponent;
+import javax.swing.JTextField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -67,7 +70,7 @@ public class AdicionarFunc extends javax.swing.JPanel {
 
         jLabel5.setText("Password :");
 
-        tipos_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Obras", "Familias", "Angariação" }));
+        tipos_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Obras", "Famílias", "Angariação" }));
         tipos_cb.setToolTipText("");
 
         nome_tf.addActionListener(new java.awt.event.ActionListener() {
@@ -186,21 +189,31 @@ public class AdicionarFunc extends javax.swing.JPanel {
     private void nome_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_tfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nome_tfActionPerformed
-
+    public void clean()
+    {
+       for(Component c : this.getComponents())
+           if(c.getClass()==JTextField.class)
+              ((JTextField)c).setText("");
+    }
     private void sub_bttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sub_bttActionPerformed
         // TODO add your handling code here:
         String name = this.nome_tf.getText();
         String username = this.username_tf.getText();
         String email = this.email_tf.getText(); 
         String tipo = this.tipos_cb.getSelectedItem().toString();
+        tipo = tipo.toLowerCase();
+        
+        System.out.println(tipo);
         String password ="";
         for(char c : this.password_pf.getPassword())
             password+=c; 
         String rua = this.street_tf.getText();
         String local = this.local_tf.getText();
         String cod_postal = this.postal_tf.getText();
-        
+        String nif =this.nif_tf.getText();
+        clean();
         this.businessFacade.addUtilizador(username, password, name, nif, email,tipo, rua, local, cod_postal);
+        
         
     }//GEN-LAST:event_sub_bttActionPerformed
 
