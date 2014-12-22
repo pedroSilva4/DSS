@@ -9,6 +9,7 @@ import com.habitat.BusinessLayer.Material.Material;
 import com.habitat.BusinessLayer.Projetos.Projeto;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
 import com.habitat.BusinessLayer.Utilizadores.Utilizador;
+import com.habitat.BusinessLayer.Voluntarios.Morada;
 import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.DataLayer.CandidaturaDAO;
 import com.habitat.DataLayer.DoacoesDAO;
@@ -36,9 +37,11 @@ public class BusinessFacade {
 	public ProjetosDAO _projetos;
 	public TarefasDAO _tarefas;
         private Utilizador activeUser;
+        private Connection conn;
         /*Constructor*/
         public BusinessFacade() throws SQLException{
-            Connection conn = null;
+            //Connection conn = null;
+            conn = null;
             conn = DriverManager.getConnection("jdbc:mysql://localhost/Habitat?" +
                                            "user=h_user&password=mypass");
            /* _candidaturas = new CandidaturaDAO(conn);
@@ -144,16 +147,21 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean addVoluntario(String aNome, String aRua, String aLocal, String aCod_postal, String aProfissao, String aContacto) {
-		throw new UnsupportedOperationException();
+	public boolean addVoluntario(String nome, Date dataNasc,Date dataAssoc,String tipo, String contacto, String equipa,String profissao,Morada m) {
+            Voluntario vol = new Voluntario(null,nome,dataNasc,dataAssoc,tipo,contacto,equipa,profissao,m);
+            boolean b = this._voluntarios.add(vol);
+            return b;
 	}
 
 	public Voluntario getVoluntario(String aId) {
-		throw new UnsupportedOperationException();
+            boolean b = this._voluntarios.contains(aId);
+            if(b == false) return null;
+            Voluntario v = this._voluntarios.get(aId);
+            return v;
 	}
 
 	public void updateVoluntario(Voluntario aVol) {
-		throw new UnsupportedOperationException();
+		this._voluntarios.update(aVol);
 	}
 
 	public boolean validaCandidatura(String aCandidatura) {
@@ -198,7 +206,7 @@ public class BusinessFacade {
                 return false;}
 	}
 
-	public void logout() {
-		throw new UnsupportedOperationException();
+	public void logout() throws SQLException {
+		this.conn.close();
 	}
 }

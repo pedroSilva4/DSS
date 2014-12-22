@@ -3,26 +3,54 @@ package com.habitat.BusinessLayer.Voluntarios;
 import java.sql.Date;
 
 public class Voluntario {
+        private String _cod;
+        private String _nome;
 	private String _nomeEquipa;
 	private Date _dataNasc;
+        private Date _dataAssociacao;
+        private String _tipo;
 	private String _contacto;
-	private String _nome;
 	private String _profissao;
 	private Morada _morada;
 
+        public Voluntario(String cod, String nome, Date dataNasc,Date dataAssoc,String tipo, String contacto, String equipa,String profissao,Morada m){
+            this._cod = cod;
+            this._nome = nome;
+            this._dataNasc = dataNasc;
+            this._dataAssociacao = dataAssoc;
+            this._tipo = tipo;
+            this._contacto = contacto;
+            this._nomeEquipa = equipa;
+            this._profissao = profissao;
+            this._morada = m;
+        }
+        
 	public void setNomeEquipa(String aNomeEquipa) {
 		this._nomeEquipa = aNomeEquipa;
 	}
-
+        public String getCod(){
+            return this._cod;
+        }
 	public void setNome(String aNome) {
 		this._nome = aNome;
 	}
-
+        public String getTipo(){
+            return this._tipo;
+        }
+        public void setTipo(String tipo){
+            this._tipo = tipo;
+        }
 	public void setDataNasc(Date aDataNasc) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Date getDataNasc() {
+		throw new UnsupportedOperationException();
+	}
+        public void setDataAssociacao(Date aDataNasc) {
+		throw new UnsupportedOperationException();
+	}
+        public Date getDataAssociacao() {
 		throw new UnsupportedOperationException();
 	}
 
