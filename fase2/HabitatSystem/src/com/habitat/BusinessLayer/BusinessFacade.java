@@ -121,19 +121,23 @@ public class BusinessFacade {
 	}
 
 	public Utilizador getUtilizador(String aUsername) {
-		//this._utilizadores.get(aUsername)
+		boolean b = this._utilizadores.contains(aUsername);
+                if(b == false) return null;
+                Utilizador ut = _utilizadores.get(aUsername);
+                return ut;
 	}
 
 	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String email, String tipo ,String aRua, String aLocal, String aCod_postal) {
-		throw new UnsupportedOperationException();
+		Utilizador u = new Utilizador(aNome,aPassword,aUsername,aNif,tipo,aRua,aLocal,aCod_postal);
+                return this._utilizadores.add(u);
 	}
 
 	public boolean rmvUtilizador(String aUsername) {
-		throw new UnsupportedOperationException();
+		return this._utilizadores.remove(aUsername);
 	}
 
 	public void updateUtilizador(Utilizador aUt) {
-		throw new UnsupportedOperationException();
+		this._utilizadores.update(aUt);
 	}
 
 	public String passwordEncript() {
