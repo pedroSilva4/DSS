@@ -37,13 +37,17 @@ public class UtilizadorDAO {
 	}
 
 	public Utilizador login(String aUser, String aPasswd) throws SQLException {
-            Statement st;
+            //Statement st;
+            PreparedStatement st;
             ResultSet res;
             String sql; 
-            sql = "select * from Habitat.Funcionarios where username = '"+aUser+"';";
-            st = conn.createStatement();
+            sql = "select * from Habitat.Funcionarios where username = ?;";
+            /*st = conn.createStatement();
            // st.setString(1, aUser);
-            res = st.executeQuery(sql);
+            res = st.executeQuery(sql);*/
+            st = conn.prepareStatement(sql);
+            st.setString(1, aUser);
+            res = st.executeQuery();
             
             if(res.next()){
                 if(res.getString(2).equals(aPasswd)){
