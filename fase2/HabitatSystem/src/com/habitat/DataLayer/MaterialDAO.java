@@ -2,8 +2,13 @@ package com.habitat.DataLayer;
 
 import com.habitat.BusinessLayer.Material.Material;
 import com.habitat.BusinessLayer.Material.*;
+import java.sql.Connection;
 
 public class MaterialDAO {
+
+    public MaterialDAO(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	public void remove(String aCod) {
 		throw new UnsupportedOperationException();
