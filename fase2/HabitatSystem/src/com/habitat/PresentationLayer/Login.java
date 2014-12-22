@@ -7,6 +7,10 @@
 package com.habitat.PresentationLayer;
 
 import com.alee.laf.WebLookAndFeel;
+import com.habitat.BusinessLayer.BusinessFacade;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +18,7 @@ import com.alee.laf.WebLookAndFeel;
  */
 public class Login extends javax.swing.JFrame{
 
+    private BusinessFacade businessFacade;
     /**
      * Creates new form Login
      */
@@ -115,11 +120,27 @@ public class Login extends javax.swing.JFrame{
         // TODO add your handling code here:
         //tentar o login!
         String username =  this.username_tf.getText();
-        String password = this.password_pf.getPassword().toString();
-        //se conseguido  abrir nova janela  Main view e dispose esta     
-        MainView hv = new MainView(username);
-        hv.setVisible(true);
-        this.dispose();
+        String password ="";
+        for(char c : this.password_pf.getPassword())
+            password+=c; 
+        
+        //se conseguido  abrir nova janela  Main view e dispose esta    
+        try {
+             this.businessFacade = new BusinessFacade();
+             boolean  b = this.businessFacade.login(username, password);
+             if(b){
+             MainView hv = new MainView(username);
+             hv.setVisible(true);
+             this.dispose();
+             }
+             else{
+                 System.out.println("Dados de Utilizador errados");
+             }
+        } catch (SQLException ex) {
+            System.out.println("impossivel ligar a BD");
+        }
+        
+       
     }//GEN-LAST:event_login_btActionPerformed
 
     /**
