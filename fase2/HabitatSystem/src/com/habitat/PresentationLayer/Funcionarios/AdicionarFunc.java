@@ -211,6 +211,8 @@ public class AdicionarFunc extends javax.swing.JPanel {
        for(Component c : this.getComponents())
            if(c.getClass()==JTextField.class)
               ((JTextField)c).setText("");
+       
+       this.password_pf.setText("");
     }
     private void sub_bttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sub_bttActionPerformed
         // TODO add your handling code here:
