@@ -2,6 +2,9 @@ package com.habitat.PresentationLayer.Funcionarios;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
@@ -226,7 +229,11 @@ public class AdicionarFunc extends javax.swing.JPanel {
         String cod_postal = this.postal_tf.getText();
         String nif =this.nif_tf.getText();
         clean();
-        this.businessFacade.addUtilizador(username, password, name, nif,tipo, rua, local, cod_postal);
+        try {
+           boolean b = this.businessFacade.addUtilizador(username, password, name, nif,tipo, rua, local, cod_postal);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdicionarFunc.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_sub_bttActionPerformed

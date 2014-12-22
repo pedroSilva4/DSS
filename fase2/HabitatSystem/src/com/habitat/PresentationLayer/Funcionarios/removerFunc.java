@@ -7,6 +7,11 @@
 package com.habitat.PresentationLayer.Funcionarios;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.util.ErrorWindow;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -90,7 +95,14 @@ public class removerFunc extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String username = this.username_tf.getText();
-        businessFacade.rmvUtilizador(username);
+        try {
+            boolean b = businessFacade.rmvUtilizador(username);
+            if(b==false)
+                 new ErrorWindow("Remover", "Utilizador não existe", "warning",new JFrame()).wshow();
+        } catch (SQLException ex) {
+              ex.printStackTrace();
+              new ErrorWindow("Remover", "Impossivel Remover Utilizador,Problema Conecção", "error",new JFrame()).wshow();
+        }
         this.username_tf.setText("");
         update();
         
