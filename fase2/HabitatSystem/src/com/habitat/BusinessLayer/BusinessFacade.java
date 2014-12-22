@@ -1,23 +1,29 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer;
+package com.habitat.BusinessLayer;
 
-import Class_Diagram_Habitat_Independent.DataLayer.CandidaturaDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.EventosDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.DoadoresDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.DoacoesDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.MaterialDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.UtilizadorDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.VoluntarioDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.ProjetosDAO;
-import Class_Diagram_Habitat_Independent.DataLayer.TarefasDAO;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Candidaturas.Candidatura;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Eventos.Evento;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Doadores.Doador;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Doadores.Doacao;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Material.Material;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Utilizadores.Utilizador;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Voluntarios.Voluntario;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Projetos.Projeto;
-import Modelo_de_Dominio.Tarefa;
+
+import com.habitat.BusinessLayer.Candidaturas.Candidatura;
+import com.habitat.BusinessLayer.Doadores.Doacao;
+import com.habitat.BusinessLayer.Doadores.Doador;
+import com.habitat.BusinessLayer.Eventos.Evento;
+import com.habitat.BusinessLayer.Material.Material;
+import com.habitat.BusinessLayer.Projetos.Projeto;
+import com.habitat.BusinessLayer.Tarefas.Tarefa;
+import com.habitat.BusinessLayer.Utilizadores.Utilizador;
+import com.habitat.BusinessLayer.Voluntarios.Voluntario;
+import com.habitat.DataLayer.CandidaturaDAO;
+import com.habitat.DataLayer.DoacoesDAO;
+import com.habitat.DataLayer.DoadoresDAO;
+import com.habitat.DataLayer.EventosDAO;
+import com.habitat.DataLayer.MaterialDAO;
+import com.habitat.DataLayer.ProjetosDAO;
+import com.habitat.DataLayer.TarefasDAO;
+import com.habitat.DataLayer.UtilizadorDAO;
+import com.habitat.DataLayer.VoluntarioDAO;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.GregorianCalendar;
 
 public class BusinessFacade {
 	public CandidaturaDAO _candidaturas;
@@ -29,6 +35,22 @@ public class BusinessFacade {
 	public VoluntarioDAO _voluntarios;
 	public ProjetosDAO _projetos;
 	public TarefasDAO _tarefas;
+        
+        /*Constructor*/
+        public BusinessFacade() throws SQLException{
+            Connection conn = null;
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/Habitat?" +
+                                           "user=h_user&password=mypass");
+            _candidaturas = new CandidaturaDAO(conn);
+            _eventos = new EventosDAO(conn);
+            _doadores = new DoadoresDAO(conn);
+            _doacoes = new DoacoesDAO(conn);
+            _materiais = new MaterialDAO(conn);
+            _utilizadores = new UtilizadorDAO(conn);
+            _voluntarios = new VoluntarioDAO(conn);
+            _projetos = new ProjetosDAO(conn);
+            _tarefas = new TarefasDAO(conn);
+        }
 
 	public Candidatura getCandidatura(String aCod) {
 		throw new UnsupportedOperationException();
@@ -50,7 +72,7 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean addEvento(GregorianCalendar aData, float aMont, int aNpessoas, String aOrg, String aNota) {
+	public boolean addEvento(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -58,7 +80,7 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean addDoador(String aNome, String aNif, String aMorada, GregorianCalendar aData, String aSetor, String aSite, String aPescontac) {
+	public boolean addDoador(String aNome, String aNif, String aMorada, Date aData, String aSetor, String aSite, String aPescontac) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -130,7 +152,7 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public void addTarefaProjeto(String aTarefa, String aProjeto, Dare aDataI, Date aDataF, double aTempo) {
+	public void addTarefaProjeto(String aTarefa, String aProjeto, Date aDataI, Date aDataF, double aTempo) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -159,7 +181,9 @@ public class BusinessFacade {
 	}
 
 	public boolean login(String aUser, String aPasswd) {
-		throw new UnsupportedOperationException();
+            try{
+		return _utilizadores.login(aUser, aPasswd);
+            }catch(SQLException e){return false;}
 	}
 
 	public void logout() {

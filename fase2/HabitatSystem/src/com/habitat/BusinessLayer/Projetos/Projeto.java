@@ -1,4 +1,6 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Projetos;
+package com.habitat.BusinessLayer.Projetos;
+
+import java.sql.Date;
 
 public class Projeto {
 	private double _orcamento;
@@ -39,15 +41,15 @@ public class Projeto {
 		throw new UnsupportedOperationException();
 	}
 
-	public Callendar getDataI() {
+	public Date getDataI() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Callendar getDataF() {
+	public Date getDataF() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setDataF(Callendar aDataF) {
+	public void setDataF(Date aDataF) {
 		throw new UnsupportedOperationException();
 	}
 }

@@ -1,8 +1,14 @@
-package Class_Diagram_Habitat_Independent.DataLayer;
+package com.habitat.DataLayer;
 
-import Class_Diagram_Habitat_Independent.BusinessLayer.Projetos.Projeto;
+import com.habitat.BusinessLayer.Projetos.Projeto;
+import java.sql.Connection;
+import java.sql.Date;
 
 public class ProjetosDAO {
+
+    public ProjetosDAO(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	public boolean existeProjeto(String aCandidato) {
 		throw new UnsupportedOperationException();

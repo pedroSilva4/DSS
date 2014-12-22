@@ -1,8 +1,10 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Doadores;
+package com.habitat.BusinessLayer.Doadores;
+
+import java.sql.Date;
 
 public class Doacao {
 	private String _cod;
-	private GregorianCalendar _data;
+	private Date _data;
 	private String _nota;
 
 	public void Docao() {
@@ -17,11 +19,11 @@ public class Doacao {
 		return this._cod;
 	}
 
-	public GregorianCalendar getData() {
+	public Date getData() {
 		return this._data;
 	}
 
-	public void setData(GregorianCalendar aData) {
+	public void setData(Date aData) {
 		this._data = aData;
 	}
 

@@ -1,8 +1,13 @@
-package Class_Diagram_Habitat_Independent.DataLayer;
+package com.habitat.DataLayer;
 
-import Class_Diagram_Habitat_Independent.BusinessLayer.Candidaturas.Candidatura;
+import com.habitat.BusinessLayer.Candidaturas.Candidatura;
+import java.sql.Connection;
 
 public class CandidaturaDAO {
+
+    public CandidaturaDAO(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	public boolean contains(String aCod) {
 		throw new UnsupportedOperationException();

@@ -1,9 +1,12 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Candidaturas;
+package com.habitat.BusinessLayer.Candidaturas;
+
+import java.sql.Date;
+import java.util.Calendar;
 
 public class Elemento {
 	private String _nome;
 	private String _escolaridade;
-	private Callendar _dataNasc;
+	private Date _dataNasc;
 	private String _estCivil;
 	private String _parentesco;
 	private String _ocupacao;
@@ -29,11 +32,11 @@ public class Elemento {
 		this._escolaridade = aEscolaridade;
 	}
 
-	public Callendar getDataNasc() {
+	public Date getDataNasc() {
 		return this._dataNasc;
 	}
 
-	public void setDataNasc(Callendar aDataNasc) {
+	public void setDataNasc(Date aDataNasc) {
 		this._dataNasc = aDataNasc;
 	}
 

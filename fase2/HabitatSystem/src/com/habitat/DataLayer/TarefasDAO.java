@@ -1,8 +1,13 @@
-package Class_Diagram_Habitat_Independent.DataLayer;
+package com.habitat.DataLayer;
 
-import Class_Diagram_Habitat_Independent.BusinessLayer.Tarefas.Tarefa;
+import com.habitat.BusinessLayer.Tarefas.Tarefa;
+import java.sql.Connection;
 
 public class TarefasDAO {
+
+    public TarefasDAO(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	public void add(Tarefa aTarefa) {
 		throw new UnsupportedOperationException();

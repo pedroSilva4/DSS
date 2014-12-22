@@ -1,6 +1,6 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Utilizadores;
+package com.habitat.BusinessLayer.Utilizadores;
 
-import Class_Diagram_Habitat_Independent.BusinessLayer.Voluntarios.Morada;
+import com.habitat.BusinessLayer.Voluntarios.Morada;
 
 public class Utilizador {
 	private String _nome;

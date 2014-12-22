@@ -1,15 +1,17 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Candidaturas;
+package com.habitat.BusinessLayer.Candidaturas;
 
 import java.util.ArrayList;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Candidaturas.Questao;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Candidaturas.Elemento;
+import com.habitat.BusinessLayer.Candidaturas.Questao;
+import com.habitat.BusinessLayer.Candidaturas.Elemento;
+import java.sql.Date;
+import java.util.Calendar;
 
 public class Candidatura {
 	private String _cod;
 	private String _obs;
 	private String _estado;
-	private Callendar _dataAbertura;
-	private Callendar _dataDecisao;
+	private Date _dataAbertura;
+	private Date _dataDecisao;
 	private float _rendimentoBruto;
 	private String _rua;
 	private String _localidade;

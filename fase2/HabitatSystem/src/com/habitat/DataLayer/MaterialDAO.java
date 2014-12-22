@@ -1,7 +1,7 @@
-package Class_Diagram_Habitat_Independent.DataLayer;
+package com.habitat.DataLayer;
 
-import Class_Diagram_Habitat_Independent.BusinessLayer.Material.Material;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Material.*;
+import com.habitat.BusinessLayer.Material.Material;
+import com.habitat.BusinessLayer.Material.*;
 
 public class MaterialDAO {
 

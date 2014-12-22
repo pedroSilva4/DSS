@@ -1,8 +1,10 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Voluntarios;
+package com.habitat.BusinessLayer.Voluntarios;
+
+import java.sql.Date;
 
 public class Voluntario {
 	private String _nomeEquipa;
-	private Object _dataNasc;
+	private Date _dataNasc;
 	private String _contacto;
 	private String _nome;
 	private String _profissao;
@@ -16,11 +18,11 @@ public class Voluntario {
 		this._nome = aNome;
 	}
 
-	public void setDataNasc(String aDataNasc) {
+	public void setDataNasc(Date aDataNasc) {
 		throw new UnsupportedOperationException();
 	}
 
-	public String getDataNasc() {
+	public Date getDataNasc() {
 		throw new UnsupportedOperationException();
 	}
 

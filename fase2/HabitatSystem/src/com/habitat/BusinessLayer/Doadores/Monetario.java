@@ -1,4 +1,4 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Doadores;
+package com.habitat.BusinessLayer.Doadores;
 
 public class Monetario extends Doacao {
 	private float _valor;

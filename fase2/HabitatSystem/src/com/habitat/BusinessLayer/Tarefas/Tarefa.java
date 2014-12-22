@@ -1,4 +1,4 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Tarefas;
+package com.habitat.BusinessLayer.Tarefas;
 
 public class Tarefa {
 	private String _descricao;

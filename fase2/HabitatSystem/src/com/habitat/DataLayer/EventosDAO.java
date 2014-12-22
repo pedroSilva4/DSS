@@ -1,9 +1,15 @@
-package Class_Diagram_Habitat_Independent.DataLayer;
+package com.habitat.DataLayer;
 
-import Class_Diagram_Habitat_Independent.BusinessLayer.Eventos.Evento;
-import Class_Diagram_Habitat_Independent.BusinessLayer.Eventos.*;
+import com.habitat.BusinessLayer.Eventos.Evento;
+import com.habitat.BusinessLayer.Eventos.*;
+import java.sql.Connection;
+import java.sql.Date;
 
 public class EventosDAO {
+
+    public EventosDAO(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	public boolean contains(String aCod) {
 		throw new UnsupportedOperationException();
@@ -17,7 +23,7 @@ public class EventosDAO {
 		throw new UnsupportedOperationException();
 	}
 
-	public void add(GregorianCalendar aData, float aMont, int aNpessoas, String aOrg, String aNota) {
+	public void add(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) {
 		throw new UnsupportedOperationException();
 	}
 

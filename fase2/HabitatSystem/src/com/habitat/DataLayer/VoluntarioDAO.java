@@ -1,8 +1,13 @@
-package Class_Diagram_Habitat_Independent.DataLayer;
+package com.habitat.DataLayer;
 
-import Class_Diagram_Habitat_Independent.BusinessLayer.Voluntarios.Voluntario;
+import com.habitat.BusinessLayer.Voluntarios.Voluntario;
+import java.sql.Connection;
 
 public class VoluntarioDAO {
+
+    public VoluntarioDAO(Connection conn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 	public boolean add(Voluntario aVol) {
 		throw new UnsupportedOperationException();

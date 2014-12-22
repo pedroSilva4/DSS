@@ -1,4 +1,4 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Doadores;
+package com.habitat.BusinessLayer.Doadores;
 
 public class Empresa extends Doador {
 	private String _setor;

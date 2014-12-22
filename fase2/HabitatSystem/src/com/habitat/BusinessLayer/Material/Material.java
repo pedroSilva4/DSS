@@ -1,4 +1,4 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Material;
+package com.habitat.BusinessLayer.Material;
 
 public class Material {
 	private String _cod;

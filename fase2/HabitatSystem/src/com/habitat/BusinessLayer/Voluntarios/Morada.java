@@ -1,4 +1,4 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Voluntarios;
+package com.habitat.BusinessLayer.Voluntarios;
 
 public class Morada {
 	private String _rua;

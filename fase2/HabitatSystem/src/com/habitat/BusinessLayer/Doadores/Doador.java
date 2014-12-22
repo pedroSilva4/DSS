@@ -1,4 +1,6 @@
-package Class_Diagram_Habitat_Independent.BusinessLayer.Doadores;
+package com.habitat.BusinessLayer.Doadores;
+
+import java.sql.Date;
 
 public class Doador {
 	private String _cod;
@@ -8,7 +10,7 @@ public class Doador {
 	private String _localidade;
 	private String _codPostal;
 	private int _contacto;
-	private GregorianCalendar _dataAssociacao;
+	private Date _dataAssociacao;
 
 	public void Doador() {
 		throw new UnsupportedOperationException();
@@ -42,7 +44,7 @@ public class Doador {
 		this._contacto = aContacto;
 	}
 
-	public void setDataAssoc(GregorianCalendar aData) {
+	public void setDataAssoc(Date aData) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -74,7 +76,7 @@ public class Doador {
 		return this._contacto;
 	}
 
-	public GregorianCalendar getDataAssoc() {
+	public Date getDataAssoc() {
 		throw new UnsupportedOperationException();
 	}
 }
