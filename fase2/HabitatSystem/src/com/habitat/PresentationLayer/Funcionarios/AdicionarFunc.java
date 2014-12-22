@@ -55,12 +55,10 @@ public class AdicionarFunc extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tipos_cb = new javax.swing.JComboBox();
         nome_tf = new javax.swing.JTextField();
         username_tf = new javax.swing.JTextField();
-        email_tf = new javax.swing.JTextField();
         password_pf = new javax.swing.JPasswordField();
         sub_btt = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -89,8 +87,6 @@ public class AdicionarFunc extends javax.swing.JPanel {
         jLabel2.setText("Nome :");
 
         jLabel3.setText("Username :");
-
-        jLabel4.setText("Email :");
 
         jLabel5.setText("Password :");
 
@@ -149,14 +145,12 @@ public class AdicionarFunc extends javax.swing.JPanel {
                                 .addComponent(nome_tf)))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel8)
-                                .addComponent(jLabel9))
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel5))
                             .addGap(2, 2, 2)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(email_tf)
                                 .addComponent(password_pf)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,10 +177,6 @@ public class AdicionarFunc extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(username_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -223,7 +213,7 @@ public class AdicionarFunc extends javax.swing.JPanel {
         // TODO add your handling code here:
         String name = this.nome_tf.getText();
         String username = this.username_tf.getText();
-        String email = this.email_tf.getText(); 
+        
         String tipo = this.tipos_cb.getSelectedItem().toString();
         tipo = tipo.toLowerCase();
         
@@ -236,7 +226,7 @@ public class AdicionarFunc extends javax.swing.JPanel {
         String cod_postal = this.postal_tf.getText();
         String nif =this.nif_tf.getText();
         clean();
-        this.businessFacade.addUtilizador(username, password, name, nif, email,tipo, rua, local, cod_postal);
+        this.businessFacade.addUtilizador(username, password, name, nif,tipo, rua, local, cod_postal);
         
         
     }//GEN-LAST:event_sub_bttActionPerformed
@@ -257,11 +247,9 @@ public class AdicionarFunc extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField email_tf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
