@@ -127,7 +127,7 @@ public class BusinessFacade {
                 return ut;
 	}
 
-	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String email, String tipo ,String aRua, String aLocal, String aCod_postal) {
+	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String email, String tipo ,String aRua, String aLocal, String aCod_postal) throws SQLException {
 		Utilizador u = new Utilizador(aNome,aPassword,aUsername,aNif,tipo,aRua,aLocal,aCod_postal);
                 return this._utilizadores.add(u);
 	}

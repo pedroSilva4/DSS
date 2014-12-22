@@ -16,8 +16,26 @@ public class UtilizadorDAO {
         this.conn = conn;
     }
 
-	public boolean add(Utilizador aUt) {
-		throw new UnsupportedOperationException();
+	public boolean add(Utilizador aUt) throws SQLException{
+            PreparedStatement st;
+            ResultSet res;
+            String sql; 
+            sql = "select id from Habitat.Funcionarios where username = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1, aUt.getNome());
+            res = st.executeQuery();
+            if(res.next()) return false;
+            sql = "insert into Habitat.Funcionarios values(?,?,?,?,?,?,?,?);";
+            st = conn.prepareStatement(sql);
+            st.setString(1, aUt.getUsername());
+            st.setString(2, aUt.getPassword());
+            st.setString(3, aUt.getNome());
+            st.setString(4, aUt.getNif());
+            st.setString(5, aUt.getMorada().getRua());
+            st.setString(6, aUt.getMorada().getLocalidade());
+            st.setString(7, aUt.getMorada().getCodigo_postal());
+            st.setString(8, aUt.getTipo());
+            return st.execute();
 	}
 
 	public void update(Utilizador aUt) {
@@ -42,9 +60,6 @@ public class UtilizadorDAO {
             ResultSet res;
             String sql; 
             sql = "select * from Habitat.Funcionarios where username = ?;";
-            /*st = conn.createStatement();
-           // st.setString(1, aUser);
-            res = st.executeQuery(sql);*/
             st = conn.prepareStatement(sql);
             st.setString(1, aUser);
             res = st.executeQuery();
