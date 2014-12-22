@@ -168,7 +168,7 @@ public class Login extends javax.swing.JFrame{
     private javax.swing.JLabel username_label;
     private javax.swing.JTextField username_tf;
     // End of variables declaration//GEN-END:variables
-   
+    
     private void update()
     {
         if((this.username_tf.getText()!= null || this.username_tf.getText().equals("")) && this.password_pf.getPassword().length > 0)
