@@ -51,7 +51,11 @@ public class BusinessFacade {
             _projetos = new ProjetosDAO(conn);
             _tarefas = new TarefasDAO(conn);*/
         }
-
+        
+        public Utilizador getActiveUser(){
+            return this.activeUser;
+        }
+        
 	public Candidatura getCandidatura(String aCod) {
 		throw new UnsupportedOperationException();
 	}
