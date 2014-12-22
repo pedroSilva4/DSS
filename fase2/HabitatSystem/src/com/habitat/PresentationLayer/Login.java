@@ -137,6 +137,7 @@ public class Login extends javax.swing.JFrame{
                  System.out.println("Dados de Utilizador errados");
              }
         } catch (SQLException ex) {
+            ex.printStackTrace();
             System.out.println("impossivel ligar a BD");
         }
         
