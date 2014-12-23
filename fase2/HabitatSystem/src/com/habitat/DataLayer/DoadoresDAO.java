@@ -36,11 +36,10 @@ public class DoadoresDAO {
             ResultSet res;
             String sql;
             if(aDoador.getClass().toString().equals("Empresa")){
-                Empresa x = (Empresa) aDoador;
                 sql = "insert into Habitat.Doadores "
                     + "(nome,NIF,rua,localidade,codPostal,contacto,dataAssociacao,"
                     + "actividade, email, site,pessoaDeContacto)"
-                    + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "values(?,?,?,?,?,?,?,?,?,?,?,?);";
                 st = conn.prepareStatement(sql);
                 st.setString(1, aDoador.getNome());
                 st.setString(2, aDoador.getNIF());
@@ -49,16 +48,16 @@ public class DoadoresDAO {
                 st.setString(5, aDoador.getCodPostal());
                 st.setString(6, aDoador.getContacto());
                 st.setString(7, aDoador.getDataAssoc().toString());
-                st.setString(8, x.getSetor());
+                st.setString(8, ((Empresa)aDoador).getSetor());
                 st.setString(9, aDoador.getEmail());
-                st.setString(10, x.getSite());
-                st.setString(11, x.getPContacto());
+                st.setString(10, ((Empresa)aDoador).getSite());
+                st.setString(11, ((Empresa)aDoador).getPContacto());
                 //campo voluntario fica a null po enquanto
             }
             else{
                 sql = "insert into Habitat.Doadores "
                     + "(nome,NIF,rua,localidade,codPostal,contacto,dataAssociacao,email"
-                    + "values(?,?,?,?,?,?,?,?)";
+                    + "values(?,?,?,?,?,?,?,?);";
                 st = conn.prepareStatement(sql);
                 st.setString(1, aDoador.getNome());
                 st.setString(2, aDoador.getNIF());
@@ -77,7 +76,7 @@ public class DoadoresDAO {
             PreparedStatement st;
             ResultSet res;
             String sql;
-            sql = "select * from Habitat.Doadores where id = ?";
+            sql = "select * from Habitat.Doadores where id = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aCod);
             res = st.executeQuery();
@@ -124,7 +123,7 @@ public class DoadoresDAO {
                        + "email = ?,"
                        + "site = ?,"
                        + "pessoaDeContacto = ?"
-                       + "where id = ?";
+                       + "where id = ?;";
                //funcionario fica a null
                st = conn.prepareStatement(sql);
                st.setString(1, aDoador.getNome());
@@ -149,7 +148,7 @@ public class DoadoresDAO {
                        + "contacto = ?,"
                        + "dataAssociacao = ?,"
                        + "email = ?,"
-                       + "where id = ?";
+                       + "where id = ?;";
                //funcionario fica a null
                st = conn.prepareStatement(sql);
                st.setString(1, aDoador.getNome());

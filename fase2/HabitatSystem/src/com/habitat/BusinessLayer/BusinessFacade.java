@@ -99,16 +99,18 @@ public class BusinessFacade {
 		return this._doadores.update(aDoador);
 	}
 
-	public Doacao getDoacao(String aCod) {
-		throw new UnsupportedOperationException();
+	public Doacao getDoacao(String aCod) throws SQLException {
+		boolean b = this._doacoes.contains(aCod);
+                if(b == false) return null;
+                return this._doacoes.get(aCod);
 	}
 
-	public boolean addDoacao(String aDoador, String aTipo, int aMont) {
-		throw new UnsupportedOperationException();
+	public void addDoacao(String aDoador, Doacao aDoacao) throws SQLException {
+		this._doacoes.add(aDoador, aDoacao);
 	}
 
-	public void containsDoador(String aCod) {
-		throw new UnsupportedOperationException();
+	public boolean containsDoador(String aCod) throws SQLException {
+		return this._doacoes.contains(aCod);
 	}
 
 	public void removeMaterial(String aCod) {

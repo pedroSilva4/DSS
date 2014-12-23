@@ -1,13 +1,10 @@
 package com.habitat.BusinessLayer.Doadores;
 
+import java.sql.Date;
+
 public class Servicos extends Doacao {
-	private String _descricao;
-
-	public String getDescricao() {
-		return this._descricao;
-	}
-
-	public void setDescricao(String aDescricao) {
-		this._descricao = aDescricao;
-	}
+	
+        public Servicos(String cod, Date data, String descricao){
+            super(cod,data,descricao);
+        }
 }
