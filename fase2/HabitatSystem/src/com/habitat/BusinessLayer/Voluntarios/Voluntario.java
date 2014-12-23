@@ -41,17 +41,17 @@ public class Voluntario {
             this._tipo = tipo;
         }
 	public void setDataNasc(Date aDataNasc) {
-		throw new UnsupportedOperationException();
+		this._dataNasc = aDataNasc;
 	}
 
 	public Date getDataNasc() {
-		throw new UnsupportedOperationException();
+		return this._dataNasc;
 	}
-        public void setDataAssociacao(Date aDataNasc) {
-		throw new UnsupportedOperationException();
+        public void setDataAssociacao(Date aDataAss) {
+		this._dataAssociacao = aDataAss;
 	}
         public Date getDataAssociacao() {
-		throw new UnsupportedOperationException();
+		return this._dataAssociacao;
 	}
 
 	public void setMorada(Morada aM) {

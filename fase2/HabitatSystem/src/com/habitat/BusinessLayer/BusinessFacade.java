@@ -83,16 +83,20 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public Doador getDoador(String aCod) {
-		throw new UnsupportedOperationException();
+	public Doador getDoador(String aCod) throws SQLException {
+                Doador d;
+		boolean b = this._doadores.contains(aCod);
+                if(b == false) return null;
+                d = this._doadores.get(aCod);
+                return d;
 	}
 
-	public boolean addDoador(String aNome, String aNif, String aMorada, Date aData, String aSetor, String aSite, String aPescontac) {
-		throw new UnsupportedOperationException();
+	public void addDoador(Doador aDoador) throws SQLException {
+            this._doadores.add(aDoador);
 	}
 
-	public boolean updateDoador(Doador aDoador) {
-		throw new UnsupportedOperationException();
+	public boolean updateDoador(Doador aDoador) throws SQLException {
+		return this._doadores.update(aDoador);
 	}
 
 	public Doacao getDoacao(String aCod) {

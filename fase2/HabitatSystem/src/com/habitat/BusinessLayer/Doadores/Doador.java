@@ -5,26 +5,42 @@ import java.sql.Date;
 public class Doador {
 	private String _cod;
 	private String _nome;
-	private float _nIF;
+	private String _nIF;
 	private String _rua;
 	private String _localidade;
 	private String _codPostal;
-	private int _contacto;
+	private String _contacto;
+        private String _email;
 	private Date _dataAssociacao;
 
-	public void Doador() {
-		throw new UnsupportedOperationException();
+	public Doador(String cod,String nome,String nif,String rua,String localidade,
+                String codP,String contacto,String email,Date dataAssoc) {
+		this._cod = cod;
+                this._nome = nome;
+                this._nIF = nif;
+                this._rua = rua;
+                this._localidade = localidade;
+                this._codPostal = codP;
+                this._contacto = contacto;
+                this._email = email;
+                this._dataAssociacao = dataAssoc;
 	}
 
 	public void setCod(String aCod) {
 		this._cod = aCod;
 	}
+        public void setEmail(String email){
+            this._email = email;
+        }
+        public String getEmail(){
+            return this._email;
+        }
 
 	public void setNome(String aNome) {
 		this._nome = aNome;
 	}
 
-	public void setNIF(float aNif) {
+	public void setNIF(String aNif) {
 		this._nIF = aNif;
 	}
 
@@ -40,12 +56,12 @@ public class Doador {
 		this._codPostal = aCP;
 	}
 
-	public void setContacto(int aContacto) {
+	public void setContacto(String aContacto) {
 		this._contacto = aContacto;
 	}
 
 	public void setDataAssoc(Date aData) {
-		throw new UnsupportedOperationException();
+		this._dataAssociacao = aData;
 	}
 
 	public String getCod() {
@@ -56,7 +72,7 @@ public class Doador {
 		return this._nome;
 	}
 
-	public float getNIF() {
+	public String getNIF() {
 		return this._nIF;
 	}
 
@@ -72,11 +88,11 @@ public class Doador {
 		return this._codPostal;
 	}
 
-	public int getContacto() {
+	public String getContacto() {
 		return this._contacto;
 	}
 
 	public Date getDataAssoc() {
-		throw new UnsupportedOperationException();
+		return this._dataAssociacao;
 	}
 }
