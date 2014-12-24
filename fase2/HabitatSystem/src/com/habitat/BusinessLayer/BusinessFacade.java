@@ -44,15 +44,15 @@ public class BusinessFacade {
             conn = null;
             conn = DriverManager.getConnection("jdbc:mysql://localhost/Habitat?" +
                                            "user=h_user&password=mypass");
-           /* _candidaturas = new CandidaturaDAO(conn);
+           // _candidaturas = new CandidaturaDAO(conn);
             _eventos = new EventosDAO(conn);
             _doadores = new DoadoresDAO(conn);
             _doacoes = new DoacoesDAO(conn);
-            _materiais = new MaterialDAO(conn);*/
+            //_materiais = new MaterialDAO(conn);
             _utilizadores = new UtilizadorDAO(conn);
-           /* _voluntarios = new VoluntarioDAO(conn);
-            _projetos = new ProjetosDAO(conn);
-            _tarefas = new TarefasDAO(conn);*/
+            _voluntarios = new VoluntarioDAO(conn);
+           // _projetos = new ProjetosDAO(conn);
+            //_tarefas = new TarefasDAO(conn);
         }
         
         public Utilizador getActiveUser(){
@@ -71,17 +71,25 @@ public class BusinessFacade {
 		throw new UnsupportedOperationException();
 	}
 
-	public Evento getEvento(String aCod) {
-		throw new UnsupportedOperationException();
+	public Evento getEvento(String aCod) throws SQLException {
+               boolean b = this._eventos.contains(aCod);
+               if(b == false) return null;
+               Evento v = this._eventos.get(aCod);
+               return v;
 	}
 
-	public boolean updateEvento(Evento aEvento) {
-		throw new UnsupportedOperationException();
+	public void updateEvento(Evento aEvento) throws SQLException {
+		this._eventos.update(aEvento);
 	}
 
-	public boolean addEvento(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) {
-		throw new UnsupportedOperationException();
+	public void addEvento(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) throws SQLException {
+            this._eventos.add(aData, aMont, aNpessoas, aOrg, aNota);
 	}
+        public boolean associarDoadorEvento(String codD, String codE) throws SQLException{
+            boolean b = this._doadores.contains(codD);
+            if(b == false) return false;
+            return this._eventos.associarDoador(codD, codE);
+        }
 
 	public Doador getDoador(String aCod) throws SQLException {
                 Doador d;

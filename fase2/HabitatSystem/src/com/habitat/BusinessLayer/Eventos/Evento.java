@@ -10,8 +10,14 @@ public class Evento {
 	private String _organizador;
 	private String _nota;
 
-	public void Evento() {
-		throw new UnsupportedOperationException();
+	public Evento(String cod, Date data, float val, 
+                        int nPessoas, String organizador, String nota) {
+            this._cod = cod;
+            this._data = data;
+            this._angariacao = val;
+            this._npessoas = nPessoas;
+            this._organizador = organizador;
+            this._nota = nota;
 	}
 
 	public void setCod(String aCod) {
@@ -27,11 +33,11 @@ public class Evento {
 	}
 
 	public void setNPessoas(int aN) {
-		throw new UnsupportedOperationException();
+		this._npessoas = aN;
 	}
 
 	public void setOrganisador(String aOrg) {
-		throw new UnsupportedOperationException();
+		this._organizador = aOrg;
 	}
 
 	public void setNota(String aNota) {
@@ -51,11 +57,11 @@ public class Evento {
 	}
 
 	public int getNPessoas() {
-		throw new UnsupportedOperationException();
+		return this._npessoas;
 	}
 
 	public String getorganisador() {
-		throw new UnsupportedOperationException();
+		return this._organizador;
 	}
 
 	public String getNota() {
