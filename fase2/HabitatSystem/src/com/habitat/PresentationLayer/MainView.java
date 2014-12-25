@@ -247,7 +247,7 @@ public class MainView extends javax.swing.JFrame {
        this.name_label.setText(this.businessFacade.getActiveUser().getNome());
        this.type_label.setText(this.businessFacade.getActiveUser().getTipo());
        this.funcionarios_jp.add(new FuncionariosJP(businessFacade));
-       //this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
+       this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
        // this.groupBox_func.setVisible(false);
     }
 

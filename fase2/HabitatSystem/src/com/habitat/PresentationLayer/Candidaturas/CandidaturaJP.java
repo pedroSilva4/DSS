@@ -6,6 +6,7 @@
 
 package com.habitat.PresentationLayer.Candidaturas;
 
+import com.habitat.BusinessLayer.BusinessFacade;
 import java.awt.CardLayout;
 
 /**
@@ -17,7 +18,9 @@ public class CandidaturaJP extends javax.swing.JPanel {
     /**
      * Creates new form CandidaturaJP
      */
-    public CandidaturaJP() {
+    private final BusinessFacade businessFacade;
+    public CandidaturaJP(BusinessFacade bus) {
+        this.businessFacade = bus;
         initComponents();
         myInit(/**tipo**/);
     }
@@ -109,6 +112,14 @@ public class CandidaturaJP extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     public void myInit(/**tipo**/)
     {
+        if(this.businessFacade.getActiveUser().getTipo().equals("famílias")){
+            this.consCand_bt.setText("Atualizar/Consultar\n Candidatura");
+            this.consProj.setText("Atualizar/Consultar\n Projecto");
+        }
+        else{
+            this.add_bt.setEnabled(false);
+        }
+        
         this.container.add(new ConsultarCand(),"consCand");
         this.container.add(new ConsultarProj(),"consProj");
         this.container.setVisible(false);
