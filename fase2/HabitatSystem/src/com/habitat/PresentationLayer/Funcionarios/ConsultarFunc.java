@@ -81,7 +81,7 @@ public class ConsultarFunc extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.getParent().setVisible(false);
+       String s = this.username_tf.getText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

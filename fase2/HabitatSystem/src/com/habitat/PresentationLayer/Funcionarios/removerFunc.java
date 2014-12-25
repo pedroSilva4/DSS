@@ -99,6 +99,9 @@ public class removerFunc extends javax.swing.JPanel {
             boolean b = businessFacade.rmvUtilizador(username);
             if(b==false)
                  new ErrorWindow("Remover", "Utilizador não existe", "warning",new JFrame()).wshow();
+            else{
+                new ErrorWindow("Remover", "Utilizador removido com Sucesso", "message",new JFrame()).wshow();
+            }
         } catch (SQLException ex) {
               ex.printStackTrace();
               new ErrorWindow("Remover", "Impossivel Remover Utilizador,Problema Conecção", "error",new JFrame()).wshow();
