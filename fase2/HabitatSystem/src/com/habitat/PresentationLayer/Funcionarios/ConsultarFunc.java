@@ -6,6 +6,14 @@
 
 package com.habitat.PresentationLayer.Funcionarios;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Utilizadores.Utilizador;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Pedro
@@ -15,7 +23,10 @@ public class ConsultarFunc extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarFunc
      */
-    public ConsultarFunc() {
+    private final BusinessFacade businessFacade;
+    
+    public ConsultarFunc(BusinessFacade bus) {
+        this.businessFacade = bus;
         initComponents();
     }
 
@@ -82,6 +93,21 @@ public class ConsultarFunc extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
        String s = this.username_tf.getText();
+        try {
+            Utilizador ut = this.businessFacade.getUtilizador(s);
+            JDialog jd;
+            if(this.businessFacade.getActiveUser().getTipo().equals("admin")){
+                //tem que se mudar para atualizar
+                jd= new AtualizarFuncDialog(new JFrame(), true,businessFacade,ut);
+            }
+            else{
+                jd= new ConsultarFuncDialog(new JFrame(), true, ut, businessFacade);
+            }
+            jd.setVisible(true);
+            this.username_tf.setText("");
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarFunc.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -66,7 +66,7 @@ public class MainView extends javax.swing.JFrame {
         logout_bt = new javax.swing.JMenuItem();
         exit_bt = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         main_tabs.setToolTipText("");
         main_tabs.setAlignmentX(0.0F);
