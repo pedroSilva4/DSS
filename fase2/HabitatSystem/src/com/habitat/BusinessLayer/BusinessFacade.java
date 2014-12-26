@@ -1,6 +1,5 @@
 package com.habitat.BusinessLayer;
 
-
 import com.habitat.BusinessLayer.Candidaturas.Candidatura;
 import com.habitat.BusinessLayer.Doadores.Doacao;
 import com.habitat.BusinessLayer.Doadores.Doador;
@@ -27,200 +26,236 @@ import java.sql.SQLException;
 import java.util.GregorianCalendar;
 
 public class BusinessFacade {
-	public CandidaturaDAO _candidaturas;
-	public EventosDAO _eventos;
-	public DoadoresDAO _doadores;
-	public DoacoesDAO _doacoes;
-	public MaterialDAO _materiais;
-	public UtilizadorDAO _utilizadores;
-	public VoluntarioDAO _voluntarios;
-	public ProjetosDAO _projetos;
-	public TarefasDAO _tarefas;
-        private Utilizador activeUser;
-        private Connection conn;
-        /*Constructor*/
-        public BusinessFacade() throws SQLException{
-            //Connection conn = null;
-            conn = null;
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/Habitat?" +
-                                           "user=h_user&password=mypass");
-           // _candidaturas = new CandidaturaDAO(conn);
-            _eventos = new EventosDAO(conn);
-            _doadores = new DoadoresDAO(conn);
-            _doacoes = new DoacoesDAO(conn);
-            //_materiais = new MaterialDAO(conn);
-            _utilizadores = new UtilizadorDAO(conn);
-            _voluntarios = new VoluntarioDAO(conn);
-           // _projetos = new ProjetosDAO(conn);
-            //_tarefas = new TarefasDAO(conn);
+
+    public CandidaturaDAO _candidaturas;
+    public EventosDAO _eventos;
+    public DoadoresDAO _doadores;
+    public DoacoesDAO _doacoes;
+    public MaterialDAO _materiais;
+    public UtilizadorDAO _utilizadores;
+    public VoluntarioDAO _voluntarios;
+    public ProjetosDAO _projetos;
+    public TarefasDAO _tarefas;
+    private Utilizador activeUser;
+    private Connection conn;
+    /*Constructor*/
+
+    public BusinessFacade() throws SQLException {
+        //Connection conn = null;
+        conn = null;
+        conn = DriverManager.getConnection("jdbc:mysql://localhost/Habitat?"
+                + "user=h_user&password=mypass");
+        _candidaturas = new CandidaturaDAO(conn);
+        _eventos = new EventosDAO(conn);
+        _doadores = new DoadoresDAO(conn);
+        _doacoes = new DoacoesDAO(conn);
+        _materiais = new MaterialDAO(conn);
+        _utilizadores = new UtilizadorDAO(conn);
+        _voluntarios = new VoluntarioDAO(conn);
+        _projetos = new ProjetosDAO(conn);
+        _tarefas = new TarefasDAO(conn);
+    }
+
+    public Utilizador getActiveUser() {
+        return this.activeUser;
+    }
+
+    //adicionei isto
+    public boolean containsCadidatura(String aCod) throws SQLException {
+        return this._candidaturas.contains(aCod);
+    }
+
+    public Candidatura getCandidatura(String aCod) throws SQLException {
+        Candidatura res = this._candidaturas.get(aCod);
+        return res;
+    }
+
+    public void setCandidatura(Candidatura aCand) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void addCandidatura(Candidatura aCand) throws SQLException {
+        this._candidaturas.add(aCand);
+    }
+
+    public Evento getEvento(String aCod) throws SQLException {
+        boolean b = this._eventos.contains(aCod);
+        if (b == false) {
+            return null;
         }
-        
-        public Utilizador getActiveUser(){
-            return this.activeUser;
+        Evento v = this._eventos.get(aCod);
+        return v;
+    }
+
+    public void updateEvento(Evento aEvento) throws SQLException {
+        this._eventos.update(aEvento);
+    }
+
+    public void addEvento(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) throws SQLException {
+        this._eventos.add(aData, aMont, aNpessoas, aOrg, aNota);
+    }
+
+    public boolean associarDoadorEvento(String codD, String codE) throws SQLException {
+        boolean b = this._doadores.contains(codD);
+        if (b == false) {
+            return false;
         }
-        
-	public Candidatura getCandidatura(String aCod) {
-		throw new UnsupportedOperationException();
-	}
+        return this._eventos.associarDoador(codD, codE);
+    }
 
-	public void setCandidatura(Candidatura aCand) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void addCandidatura(Candidatura aCand) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Evento getEvento(String aCod) throws SQLException {
-               boolean b = this._eventos.contains(aCod);
-               if(b == false) return null;
-               Evento v = this._eventos.get(aCod);
-               return v;
-	}
-
-	public void updateEvento(Evento aEvento) throws SQLException {
-		this._eventos.update(aEvento);
-	}
-
-	public void addEvento(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) throws SQLException {
-            this._eventos.add(aData, aMont, aNpessoas, aOrg, aNota);
-	}
-        public boolean associarDoadorEvento(String codD, String codE) throws SQLException{
-            boolean b = this._doadores.contains(codD);
-            if(b == false) return false;
-            return this._eventos.associarDoador(codD, codE);
+    public Doador getDoador(String aCod) throws SQLException {
+        Doador d;
+        boolean b = this._doadores.contains(aCod);
+        if (b == false) {
+            return null;
         }
+        d = this._doadores.get(aCod);
+        return d;
+    }
 
-	public Doador getDoador(String aCod) throws SQLException {
-                Doador d;
-		boolean b = this._doadores.contains(aCod);
-                if(b == false) return null;
-                d = this._doadores.get(aCod);
-                return d;
-	}
+    public void addDoador(Doador aDoador) throws SQLException {
+        this._doadores.add(aDoador);
+    }
 
-	public void addDoador(Doador aDoador) throws SQLException {
-            this._doadores.add(aDoador);
-	}
+    public boolean updateDoador(Doador aDoador) throws SQLException {
+        return this._doadores.update(aDoador);
+    }
 
-	public boolean updateDoador(Doador aDoador) throws SQLException {
-		return this._doadores.update(aDoador);
-	}
+    public Doacao getDoacao(String aCod) throws SQLException {
+        boolean b = this._doacoes.contains(aCod);
+        if (b == false) {
+            return null;
+        }
+        return this._doacoes.get(aCod);
+    }
 
-	public Doacao getDoacao(String aCod) throws SQLException {
-		boolean b = this._doacoes.contains(aCod);
-                if(b == false) return null;
-                return this._doacoes.get(aCod);
-	}
+    public void addDoacao(String aDoador, Doacao aDoacao) throws SQLException {
+        this._doacoes.add(aDoador, aDoacao);
+    }
 
-	public void addDoacao(String aDoador, Doacao aDoacao) throws SQLException {
-		this._doacoes.add(aDoador, aDoacao);
-	}
+    public boolean containsDoador(String aCod) throws SQLException {
+        return this._doacoes.contains(aCod);
+    }
 
-	public boolean containsDoador(String aCod) throws SQLException {
-		return this._doacoes.contains(aCod);
-	}
+     public Material getMaterial(String aCod) throws SQLException {
+        return this._materiais.get(aCod);
+    }
 
-	public void removeMaterial(String aCod) {
-		throw new UnsupportedOperationException();
-	}
+    public void addMaterial(String aDescricao, String aUnidade, int aQuantidade) throws SQLException {
+        this._materiais.add(aDescricao, aUnidade, aQuantidade);
+    }
 
-	public Material getMaterial(String aCod) {
-		throw new UnsupportedOperationException();
-	}
+    public void setMaterial(String aCod, String aDescricao, String aUnidade, int aQuantidade) throws SQLException {
+        this._materiais.set(aCod, aDescricao, aUnidade, aQuantidade);
+    }
+    
+    public void setMaterial(Material m) throws SQLException {
+        this._materiais.set(m);
+    }
+    public Utilizador getUtilizador(String aUsername) throws SQLException {
+        boolean b = this._utilizadores.contains(aUsername);
+        if (b == false) {
+            return null;
+        }
+        Utilizador ut = _utilizadores.get(aUsername);
+        return ut;
+    }
 
-	public void addMaterial(String aDescricao, String aUnidade, int aQuantidade) {
-		throw new UnsupportedOperationException();
-	}
+    public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String tipo, String aRua, String aLocal, String aCod_postal) throws SQLException {
+        Utilizador u = new Utilizador(aNome, aPassword, aUsername, aNif, tipo, aRua, aLocal, aCod_postal);
+        return this._utilizadores.add(u);
+    }
 
-	public void setMaterial(String aCod, String aDescricao, String aUnidade, int aQuantidade) {
-		throw new UnsupportedOperationException();
-	}
+    public boolean rmvUtilizador(String aUsername) throws SQLException {
+        return this._utilizadores.remove(aUsername);
+    }
 
-	public Utilizador getUtilizador(String aUsername) throws SQLException {
-		boolean b = this._utilizadores.contains(aUsername);
-                if(b == false) return null;
-                Utilizador ut = _utilizadores.get(aUsername);
-                return ut;
-	}
+    public void updateUtilizador(Utilizador aUt) throws SQLException {
+        this._utilizadores.update(aUt);
+    }
 
-	public boolean addUtilizador(String aUsername, String aPassword, String aNome, String aNif, String tipo ,String aRua, String aLocal, String aCod_postal) throws SQLException {
-		Utilizador u = new Utilizador(aNome,aPassword,aUsername,aNif,tipo,aRua,aLocal,aCod_postal);
-                return this._utilizadores.add(u);
-	}
+    public String passwordEncript() {
+        throw new UnsupportedOperationException();
+    }
 
-	public boolean rmvUtilizador(String aUsername) throws SQLException {
-		return this._utilizadores.remove(aUsername);
-	}
+    public boolean addVoluntario(String nome, Date dataNasc, Date dataAssoc, String tipo, String contacto, String equipa, String profissao, Morada m) throws SQLException {
+        Voluntario vol = new Voluntario(null, nome, dataNasc, dataAssoc, tipo, contacto, equipa, profissao, m);
+        boolean b = this._voluntarios.add(vol);
+        return b;
+    }
 
-	public void updateUtilizador(Utilizador aUt) throws SQLException {
-		this._utilizadores.update(aUt);
-	}
+    public Voluntario getVoluntario(String aId) throws SQLException {
+        boolean b = this._voluntarios.contains(aId);
+        if (b == false) {
+            return null;
+        }
+        Voluntario v = this._voluntarios.get(aId);
+        return v;
+    }
 
-	public String passwordEncript() {
-		throw new UnsupportedOperationException();
-	}
+    public void updateVoluntario(Voluntario aVol) throws SQLException {
+        this._voluntarios.update(aVol);
+    }
 
-	public boolean addVoluntario(String nome, Date dataNasc,Date dataAssoc,String tipo, String contacto, String equipa,String profissao,Morada m) throws SQLException {
-            Voluntario vol = new Voluntario(null,nome,dataNasc,dataAssoc,tipo,contacto,equipa,profissao,m);
-            boolean b = this._voluntarios.add(vol);
-            return b;
-	}
+    public boolean validaCandidatura(String aCandidatura) {
+        throw new UnsupportedOperationException();
+    }
+    
+    public void addProjeto(Projeto p) throws SQLException{
+        this._projetos.add(p);
+    }
+    
+    public boolean existeProjeto(String cod) throws SQLException{
+        return this._projetos.existeProjeto(cod);
+    }
 
-	public Voluntario getVoluntario(String aId) throws SQLException {
-            boolean b = this._voluntarios.contains(aId);
-            if(b == false) return null;
-            Voluntario v = this._voluntarios.get(aId);
-            return v;
-	}
+    public void addTarefaProjeto(String aTarefa, String aProjeto, Date aDataI, Date aDataF) throws SQLException {
+        this._projetos.addTarefa(aTarefa, aProjeto, aDataI, aDataF);
+    }
 
-	public void updateVoluntario(Voluntario aVol) throws SQLException {
-		this._voluntarios.update(aVol);
-	}
+    public Projeto getProjeto(String aProjeto) throws SQLException {
+        return this._projetos.get(aProjeto);
+    }
 
-	public boolean validaCandidatura(String aCandidatura) {
-		throw new UnsupportedOperationException();
-	}
+    public void updateProjeto(Projeto aProjeto) throws SQLException {
+        this._projetos.update(aProjeto);
+    }
 
-	public void addTarefaProjeto(String aTarefa, String aProjeto, Date aDataI, Date aDataF, double aTempo) {
-		throw new UnsupportedOperationException();
-	}
+    public void addExeTarefaProjeto(String aTarefa, String aProjeto, String voluntario, Date aData, double aDuracao) throws SQLException {
+        this._projetos.addExeTarefa(aTarefa, aProjeto, voluntario, aData, aDuracao);
+    }
 
-	public Projeto getProjeto(String aProjeto) {
-		throw new UnsupportedOperationException();
-	}
+    public void addTarefa(Tarefa aTarefa) throws SQLException {
+        this._tarefas.add(aTarefa);
+    }
+    
+    public void addTarefa(String aTarefa) throws SQLException {
+        this._tarefas.add(aTarefa);
+    }
 
-	public void updateProjeto(Projeto aProjeto) {
-		throw new UnsupportedOperationException();
-	}
+    public Tarefa getTarefa(String aCod) throws SQLException {
+        return this._tarefas.get(aCod);
+    }
 
-	public void addExeTarefaProjeto(String aTarefa, String aProjeto, Date aData, double aDuracao) {
-		throw new UnsupportedOperationException();
-	}
+    public void updateTarefa(Tarefa aTarefa) throws SQLException {
+        this._tarefas.setTarefa(aTarefa);
+    }
 
-	public void addtarefa(Tarefa aTarefa) {
-		throw new UnsupportedOperationException();
-	}
+    public boolean login(String aUser, String aPasswd) {
+        try {
+            this.activeUser = _utilizadores.login(aUser, aPasswd);
+            if (this.activeUser != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
-	public Tarefa getTarefa(String aDescricao) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateTarefa(Tarefa aTarefa) {
-		throw new UnsupportedOperationException();
-	}
-
-	public boolean login(String aUser, String aPasswd) {
-            try{
-                this.activeUser = _utilizadores.login(aUser, aPasswd);
-		if(this.activeUser!=null) return true;
-                else return false;
-            }catch(SQLException e){
-                e.printStackTrace();
-                return false;}
-	}
-
-	public void logout() throws SQLException {
-		this.conn.close();
-	}
+    public void logout() throws SQLException {
+        this.conn.close();
+    }
 }

@@ -1,40 +1,54 @@
 package com.habitat.BusinessLayer.Material;
 
 public class Material {
-	private String _cod;
-	private String _descricao;
-	private String _unidade;
-	private int _quantidade;
+    private String _cod;
+    private String _descricao;
+    private int _quantidade;
+    private String _unidade;
 
-	public String getCod() {
-		return this._cod;
-	}
+    public Material(String _cod, String _descricao,  int _quantidade, String _unidade) {
+        this._cod = _cod;
+        this._descricao = _descricao;
+        this._unidade = _unidade;
+        this._quantidade = _quantidade;
+    }
 
-	public void setCod(String aCod) {
-		this._cod = aCod;
-	}
+    public String getCod() {
+        return this._cod;
+    }
 
-	public String getDescricao() {
-		return this._descricao;
-	}
+    public void setCod(String aCod) {
+        this._cod = aCod;
+    }
 
-	public void setDescricao(String aDescricao) {
-		this._descricao = aDescricao;
-	}
+    public String getDescricao() {
+        return this._descricao;
+    }
 
-	public String getUnidade() {
-		return this._unidade;
-	}
+    public void setDescricao(String aDescricao) {
+        this._descricao = aDescricao;
+    }
 
-	public void setUnidade(String aUnidade) {
-		this._unidade = aUnidade;
-	}
+    public String getUnidade() {
+        return this._unidade;
+    }
 
-	public int getQuantidade() {
-		return this._quantidade;
-	}
+    public void setUnidade(String aUnidade) {
+        this._unidade = aUnidade;
+    }
 
-	public void setQuantidade(int aQuantidade) {
-		this._quantidade = aQuantidade;
-	}
+    public int getQuantidade() {
+        return this._quantidade;
+    }
+
+    public void setQuantidade(int aQuantidade) {
+        this._quantidade = aQuantidade;
+    }
+
+    @Override
+    public String toString() {
+        return "Material{" + "_cod=" + _cod + ", _descricao=" + _descricao + ", _quantidade=" + _quantidade + ", _unidade=" + _unidade + '}';
+    }
+    
+    
 }
