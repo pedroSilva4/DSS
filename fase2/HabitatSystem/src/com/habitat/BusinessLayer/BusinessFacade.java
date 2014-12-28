@@ -1,6 +1,7 @@
 package com.habitat.BusinessLayer;
 
 import com.habitat.BusinessLayer.Candidaturas.Candidatura;
+import com.habitat.BusinessLayer.Candidaturas.Questao;
 import com.habitat.BusinessLayer.Doadores.Doacao;
 import com.habitat.BusinessLayer.Doadores.Doador;
 import com.habitat.BusinessLayer.Eventos.Evento;
@@ -23,6 +24,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class BusinessFacade {
@@ -60,18 +62,16 @@ public class BusinessFacade {
         return this.activeUser;
     }
 
-    //adicionei isto
-    public boolean containsCadidatura(String aCod) throws SQLException {
-        return this._candidaturas.contains(aCod);
+    public ArrayList<Questao> getQuestoesActivas() throws SQLException{
+        return this._candidaturas.getQuestoesActivas();
     }
 
     public Candidatura getCandidatura(String aCod) throws SQLException {
-        Candidatura res = this._candidaturas.get(aCod);
-        return res;
+        return this._candidaturas.get(aCod);
     }
 
-    public void setCandidatura(Candidatura aCand) {
-        throw new UnsupportedOperationException();
+    public void setCandidatura(Candidatura aCand) throws SQLException {
+        this._candidaturas.set(aCand);
     }
 
     public void addCandidatura(Candidatura aCand) throws SQLException {
@@ -95,12 +95,10 @@ public class BusinessFacade {
         this._eventos.add(aData, aMont, aNpessoas, aOrg, aNota);
     }
 
-    public boolean associarDoadorEvento(String codD, String codE) throws SQLException {
-        boolean b = this._doadores.contains(codD);
-        if (b == false) {
-            return false;
-        }
-        return this._eventos.associarDoador(codD, codE);
+    public boolean associarDoacao(String codD, String codE) throws SQLException {
+        boolean b = this._doacoes.contains(codD);
+        if(b == false) return b;
+        return this._doacoes.associarDoacao(codD, codE);
     }
 
     public Doador getDoador(String aCod) throws SQLException {

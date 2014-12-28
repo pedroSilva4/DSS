@@ -12,8 +12,8 @@ public class Questao {
         this._resposta = _resposta;
     }
 
-    public void setPergunta() {
-        throw new UnsupportedOperationException();
+    public void setPergunta(String pergunta) {
+        this._pergunta = pergunta;
     }
 
     public void SetResposta() {

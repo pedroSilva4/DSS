@@ -117,7 +117,15 @@ public class DoacoesDAO {
                     st.setString(3, "serviço");
                     st.setString(4, aDoador);
                     st.executeUpdate();
-                }
-                
+                }     
 	}
+        public boolean associarDoacao(String codD, String codE) throws SQLException{
+            PreparedStatement st;
+            String sql;
+            sql = "update Habitat.Doacoes set evento = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1, codE);
+            st.executeUpdate();
+            return true;
+        }
 }

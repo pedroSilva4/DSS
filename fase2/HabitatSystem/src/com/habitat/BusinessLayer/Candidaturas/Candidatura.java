@@ -19,38 +19,48 @@ public class Candidatura {
 	private String _rua;
 	private String _localidade;
 	private String _codPostal;		
-	private Elemento _candidato;	
+	private Elemento _candidato;
+        private String _contacto;
 
-    public Candidatura(String _cod, String _obs, String _estado, Date _dataAbertura, 
-            Date _dataDecisao, float _rendimentoBruto, String _rua, String _localidade, 
-            String _codPostal, String _funcionario, Elemento _candidato, 
-            ArrayList<Questao> questionario, ArrayList<Elemento> elementos) {
-        this._cod = _cod;
-        this._obs = _obs;
-        this._estado = _estado;
-        this._dataAbertura = _dataAbertura;
-        this._dataDecisao = _dataDecisao;
-        this._rendimentoBruto = _rendimentoBruto;
-        this._rua = _rua;
-        this._localidade = _localidade;
-        this._codPostal = _codPostal;
-        this._funcionario = _funcionario;
-        this._candidato = _candidato;
-        this._questionario = questionario;
-        this._elementos = elementos;
+    public Candidatura(String cod, Date dataAbertura, Date dataDecisao,
+                       String obs, String estado, String funcionario,
+                       ArrayList<Questao> quest,ArrayList<Elemento> elems,
+                       float rendimentoBruto, String rua, String localidade,
+                       String codPostal, Elemento candidato, String contacto) {
+        this._cod = cod;
+        this._dataAbertura = dataAbertura;
+        this._dataDecisao = dataDecisao;
+        this._obs = obs;
+        this._estado = estado;
+        this._funcionario = funcionario;
+        this._questionario = quest;
+        this._elementos = elems;
+        this._rendimentoBruto = rendimentoBruto;
+        this._rua = rua;
+        this._localidade = localidade;
+        this._codPostal = codPostal;
+        this._candidato = candidato;
+        this._contacto = contacto;
+        
     }
 
-    public Candidatura(String _cod, Date _dataAbertura, Date _dataDecisao, String _obs, 
-            String _estado, String _funcionario, ArrayList<Questao> questionario, 
-            ArrayList<Elemento> elementos) {
-        this._cod = _cod;
-        this._dataAbertura = _dataAbertura;
-        this._dataDecisao = _dataDecisao;
-        this._obs = _obs;
-        this._estado = _estado;
-        this._funcionario = _funcionario;
+    public ArrayList<Questao> getQuestionario(){
+        return this._questionario;
+    }
+    public void stQuestionario(ArrayList<Questao> questionario){
         this._questionario = questionario;
-        this._elementos = elementos;
+    }
+    public ArrayList<Elemento> getElementos(){
+        return this._elementos;
+    }
+    public void setElementos(ArrayList<Elemento>elems){
+        this._elementos = elems;
+    }
+    public String getContacto(){
+        return this._contacto;
+    }
+    public void setContacto(String contacto){
+        this._contacto = contacto;
     }
 
     public String getCod() {
@@ -92,6 +102,9 @@ public class Candidatura {
 
     public Elemento getCandidato() {
         return _candidato;
+    }
+    public void setCandidato(Elemento c){
+        this._candidato = c;
     }
 
     public String getFuncionario() {

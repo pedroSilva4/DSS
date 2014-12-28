@@ -1,7 +1,6 @@
 package com.habitat.BusinessLayer.Candidaturas;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 public class Elemento {
         private String _cod;
@@ -10,17 +9,30 @@ public class Elemento {
 	private String _escolaridade;	
 	private String _estCivil;
 	private String _parentesco;
-	private String _ocupacao;	
+	private String _ocupacao;
+        private String _naturalidade;
+        private String _nacionalidade;
 
-        public Elemento(String _cod, String _nome, Date _dataNasc, String _escolaridade, String _estCivil, String _parentesco, String _ocupacao) {
+        public Elemento(String _cod, String _nome, Date _dataNasc, 
+                String _escolaridade, String _estCivil, String _parentesco,
+                String _ocupacao, String naturalidade, String nacionalidade) {
             this._cod = _cod;
             this._nome = _nome;
             this._dataNasc = _dataNasc;
             this._escolaridade = _escolaridade;
             this._estCivil = _estCivil;
             this._parentesco = _parentesco;
-            this._ocupacao = _ocupacao;            
-        }                
+            this._ocupacao = _ocupacao; 
+            this._naturalidade = naturalidade;
+            this._nacionalidade = nacionalidade;
+        }
+        
+        public String getNaturalidade(){
+            return this._naturalidade;
+        }
+        public String getNacionalidade(){
+            return this._nacionalidade;
+        }
         
 	public String getNome() {
 		return this._nome;
