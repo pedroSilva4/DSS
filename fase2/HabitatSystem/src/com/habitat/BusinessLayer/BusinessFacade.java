@@ -134,6 +134,10 @@ public class BusinessFacade {
     public boolean containsDoador(String aCod) throws SQLException {
         return this._doacoes.contains(aCod);
     }
+    
+    public ArrayList<Material> getListaMaterial(){
+        return this._materiais.getLista();
+    }
 
      public Material getMaterial(String aCod) throws SQLException {
         return this._materiais.get(aCod);

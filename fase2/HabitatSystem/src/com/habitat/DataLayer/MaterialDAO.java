@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class MaterialDAO {
 
@@ -84,5 +86,21 @@ public class MaterialDAO {
         } else {
             return false;
         }
+    }
+    public ArrayList<Material> getLista() throws SQLException{
+        Statement st;
+        ResultSet res;
+        String sql;
+        ArrayList<Material> ms = new ArrayList<Material>();
+        sql = "select * from Habitat.Material;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        while(res.next()){
+            Integer i = new Integer(res.getString("quantidade"));
+            Material m = new Material(res.getString("id"),res.getString("descricao"),
+                            i,res.getString("unidade"));
+            ms.add(m);
+        }
+        return ms;
     }
 }
