@@ -88,7 +88,7 @@ public class DoacoesDAO {
                             + "?,?,?,?,?,?);";
                     st = conn.prepareStatement(sql);
                     st.setString(1, aDoacao.getDescricao());
-                    st.setString(2, aDoacao.getData().toString());
+                    st.setString(2, aDoacao.getDate().toString());
                     st.setString(3, "material");
                     Integer i = new Integer(((DMaterial)aDoacao).getQuantidade());
                     st.setString(4, i.toString());
@@ -102,7 +102,7 @@ public class DoacoesDAO {
                             + "values(?,?,?,?,?);";
                     st = conn.prepareStatement(sql);
                     st.setString(1, aDoacao.getDescricao());
-                    st.setString(2, aDoacao.getData().toString());
+                    st.setString(2, aDoacao.getDate().toString());
                     st.setString(3, "monetário");
                     Float f = new Float(((Monetario)aDoacao).getValor());
                     st.setString(4, f.toString());
@@ -115,7 +115,7 @@ public class DoacoesDAO {
                             + "values(?,?,?,?);";
                     st = conn.prepareStatement(sql);
                     st.setString(1, aDoacao.getDescricao());
-                    st.setString(2, aDoacao.getData().toString());
+                    st.setString(2, aDoacao.getDate().toString());
                     st.setString(3, "serviço");
                     st.setString(4, aDoador);
                     st.executeUpdate();

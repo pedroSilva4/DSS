@@ -26,6 +26,9 @@ public class Doacao {
 	public Date getData() {
 		return this._data;
 	}
+        public String getDate(){
+        return (this._data.getYear()+"-"+this._data.getMonth()+"-"+this._data.getDate());
+    }
 
 	public void setData(Date aData) {
 		this._data = aData;
