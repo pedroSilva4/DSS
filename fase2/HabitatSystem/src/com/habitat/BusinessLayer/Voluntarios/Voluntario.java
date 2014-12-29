@@ -22,7 +22,12 @@ public class Voluntario {
             this._profissao = profissao;
             this._morada = m;
         }
-        
+        public String getDateNasc(){
+            return (this._dataNasc.getYear()+"-"+this._dataNasc.getMonth()+"-"+this._dataNasc.getDate());
+        }
+        public String getDateAssociacao(){
+            return (this._dataAssociacao.getYear()+"-"+this._dataAssociacao.getMonth()+"-"+this._dataAssociacao.getDate());
+        }
 	public void setNomeEquipa(String aNomeEquipa) {
 		this._nomeEquipa = aNomeEquipa;
 	}

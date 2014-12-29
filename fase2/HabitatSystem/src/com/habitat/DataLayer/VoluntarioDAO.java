@@ -32,9 +32,9 @@ public class VoluntarioDAO {
                     + "values(?,?,?,?,?,?,?,?,?);";
             st = conn.prepareStatement(sql);
             st.setString(1, aVol.getNome());
-            st.setString(2, aVol.getDataAssociacao().toString());
+            st.setString(2, aVol.getDateAssociacao());
             st.setString(3, aVol.getContacto());
-            st.setString(4, aVol.getDataNasc().toString());
+            st.setString(4, aVol.getDateNasc());
             st.setString(5, aVol.getProfissao());
             st.setString(6, aVol.getMorada().getRua());
             st.setString(7, aVol.getMorada().getLocalidade());
@@ -97,9 +97,9 @@ public class VoluntarioDAO {
                     + "where id = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, aVol.getNome());
-            st.setString(2, aVol.getDataAssociacao().toString());
+            st.setString(2, aVol.getDateAssociacao());
             st.setString(3, aVol.getContacto());
-            st.setString(4, aVol.getDataNasc().toString());
+            st.setString(4, aVol.getDateNasc());
             st.setString(5, aVol.getProfissao());
             st.setString(6, aVol.getMorada().getRua());
             st.setString(7, aVol.getMorada().getLocalidade());
