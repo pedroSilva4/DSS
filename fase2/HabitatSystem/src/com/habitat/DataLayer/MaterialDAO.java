@@ -40,9 +40,16 @@ public class MaterialDAO {
     }
 
     public void add(String aDescricao, String aUnidade, int aQuantidade) throws SQLException {
-        PreparedStatement st;
+        /*PreparedStatement st;
         String sql = "insert into Habitat.Material (`descricao`, `quantidade`, `unidade`) values(?,?,?);";
 
+        st = conn.prepareStatement(sql);
+        st.setString(1, aDescricao);
+        st.setInt(2, aQuantidade);
+        st.setString(3, aUnidade);
+        st.executeUpdate();*/
+        PreparedStatement st;
+        String sql = "call sp_actualizaMaterial(?,?,?)";
         st = conn.prepareStatement(sql);
         st.setString(1, aDescricao);
         st.setInt(2, aQuantidade);
