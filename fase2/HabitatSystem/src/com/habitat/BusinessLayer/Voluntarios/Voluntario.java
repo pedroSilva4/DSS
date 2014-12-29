@@ -23,10 +23,10 @@ public class Voluntario {
             this._morada = m;
         }
         public String getDateNasc(){
-            return (this._dataNasc.getYear()+"-"+this._dataNasc.getMonth()+"-"+this._dataNasc.getDate());
+            return ((this._dataNasc.getYear())+"-"+(this._dataNasc.getMonth()+1)+"-"+this._dataNasc.getDate());
         }
         public String getDateAssociacao(){
-            return (this._dataAssociacao.getYear()+"-"+this._dataAssociacao.getMonth()+"-"+this._dataAssociacao.getDate());
+            return ((this._dataAssociacao.getYear()+1900)+"-"+(this._dataAssociacao.getMonth()+1)+"-"+this._dataAssociacao.getDate());
         }
 	public void setNomeEquipa(String aNomeEquipa) {
 		this._nomeEquipa = aNomeEquipa;

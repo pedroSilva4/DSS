@@ -1,13 +1,24 @@
 package com.habitat.PresentationLayer.Voluntários;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Voluntarios.Morada;
+import com.habitat.util.ErrorWindow;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
+import org.jdatepicker.JDatePicker;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,10 +38,12 @@ public class AdicionarVol extends javax.swing.JPanel {
      * Creates new form AdicionarVol
      */
     private BusinessFacade businessFacade;
+    private JDatePicker jdatePicker;
     public AdicionarVol(BusinessFacade bus) {
         businessFacade =bus;
         initComponents();
         setVisible(true);
+       
         this.sub_btt.setEnabled(false);
     }
     
@@ -277,19 +290,26 @@ public class AdicionarVol extends javax.swing.JPanel {
         // TODO add your handling code here:
         String name = this.nome_tf.getText();
         String equipa = this.team_tf.getText();
+
         String[] dateArr = this.bday_tf.getText().split("/");
-        Date date = new Date(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1]), Integer.parseInt(dateArr[0]));
-        Date dateNow = new Date(Calendar.YEAR,Calendar.MONTH,Calendar.DATE);
+   
+        Date date = new Date(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
+        System.out.println(date.getDate()+"-"+date.getMonth()+"-"+date.getYear());
+        
+        Calendar cal = Calendar.getInstance();
+        Date dateNow = new Date(cal.getTimeInMillis());
         String rua = this.street_tf.getText();
         String local = this.local_tf.getText();
         String cod_postal = this.postal_tf.getText();
         String nif =this.nif_tf.getText();
         String contact = this.phone_tf.getText();
         String job =  this.job_tf.getText();
-        
-        
-       businessFacade.addVoluntario(name, date, dateNow, contact, equipa, job, local, null)
-     
+        try {
+           boolean b =  businessFacade.addVoluntario(name, date, dateNow, contact, equipa, job, new Morada(rua, local, cod_postal));
+        } catch (SQLException ex) {
+            new ErrorWindow("Voluntário", ex.getMessage(), "error", new JFrame()).wshow();
+        }
+    
         clean();
       
         

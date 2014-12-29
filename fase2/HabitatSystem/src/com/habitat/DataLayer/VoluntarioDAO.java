@@ -25,7 +25,7 @@ public class VoluntarioDAO {
             st = conn.prepareStatement(sql);
             st.setString(1, aVol.getCod());
             res = st.executeQuery();
-            if(res.next() == false) return false;
+            if(res.next()) return false;
             sql = "insert into Habitat.Voluntarios"
                     + "(nome,dataAssociacao,contacto,dataNascimento,"
                     + "profissao,rua,localidade,codPostal,nomeEquipa)"
