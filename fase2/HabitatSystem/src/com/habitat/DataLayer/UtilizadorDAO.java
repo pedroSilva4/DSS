@@ -43,22 +43,25 @@ public class UtilizadorDAO {
             PreparedStatement st;
             ResultSet res;
             String sql; 
-            sql = "UPDATE Habitat.Funcionarios SET"
+            sql = "UPDATE Habitat.Funcionarios SET "
                     + "password = ?,"
                     + "nome = ?,"
                     + "NIF = ?,"
                     + "rua = ?,"
                     + "localidade = ?,"
-                    + "codPostal = ?,"
-                    + "tipo = ?;";
+                    + "codPostal = ?"
+                    //+ "tipo = ?"
+                    + "where username = ? ;";
             st = conn.prepareStatement(sql);
             st.setString(1, aUt.getPassword());
-            st.setString(2,aUt.getNome());
+            st.setString(2, aUt.getNome());
             st.setString(3, aUt.getNif());
             st.setString(4, aUt.getMorada().getRua());
             st.setString(5, aUt.getMorada().getLocalidade());
             st.setString(6, aUt.getMorada().getCodigo_postal());
-            st.setString(7, aUt.getTipo());
+            //st.setString(7, aUt.getTipo());
+            st.setString(7, aUt.getUsername());
+            
             st.executeUpdate();
 	}
 

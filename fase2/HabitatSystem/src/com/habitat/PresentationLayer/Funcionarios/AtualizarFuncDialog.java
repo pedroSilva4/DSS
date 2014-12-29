@@ -8,6 +8,11 @@ package com.habitat.PresentationLayer.Funcionarios;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Utilizadores.Utilizador;
+import com.habitat.BusinessLayer.Voluntarios.Morada;
+import com.habitat.util.ErrorWindow;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -59,9 +64,9 @@ public class AtualizarFuncDialog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
-        username = new javax.swing.JTextField();
         nome = new javax.swing.JTextField();
         update = new javax.swing.JButton();
+        username = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,6 +109,8 @@ public class AtualizarFuncDialog extends javax.swing.JDialog {
                 updateActionPerformed(evt);
             }
         });
+
+        username.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,7 +162,7 @@ public class AtualizarFuncDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(username))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -171,10 +178,10 @@ public class AtualizarFuncDialog extends javax.swing.JDialog {
                     .addComponent(jLabel8)
                     .addComponent(rua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(local, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back)
                     .addComponent(update))
@@ -203,8 +210,15 @@ public class AtualizarFuncDialog extends javax.swing.JDialog {
         this.ut.setNome(this.nome.getText());
         this.ut.setNif(this.nif.getText());
         this.ut.setPassword(this.password.getText());
+        Morada m =  new Morada(this.rua.getText(), this.local.getText(), this.postal.getText());
+        this.ut.setMorada(m);
         //perguntar ao xavier
-        
+        try {
+            businessFacade.updateUtilizador(ut);
+            
+        } catch (SQLException ex) {
+            new ErrorWindow("Update", ex.getMessage(), "error", new JFrame()).wshow();
+        }
     }//GEN-LAST:event_updateActionPerformed
 
     /**
@@ -265,7 +279,7 @@ public class AtualizarFuncDialog extends javax.swing.JDialog {
     private javax.swing.JTextField postal;
     private javax.swing.JTextField rua;
     private javax.swing.JButton update;
-    private javax.swing.JTextField username;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
     public void init(){
             this.nome.setText(this.ut.getNome());
