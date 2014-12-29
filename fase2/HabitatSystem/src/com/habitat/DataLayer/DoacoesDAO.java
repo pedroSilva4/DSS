@@ -157,9 +157,9 @@ public class DoacoesDAO {
                         Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
                 Float f = new Float(res.getString("valor"));
                 Integer i = new Integer(res.getString("quantidade"));
-                Doacao d = new Doacao(res.getString("id"),d1,res.getString("descricao"),
-                                res.getString("tipo"),f.floatValue(),i.intValue(),res.getString("unidade"));
-                ds.add(d);
+                //Doacao d = new Doacao(res.getString("id"),d1,res.getString("descricao"),
+                            //    res.getString("tipo"),f.floatValue(),i.intValue(),res.getString("unidade"));
+                //ds.add(d);
             }
             return ds;
         }
