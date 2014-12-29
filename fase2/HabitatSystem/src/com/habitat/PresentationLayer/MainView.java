@@ -10,6 +10,7 @@ import com.alee.laf.WebLookAndFeel;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.PresentationLayer.Candidaturas.CandidaturaJP;
 import com.habitat.PresentationLayer.Funcionarios.FuncionariosJP;
+import com.habitat.PresentationLayer.Inventario.InventarioJP;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -248,6 +249,7 @@ public class MainView extends javax.swing.JFrame {
        this.type_label.setText(this.businessFacade.getActiveUser().getTipo());
        this.funcionarios_jp.add(new FuncionariosJP(businessFacade));
        this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
+       this.inventario_jp.add(new InventarioJP(businessFacade));
        // this.groupBox_func.setVisible(false);
     }
 
