@@ -152,14 +152,37 @@ public class DoacoesDAO {
  //(String cod, Date data, String descricao, String tipo,
 // String valor,String quant, String unidade)
             while(res.next()){
-                String[] parts = res.getString("data").split("-");
+                if(res.getString(4).equals("material")){
+                    DMaterial m;
+ //(String cod, Date data, String descricao,String unidade,int quantidade)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]),
+                                Integer.parseInt(parts[3]));
+                    Integer i = new Integer(res.getString(6));
+                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                    ds.add(m);
+                }
+                if(res.getString(4).equals("serviço")){
+                    Servicos s;
+ //(String cod, Date data, String descricao)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]),
+                                Integer.parseInt(parts[3]));
+                    s = new Servicos(res.getString(1),d1,res.getString(2));
+                    ds.add(s);
+                }
+                
+                Monetario m;
+ //(String cod, Date data, String descricao,float valor)
+                String[] parts = res.getString(3).split("-");
                 Date d1 = new Date(Integer.parseInt(parts[1]),
-                        Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
-                Float f = new Float(res.getString("valor"));
-                Integer i = new Integer(res.getString("quantidade"));
-                //Doacao d = new Doacao(res.getString("id"),d1,res.getString("descricao"),
-                            //    res.getString("tipo"),f.floatValue(),i.intValue(),res.getString("unidade"));
-                //ds.add(d);
+                                Integer.parseInt(parts[2]),
+                                Integer.parseInt(parts[3]));
+                Float f = new Float(res.getString(5));
+                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                ds.add(m);
             }
             return ds;
         }
