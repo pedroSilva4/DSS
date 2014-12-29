@@ -301,7 +301,6 @@ public class AdicionarVol extends javax.swing.JPanel {
         String rua = this.street_tf.getText();
         String local = this.local_tf.getText();
         String cod_postal = this.postal_tf.getText();
-        String nif =this.nif_tf.getText();
         String contact = this.phone_tf.getText();
         String job =  this.job_tf.getText();
         try {

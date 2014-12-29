@@ -83,4 +83,8 @@ public class Voluntario {
 	public String getProfissao() {
 		return this._profissao;
 	}
+        @Override
+        public String toString(){
+                return this.getCod()+": "+this.getNome();
+            }
 }
