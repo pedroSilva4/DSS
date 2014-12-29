@@ -26,8 +26,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Observable;
 
-public class BusinessFacade {
+public class BusinessFacade extends Observable{
 
     public CandidaturaDAO _candidaturas;
     public EventosDAO _eventos;
@@ -135,7 +136,7 @@ public class BusinessFacade {
         return this._doacoes.contains(aCod);
     }
     
-    public ArrayList<Material> getListaMaterial(){
+    public ArrayList<Material> getListaMaterial() throws SQLException{
         return this._materiais.getLista();
     }
 
@@ -145,14 +146,20 @@ public class BusinessFacade {
 
     public void addMaterial(String aDescricao, String aUnidade, int aQuantidade) throws SQLException {
         this._materiais.add(aDescricao, aUnidade, aQuantidade);
+        this.setChanged();
+        notifyObservers();
     }
 
     public void setMaterial(String aCod, String aDescricao, String aUnidade, int aQuantidade) throws SQLException {
         this._materiais.set(aCod, aDescricao, aUnidade, aQuantidade);
+        this.setChanged();
+        notifyObservers();
     }
     
     public void setMaterial(Material m) throws SQLException {
         this._materiais.set(m);
+        this.setChanged();
+        notifyObservers();
     }
     public Utilizador getUtilizador(String aUsername) throws SQLException {
         boolean b = this._utilizadores.contains(aUsername);

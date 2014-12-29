@@ -8,7 +8,14 @@ package com.habitat.PresentationLayer.Inventario;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Material.Material;
+import com.habitat.util.ErrorWindow;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,16 +23,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Pedro
  */
-public class InventarioJP extends javax.swing.JPanel {
+public final class InventarioJP extends javax.swing.JPanel implements Observer{
 
     /**
      * Creates new form InventarioJP
      */
     private final BusinessFacade businessFacade;
+    
     public InventarioJP(BusinessFacade bus) {
         businessFacade = bus; 
+        businessFacade.addObserver(this);
         initComponents();
-        populateTable();
+        init();
+        update(null,null);
     }
 
     /**
@@ -39,6 +49,7 @@ public class InventarioJP extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         inventory = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         inventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,6 +74,7 @@ public class InventarioJP extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        inventory.setFocusable(false);
         jScrollPane1.setViewportView(inventory);
         if (inventory.getColumnModel().getColumnCount() > 0) {
             inventory.getColumnModel().getColumn(0).setResizable(false);
@@ -70,43 +82,81 @@ public class InventarioJP extends javax.swing.JPanel {
             inventory.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        jButton1.setText("Adicionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 594, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new addMaterialDialog(new JFrame(), true, businessFacade, inventory).setVisible(true);
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable inventory;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable(){
-        
-        ArrayList<Material> mat = new ArrayList<>(10);
-        DefaultTableModel model = (DefaultTableModel) inventory.getModel();
-        //model.addRow(new Object[]{"Descrição", "Quantidade", "Unidade"});
-        
-        for(int i=0;i<mat.size();i++)
-        {
-            Material m = mat.get(i);
-            model.addRow(new String[]{m.getDescricao(),new Integer(m.getQuantidade()).toString(),m.getUnidade()});
-            model.fireTableDataChanged();
-        }
-         
-   }
+   
+
+    @Override
+    public void update(Observable o, Object arg) {
+       ArrayList<Material> mat;
+        try {
+            mat = businessFacade.getListaMaterial();
+            
+            
+            DefaultTableModel model = new DefaultTableModel(new String[]{"Descrição","Quantidade","Unidade"}, 0);
+            //model.addRow(new Object[]{"Descrição", "Quantidade", "Unidade"});
+            
+            inventory.setModel(model);
+            inventory.setCellSelectionEnabled(false);
+            for(int i=0;i<mat.size();i++)
+            {
+                Material m = mat.get(i);
+                model.addRow(new String[]{m.getDescricao(),new Integer(m.getQuantidade()).toString(),m.getUnidade()});
+                model.fireTableDataChanged();
+            }
+            
+            
+        } catch (SQLException ex) {
+            new ErrorWindow("Inventário", ex.getMessage(), "error", new JFrame()).wshow();
+        } 
+    }
+    
+    private void init(){
+        if(businessFacade.getActiveUser().getTipo().equals("obras") || businessFacade.getActiveUser().getTipo().equals("admin"))
+            this.jButton1.setEnabled(true);
+        else this.jButton1.setEnabled(false);
+    }
 
 }
