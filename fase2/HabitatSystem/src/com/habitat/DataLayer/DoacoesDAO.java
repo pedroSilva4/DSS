@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 // import com.habitat.BusinessLayer.Doadores.Doacao;
 
@@ -127,5 +129,38 @@ public class DoacoesDAO {
             st.setString(1, codE);
             st.executeUpdate();
             return true;
+        }
+        public boolean associaProjecto(String codP, String codD) throws SQLException{
+            PreparedStatement st;
+            String sql = "update Habitat.Doacoes set"
+                    + "projecto = ?"
+                    + "where id = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1, codD);
+            st.setString(2, codP);
+            st.executeUpdate();
+            return true;
+        }
+        
+        public ArrayList<Doacao> getLista() throws SQLException{
+            ArrayList<Doacao> ds = new ArrayList<Doacao>();
+            Statement st;
+            ResultSet res;
+            String sql = "select * from Habitat.Doacoes";
+            st = conn.createStatement();
+            res = st.executeQuery(sql);
+ //(String cod, Date data, String descricao, String tipo,
+// String valor,String quant, String unidade)
+            while(res.next()){
+                String[] parts = res.getString("data").split("-");
+                Date d1 = new Date(Integer.parseInt(parts[1]),
+                        Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
+                Float f = new Float(res.getString("valor"));
+                Integer i = new Integer(res.getString("quantidade"));
+                Doacao d = new Doacao(res.getString("id"),d1,res.getString("descricao"),
+                                res.getString("tipo"),f.floatValue(),i.intValue(),res.getString("unidade"));
+                ds.add(d);
+            }
+            return ds;
         }
 }

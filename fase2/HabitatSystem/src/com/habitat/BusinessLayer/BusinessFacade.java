@@ -100,12 +100,6 @@ public class BusinessFacade extends Observable{
         this._eventos.add(aData, aMont, aNpessoas, aOrg, aNota);
     }
 
-    public boolean associarDoacao(String codD, String codE) throws SQLException {
-        boolean b = this._doacoes.contains(codD);
-        if(b == false) return b;
-        return this._doacoes.associarDoacao(codD, codE);
-    }
-
     public Doador getDoador(String aCod) throws SQLException {
         Doador d;
         boolean b = this._doadores.contains(aCod);
@@ -122,6 +116,16 @@ public class BusinessFacade extends Observable{
 
     public boolean updateDoador(Doador aDoador) throws SQLException {
         return this._doadores.update(aDoador);
+    }
+    
+    public boolean associarDoacao(String codD, String codE) throws SQLException {
+        boolean b = this._doacoes.contains(codD);
+        if(b == false) return b;
+        return this._doacoes.associarDoacao(codD, codE);
+    }
+    
+    public ArrayList<Doacao> getListaDoacoes() throws SQLException{
+        return this._doacoes.getLista();
     }
 
     public Doacao getDoacao(String aCod) throws SQLException {
@@ -194,6 +198,8 @@ public class BusinessFacade extends Observable{
     public boolean addVoluntario(String nome, Date dataNasc, Date dataAssoc, String contacto, String equipa, String profissao, Morada m) throws SQLException {
         Voluntario vol = new Voluntario(null, nome, dataNasc, dataAssoc, contacto, equipa, profissao, m);
         boolean b = this._voluntarios.add(vol);
+        this.setChanged();
+        this.notifyObservers();
         return b;
     }
 
@@ -208,6 +214,8 @@ public class BusinessFacade extends Observable{
 
     public void updateVoluntario(Voluntario aVol) throws SQLException {
         this._voluntarios.update(aVol);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public boolean validaCandidatura(String aCandidatura) {
@@ -232,6 +240,12 @@ public class BusinessFacade extends Observable{
 
     public void updateProjeto(Projeto aProjeto) throws SQLException {
         this._projetos.update(aProjeto);
+    }
+    public boolean associaDoacaoProjeto(String codP,String codD) throws SQLException{
+        boolean b = this._projetos.existeProjeto(codP);
+        if(b == false) return false;
+        this._doacoes.associaProjecto(codP,codD);
+        return true;
     }
 
     public void addExeTarefaProjeto(String aTarefa, String aProjeto, String voluntario, Date aData, double aDuracao) throws SQLException {
