@@ -81,10 +81,15 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
     @Override
     public void update(Observable o, Object arg) {
         try {
-            ComboBoxModel cb = new DefaultComboBoxModel(businessFacade.getListaVoluntario().toArray());
-            this.voluntarios_drop.setModel(cb);
+            this.voluntarios_drop.removeAllItems();
+            for(Voluntario v : businessFacade.getListaVoluntario())
+            {
+                this.voluntarios_drop.addItem(v);
+            }
+            this.voluntarios_drop.setSelectedIndex(0);
+            
         } catch (SQLException ex) {
-           new ErrorWindow("ComboBox", ex.getMessage(), "error", new JFrame());
+           new ErrorWindow("ComboBox", ex.getMessage(), "error", new JFrame()).wshow();
         }
     }
 }
