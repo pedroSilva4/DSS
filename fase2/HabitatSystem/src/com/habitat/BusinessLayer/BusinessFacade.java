@@ -62,6 +62,10 @@ public class BusinessFacade extends Observable{
     public Utilizador getActiveUser() {
         return this.activeUser;
     }
+    
+    public ArrayList<Voluntario> getListaVoluntario(){
+        return this._voluntarios.getLista();
+    }
 
     public ArrayList<Questao> getQuestoesActivas() throws SQLException{
         return this._candidaturas.getQuestoesActivas();
@@ -187,8 +191,8 @@ public class BusinessFacade extends Observable{
         throw new UnsupportedOperationException();
     }
 
-    public boolean addVoluntario(String nome, Date dataNasc, Date dataAssoc, String tipo, String contacto, String equipa, String profissao, Morada m) throws SQLException {
-        Voluntario vol = new Voluntario(null, nome, dataNasc, dataAssoc, tipo, contacto, equipa, profissao, m);
+    public boolean addVoluntario(String nome, Date dataNasc, Date dataAssoc, String contacto, String equipa, String profissao, Morada m) throws SQLException {
+        Voluntario vol = new Voluntario(null, nome, dataNasc, dataAssoc, contacto, equipa, profissao, m);
         boolean b = this._voluntarios.add(vol);
         return b;
     }
