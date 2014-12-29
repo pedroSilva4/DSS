@@ -11,7 +11,9 @@ import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.PresentationLayer.Candidaturas.CandidaturaJP;
 import com.habitat.PresentationLayer.Funcionarios.FuncionariosJP;
 import com.habitat.PresentationLayer.Inventario.InventarioJP;
+import com.habitat.PresentationLayer.Voluntários.VoluntarioJP;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
@@ -250,7 +252,8 @@ public class MainView extends javax.swing.JFrame {
        this.funcionarios_jp.add(new FuncionariosJP(businessFacade));
        this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
        this.inventario_jp.add(new InventarioJP(businessFacade));
-       // this.groupBox_func.setVisible(false);
+       this.voluntarios_jp.add(new VoluntarioJP(businessFacade));
+        // this.groupBox_func.setVisible(false);
     }
 
 }
