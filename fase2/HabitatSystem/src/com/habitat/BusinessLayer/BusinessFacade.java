@@ -63,7 +63,7 @@ public class BusinessFacade extends Observable{
         return this.activeUser;
     }
     
-    public ArrayList<Voluntario> getListaVoluntario(){
+    public ArrayList<Voluntario> getListaVoluntario() throws SQLException{
         return this._voluntarios.getLista();
     }
 
