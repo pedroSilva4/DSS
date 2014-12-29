@@ -32,14 +32,14 @@ public class MainView extends javax.swing.JFrame {
         this.businessFacade = bus;
         this.setTitle("Habitat");
         initComponents();
-        this.initByType();
+        this.init();
     }
     
     public MainView() {
         
         this.setTitle("Habitat");
         initComponents();
-        this.initByType();
+        this.init();
        
     }
 
@@ -244,15 +244,17 @@ public class MainView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-    public final void initByType()
+    public final void init()
     {
         //incializa coisas nice consante o tipo
        this.name_label.setText(this.businessFacade.getActiveUser().getNome());
        this.type_label.setText(this.businessFacade.getActiveUser().getTipo());
+       //tabs
        this.funcionarios_jp.add(new FuncionariosJP(businessFacade));
        this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
        this.inventario_jp.add(new InventarioJP(businessFacade));
        this.voluntarios_jp.add(new VoluntarioJP(businessFacade));
+       
         // this.groupBox_func.setVisible(false);
     }
 
