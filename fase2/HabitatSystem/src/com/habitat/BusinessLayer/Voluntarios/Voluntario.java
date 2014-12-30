@@ -1,6 +1,8 @@
 package com.habitat.BusinessLayer.Voluntarios;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Voluntario {
         private String _cod;
@@ -24,6 +26,12 @@ public class Voluntario {
         }
         public String getDateNasc(){
             return ((this._dataNasc.getYear())+"-"+(this._dataNasc.getMonth()+1)+"-"+this._dataNasc.getDate());
+        }
+        public String getFormatedDate(){
+            DateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
+            this._dataNasc.setYear((_dataNasc.getYear() - 1900));
+            this._dataNasc.setMonth((_dataNasc.getMonth() - 1));
+            return dtf.format(_dataNasc);
         }
         public String getDateAssociacao(){
             return ((this._dataAssociacao.getYear()+1900)+"-"+(this._dataAssociacao.getMonth()+1)+"-"+this._dataAssociacao.getDate());

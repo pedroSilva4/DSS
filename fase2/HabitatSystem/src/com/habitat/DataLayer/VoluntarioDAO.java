@@ -67,11 +67,11 @@ public class VoluntarioDAO {
                 Morada m = new Morada(res.getString("rua"),res.getString("localidade"),
                         res.getString("dataNascimento"));
                 String[] parts = res.getString("dataNascimento").split("-");
-                Date d1 = new Date(Integer.parseInt(parts[1]),
-                        Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
                 String[] parts2 = res.getString("dataAssociacao").split("-");
-                Date d2 = new Date(Integer.parseInt(parts2[1]),
-                        Integer.parseInt(parts2[2]),Integer.parseInt(parts2[3]));
+                Date d2 = new Date(Integer.parseInt(parts2[0]),
+                        Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
                 return new Voluntario(res.getString("id"),res.getString("nome"),d1,d2,
                             res.getString("contacto"),res.getString("nomeEquipa"),
                             res.getString("profissao"),m);
@@ -117,13 +117,14 @@ public class VoluntarioDAO {
             res = st.executeQuery(sql);
             while(res.next()){
                 Morada m = new Morada(res.getString("rua"),
-                        res.getString("localidade"),res.getString("dataNascimento"));
+                        res.getString("localidade"),res.getString("codPostal"));
                 String[] parts = res.getString("dataNascimento").split("-");
-                Date d1 = new Date(Integer.parseInt(parts[1]),
-                        Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
+                
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
                 String[] parts2 = res.getString("dataAssociacao").split("-");
-                Date d2 = new Date(Integer.parseInt(parts2[1]),
-                        Integer.parseInt(parts2[2]),Integer.parseInt(parts2[3]));
+                Date d2 = new Date(Integer.parseInt(parts2[0]),
+                       Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
                 Voluntario v;
                 v = new Voluntario(res.getString("id"),res.getString("nome"),d1,d2,
                             res.getString("contacto"),res.getString("nomeEquipa"),

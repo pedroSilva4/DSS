@@ -14,6 +14,8 @@ import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.util.ErrorWindow;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -390,7 +392,9 @@ public class AtualizarVolDialog extends javax.swing.JDialog {
             this.nome_tf.setText(this.vol.getNome());
             this.team_tf.setText((this.vol.getNomeEquipa()));
             this.job_tf.setText(this.vol.getProfissao());
-            this.bday_tf.setText(this.vol.getDateNasc());
+           
+            this.bday_tf.setText(this.vol.getFormatedDate());
+            System.out.println(this.vol.getMorada().getCodigo_postal());
             this.postal_tf.setText(this.vol.getMorada().getCodigo_postal());
             this.street_tf.setText(this.vol.getMorada().getRua());
             this.local_tf.setText(this.vol.getMorada().getLocalidade());

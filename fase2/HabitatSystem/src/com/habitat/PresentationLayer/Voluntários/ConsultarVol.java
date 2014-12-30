@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -36,7 +37,15 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
         this.businessFacade = bus;
         businessFacade.addObserver(this);
         initComponents();
-        update(null);
+        try {
+            for(Voluntario v : businessFacade.getListaVoluntario())
+            {
+                this.voluntarios_drop.addItem(v);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarVol.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
 
     
@@ -50,44 +59,69 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
     private void initComponents() {
 
         voluntarios_drop = new javax.swing.JComboBox();
+        consult = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
-        voluntarios_drop.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        consult.setText("Consultar");
+        consult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Voluntario :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(voluntarios_drop, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(consult)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(voluntarios_drop, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(voluntarios_drop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(voluntarios_drop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addComponent(consult)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultActionPerformed
+        // TODO add your handling code here:
+        Voluntario vol = (Voluntario)this.voluntarios_drop.getSelectedItem();
+        new AtualizarVolDialog(new JFrame(), true, businessFacade, vol).setVisible(true);
+        
+    }//GEN-LAST:event_consultActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton consult;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox voluntarios_drop;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void update(Observable o, Object arg) {
         try {
-            this.voluntarios_drop.removeAllItems();
             for(Voluntario v : businessFacade.getListaVoluntario())
-            {
-                this.voluntarios_drop.addItem(v);
+            {   
+                this.voluntarios_drop.addItem("hello"); 
             }
-            this.voluntarios_drop.setSelectedIndex(0);
-            
+           
         } catch (SQLException ex) {
            new ErrorWindow("ComboBox", ex.getMessage(), "error", new JFrame()).wshow();
         }
