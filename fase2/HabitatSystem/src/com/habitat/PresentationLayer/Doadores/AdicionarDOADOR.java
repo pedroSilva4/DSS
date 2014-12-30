@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.habitat.PresentationLayer.Doacoes;
+package com.habitat.PresentationLayer.Doadores;
 
 /**
  *
  * @author filiperibeiro
  */
-public class AdicionarDOA extends javax.swing.JPanel {
+public class AdicionarDOADOR extends javax.swing.JPanel {
 
     /**
-     * Creates new form AdicionarDOA
+     * Creates new form AdicionarDOADOR
      */
-    public AdicionarDOA() {
+    public AdicionarDOADOR() {
         initComponents();
     }
 
@@ -27,15 +27,11 @@ public class AdicionarDOA extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Adicionar"));
-
-        jButton1.setText("Individual");
-
-        jButton2.setText("Empresa");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -45,8 +41,12 @@ public class AdicionarDOA extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 386, Short.MAX_VALUE)
+            .addGap(0, 362, Short.MAX_VALUE)
         );
+
+        jButton1.setText("Individual");
+
+        jButton2.setText("Empresa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,8 +71,8 @@ public class AdicionarDOA extends javax.swing.JPanel {
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

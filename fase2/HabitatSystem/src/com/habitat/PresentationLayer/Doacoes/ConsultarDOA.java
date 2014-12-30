@@ -9,12 +9,12 @@ package com.habitat.PresentationLayer.Doacoes;
  *
  * @author filiperibeiro
  */
-public class ConsultarDAO extends javax.swing.JPanel {
+public class ConsultarDOA extends javax.swing.JPanel {
 
     /**
      * Creates new form ConsultarDAO
      */
-    public ConsultarDAO() {
+    public ConsultarDOA() {
         initComponents();
     }
 
@@ -71,7 +71,6 @@ public class ConsultarDAO extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
