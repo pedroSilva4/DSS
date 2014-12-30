@@ -48,9 +48,9 @@ public class DoacoesDAO {
                     DMaterial m;
  //(String cod, Date data, String descricao,String unidade,int quantidade)
                     String[] parts = res.getString(3).split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]),
-                                Integer.parseInt(parts[3]));
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
                     Integer i = new Integer(res.getString(6));
                     m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
                     return m;
@@ -59,9 +59,9 @@ public class DoacoesDAO {
                     Servicos s;
  //(String cod, Date data, String descricao)
                     String[] parts = res.getString(3).split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]),
-                                Integer.parseInt(parts[3]));
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
                     s = new Servicos(res.getString(1),d1,res.getString(2));
                     return s;
                 }
@@ -69,9 +69,9 @@ public class DoacoesDAO {
                 Monetario m;
  //(String cod, Date data, String descricao,float valor)
                 String[] parts = res.getString(3).split("-");
-                Date d1 = new Date(Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]),
-                                Integer.parseInt(parts[3]));
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
                 Float f = new Float(res.getString(5));
                 m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
                 return m;
@@ -156,9 +156,9 @@ public class DoacoesDAO {
                     DMaterial m;
  //(String cod, Date data, String descricao,String unidade,int quantidade)
                     String[] parts = res.getString(3).split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]),
-                                Integer.parseInt(parts[3]));
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
                     Integer i = new Integer(res.getString(6));
                     m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
                     ds.add(m);
@@ -167,9 +167,9 @@ public class DoacoesDAO {
                     Servicos s;
  //(String cod, Date data, String descricao)
                     String[] parts = res.getString(3).split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]),
-                                Integer.parseInt(parts[3]));
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
                     s = new Servicos(res.getString(1),d1,res.getString(2));
                     ds.add(s);
                 }
@@ -177,9 +177,9 @@ public class DoacoesDAO {
                 Monetario m;
  //(String cod, Date data, String descricao,float valor)
                 String[] parts = res.getString(3).split("-");
-                Date d1 = new Date(Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]),
-                                Integer.parseInt(parts[3]));
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
                 Float f = new Float(res.getString(5));
                 m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
                 ds.add(m);
