@@ -108,7 +108,7 @@ public void myInit(){
         
     if(type.equals("admin") || type.equals("angariação")){
 
-                this.jPanel1.add(new AdicionarDOA(),"add");
+                this.jPanel1.add(new AdicionarDOA(businessFacade),"add");
                 this.cons_.setText("Consultar/Atualizar");
         }
         else{

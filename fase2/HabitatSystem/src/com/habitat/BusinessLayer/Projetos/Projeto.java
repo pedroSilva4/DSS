@@ -99,9 +99,7 @@ public class Projeto {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append("Projeto{"+"cod=" + cod +", candidatura="+_candidatura +  ", _dataI=" + this.getDateI() + ", _dataF=" + this.getDateF() + ", _estado=" + _estado + ", _descricao=" + _descricao + ", _orcamento=" + _orcamento + ", Funcionario=" + Funcionario + '}');
-        for(ProjetoTarefas t : tarefas)
-            res.append(t.toString());
+        res.append("Projeto ID:").append(cod);
         return res.toString();
     }
 

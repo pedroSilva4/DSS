@@ -2,11 +2,13 @@ package com.habitat.DataLayer;
 
 import com.habitat.BusinessLayer.Eventos.Evento;
 import com.habitat.BusinessLayer.Eventos.*;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EventosDAO {
     private Connection conn;
@@ -108,4 +110,19 @@ public class EventosDAO {
                 st.executeUpdate();
                 return true;
 	}
+        
+        public ArrayList<String> getListaIds() throws SQLException{
+            ArrayList<String> ids  =new ArrayList<>();
+            PreparedStatement st;
+                String sql;
+                sql = "Select id  from Habitat.Eventos;";
+                st = conn.prepareStatement(sql);
+                
+                ResultSet rs = st.executeQuery();
+                while(rs.next())
+                {
+                    ids.add(rs.getString(1));
+                }
+            return ids;
+        }
 }

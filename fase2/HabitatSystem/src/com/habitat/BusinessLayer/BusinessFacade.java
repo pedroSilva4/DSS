@@ -281,7 +281,9 @@ public class BusinessFacade extends Observable{
             return false;
         }
     }
-
+     public ArrayList<String> getListaIdsEventos() throws SQLException{
+         return _eventos.getListaIds();
+     }
     public void logout() throws SQLException {
         this.conn.close();
     }

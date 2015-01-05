@@ -1,5 +1,7 @@
 package com.habitat.BusinessLayer.Eventos;
 
+import com.habitat.DataLayer.DoacoesDAO;
+import com.habitat.DataLayer.DoadoresDAO;
 import java.sql.Date;
 
 public class Evento {
@@ -9,7 +11,9 @@ public class Evento {
 	private int _npessoas;
 	private String _organizador;
 	private String _nota;
-
+        public DoacoesDAO doacoes_;
+        public DoadoresDAO doadores_;
+        
 	public Evento(String cod, Date data, float val, 
                         int nPessoas, String organizador, String nota) {
             this._cod = cod;

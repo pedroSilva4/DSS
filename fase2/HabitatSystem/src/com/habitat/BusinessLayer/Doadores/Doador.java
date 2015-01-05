@@ -1,5 +1,7 @@
 package com.habitat.BusinessLayer.Doadores;
 
+import com.habitat.DataLayer.DoacoesDAO;
+import com.habitat.DataLayer.DoadoresDAO;
 import java.sql.Date;
 
 public class Doador {
@@ -12,6 +14,7 @@ public class Doador {
 	private String _contacto;
         private String _email;
 	private Date _dataAssociacao;
+        public DoacoesDAO doacoes_;
 
 	public Doador(String cod,String nome,String nif,String rua,String localidade,
                 String codP,String contacto,String email,Date dataAssoc) {
