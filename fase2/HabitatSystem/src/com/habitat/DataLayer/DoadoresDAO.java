@@ -9,6 +9,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 // import com.habitat.BusinessLayer.Doadores.Doador;
 
@@ -162,4 +165,48 @@ public class DoadoresDAO {
                st.executeUpdate();
                return true;
 	}
+        
+        public HashMap<String,String> getListaIdDoadores() throws SQLException{
+            HashMap<String,String> l = new HashMap<String,String>();
+            Statement st;
+            ResultSet res;
+            String sql = "select id,nome from Habitat.Doadores;";
+            st = conn.createStatement();
+            res = st.executeQuery(sql);
+            while(res.next()){
+                l.put(res.getString("id"), res.getString("nome"));
+            }
+            return l;
+        }
+        public ArrayList<Doador> getListaDoadores() throws SQLException{
+            ArrayList<Doador> ds = new ArrayList<Doador>();
+            Statement st;
+            ResultSet res;
+            String sql = "select * from Habitat.Doadores;";
+            st = conn.createStatement();
+            res = st.executeQuery(sql);
+            while(res.next()){
+                if(res.getString("actividade").equals("null")){
+                    String[] parts = res.getString("dataAssociacao").split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+                    Doador d = new Doador(res.getString("id"),res.getString("nome"),res.getString("NIF"),
+                            res.getString("rua"),res.getString("localidade"),res.getString("codPostal"),
+                            res.getString("contacto"),res.getString("email"),d1);
+                    ds.add(d);
+                }
+                else{
+                    String[] parts = res.getString("dataAssociacao").split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+                    Empresa e = new Empresa(res.getString("id"),res.getString("nome"),res.getString("NIF"),
+                            res.getString("rua"),res.getString("localidade"),res.getString("codPostal"),
+                            res.getString("contacto"),res.getString("email"),d1,res.getString("actividade"),
+                            res.getString("site"),res.getString("pessoaDeContacto"));
+                    ds.add(e);
+                }
+                
+            }
+            return ds;
+        }
 }

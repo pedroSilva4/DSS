@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class EventosDAO {
@@ -124,5 +125,25 @@ public class EventosDAO {
                     ids.add(rs.getString(1));
                 }
             return ids;
+        }
+        
+        public ArrayList<Evento> getListaEventos() throws SQLException{
+            Statement st;
+            ResultSet res;
+            ArrayList<Evento> evs = new ArrayList<Evento>();
+            String sql = "select * from Habitat.Eventos;";
+            st = conn.createStatement();
+            res = st.executeQuery(sql);
+            while(res.next()){   
+                String[] parts = res.getString("data").split("-");
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+                Float f = new Float(res.getString("valorAngariado"));
+                Integer i = new Integer(res.getString("nrParticipantes"));
+                Evento ev = new Evento(res.getString("id"),d1,f.floatValue(),i.intValue(),
+                                res.getString("funcionario"),res.getString("observacoes"));
+                evs.add(ev);  
+            }
+            return evs;
         }
 }

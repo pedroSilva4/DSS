@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProjetosDAO {
@@ -119,5 +120,56 @@ public class ProjetosDAO {
         st.setString(4, aTarefa);
         st.setString(5, aProjeto);
         st.executeUpdate();
+    }
+    public ArrayList<String> getListaIdProjectos() throws SQLException{
+        Statement st;
+        ResultSet res;
+        ArrayList<String> l = new ArrayList<String>();
+        String sql = "select id from Habitat.Projectos;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        while(res.next()){
+            l.add(res.getString("id"));
+        }
+        return l;
+    }
+    public ArrayList<Projeto> getListaProjectos() throws SQLException{
+        ArrayList<Projeto> ps = new ArrayList<Projeto>();
+        Statement st;
+        Statement st2;
+        ResultSet res;
+        ResultSet res2;
+        String sql = "select * from Habitat.Projectos;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        while(res.next()){
+            String sql2 = "Select * from Habitat.ProjectoTarefas where id = "+res.getString("id")+";";
+            st2 = conn.createStatement();
+            res2 = st2.executeQuery(sql2);
+            ArrayList<ProjetoTarefas> tar = new ArrayList<ProjetoTarefas>();
+            while(res2.next()){
+                String[] parts = res.getString("dataInicio").split("-");
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+                String[] parts2 = res.getString("dataFim").split("-");
+                Date d2 = new Date(Integer.parseInt(parts2[0]),
+                       Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
+                //da tarefa é o código que se quer??
+                ProjetoTarefas pt = new ProjetoTarefas(d1,d2,res.getString("tarefa"));
+                tar.add(pt);
+            }
+            String[] parts = res.getString("dataInicio").split("-");
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+                String[] parts2 = res.getString("dataFim").split("-");
+                Date d2 = new Date(Integer.parseInt(parts2[0]),
+                       Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
+            Double d = new Double(res.getString("orcamento"));
+            //é o codigo do candidato que se quer?
+            Projeto p = new Projeto(res.getString("id"),res.getString("candidato"),d1,d2,
+                        res.getString("estado"),res.getString("descricao"),
+                        d.doubleValue(),res.getString("funcionario"),tar);
+        }
+        return ps;
     }
 }
