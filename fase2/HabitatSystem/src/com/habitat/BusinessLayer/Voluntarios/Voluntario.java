@@ -27,14 +27,22 @@ public class Voluntario {
         public String getDateNasc(){
             return ((this._dataNasc.getYear())+"-"+(this._dataNasc.getMonth()+1)+"-"+this._dataNasc.getDate());
         }
-        public String getFormatedDate(){
+        public String getFormatedDateNasc(){
             DateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
             this._dataNasc.setYear((_dataNasc.getYear() - 1900));
             this._dataNasc.setMonth((_dataNasc.getMonth() - 1));
             return dtf.format(_dataNasc);
         }
         public String getDateAssociacao(){
-            return ((this._dataAssociacao.getYear()+1900)+"-"+(this._dataAssociacao.getMonth()+1)+"-"+this._dataAssociacao.getDate());
+            return ((this._dataAssociacao.getYear())+"-"+(this._dataAssociacao.getMonth()+1)+"-"+this._dataAssociacao.getDate());
+        }
+        public String getFormatedDateAssoc(){
+            DateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
+            int ano = _dataAssociacao.getYear();
+            if(ano>1000) ano -=1900;
+            this._dataAssociacao.setYear((ano));
+            this._dataAssociacao.setMonth((_dataAssociacao.getMonth() - 1));
+            return dtf.format(_dataAssociacao);
         }
 	public void setNomeEquipa(String aNomeEquipa) {
 		this._nomeEquipa = aNomeEquipa;

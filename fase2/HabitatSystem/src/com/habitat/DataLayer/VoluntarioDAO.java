@@ -84,17 +84,17 @@ public class VoluntarioDAO {
             PreparedStatement st;
             ResultSet res;
             String sql;
-            sql = "update Habitat.Voluntarios set"
-                    + "nome = ?,"
-                    + "dataAssociacao = ?,"
-                    + "contacto = ?,"
-                    + "dataNascimento = ?,"
-                    + "profissao = ?,"
-                    + "rua = ?,"
-                    + "localidade = ?,"
-                    + "codPostal = ?,"
-                    + "nomeEquipa = ?;"
-                    + "where id = ?;";
+            sql = "UPDATE Habitat.Voluntarios SET "
+                    + "nome = ?, "
+                    + "dataAssociacao = ?, "
+                    + "contacto = ?, "
+                    + "dataNascimento = ?, "
+                    + "profissao = ?, "
+                    + "rua = ?, "
+                    + "localidade = ?, " 
+                    + "codPostal = ?, "
+                    + "nomeEquipa = ? "
+                    + "where id = ? ;";
             st = conn.prepareStatement(sql);
             st.setString(1, aVol.getNome());
             st.setString(2, aVol.getDateAssociacao());
@@ -105,7 +105,7 @@ public class VoluntarioDAO {
             st.setString(7, aVol.getMorada().getLocalidade());
             st.setString(8, aVol.getMorada().getCodigo_postal());
             st.setString(9, aVol.getNomeEquipa());
-            st.setString(9, aVol.getCod());
+            st.setString(10, aVol.getCod());
             st.executeUpdate();
 	}
         public ArrayList<Voluntario> getLista() throws SQLException{

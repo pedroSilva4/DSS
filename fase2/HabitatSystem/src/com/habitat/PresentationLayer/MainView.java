@@ -9,6 +9,8 @@ package com.habitat.PresentationLayer;
 import com.alee.laf.WebLookAndFeel;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.PresentationLayer.Candidaturas.CandidaturaJP;
+import com.habitat.PresentationLayer.Doacoes.DoacoesJP;
+import com.habitat.PresentationLayer.Doadores.DoadoresJP;
 import com.habitat.PresentationLayer.Funcionarios.FuncionariosJP;
 import com.habitat.PresentationLayer.Inventario.InventarioJP;
 import com.habitat.PresentationLayer.Voluntários.VoluntarioJP;
@@ -62,8 +64,9 @@ public class MainView extends javax.swing.JFrame {
         candidaturas_jpanel = new javax.swing.JPanel();
         eventos_jp = new javax.swing.JPanel();
         doacoes_jp = new javax.swing.JPanel();
-        voluntarios_jp = new javax.swing.JPanel();
+        doadoresJP = new javax.swing.JPanel();
         inventario_jp = new javax.swing.JPanel();
+        voluntarios_jp = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         logout_bt = new javax.swing.JMenuItem();
@@ -132,11 +135,24 @@ public class MainView extends javax.swing.JFrame {
         doacoes_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Doações", doacoes_jp);
 
-        voluntarios_jp.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Voluntários", voluntarios_jp);
+        javax.swing.GroupLayout doadoresJPLayout = new javax.swing.GroupLayout(doadoresJP);
+        doadoresJP.setLayout(doadoresJPLayout);
+        doadoresJPLayout.setHorizontalGroup(
+            doadoresJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 882, Short.MAX_VALUE)
+        );
+        doadoresJPLayout.setVerticalGroup(
+            doadoresJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 481, Short.MAX_VALUE)
+        );
+
+        main_tabs.addTab("Doadores", doadoresJP);
 
         inventario_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Inventário", inventario_jp);
+
+        voluntarios_jp.setLayout(new java.awt.CardLayout());
+        main_tabs.addTab("Voluntários", voluntarios_jp);
 
         jMenu1.setText("Menu");
 
@@ -185,7 +201,8 @@ public class MainView extends javax.swing.JFrame {
 
     private void exit_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_btActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        //this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_exit_btActionPerformed
 
     /**
@@ -228,6 +245,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel Home_jp;
     private javax.swing.JPanel candidaturas_jpanel;
     private javax.swing.JPanel doacoes_jp;
+    private javax.swing.JPanel doadoresJP;
     private javax.swing.JPanel eventos_jp;
     private javax.swing.JMenuItem exit_bt;
     private javax.swing.JPanel funcionarios_jp;
@@ -254,6 +272,9 @@ public class MainView extends javax.swing.JFrame {
        this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
        this.inventario_jp.add(new InventarioJP(businessFacade));
        this.voluntarios_jp.add(new VoluntarioJP(businessFacade));
+       this.doadoresJP.add(new DoadoresJP());
+       this.doacoes_jp.add(new DoacoesJP(businessFacade));
+       this.doadoresJP.setVisible(true);
        
         // this.groupBox_func.setVisible(false);
     }

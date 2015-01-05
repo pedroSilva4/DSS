@@ -103,7 +103,14 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
     private void consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultActionPerformed
         // TODO add your handling code here:
         Voluntario vol = (Voluntario)this.voluntarios_drop.getSelectedItem();
+        String type = this.businessFacade.getActiveUser().getTipo();
+        
+        if(type.equals("admin") || type.equals("angariação")){
         new AtualizarVolDialog(new JFrame(), true, businessFacade, vol).setVisible(true);
+        }else
+        {
+            new ConsultarVolDialog(new JFrame(), true, vol, businessFacade).setVisible(true);
+        }
         
     }//GEN-LAST:event_consultActionPerformed
 
@@ -117,13 +124,13 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
     @Override
     public void update(Observable o, Object arg) {
         try {
+            this.voluntarios_drop.removeAllItems();
             for(Voluntario v : businessFacade.getListaVoluntario())
-            {   
-                this.voluntarios_drop.addItem("hello"); 
+            {
+                this.voluntarios_drop.addItem(v);
             }
-           
         } catch (SQLException ex) {
-           new ErrorWindow("ComboBox", ex.getMessage(), "error", new JFrame()).wshow();
+            Logger.getLogger(ConsultarVol.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

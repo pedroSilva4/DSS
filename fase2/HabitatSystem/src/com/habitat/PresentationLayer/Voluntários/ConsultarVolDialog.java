@@ -9,6 +9,7 @@ package com.habitat.PresentationLayer.Voluntários;
 import com.habitat.PresentationLayer.Funcionarios.*;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Utilizadores.Utilizador;
+import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import javax.swing.JFrame;
 
 /**
@@ -20,11 +21,11 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
     /**
      * Creates new form ConsultarVolDialog
      */
-    private final Utilizador ut;
+    private final Voluntario vol;
     private final BusinessFacade businessFacade;
-    public ConsultarVolDialog(java.awt.Frame parent, boolean modal,Utilizador ut,BusinessFacade bus) {
+    public ConsultarVolDialog(java.awt.Frame parent, boolean modal,Voluntario ut,BusinessFacade bus) {
         super(parent, modal);
-        this.ut = ut;
+        this.vol = ut;
         this.businessFacade = bus;
         initComponents();
         init();
@@ -32,7 +33,7 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
 
     private ConsultarVolDialog(JFrame jFrame, boolean b) {
          super(jFrame, b);
-         this.ut = null;
+         this.vol = null;
          this.businessFacade = null;
          initComponents();
          
@@ -48,26 +49,26 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel9 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        label3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         nome = new javax.swing.JLabel();
-        username = new javax.swing.JLabel();
-        nif = new javax.swing.JLabel();
+        dataNasc = new javax.swing.JLabel();
         codpostal = new javax.swing.JLabel();
         rua = new javax.swing.JLabel();
         local = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        tipo = new javax.swing.JLabel();
+        equipa = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        contacto = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        dataAssoc = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel9.setText("Localidade :");
-
-        jLabel6.setText("NIF :");
 
         back.setText("Voltar");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +79,7 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
 
         jLabel8.setText("Rua :");
 
-        jLabel3.setText("Username :");
+        label3.setText("Data Nasc :");
 
         jLabel7.setText("Codigo Postal :");
 
@@ -86,9 +87,7 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
 
         nome.setText("jLabel1");
 
-        username.setText("jLabel4");
-
-        nif.setText("jLabel5");
+        dataNasc.setText("jLabel4");
 
         codpostal.setText("jLabel10");
 
@@ -96,56 +95,58 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
 
         local.setText("jLabel12");
 
-        jLabel1.setText("Tipo :");
+        jLabel1.setText("Equipa :");
 
-        tipo.setText("jLabel4");
+        equipa.setText("jLabel4");
+
+        jLabel4.setText("Contacto :");
+
+        contacto.setText("jLabel5");
+
+        jLabel3.setText("Data Assoc :");
+
+        dataAssoc.setText("jLabel5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(96, 258, Short.MAX_VALUE)
+                        .addComponent(back))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(back))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel2)
-                                                        .addGap(62, 62, 62))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel1)
-                                                        .addGap(69, 69, 69)))
-                                                .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(jLabel3)
-                                                    .addGap(41, 41, 41)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addGap(70, 70, 70)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(rua)
-                                            .addComponent(tipo)
-                                            .addComponent(nome)
-                                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(nif)
-                                            .addComponent(codpostal)
-                                            .addComponent(local))))
-                                .addGap(0, 116, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                        .addComponent(jLabel2)
+                                        .addGap(62, 62, 62))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(69, 69, 69)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(label3)
+                                    .addGap(41, 41, 41)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(47, 47, 47))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(equipa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dataNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dataAssoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(contacto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(codpostal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(local, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,15 +158,19 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tipo))
+                    .addComponent(equipa))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label3)
+                    .addComponent(dataNasc))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(username))
+                    .addComponent(dataAssoc))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(nif))
+                    .addComponent(jLabel4)
+                    .addComponent(contacto))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -178,9 +183,9 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(local))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(back)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -223,11 +228,12 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ConsultarVolDialog dialog = new ConsultarVolDialog(new javax.swing.JFrame(), true);
+                final ConsultarVolDialog dialog = new ConsultarVolDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
+                         ((JFrame)dialog.getParent()).dispose();
                     }
                 });
                 dialog.setVisible(true);
@@ -238,29 +244,33 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JLabel codpostal;
+    private javax.swing.JLabel contacto;
+    private javax.swing.JLabel dataAssoc;
+    private javax.swing.JLabel dataNasc;
+    private javax.swing.JLabel equipa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel label3;
     private javax.swing.JLabel local;
-    private javax.swing.JLabel nif;
     private javax.swing.JLabel nome;
     private javax.swing.JLabel rua;
-    private javax.swing.JLabel tipo;
-    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 
     public void init(){
-            this.nome.setText(this.ut.getNome());
-            this.username.setText(this.ut.getUsername());
-            this.nif.setText(this.ut.getNif());
-            this.codpostal.setText(this.ut.getMorada().getCodigo_postal());
-            this.rua.setText(this.ut.getMorada().getRua());
-            this.local.setText(this.ut.getMorada().getLocalidade());
-            this.tipo.setText(this.ut.getTipo());
+            this.nome.setText(this.vol.getNome());
+            this.dataNasc.setText(this.vol.getFormatedDateNasc());
+            this.dataAssoc.setText(this.vol.getFormatedDateAssoc());
+            this.contacto.setText(this.vol.getContacto());
+            this.equipa.setText(this.vol.getNomeEquipa());
+            this.codpostal.setText(this.vol.getMorada().getCodigo_postal());
+            this.rua.setText(this.vol.getMorada().getRua());
+            this.local.setText(this.vol.getMorada().getLocalidade());
+           
                     
     }
 }
