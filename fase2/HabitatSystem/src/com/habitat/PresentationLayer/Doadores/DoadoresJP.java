@@ -5,6 +5,9 @@
  */
 package com.habitat.PresentationLayer.Doadores;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.PresentationLayer.Doacoes.AdicionarDOA;
+import com.habitat.PresentationLayer.Doacoes.ConsultarDOA;
 import java.awt.CardLayout;
 
 /**
@@ -16,8 +19,12 @@ public class DoadoresJP extends javax.swing.JPanel {
     /**
      * Creates new form DoadoresJP
      */
-    public DoadoresJP() {
+    private final BusinessFacade businessFacade;
+    public DoadoresJP(BusinessFacade bus) {
+        this.businessFacade = bus;
+        System.out.println("initializing....");
         initComponents();
+        init();
     }
 
     /**
@@ -30,9 +37,9 @@ public class DoadoresJP extends javax.swing.JPanel {
     private void initComponents() {
 
         add_ = new javax.swing.JButton();
+        rem_ = new javax.swing.JButton();
+        container = new javax.swing.JPanel();
         cons_ = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
 
         add_.setText("Adicionar");
         add_.addActionListener(new java.awt.event.ActionListener() {
@@ -41,75 +48,95 @@ public class DoadoresJP extends javax.swing.JPanel {
             }
         });
 
-        cons_.setText("Remover");
+        rem_.setText("Remover");
+        rem_.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rem_ActionPerformed(evt);
+            }
+        });
+
+        container.setLayout(new java.awt.CardLayout());
+
+        cons_.setText("Consultar");
         cons_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cons_ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 366, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jButton1.setText("Consultar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(add_, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(cons_, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(105, 105, 105)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(add_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rem_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cons_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
                         .addComponent(add_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(rem_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(cons_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGap(78, 78, 78))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void add_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_ActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout)this.jPanel1.getLayout();
-        cl.show(jPanel1, "add");
-        jPanel1.setVisible(true);
+        CardLayout cl = (CardLayout)this.container.getLayout();
+        cl.show(container, "add");
+        container.setVisible(true);
     }//GEN-LAST:event_add_ActionPerformed
+
+    private void rem_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rem_ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_rem_ActionPerformed
 
     private void cons_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cons_ActionPerformed
         // TODO add your handling code here:
-        CardLayout cl = (CardLayout)this.jPanel1.getLayout();
-        cl.show(jPanel1, "cons");
-        jPanel1.setVisible(true);
+        CardLayout cl = (CardLayout)this.container.getLayout();
+        cl.show(container, "cons");
+        container.setVisible(true);
     }//GEN-LAST:event_cons_ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_;
     private javax.swing.JButton cons_;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel container;
+    private javax.swing.JButton rem_;
     // End of variables declaration//GEN-END:variables
+    private void init(){
+        String type = this.businessFacade.getActiveUser().getTipo();
+        
+        if(type.equals("admin") || type.equals("angariação")){
+
+                this.container.add(new AdicionarDOADOR(),"add");
+                this.cons_.setText("Consultar/Atualizar");
+        }
+        else{
+            this.add_.setEnabled(false);
+        }
+        
+        this.container.add(new ConsultarDOADOR(),"cons");
+        //--this.container.add(new )
+        this.container.setVisible(false);
+    }
 }

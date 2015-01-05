@@ -135,17 +135,7 @@ public class MainView extends javax.swing.JFrame {
         doacoes_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Doações", doacoes_jp);
 
-        javax.swing.GroupLayout doadoresJPLayout = new javax.swing.GroupLayout(doadoresJP);
-        doadoresJP.setLayout(doadoresJPLayout);
-        doadoresJPLayout.setHorizontalGroup(
-            doadoresJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 882, Short.MAX_VALUE)
-        );
-        doadoresJPLayout.setVerticalGroup(
-            doadoresJPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 481, Short.MAX_VALUE)
-        );
-
+        doadoresJP.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Doadores", doadoresJP);
 
         inventario_jp.setLayout(new java.awt.CardLayout());
@@ -272,9 +262,8 @@ public class MainView extends javax.swing.JFrame {
        this.candidaturas_jpanel.add(new CandidaturaJP(businessFacade));
        this.inventario_jp.add(new InventarioJP(businessFacade));
        this.voluntarios_jp.add(new VoluntarioJP(businessFacade));
-       this.doadoresJP.add(new DoadoresJP());
        this.doacoes_jp.add(new DoacoesJP(businessFacade));
-       this.doadoresJP.setVisible(true);
+       this.doadoresJP.add(new DoadoresJP(businessFacade));
        
         // this.groupBox_func.setVisible(false);
     }
