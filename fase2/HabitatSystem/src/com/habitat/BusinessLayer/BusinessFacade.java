@@ -131,11 +131,43 @@ public class BusinessFacade extends Observable{
         HashMap<String,Doacao> doador = this._doacoes.getPorDoador(cDoador);
         HashMap<String,Doacao> projecto = this._doacoes.getPorProjecto(cProjecto);
         HashMap<String,Doacao> evento = this._doacoes.getPorEvento(cEvento);
-        for(String s : doador.keySet()){
-            if(projecto.containsKey(s) && evento.containsKey(s)){
-                res.put(s, doador.get(s));
-            }     
+        if(cDoador != null){
+            if(cProjecto == null && cEvento == null)
+                return doador;
+            
+            if(cProjecto != null && cEvento == null){
+                for(String s : doador.keySet()){
+                    if(projecto.containsKey(s)){
+                        res.put(s, doador.get(s));
+                    }     
+                }
+                return res;
+            }
+            if(cProjecto == null && cEvento != null){
+                for(String s : doador.keySet()){
+                    if(evento.containsKey(s)){
+                        res.put(s, doador.get(s));
+                    }     
+                }
+                return res;
+            }
+            for(String s : doador.keySet()){
+                if(projecto.containsKey(s) && evento.containsKey(s)){
+                    res.put(s, doador.get(s));
+                } 
+                return res;
+            }
         }
+        if(cProjecto != null && cEvento == null)
+            return projecto;
+        if(cProjecto != null && cEvento != null)
+            for(String s : projecto.keySet()){
+                if(evento.containsKey(s))
+                    res.put(s, projecto.get(s));
+            }
+        if(cEvento != null)
+            return evento;
+        
         return res;
     }
 
