@@ -124,8 +124,7 @@ public class ConsultarDOADOR extends javax.swing.JPanel implements Observer{
     private void consultar_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultar_btActionPerformed
         // TODO add your handling code here:
         Doador d = (Doador)this.doador_cb.getSelectedItem();
-        String type = this.businessFacade.getActiveUser().getTipo();
-        System.out.println(d.getClass().toString());
+        String type = this.businessFacade.getActiveUser().getTipo(); 
         
         if(type.equals("admin") || type.equals("angariação")){
             if(d.getClass() == Empresa.class){
