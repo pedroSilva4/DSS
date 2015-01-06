@@ -309,7 +309,7 @@ public class ConsultarDOADOR_emp extends javax.swing.JDialog {
             this.site_lb.setText(this.d.getSite());
             this.pc_nome_lb.setText(this.d.getPContacto());
             this.email_lb.setText(this.d.getEmail());
-            this.data_ass_tf.setText(this.getFormatedDateAssoc());
+            this.data_ass_tf.setText(this.d.getDataAssoc().toString());
            
                     
     }

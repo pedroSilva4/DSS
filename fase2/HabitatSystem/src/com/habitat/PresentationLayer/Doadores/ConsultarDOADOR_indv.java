@@ -257,6 +257,7 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
             this.rua_lb.setText(this.d.getRua());
             this.codPostal_lb.setText(this.d.getCodPostal());
             this.email_lb.setText(this.d.getEmail());
+            this.data_ass_tf.setText(this.d.getDataAssoc().toString());
            
                     
     }
