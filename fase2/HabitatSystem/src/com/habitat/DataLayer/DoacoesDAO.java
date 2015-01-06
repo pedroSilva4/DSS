@@ -153,12 +153,12 @@ public class DoacoesDAO {
         }
         public boolean associaProjecto(String codP, String codD) throws SQLException{
             PreparedStatement st;
-            String sql = "update Habitat.Doacoes set"
+            String sql = "update Habitat.Doacoes set "
                     + "projecto = ?"
                     + "where id = ?;";
             st = conn.prepareStatement(sql);
-            st.setString(1, codD);
-            st.setString(2, codP);
+            st.setString(1, codP);
+            st.setString(2, codD);
             st.executeUpdate();
             return true;
         }

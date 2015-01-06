@@ -307,6 +307,9 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarDOA.class.getName()).log(Level.SEVERE, null, ex);
         }
+         for(Component c:this.getComponents())
+            if(c.getClass() == javax.swing.JTextField.class ||c.getClass() == javax.swing.JTextArea.class  || c.getClass() == javax.swing.JFormattedTextField.class )
+                ((javax.swing.JTextField)c).setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
