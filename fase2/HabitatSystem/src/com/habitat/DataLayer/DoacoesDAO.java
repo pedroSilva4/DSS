@@ -186,4 +186,130 @@ public class DoacoesDAO {
             }
             return ds;
         }
+        
+        public Doacao getPorProjecto(String aCod) throws SQLException {
+		PreparedStatement st;
+                ResultSet res;
+                String sql;
+                sql = "select * from Habitat.Doacoes where projecto = ?;";
+                st = conn.prepareStatement(sql);
+                st.setString(1, aCod);
+                res = st.executeQuery();
+                if(res.next() == false) return null;
+                if(res.getString(4).equals("material")){
+                    DMaterial m;
+ //(String cod, Date data, String descricao,String unidade,int quantidade)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                    Integer i = new Integer(res.getString(6));
+                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                    return m;
+                }
+                if(res.getString(4).equals("serviço")){
+                    Servicos s;
+ //(String cod, Date data, String descricao)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                    s = new Servicos(res.getString(1),d1,res.getString(2));
+                    return s;
+                }
+                
+                Monetario m;
+ //(String cod, Date data, String descricao,float valor)
+                String[] parts = res.getString(3).split("-");
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                Float f = new Float(res.getString(5));
+                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                return m;
+	}
+        
+        public Doacao getPorDoador(String aCod) throws SQLException {
+		PreparedStatement st;
+                ResultSet res;
+                String sql;
+                sql = "select * from Habitat.Doacoes where doador = ?;";
+                st = conn.prepareStatement(sql);
+                st.setString(1, aCod);
+                res = st.executeQuery();
+                if(res.next() == false) return null;
+                if(res.getString(4).equals("material")){
+                    DMaterial m;
+ //(String cod, Date data, String descricao,String unidade,int quantidade)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                    Integer i = new Integer(res.getString(6));
+                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                    return m;
+                }
+                if(res.getString(4).equals("serviço")){
+                    Servicos s;
+ //(String cod, Date data, String descricao)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                    s = new Servicos(res.getString(1),d1,res.getString(2));
+                    return s;
+                }
+                
+                Monetario m;
+ //(String cod, Date data, String descricao,float valor)
+                String[] parts = res.getString(3).split("-");
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                Float f = new Float(res.getString(5));
+                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                return m;
+	}
+        
+        public Doacao getPorEvento(String aCod) throws SQLException {
+		PreparedStatement st;
+                ResultSet res;
+                String sql;
+                sql = "select * from Habitat.Doacoes where evento = ?;";
+                st = conn.prepareStatement(sql);
+                st.setString(1, aCod);
+                res = st.executeQuery();
+                if(res.next() == false) return null;
+                if(res.getString(4).equals("material")){
+                    DMaterial m;
+ //(String cod, Date data, String descricao,String unidade,int quantidade)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                    Integer i = new Integer(res.getString(6));
+                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                    return m;
+                }
+                if(res.getString(4).equals("serviço")){
+                    Servicos s;
+ //(String cod, Date data, String descricao)
+                    String[] parts = res.getString(3).split("-");
+                    Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                    s = new Servicos(res.getString(1),d1,res.getString(2));
+                    return s;
+                }
+                
+                Monetario m;
+ //(String cod, Date data, String descricao,float valor)
+                String[] parts = res.getString(3).split("-");
+                Date d1 = new Date(Integer.parseInt(parts[0]),
+                                Integer.parseInt(parts[1]),
+                                Integer.parseInt(parts[2]));
+                Float f = new Float(res.getString(5));
+                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                return m;
+	}
 }
