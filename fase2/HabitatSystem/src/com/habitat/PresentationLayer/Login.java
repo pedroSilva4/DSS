@@ -26,6 +26,7 @@ public class Login extends javax.swing.JFrame{
     public Login() {
        this.setTitle("Habitat");
        initComponents();
+       this.setLocationByPlatform(true);
     }
 
     /**

@@ -35,6 +35,7 @@ public class MainView extends javax.swing.JFrame {
         this.setTitle("Habitat");
         initComponents();
         this.init();
+        this.setLocationByPlatform(true);
     }
     
     public MainView() {
