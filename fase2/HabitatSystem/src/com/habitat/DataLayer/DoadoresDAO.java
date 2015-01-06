@@ -38,7 +38,7 @@ public class DoadoresDAO {
             PreparedStatement st;
             ResultSet res;
             String sql;
-            if(aDoador.getClass().toString().equals("Empresa")){
+            if(aDoador.getClass() == Empresa.class){
                 sql = "insert into Habitat.Doadores "
                     + "(nome,NIF,rua,localidade,codPostal,contacto,dataAssociacao,"
                     + "actividade, email, site,pessoaDeContacto)"
@@ -113,7 +113,7 @@ public class DoadoresDAO {
             PreparedStatement st;
             ResultSet res;
             String sql;
-            if(aDoador.getClass().toString().equals("Empresa")){
+            if(aDoador.getClass() == Empresa.class){
                Empresa e = (Empresa) aDoador;
                sql = "update Habitat.Doadores set "
                        + "nome = ?,"

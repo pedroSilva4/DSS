@@ -113,10 +113,15 @@ public class BusinessFacade extends Observable{
 
     public void addDoador(Doador aDoador) throws SQLException {
         this._doadores.add(aDoador);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public boolean updateDoador(Doador aDoador) throws SQLException {
-        return this._doadores.update(aDoador);
+        boolean b = this._doadores.update(aDoador);
+        this.setChanged();
+        this.notifyObservers();
+        return b;
     }
     
     public boolean associarDoacao(String codD, String codE) throws SQLException {
