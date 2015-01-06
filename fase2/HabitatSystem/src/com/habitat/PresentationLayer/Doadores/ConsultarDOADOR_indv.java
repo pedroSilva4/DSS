@@ -58,6 +58,8 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
         rua_lb = new javax.swing.JLabel();
         localidade_lb = new javax.swing.JLabel();
         codPostal_lb = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        data_ass_tf = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -95,6 +97,10 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
         localidade_lb.setText("jLabel1");
 
         codPostal_lb.setText("jLabel1");
+
+        jLabel1.setText("Data de Associação:");
+
+        data_ass_tf.setText("jLabel3");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,11 +147,17 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(codPostal_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 7, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(data_ass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 55, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nome_lb))
@@ -159,7 +171,11 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(nif_lb))))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(data_ass_tf))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(email_lb))
@@ -248,7 +264,9 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel codPostal_lb;
     private javax.swing.JLabel contacto_lb;
+    private javax.swing.JLabel data_ass_tf;
     private javax.swing.JLabel email_lb;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -259,8 +277,6 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
     private javax.swing.JLabel localidade_lb;
     private javax.swing.JLabel nif_lb;
     private javax.swing.JLabel nome_lb;
-    private javax.swing.JTextField nome_tf;
-    private javax.swing.JTextField nome_tf1;
     private javax.swing.JLabel rua_lb;
     private javax.swing.JButton voltar_bt;
     // End of variables declaration//GEN-END:variables
