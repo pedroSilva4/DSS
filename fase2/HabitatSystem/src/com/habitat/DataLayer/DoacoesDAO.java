@@ -97,7 +97,10 @@ public class DoacoesDAO {
                     st.setString(6, aDoador);
                     st.executeUpdate();
                     res = st.getGeneratedKeys();
-                    String key = res.getString(1);
+                    String key = null;
+                    if(res.next()){
+                        key = res.getString(1);
+                    }
                     return key;
                 }
                 if(aDoacao.getClass()==Monetario.class){
@@ -113,7 +116,10 @@ public class DoacoesDAO {
                     st.setString(5, aDoador);
                     st.executeUpdate();
                     res = st.getGeneratedKeys();
-                    String key = res.getString(1);
+                    String key = null;
+                    if(res.next()){
+                        key = res.getString(1);
+                    }
                     return key;
                 }
                 if(aDoacao.getClass()==Servicos.class){
@@ -127,7 +133,10 @@ public class DoacoesDAO {
                     st.setString(4, aDoador);
                     st.executeUpdate();
                     res = st.getGeneratedKeys();
-                    String key = res.getString(1);
+                     String key = null;
+                    if(res.next()){
+                        key = res.getString(1);
+                    }
                     return key;
                 }     
                 
