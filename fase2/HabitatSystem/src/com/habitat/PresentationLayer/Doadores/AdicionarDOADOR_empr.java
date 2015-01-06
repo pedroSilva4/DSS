@@ -5,7 +5,20 @@
  */
 package com.habitat.PresentationLayer.Doadores;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Doadores.Doador;
+import com.habitat.BusinessLayer.Doadores.Empresa;
+import com.habitat.BusinessLayer.Voluntarios.Morada;
 import com.habitat.PresentationLayer.Doacoes.*;
+import com.habitat.util.ErrorWindow;
+import java.awt.Component;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Calendar;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import org.jdatepicker.JDatePicker;
 
 /**
  *
@@ -16,9 +29,16 @@ public class AdicionarDOADOR_empr extends javax.swing.JPanel {
     /**
      * Creates new form AdicionarDOAempr
      */
-    public AdicionarDOADOR_empr() {
+    private BusinessFacade businessFacade;
+    private JDatePicker jdatePicker;
+    public AdicionarDOADOR_empr(BusinessFacade bus) {
+        businessFacade =bus;
         initComponents();
+        setVisible(true);
+        
+        //this.submeter_bt.setEnabled(false);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,27 +52,27 @@ public class AdicionarDOADOR_empr extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        rua_tf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        submeter_bt = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        actividade_tf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        nif_tf = new javax.swing.JTextField();
         nome_tf = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        localidade_tf = new javax.swing.JTextField();
         telefone_TF = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        email_tf = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        site_tf = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        pc_nome_tf = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        postal_tf = new javax.swing.JFormattedTextField();
 
         jButton2.setText("jButton2");
 
@@ -67,90 +87,219 @@ public class AdicionarDOADOR_empr extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel9.setText("Contacto:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 52, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 125, 308, -1));
 
         jLabel4.setText("Rua:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 125, -1, -1));
 
         jLabel8.setText("Actividade:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 204, -1, -1));
 
-        jButton1.setText("Submeter");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 347, -1, -1));
+        submeter_bt.setText("Submeter");
+        submeter_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submeter_btActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Email:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 87, -1, -1));
-        add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 201, 310, -1));
 
         jLabel2.setText("Nome:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, -1, -1));
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 49, 141, -1));
 
         nome_tf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nome_tfActionPerformed(evt);
             }
         });
-        add(nome_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 11, 308, -1));
 
         jLabel10.setText("Localidade:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 166, -1, -1));
 
         jLabel6.setText("NIF:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 52, -1, -1));
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 163, 310, -1));
-        add(telefone_TF, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 49, 138, -1));
-        add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 87, 308, -1));
 
         jLabel1.setText("Site:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 242, -1, -1));
-        add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 239, 310, -1));
 
         jLabel3.setText("Pessoa de contacto :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 277, -1, -1));
 
         jLabel11.setText("Nome:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 312, -1, -1));
 
-        jLabel12.setText("Contacto:");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 351, -1, -1));
-        add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 309, 308, -1));
-        add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 348, 127, -1));
+        jLabel7.setText("CodPostal:");
+
+        try {
+            postal_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(submeter_bt)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pc_nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(site_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(postal_tf))
+                                        .addComponent(actividade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(telefone_TF, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(4, 4, 4)
+                                                .addComponent(jLabel6)
+                                                .addGap(0, 0, 0)
+                                                .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rua_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel2)
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel9)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel5)
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel4)
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel10)
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel8)
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telefone_TF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel6)))
+                        .addGap(10, 10, 10)
+                        .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(rua_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(postal_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(actividade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(site_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel11)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pc_nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(submeter_bt)
+                        .addContainerGap())))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void nome_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_tfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nome_tfActionPerformed
 
+    public void clean()
+    {
+       for(Component c : this.getComponents())
+           if(c.getClass()==JTextField.class || c.getClass()==JFormattedTextField.class)
+              ((JTextField)c).setText("");
+    }
+    
+    private void submeter_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submeter_btActionPerformed
+        // TODO add your handling code here:
+        
+        //data de associação
+            Calendar cal = Calendar.getInstance();
+            Date dateASSOC = new Date(cal.getTimeInMillis());
+        String nome = this.nome_tf.getText();
+        String contact = this.telefone_TF.getText();
+        String nif = this.nif_tf.getText();
+        String email = this.email_tf.getText();
+        String rua = this.rua_tf.getText();
+        String localidade = this.localidade_tf.getText();
+        String cod_postal = this.postal_tf.getText();
+        String actividade = this.actividade_tf.getText();
+        String site = this.site_tf.getText();
+        String pc_nome = this.pc_nome_tf.getText();
+  
+       
+        try {
+           Doador doa = new Empresa("",nome,nif,rua,localidade,
+                cod_postal,contact,email,dateASSOC,actividade,site, pc_nome);
+        businessFacade.addDoador(doa);
+        } catch (SQLException ex) {
+            new ErrorWindow("Doador", ex.getMessage(), "error", new JFrame()).wshow();
+        }
+    
+        clean();
+    }//GEN-LAST:event_submeter_btActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField actividade_tf;
+    private javax.swing.JTextField email_tf;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField localidade_tf;
+    private javax.swing.JTextField nif_tf;
     private javax.swing.JTextField nome_tf;
+    private javax.swing.JTextField pc_nome_tf;
+    private javax.swing.JFormattedTextField postal_tf;
+    private javax.swing.JTextField rua_tf;
+    private javax.swing.JTextField site_tf;
+    private javax.swing.JButton submeter_bt;
     private javax.swing.JTextField telefone_TF;
     // End of variables declaration//GEN-END:variables
 }

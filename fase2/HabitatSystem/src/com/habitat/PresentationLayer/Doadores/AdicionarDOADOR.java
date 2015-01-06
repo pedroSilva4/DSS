@@ -5,6 +5,7 @@
  */
 package com.habitat.PresentationLayer.Doadores;
 
+import com.habitat.BusinessLayer.BusinessFacade;
 import java.awt.CardLayout;
 
 /**
@@ -16,11 +17,14 @@ public class AdicionarDOADOR extends javax.swing.JPanel {
     /**
      * Creates new form AdicionarDOADOR
      */
-    public AdicionarDOADOR() {
+    private BusinessFacade businessFacade;
+    public AdicionarDOADOR(BusinessFacade bus) {
+        businessFacade = bus;
+        setVisible(true);
         initComponents();
-                this.container.add(new AdicionarDOADOR_empr(),"emp");
-                this.container.add(new AdicionarDOADOR_indiv(),"ind");
-                this.container.setVisible(false);
+                this.jPanel1.add(new AdicionarDOADOR_empr(bus),"emp");
+                this.jPanel1.add(new AdicionarDOADOR_indiv(bus),"ind");
+                this.jPanel1.setVisible(false);
     }
 
     /**
@@ -32,13 +36,11 @@ public class AdicionarDOADOR extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        container = new javax.swing.JPanel();
         ind = new javax.swing.JButton();
         emp = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Adicionar"));
-
-        container.setLayout(new java.awt.CardLayout());
 
         ind.setText("Individual");
         ind.addActionListener(new java.awt.event.ActionListener() {
@@ -54,51 +56,53 @@ public class AdicionarDOADOR extends javax.swing.JPanel {
             }
         });
 
+        jPanel1.setLayout(new java.awt.CardLayout());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ind, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                         .addComponent(emp, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(container, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emp, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ind, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(34, 34, 34))
+                    .addComponent(ind, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emp, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void empActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empActionPerformed
         // TODO add your handling code here:
-         CardLayout cl = (CardLayout)this.container.getLayout();
-        cl.show(container, "emp");
-        container.setVisible(true);
+         CardLayout cl = (CardLayout)this.jPanel1.getLayout();
+        cl.show(jPanel1, "emp");
+        jPanel1.setVisible(true);
     }//GEN-LAST:event_empActionPerformed
 
     private void indActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indActionPerformed
         // TODO add your handling code here
-         CardLayout cl = (CardLayout)this.container.getLayout();
-        cl.show(container, "ind");
-        container.setVisible(true);
+         CardLayout cl = (CardLayout)this.jPanel1.getLayout();
+        cl.show(jPanel1, "ind");
+        jPanel1.setVisible(true);
     }//GEN-LAST:event_indActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel container;
     private javax.swing.JButton emp;
     private javax.swing.JButton ind;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

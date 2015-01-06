@@ -5,7 +5,13 @@
  */
 package com.habitat.PresentationLayer.Doadores;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Doadores.Doador;
 import com.habitat.PresentationLayer.Doacoes.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,8 +22,22 @@ public class ConsultarDOADOR extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarDAO
      */
-    public ConsultarDOADOR() {
-        initComponents();
+    
+    private final BusinessFacade businessFacade;
+    private ArrayList<Doador> doadores;
+    
+    public ConsultarDOADOR(BusinessFacade bus) {
+        this.businessFacade = bus;
+        try{
+            this.doadores = businessFacade;
+            businessFacade.addObserver(this);
+            initComponents();
+            updateComboBox();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarDOADOR.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    
+    
     }
 
     /**
@@ -30,16 +50,21 @@ public class ConsultarDOADOR extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        consultar_bt = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        filtrar_tf = new javax.swing.JTextField();
+        doador_cb = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
         jLabel1.setText("Doador:");
 
-        jButton3.setText("Consultar");
+        consultar_bt.setText("Consultar");
+        consultar_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultar_btActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Filtrar:");
 
@@ -50,15 +75,15 @@ public class ConsultarDOADOR extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(consultar_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
-                            .addComponent(jComboBox1, 0, 165, Short.MAX_VALUE))))
+                            .addComponent(filtrar_tf)
+                            .addComponent(doador_cb, 0, 165, Short.MAX_VALUE))))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -67,23 +92,36 @@ public class ConsultarDOADOR extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filtrar_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doador_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(consultar_bt)
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void consultar_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultar_btActionPerformed
+        // TODO add your handling code here:
+        Doador vol = (Doador)this.voluntarios_drop.getSelectedItem();
+        String type = this.businessFacade.getActiveUser().getTipo();
+        
+        if(type.equals("admin") || type.equals("angariação")){
+        new AtualizarVolDialog(new JFrame(), true, businessFacade, vol).setVisible(true);
+        }else
+        {
+            new ConsultarVolDialog(new JFrame(), true, vol, businessFacade).setVisible(true);
+        }
+    }//GEN-LAST:event_consultar_btActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton consultar_bt;
+    private javax.swing.JComboBox doador_cb;
+    private javax.swing.JTextField filtrar_tf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

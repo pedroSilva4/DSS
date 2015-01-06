@@ -59,7 +59,7 @@ public class DoadoresDAO {
             }
             else{
                 sql = "insert into Habitat.Doadores "
-                    + "(nome,NIF,rua,localidade,codPostal,contacto,dataAssociacao,email"
+                    + "(nome,NIF,rua,localidade,codPostal,contacto,dataAssociacao,email)"
                     + "values(?,?,?,?,?,?,?,?);";
                 st = conn.prepareStatement(sql);
                 st.setString(1, aDoador.getNome());
@@ -115,7 +115,7 @@ public class DoadoresDAO {
             String sql;
             if(aDoador.getClass().toString().equals("Empresa")){
                Empresa e = (Empresa) aDoador;
-               sql = "update Habitat.Doadores set"
+               sql = "update Habitat.Doadores set "
                        + "nome = ?,"
                        + "rua = ?,"
                        + "localidade = ?,"
@@ -143,7 +143,7 @@ public class DoadoresDAO {
                st.executeUpdate();
                return true;
             }
-            sql = "update Habitat.Doadores set"
+            sql = "update Habitat.Doadores set "
                        + "nome = ?,"
                        + "rua = ?,"
                        + "localidade = ?,"
