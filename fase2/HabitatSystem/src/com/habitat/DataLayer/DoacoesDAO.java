@@ -96,7 +96,9 @@ public class DoacoesDAO {
                     st.setString(5, ((DMaterial)aDoacao).getUnidade());
                     st.setString(6, aDoador);
                     st.executeUpdate();
-                    return st.getGeneratedKeys().getString(1);
+                    res = st.getGeneratedKeys();
+                    String key = res.getString(1);
+                    return key;
                 }
                 if(aDoacao.getClass()==Monetario.class){
                     sql = "insert into Habitat.Doacoes"
@@ -110,7 +112,9 @@ public class DoacoesDAO {
                     st.setFloat(4, ((Monetario)aDoacao).getValor());
                     st.setString(5, aDoador);
                     st.executeUpdate();
-                    return st.getGeneratedKeys().getString(1);
+                    res = st.getGeneratedKeys();
+                    String key = res.getString(1);
+                    return key;
                 }
                 if(aDoacao.getClass()==Servicos.class){
                     sql = "insert into Habitat.Doacoes"
@@ -122,7 +126,9 @@ public class DoacoesDAO {
                     st.setString(3, "serviço");
                     st.setString(4, aDoador);
                     st.executeUpdate();
-                    return st.getGeneratedKeys().getString(1);
+                    res = st.getGeneratedKeys();
+                    String key = res.getString(1);
+                    return key;
                 }     
                 
                 return null;
