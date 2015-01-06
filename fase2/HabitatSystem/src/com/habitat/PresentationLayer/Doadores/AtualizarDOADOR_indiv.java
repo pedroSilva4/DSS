@@ -38,7 +38,7 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         this.d = ut;
         this.businessFacade = bus;
         initComponents();
-        init();
+     //   init();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -235,10 +235,10 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         this.d.setEmail(email);
         
         try {
-             businessFacade.updateVoluntario(this.vol);
+             businessFacade.updateDoador(d);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            new ErrorWindow("Voluntário", ex.getMessage(), "error", new JFrame()).wshow();
+            new ErrorWindow("Doador", ex.getMessage(), "error", new JFrame()).wshow();
         }
     }//GEN-LAST:event_update_btt2update_bttActionPerformed
 
@@ -321,7 +321,7 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
     private javax.swing.JButton update_btt2;
     // End of variables declaration//GEN-END:variables
 
-public void init(){
+/*public void init(){
             this.nome_tf.setText(this.vol.getNome());
             this.team_tf.setText((this.vol.getNomeEquipa()));
             this.job_tf.setText(this.vol.getProfissao());
@@ -334,7 +334,7 @@ public void init(){
             this.local_tf.setText(this.vol.getMorada().getLocalidade());
             
                     
-    }
+    }*/
 
 
 
