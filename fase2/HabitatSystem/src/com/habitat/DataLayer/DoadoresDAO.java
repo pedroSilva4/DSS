@@ -150,7 +150,7 @@ public class DoadoresDAO {
                        + "codPostal = ?,"
                        + "contacto = ?,"
                        + "dataAssociacao = ?,"
-                       + "email = ?,"
+                       + "email = ? "
                        + "where id = ?;";
                //funcionario fica a null
                st = conn.prepareStatement(sql);
