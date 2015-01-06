@@ -336,6 +336,10 @@ public class BusinessFacade extends Observable{
          return this._doadores.getListaIdDoadores();
      }
      
+     public ArrayList<Doador> getListaDoadores() throws SQLException{
+         return this._doadores.getListaDoadores();
+     }
+     
      public ArrayList<String> getListaIdProjectos() throws SQLException{
          return this._projetos.getListaIdProjectos();
      }
