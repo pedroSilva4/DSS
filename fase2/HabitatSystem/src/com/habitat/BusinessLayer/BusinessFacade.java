@@ -125,8 +125,18 @@ public class BusinessFacade extends Observable{
         return this._doacoes.associarDoacao(codD, codE);
     }
     
-    public ArrayList<Doacao> getListaDoacoes() throws SQLException{
-        return this._doacoes.getLista();
+    public HashMap<String,Doacao> getListaDoacoes(String cDoador,String cProjecto,
+                                                String cEvento) throws SQLException{
+        HashMap<String,Doacao> res = new HashMap<String,Doacao>();
+        HashMap<String,Doacao> doador = this._doacoes.getPorDoador(cDoador);
+        HashMap<String,Doacao> projecto = this._doacoes.getPorProjecto(cProjecto);
+        HashMap<String,Doacao> evento = this._doacoes.getPorEvento(cEvento);
+        for(String s : doador.keySet()){
+            if(projecto.containsKey(s) && evento.containsKey(s)){
+                res.put(s, doador.get(s));
+            }     
+        }
+        return res;
     }
 
     public Doacao getDoacao(String aCod) throws SQLException {

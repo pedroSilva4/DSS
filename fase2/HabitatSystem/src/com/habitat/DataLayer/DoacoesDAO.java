@@ -87,7 +87,7 @@ public class DoacoesDAO {
                             + "(descricao,data,tipo,quantidade,unidade,doador)"
                             + "values("
                             + "?,?,?,?,?,?);";
-                    st = conn.prepareStatement(sql);
+                    st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     st.setString(1, aDoacao.getDescricao());
                     st.setString(2, aDoacao.getDate().toString());
                     st.setString(3, "material");
@@ -104,7 +104,7 @@ public class DoacoesDAO {
                     sql = "insert into Habitat.Doacoes"
                             + "(descricao,data,tipo,valor,doador)"
                             + "values(?,?,?,?,?);";
-                    st = conn.prepareStatement(sql);
+                    st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     st.setString(1, aDoacao.getDescricao());
                     st.setString(2, aDoacao.getDate().toString());
                     st.setString(3, "monetário");
@@ -120,7 +120,7 @@ public class DoacoesDAO {
                     sql = "insert into Habitat.Doacoes"
                             + "(descricao,data,tipo,doador)"
                             + "values(?,?,?,?);";
-                    st = conn.prepareStatement(sql);
+                    st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     st.setString(1, aDoacao.getDescricao());
                     st.setString(2, aDoacao.getDate().toString());
                     st.setString(3, "serviço");
