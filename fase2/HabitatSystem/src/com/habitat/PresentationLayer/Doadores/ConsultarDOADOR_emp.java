@@ -308,9 +308,7 @@ public class ConsultarDOADOR_emp extends javax.swing.JDialog {
             this.pc_nome_lb.setText(this.d.getPContacto());
             this.email_lb.setText(this.d.getEmail());
             Date dt = this.d.getDataAssoc();
-            this.data_ass_tf.setText(dt.getYear()+"/"+(dt.getMonth()-1)+"/"+(dt.getDay()));
-           
-                    
+            this.data_ass_tf.setText(dt.getYear()+"/"+(dt.getMonth()+1)+"/"+(dt.getDate()));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

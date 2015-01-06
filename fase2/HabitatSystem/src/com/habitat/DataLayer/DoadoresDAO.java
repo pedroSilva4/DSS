@@ -189,7 +189,7 @@ public class DoadoresDAO {
                 if(res.getString("actividade") == null){
                     String[] parts = res.getString("dataAssociacao").split("-");
                     Date d1 = new Date(Integer.parseInt(parts[0]),
-                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+                        Integer.parseInt(parts[1])-1,Integer.parseInt(parts[2]));
                     Doador d = new Doador(res.getString("id"),res.getString("nome"),res.getString("NIF"),
                             res.getString("rua"),res.getString("localidade"),res.getString("codPostal"),
                             res.getString("contacto"),res.getString("email"),d1);
@@ -198,7 +198,7 @@ public class DoadoresDAO {
                 else{
                     String[] parts = res.getString("dataAssociacao").split("-");
                     Date d1 = new Date(Integer.parseInt(parts[0]),
-                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+                        Integer.parseInt(parts[1])-1,Integer.parseInt(parts[2]));
                     Empresa e = new Empresa(res.getString("id"),res.getString("nome"),res.getString("NIF"),
                             res.getString("rua"),res.getString("localidade"),res.getString("codPostal"),
                             res.getString("contacto"),res.getString("email"),d1,res.getString("actividade"),

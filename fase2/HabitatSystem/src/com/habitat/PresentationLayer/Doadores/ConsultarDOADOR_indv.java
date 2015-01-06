@@ -246,7 +246,7 @@ public class ConsultarDOADOR_indv extends javax.swing.JDialog {
             this.codPostal_lb.setText(this.d.getCodPostal());
             this.email_lb.setText(this.d.getEmail());
             Date dt = this.d.getDataAssoc();
-            this.data_ass_tf.setText(dt.getYear()+"/"+(dt.getMonth()-1)+"/"+(dt.getDay()));
+            this.data_ass_tf.setText(dt.getYear()+"/"+(dt.getMonth()+1)+"/"+(dt.getDate()));
            
                     
     }

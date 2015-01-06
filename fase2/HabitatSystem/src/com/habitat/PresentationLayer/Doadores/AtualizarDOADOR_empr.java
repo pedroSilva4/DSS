@@ -7,8 +7,7 @@ package com.habitat.PresentationLayer.Doadores;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.Doador;
-import com.habitat.BusinessLayer.Voluntarios.Morada;
-import com.habitat.BusinessLayer.Voluntarios.Voluntario;
+import com.habitat.BusinessLayer.Doadores.Empresa;
 import com.habitat.util.ErrorWindow;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -18,28 +17,29 @@ import javax.swing.JFrame;
  *
  * @author filiperibeiro
  */
-public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
+public class AtualizarDOADOR_empr extends javax.swing.JDialog {
 
     /**
-     * Creates new form AtualizarDOADOR_indiv
+     * Creates new form AtualizarDOADOR_empr
      */
-    
-    private final Doador d;
+    private final Empresa d;
     private final BusinessFacade businessFacade;
-    public AtualizarDOADOR_indiv(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public AtualizarDOADOR_empr(java.awt.Frame parent, boolean modal) {
+         super(parent, modal);
         d = null;
         businessFacade = null;
         initComponents();
     }
 
-    public AtualizarDOADOR_indiv(java.awt.Frame parent, boolean modal,BusinessFacade bus,Doador ut) {
+    public AtualizarDOADOR_empr(java.awt.Frame parent, boolean modal,BusinessFacade bus,Empresa ut) {
         super(parent, modal);
         this.d = ut;
         this.businessFacade = bus;
         initComponents();
         init();
     }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,6 +68,13 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         email_tf = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         data_tf = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        pc_nome_tf = new javax.swing.JTextField();
+        atividade_tf = new javax.swing.JTextField();
+        site_tf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -125,6 +132,14 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
 
         jLabel1.setText("Data de Associação:");
 
+        jLabel2.setText("Atividade:");
+
+        jLabel3.setText("Site:");
+
+        jLabel4.setText("Pessoa de Contacto:");
+
+        jLabel5.setText("Nome:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -133,41 +148,70 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(data_tf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(data_tf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel26)
+                                    .addComponent(jLabel23))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nome_tf2)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel29)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nif_tf)))))
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel26)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel27)
+                                    .addComponent(jLabel24))
+                                .addGap(43, 43, 43)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rua_tf)
+                                    .addComponent(email_tf)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel29)
+                                .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nif_tf))
-                            .addComponent(email_tf, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rua_tf)
-                            .addComponent(nome_tf2)))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(update_btt2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(back2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 17, Short.MAX_VALUE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel28)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(codPstal_tf)))))
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(update_btt2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(back2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(pc_nome_tf))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel28)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codPstal_tf)))))
-                .addGap(23, 23, 23))
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(atividade_tf)
+                                    .addComponent(site_tf))))
+                        .addGap(6, 6, 6))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,10 +227,10 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
                     .addComponent(jLabel29)
                     .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(data_tf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(12, 12, 12)
+                    .addComponent(data_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
                     .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,9 +246,23 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
                     .addComponent(codPstal_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(atividade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(site_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(pc_nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(update_btt2)
                     .addComponent(back2))
-                .addGap(32, 32, 32))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -215,7 +273,7 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -233,8 +291,11 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         String rua = this.rua_tf.getText();
         String local = this.localidade_tf.getText();
         String cod_postal = this.codPstal_tf.getText();
-        String email =  this.email_tf.getText(); 
-        
+        String email =  this.email_tf.getText();
+        String ativ = this.atividade_tf.getText();
+        String site = this.site_tf.getText();
+        String pcNome = this.pc_nome_tf.getText();
+
         this.d.setNome(name);
         this.d.setContacto(contac);
         this.d.setNIF(nif);
@@ -242,9 +303,12 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         this.d.setLocalidade(local);
         this.d.setRua(rua);
         this.d.setEmail(email);
-        
+        this.d.setSetor(ativ);
+        this.d.setSite(site);
+        this.d.setPContacto(pcNome);
+
         try {
-             businessFacade.updateDoador(d);
+            businessFacade.updateDoador(d);
         } catch (SQLException ex) {
             ex.printStackTrace();
             new ErrorWindow("Doador", ex.getMessage(), "error", new JFrame()).wshow();
@@ -285,20 +349,20 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AtualizarDOADOR_indiv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarDOADOR_empr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AtualizarDOADOR_indiv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarDOADOR_empr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AtualizarDOADOR_indiv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarDOADOR_empr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AtualizarDOADOR_indiv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AtualizarDOADOR_empr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AtualizarDOADOR_indiv dialog = new AtualizarDOADOR_indiv(new javax.swing.JFrame(), true);
+                AtualizarDOADOR_empr dialog = new AtualizarDOADOR_empr(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -311,12 +375,14 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField atividade_tf;
     private javax.swing.JButton back2;
     private javax.swing.JTextField codPstal_tf;
     private javax.swing.JTextField contacto_tf;
     private javax.swing.JLabel data_tf;
     private javax.swing.JTextField email_tf;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -324,13 +390,19 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField localidade_tf;
     private javax.swing.JTextField nif_tf;
     private javax.swing.JTextField nome_tf2;
+    private javax.swing.JTextField pc_nome_tf;
     private javax.swing.JTextField rua_tf;
+    private javax.swing.JTextField site_tf;
     private javax.swing.JButton update_btt2;
     // End of variables declaration//GEN-END:variables
+
 
 public void init(){
             this.nome_tf2.setText(this.d.getNome());
@@ -342,7 +414,12 @@ public void init(){
             this.codPstal_tf.setText(this.d.getCodPostal());
             Date dt = this.d.getDataAssoc();
             this.data_tf.setText(dt.getYear()+"/"+(dt.getMonth()+1)+"/"+(dt.getDate()));
+            this.atividade_tf.setText(this.d.getSetor());
+            this.site_tf.setText(this.d.getSite());
+            this.pc_nome_tf.setText(this.d.getPContacto());
     }
+
+
 
 
 

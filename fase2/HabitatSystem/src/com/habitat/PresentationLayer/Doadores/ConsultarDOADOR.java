@@ -129,8 +129,7 @@ public class ConsultarDOADOR extends javax.swing.JPanel implements Observer{
         if(type.equals("admin") || type.equals("angariação")){
             if(d.getClass() == Empresa.class){
                 Empresa emp = (Empresa) d;
-                    new ConsultarDOADOR_emp(new JFrame(), true, emp).setVisible(true);
-                    //mudar aqui
+                    new AtualizarDOADOR_empr(new JFrame(), true, businessFacade ,emp).setVisible(true);
             }
             else{
                     new AtualizarDOADOR_indiv(new JFrame(), true, businessFacade ,d).setVisible(true);
