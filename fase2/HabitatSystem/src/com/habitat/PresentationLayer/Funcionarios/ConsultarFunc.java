@@ -8,6 +8,7 @@ package com.habitat.PresentationLayer.Funcionarios;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Utilizadores.Utilizador;
+import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,6 +96,7 @@ public class ConsultarFunc extends javax.swing.JPanel {
        String s = this.username_tf.getText();
         try {
             Utilizador ut = this.businessFacade.getUtilizador(s);
+            if(ut==null){new ErrorWindow("Utilizador","Utilizador não Existe", "warning", new JFrame()).wshow();return;}
             JDialog jd;
             if(this.businessFacade.getActiveUser().getTipo().equals("admin")){
                 //tem que se mudar para atualizar
@@ -106,7 +108,7 @@ public class ConsultarFunc extends javax.swing.JPanel {
             jd.setVisible(true);
             this.username_tf.setText("");
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultarFunc.class.getName()).log(Level.SEVERE, null, ex);
+            new ErrorWindow("Utilizador",ex.getMessage(), "error", new JFrame()).wshow();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

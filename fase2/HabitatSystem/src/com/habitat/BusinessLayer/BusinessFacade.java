@@ -26,19 +26,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Observable;
 
 public class BusinessFacade extends Observable{
 
-    public CandidaturaDAO _candidaturas;
-    public EventosDAO _eventos;
-    public DoadoresDAO _doadores;
-    public DoacoesDAO _doacoes;
-    public MaterialDAO _materiais;
-    public UtilizadorDAO _utilizadores;
-    public VoluntarioDAO _voluntarios;
-    public ProjetosDAO _projetos;
-    public TarefasDAO _tarefas;
+    private final CandidaturaDAO _candidaturas;
+    private final EventosDAO _eventos;
+    private final DoadoresDAO _doadores;
+    private final DoacoesDAO _doacoes;
+    private final MaterialDAO _materiais;
+    private final UtilizadorDAO _utilizadores;
+    private final VoluntarioDAO _voluntarios;
+    private final ProjetosDAO _projetos;
+    private final TarefasDAO _tarefas;
     private Utilizador activeUser;
     private Connection conn;
     /*Constructor*/
@@ -288,4 +289,12 @@ public class BusinessFacade extends Observable{
     public void logout() throws SQLException {
         this.conn.close();
     }
+    
+     public HashMap<String,String> getListaIdDoadores() throws SQLException{
+         return this._doadores.getListaIdDoadores();
+     }
+     
+     public ArrayList<String> getListaIdProjectos() throws SQLException{
+         return this._projetos.getListaIdProjectos();
+     }
 }
