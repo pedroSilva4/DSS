@@ -250,8 +250,10 @@ public class CandidaturaDAO {
         st.setString(9, codFamilia);
         st.executeUpdate();
         /*associar responsavel a familia*/
+        String codCandidato = null;
         res = st.getGeneratedKeys();
-        String codCandidato = res.getString(1);
+        if(res.next())
+            codCandidato = res.getString(1);
         sql = "update Habitat.Familias set responsavel = ?"
                 + "where id = ?";
         st = conn.prepareStatement(sql);
