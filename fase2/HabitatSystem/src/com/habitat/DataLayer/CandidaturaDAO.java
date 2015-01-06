@@ -222,7 +222,7 @@ public class CandidaturaDAO {
         /*inserir familia*/
         sql = "insert into Habitat.Familias (rendimento,rua,localidade,codPostal,contacto,funcionario)"
                 + "values(?,?,?,?,?,?)";
-        st = conn.prepareStatement(sql);
+        st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         Float f = new Float(aC.getRendimentoBruto());
         st.setString(1, f.toString());
         st.setString(2, aC.getRua());
