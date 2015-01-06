@@ -36,7 +36,8 @@ public class addMaterialDialog extends javax.swing.JDialog {
         this.bus = bus;
         this.table = table;
         initComponents();
-        this.add_btt.setEnabled(false);     
+        this.add_btt.setEnabled(false);    
+        initListener();
     }
 
     /**

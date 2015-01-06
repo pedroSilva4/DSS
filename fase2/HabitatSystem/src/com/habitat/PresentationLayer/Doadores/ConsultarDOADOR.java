@@ -125,7 +125,7 @@ public class ConsultarDOADOR extends javax.swing.JPanel implements Observer{
         // TODO add your handling code here:
         Doador d = (Doador)this.doador_cb.getSelectedItem();
         String type = this.businessFacade.getActiveUser().getTipo();
-        
+        System.out.println(d.getClass().toString());
         if(d.getClass() == Empresa.class){
             Empresa emp = (Empresa) d;
             new ConsultarDOADOR_emp(new JFrame(), true, emp).setVisible(true);

@@ -6,9 +6,7 @@
 
 package com.habitat.PresentationLayer.Voluntários;
 
-import com.habitat.PresentationLayer.Funcionarios.*;
 import com.habitat.BusinessLayer.BusinessFacade;
-import com.habitat.BusinessLayer.Utilizadores.Utilizador;
 import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import javax.swing.JFrame;
 
@@ -65,6 +63,8 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
         contacto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         dataAssoc = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        profissao_lb = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,6 +107,10 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
 
         dataAssoc.setText("jLabel5");
 
+        jLabel5.setText("Profissção:");
+
+        profissao_lb.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,12 +135,14 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
                                     .addComponent(label3)
                                     .addGap(41, 41, 41)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(47, 47, 47))
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
+                                .addGap(31, 31, 31))
+                            .addComponent(jLabel5))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(equipa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,7 +151,8 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
                             .addComponent(contacto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(codpostal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(rua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(local, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(local, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profissao_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -171,6 +178,10 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(contacto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(profissao_lb))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -185,7 +196,7 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
                     .addComponent(local))
                 .addGap(18, 18, 18)
                 .addComponent(back)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -252,12 +263,14 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel local;
     private javax.swing.JLabel nome;
+    private javax.swing.JLabel profissao_lb;
     private javax.swing.JLabel rua;
     // End of variables declaration//GEN-END:variables
 
@@ -270,6 +283,7 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
             this.codpostal.setText(this.vol.getMorada().getCodigo_postal());
             this.rua.setText(this.vol.getMorada().getRua());
             this.local.setText(this.vol.getMorada().getLocalidade());
+            this.profissao_lb.setText(this.vol.getProfissao());
            
                     
     }
