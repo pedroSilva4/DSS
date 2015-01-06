@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // import com.habitat.BusinessLayer.Doadores.Doacao;
 
@@ -81,7 +82,7 @@ public class DoacoesDAO {
 		PreparedStatement st;
                 ResultSet res;
                 String sql;
-                if(aDoacao.getClass().toString().equals("DMaterial")){
+                if(aDoacao.getClass()==DMaterial.class){
                     sql = "insert into Habitat.Doacoes"
                             + "(descricao,data,tipo,quantidade,unidade,doador)"
                             + "values("
@@ -97,7 +98,7 @@ public class DoacoesDAO {
                     st.executeUpdate();
                     return st.getGeneratedKeys().getString(1);
                 }
-                if(aDoacao.getClass().toString().equals("Monetario")){
+                if(aDoacao.getClass()==Monetario.class){
                     sql = "insert into Habitat.Doacoes"
                             + "(descricao,data,tipo,valor,doador)"
                             + "values(?,?,?,?,?);";
@@ -105,13 +106,13 @@ public class DoacoesDAO {
                     st.setString(1, aDoacao.getDescricao());
                     st.setString(2, aDoacao.getDate().toString());
                     st.setString(3, "monetário");
-                    Float f = new Float(((Monetario)aDoacao).getValor());
-                    st.setString(4, f.toString());
+                    //Float f = ((Monetario)aDoacao).getValor();
+                    st.setFloat(4, ((Monetario)aDoacao).getValor());
                     st.setString(5, aDoador);
                     st.executeUpdate();
                     return st.getGeneratedKeys().getString(1);
                 }
-                if(aDoacao.getClass().toString().equals("Servicos")){
+                if(aDoacao.getClass()==Servicos.class){
                     sql = "insert into Habitat.Doacoes"
                             + "(descricao,data,tipo,doador)"
                             + "values(?,?,?,?);";
@@ -192,129 +193,139 @@ public class DoacoesDAO {
             return ds;
         }
         
-        public Doacao getPorProjecto(String aCod) throws SQLException {
+        public HashMap<String,Doacao> getPorProjecto(String aCod) throws SQLException {
 		PreparedStatement st;
                 ResultSet res;
                 String sql;
                 sql = "select * from Habitat.Doacoes where projecto = ?;";
+                HashMap<String,Doacao> ds = new HashMap<String,Doacao>();
                 st = conn.prepareStatement(sql);
                 st.setString(1, aCod);
                 res = st.executeQuery();
-                if(res.next() == false) return null;
-                if(res.getString(4).equals("material")){
-                    DMaterial m;
- //(String cod, Date data, String descricao,String unidade,int quantidade)
+                while(res.next()){
+                    if(res.getString(4).equals("material")){
+                        DMaterial m;
+     //(String cod, Date data, String descricao,String unidade,int quantidade)
+                        String[] parts = res.getString(3).split("-");
+                        Date d1 = new Date(Integer.parseInt(parts[0]),
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                        Integer i = new Integer(res.getString(6));
+                        m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                        ds.put(res.getString("id"), m);
+                    }
+                    if(res.getString(4).equals("serviço")){
+                        Servicos s;
+     //(String cod, Date data, String descricao)
+                        String[] parts = res.getString(3).split("-");
+                        Date d1 = new Date(Integer.parseInt(parts[0]),
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                        s = new Servicos(res.getString(1),d1,res.getString(2));
+                        ds.put(res.getString("id"), s);
+                    }
+
+                    Monetario m;
+     //(String cod, Date data, String descricao,float valor)
                     String[] parts = res.getString(3).split("-");
                     Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                    Integer i = new Integer(res.getString(6));
-                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
-                    return m;
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                    Float f = new Float(res.getString(5));
+                    m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                    ds.put(res.getString("id"), m);
                 }
-                if(res.getString(4).equals("serviço")){
-                    Servicos s;
- //(String cod, Date data, String descricao)
-                    String[] parts = res.getString(3).split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                    s = new Servicos(res.getString(1),d1,res.getString(2));
-                    return s;
-                }
-                
-                Monetario m;
- //(String cod, Date data, String descricao,float valor)
-                String[] parts = res.getString(3).split("-");
-                Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                Float f = new Float(res.getString(5));
-                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
-                return m;
+                return ds;
 	}
         
-        public Doacao getPorDoador(String aCod) throws SQLException {
+        public HashMap<String,Doacao> getPorDoador(String aCod) throws SQLException {
 		PreparedStatement st;
                 ResultSet res;
                 String sql;
+                HashMap<String,Doacao> ds = new HashMap<String,Doacao>();
                 sql = "select * from Habitat.Doacoes where doador = ?;";
                 st = conn.prepareStatement(sql);
                 st.setString(1, aCod);
                 res = st.executeQuery();
-                if(res.next() == false) return null;
-                if(res.getString(4).equals("material")){
-                    DMaterial m;
- //(String cod, Date data, String descricao,String unidade,int quantidade)
+                while(res.next()){
+                    if(res.getString(4).equals("material")){
+                        DMaterial m;
+     //(String cod, Date data, String descricao,String unidade,int quantidade)
+                        String[] parts = res.getString(3).split("-");
+                        Date d1 = new Date(Integer.parseInt(parts[0]),
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                        Integer i = new Integer(res.getString(6));
+                        m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                        ds.put(res.getString("id"), m);
+                    }
+                    if(res.getString(4).equals("serviço")){
+                        Servicos s;
+     //(String cod, Date data, String descricao)
+                        String[] parts = res.getString(3).split("-");
+                        Date d1 = new Date(Integer.parseInt(parts[0]),
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                        s = new Servicos(res.getString(1),d1,res.getString(2));
+                        ds.put(res.getString("id"), s);
+                    }
+
+                    Monetario m;
+     //(String cod, Date data, String descricao,float valor)
                     String[] parts = res.getString(3).split("-");
                     Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                    Integer i = new Integer(res.getString(6));
-                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
-                    return m;
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                    Float f = new Float(res.getString(5));
+                    m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                    ds.put(res.getString("id"), m);
                 }
-                if(res.getString(4).equals("serviço")){
-                    Servicos s;
- //(String cod, Date data, String descricao)
-                    String[] parts = res.getString(3).split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                    s = new Servicos(res.getString(1),d1,res.getString(2));
-                    return s;
-                }
-                
-                Monetario m;
- //(String cod, Date data, String descricao,float valor)
-                String[] parts = res.getString(3).split("-");
-                Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                Float f = new Float(res.getString(5));
-                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
-                return m;
+                return ds;
 	}
         
-        public Doacao getPorEvento(String aCod) throws SQLException {
+        public HashMap<String,Doacao> getPorEvento(String aCod) throws SQLException {
 		PreparedStatement st;
                 ResultSet res;
                 String sql;
                 sql = "select * from Habitat.Doacoes where evento = ?;";
+                HashMap<String,Doacao> ds = new HashMap<String,Doacao>();
                 st = conn.prepareStatement(sql);
                 st.setString(1, aCod);
                 res = st.executeQuery();
-                if(res.next() == false) return null;
-                if(res.getString(4).equals("material")){
-                    DMaterial m;
- //(String cod, Date data, String descricao,String unidade,int quantidade)
+                while(res.next()){
+                    if(res.getString(4).equals("material")){
+                        DMaterial m;
+     //(String cod, Date data, String descricao,String unidade,int quantidade)
+                        String[] parts = res.getString(3).split("-");
+                        Date d1 = new Date(Integer.parseInt(parts[0]),
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                        Integer i = new Integer(res.getString(6));
+                        m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                        ds.put(res.getString("id"), m);
+                    }
+                    if(res.getString(4).equals("serviço")){
+                        Servicos s;
+     //(String cod, Date data, String descricao)
+                        String[] parts = res.getString(3).split("-");
+                        Date d1 = new Date(Integer.parseInt(parts[0]),
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                        s = new Servicos(res.getString(1),d1,res.getString(2));
+                        ds.put(res.getString("id"), s);
+                    }
+
+                    Monetario m;
+     //(String cod, Date data, String descricao,float valor)
                     String[] parts = res.getString(3).split("-");
                     Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                    Integer i = new Integer(res.getString(6));
-                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
-                    return m;
+                                    Integer.parseInt(parts[1]),
+                                    Integer.parseInt(parts[2]));
+                    Float f = new Float(res.getString(5));
+                    m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                    ds.put(res.getString("id"), m);
                 }
-                if(res.getString(4).equals("serviço")){
-                    Servicos s;
- //(String cod, Date data, String descricao)
-                    String[] parts = res.getString(3).split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                    s = new Servicos(res.getString(1),d1,res.getString(2));
-                    return s;
-                }
-                
-                Monetario m;
- //(String cod, Date data, String descricao,float valor)
-                String[] parts = res.getString(3).split("-");
-                Date d1 = new Date(Integer.parseInt(parts[0]),
-                                Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]));
-                Float f = new Float(res.getString(5));
-                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
-                return m;
+                return ds;
 	}
+        
 }
