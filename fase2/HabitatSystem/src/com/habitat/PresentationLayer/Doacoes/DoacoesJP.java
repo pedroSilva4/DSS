@@ -109,13 +109,13 @@ public void myInit(){
     if(type.equals("admin") || type.equals("angariação")){
 
                 this.jPanel1.add(new AdicionarDOA(businessFacade),"add");
-                this.cons_.setText("Consultar/Atualizar");
+                //this.cons_.setText("Consultar/Atualizar");
         }
         else{
             this.add_.setEnabled(false);
         }
         
-        this.jPanel1.add(new ConsultarDOA(),"cons");
+        this.jPanel1.add(new ConsultarDOA(businessFacade),"cons");
         this.jPanel1.setVisible(false);
 }
     
