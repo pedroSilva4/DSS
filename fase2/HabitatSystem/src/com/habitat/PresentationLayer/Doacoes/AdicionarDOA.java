@@ -8,10 +8,14 @@ package com.habitat.PresentationLayer.Doacoes;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.DMaterial;
 import com.habitat.BusinessLayer.Doadores.Doacao;
+import com.habitat.BusinessLayer.Doadores.Monetario;
+import com.habitat.BusinessLayer.Doadores.Servicos;
 import com.habitat.util.ErrorWindow;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.lang.invoke.MethodHandles;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Observable;
@@ -58,8 +62,6 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
 
         jLabel12 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        servico = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         montante = new javax.swing.JTextField();
@@ -84,8 +86,6 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
         jLabel12.setText("Cód. Doador:");
 
         jLabel4.setText("Unidade:");
-
-        jLabel5.setText("Serviço:");
 
         jLabel7.setText("Montante:");
 
@@ -154,11 +154,6 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel5)
-                .addGap(40, 40, 40)
-                .addComponent(servico, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(329, 329, 329)
                 .addComponent(jButton1))
             .addGroup(layout.createSequentialGroup()
@@ -226,46 +221,85 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
                             .addComponent(jLabel4)
                             .addComponent(jLabel8))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel5))
-                    .addComponent(servico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1))
+                .addComponent(jButton1)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String des = this.jTextArea1.getText();
-        String evento,doador,projeto;
-        
+        String evento=null,doador = null,projeto=null,unid = null;
+        int qtt_= 0;
+        float valor = 0;
+        Date data_ = null;
+        boolean b = true;
         if(this.eventos_.getSelectedItem()!=null)
         {
             evento =((String)eventos_.getSelectedItem()).split(":")[1].trim();
-            System.out.println(evento);
+           
         }
         if(this.projectos_.getSelectedItem()!=null)
         {
             projeto =((String)projectos_.getSelectedItem()).split(":")[1].trim();
-            System.out.println(projeto);
+            
         }
         if(this.doadores_.getSelectedItem()!=null)
         {
             doador =((String)doadores_.getSelectedItem()).split(":")[0].trim();
-            System.out.println(doador);
+            
         }
-        else {
-            new ErrorWindow("Doação","Tem que ser selecionado um Doador!", "warning", new JFrame()).wshow();
+        else{b=false;}
+        if(!b){
+            new ErrorWindow("Doação","Doador nao selecionado", "warning", new JFrame()).wshow();
             return;
         }
         String tipo =(String)this.jComboBox1.getSelectedItem();
         Doacao d = null;
-           if(tipo.equals("Monetário"))
-               d = new DMaterial(des, null, des, tipo, WIDTH);
+          switch(tipo){
+              case "Monetário": try{
+                                    valor = Float.parseFloat(this.montante.getText());
+                                    String[] date =this.data.getText().split("/");
+                                    data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1])-1, Integer.parseInt(date[0]));
+                                   }catch(Exception ex){b=false;}
+                                   if(!b || des.equals("")){
+                                        new ErrorWindow("Doação","Formulário com dados errados", "warning", new JFrame()).wshow();
+                                        return;
+                                   }
+                                    d = new Monetario("", data_, des, valor);
+                                break;
+              case "Serviços":  try{
+                                    String[] date =this.data.getText().split("/");
+                                    data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1])-1, Integer.parseInt(date[0]));
+                                   }catch(NumberFormatException ex){b=false;}
+                                   if(!b || des.equals("")){
+                                        new ErrorWindow("Doação","Formulário com dados errados", "warning", new JFrame()).wshow();
+                                        return;
+                                   }
+                                d = new Servicos("", data_, des);
+                                break;
+              
+              case "Material": try{
+                                    String[] date =this.data.getText().split("/");
+                                    data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1])-1, Integer.parseInt(date[0]));
+                                    unid = this.unidade.getText();
+                                   }catch(NumberFormatException ex){b=false;}
+                                   if(!b || des.equals("") || unid.equals("")){
+                                        new ErrorWindow("Doação","Formulário com dados errados", "warning", new JFrame()).wshow();
+                                        return;
+                                   }
+                                   d = new DMaterial(des, data_, des, unid, qtt_);
+                                   break;
+          }
         try {
-            this.businessFacade.addDoacao(doador, d);
+            String s = null;
+            if(d!=null && doador!=null){
+                 s = this.businessFacade.addDoacao(doador, d);
+            }
+            if(s!=null){
+                    this.businessFacade.associaDoacaoProjeto(tipo, tipo);
+                    
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarDOA.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -284,7 +318,6 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -293,7 +326,6 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
     private javax.swing.JTextField montante;
     private javax.swing.JComboBox projectos_;
     private javax.swing.JTextField qtt;
-    private javax.swing.JTextField servico;
     private javax.swing.JTextField unidade;
     // End of variables declaration//GEN-END:variables
 
@@ -337,21 +369,18 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
            data.setEnabled(true);
            if(e.getItem().equals("Monetário")){
                montante.setEnabled(true);
-               servico.setEnabled(false);
                unidade.setEnabled(false);
                qtt.setEnabled(false);
                return;
            }
            if(e.getItem().equals("Serviços")){
                montante.setEnabled(false);
-               servico.setEnabled(true);
                unidade.setEnabled(false);
                qtt.setEnabled(false);
                return;
            }
            if(e.getItem().equals("Material")){
                montante.setEnabled(false);
-               servico.setEnabled(false);
                unidade.setEnabled(true);
                qtt.setEnabled(true);
            }

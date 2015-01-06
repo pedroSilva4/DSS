@@ -77,7 +77,7 @@ public class DoacoesDAO {
                 return m;
 	}
 
-	public void add(String aDoador, Doacao aDoacao) throws SQLException {
+	public String add(String aDoador, Doacao aDoacao) throws SQLException {
 		PreparedStatement st;
                 ResultSet res;
                 String sql;
@@ -95,6 +95,7 @@ public class DoacoesDAO {
                     st.setString(5, ((DMaterial)aDoacao).getUnidade());
                     st.setString(6, aDoador);
                     st.executeUpdate();
+                    return st.getGeneratedKeys().getString(1);
                 }
                 if(aDoacao.getClass().toString().equals("Monetario")){
                     sql = "insert into Habitat.Doacoes"
@@ -108,6 +109,7 @@ public class DoacoesDAO {
                     st.setString(4, f.toString());
                     st.setString(5, aDoador);
                     st.executeUpdate();
+                    return st.getGeneratedKeys().getString(1);
                 }
                 if(aDoacao.getClass().toString().equals("Servicos")){
                     sql = "insert into Habitat.Doacoes"
@@ -119,7 +121,10 @@ public class DoacoesDAO {
                     st.setString(3, "serviço");
                     st.setString(4, aDoador);
                     st.executeUpdate();
+                    return st.getGeneratedKeys().getString(1);
                 }     
+                
+                return null;
 	}
         public boolean associarDoacao(String codD, String codE) throws SQLException{
             PreparedStatement st;
