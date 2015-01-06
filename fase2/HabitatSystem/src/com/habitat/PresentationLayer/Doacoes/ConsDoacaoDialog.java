@@ -12,6 +12,7 @@ import com.habitat.BusinessLayer.Doadores.Doacao;
 import com.habitat.BusinessLayer.Doadores.Monetario;
 import com.habitat.BusinessLayer.Doadores.Servicos;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -54,12 +55,12 @@ public class ConsDoacaoDialog extends javax.swing.JDialog {
             }
        
     }
-    public ConsDoacaoDialog(java.awt.Frame parent, boolean modal,HashMap<String,Doacao> doacoes) {
+    public ConsDoacaoDialog(java.awt.Frame parent, boolean modal,ArrayList<Doacao> doacoes) {
         super(parent, modal);
         initComponents();
         
         DefaultTableModel model = ((DefaultTableModel)this.jTable1.getModel());
-        for(Doacao d : doacoes.values())
+        for(Doacao d : doacoes)
         {
             if(d.getClass() == DMaterial.class){
                 DMaterial dm = (DMaterial)d;

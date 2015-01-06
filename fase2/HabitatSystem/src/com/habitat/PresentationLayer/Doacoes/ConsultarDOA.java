@@ -10,6 +10,7 @@ import com.habitat.BusinessLayer.Doadores.Doacao;
 import com.habitat.util.ErrorWindow;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -163,7 +164,7 @@ public class ConsultarDOA extends javax.swing.JPanel implements Observer{
 
             }
             try {
-                HashMap<String,Doacao> doacoes = businessFacade.getListaDoacoes(doador, projeto, evento);
+                ArrayList<Doacao> doacoes = businessFacade.getListaDoacoes(doador, projeto, evento);
                 if(!doacoes.isEmpty()){
                     new ConsDoacaoDialog(new JFrame(), true, doacoes).setVisible(true);
                 }

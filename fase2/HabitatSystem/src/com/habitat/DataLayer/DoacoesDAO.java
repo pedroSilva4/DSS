@@ -164,7 +164,7 @@ public class DoacoesDAO {
         }
         
         public ArrayList<Doacao> getLista(String projeto, String evento, String doador) throws SQLException{
-            ArrayList<Doacao> ds = new ArrayList<Doacao>();
+            ArrayList<Doacao> ds = new ArrayList<>();
             PreparedStatement st;
             ResultSet res;
             String sql = "select * from Habitat.Doacoes";
@@ -188,7 +188,7 @@ public class DoacoesDAO {
                     sql += " where doador = ?";
                 contador++;                
             }                            
-       
+            sql+=";";
             st = conn.prepareStatement(sql);
             
             if(doador!=null){

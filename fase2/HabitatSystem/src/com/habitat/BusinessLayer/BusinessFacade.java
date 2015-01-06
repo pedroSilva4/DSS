@@ -125,10 +125,11 @@ public class BusinessFacade extends Observable{
         return this._doacoes.associarDoacao(codD, codE);
     }
     
-    public HashMap<String,Doacao> getListaDoacoes(String cDoador,String cProjecto,
+    public ArrayList<Doacao> getListaDoacoes(String cDoador,String cProjecto,
                                                 String cEvento) throws SQLException{
-        HashMap<String,Doacao> res = new HashMap<String,Doacao>();
-        HashMap<String,Doacao> doador = this._doacoes.getPorDoador(cDoador);
+      // HashMap<String,Doacao> res = new HashMap<String,Doacao>();
+        return this._doacoes.getLista(cProjecto, cEvento, cDoador);
+       /** HashMap<String,Doacao> doador = this._doacoes.getPorDoador(cDoador);
         HashMap<String,Doacao> projecto = this._doacoes.getPorProjecto(cProjecto);
         HashMap<String,Doacao> evento = this._doacoes.getPorEvento(cEvento);
         if(cDoador != null){
@@ -167,8 +168,8 @@ public class BusinessFacade extends Observable{
             }
         if(cEvento != null)
             return evento;
-        
-        return res;
+        **/
+        //return res;
     }
 
     public Doacao getDoacao(String aCod) throws SQLException {
