@@ -134,6 +134,9 @@ public class ConsultarDOA extends javax.swing.JPanel implements Observer{
         if(!this.id_.getText().isEmpty()){
             try {
                Doacao d = this.businessFacade.getDoacao(id_.getText());
+               if(d!=null){
+                    new ConsDoacaoDialog(new JFrame(), true, d).setVisible(true);
+               }
             } catch (SQLException ex) {
                 new ErrorWindow("Pesquisa",ex.getMessage(), "error", new JFrame()).wshow();
             }
@@ -159,7 +162,14 @@ public class ConsultarDOA extends javax.swing.JPanel implements Observer{
                 doador =((String)doadores_.getSelectedItem()).split(":")[0].trim();
 
             }
-            
+            try {
+                HashMap<String,Doacao> doacoes = businessFacade.getListaDoacoes(doador, projeto, evento);
+                if(!doacoes.isEmpty()){
+                    new ConsDoacaoDialog(new JFrame(), true, doacoes).setVisible(true);
+                }
+            } catch (SQLException ex) {
+                 new ErrorWindow("Pesquisa",ex.getMessage(), "error", new JFrame()).wshow();
+            }
         }
         
     }//GEN-LAST:event_consActionPerformed
