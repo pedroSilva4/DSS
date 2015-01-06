@@ -261,7 +261,7 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
                                     valor = Float.parseFloat(this.montante.getText());
                                     String[] date =this.data.getText().split("/");
                                     data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1])-1, Integer.parseInt(date[0]));
-                                   }catch(Exception ex){b=false;}
+                                   }catch(NumberFormatException ex){b=false;}
                                    if(!b || des.equals("")){
                                         new ErrorWindow("Doação","Formulário com dados errados", "warning", new JFrame()).wshow();
                                         return;
@@ -283,8 +283,9 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
                                     String[] date =this.data.getText().split("/");
                                     data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1])-1, Integer.parseInt(date[0]));
                                     unid = this.unidade.getText();
+                                    qtt_ = Integer.parseInt(this.qtt.getText());
                                    }catch(NumberFormatException ex){b=false;}
-                                   if(!b || des.equals("") || unid.equals("")){
+                                   if(!b || des.equals("") || unid.equals("") || qtt_ == 0){
                                         new ErrorWindow("Doação","Formulário com dados errados", "warning", new JFrame()).wshow();
                                         return;
                                    }
@@ -297,9 +298,12 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
                  s = this.businessFacade.addDoacao(doador, d);
             }
             if(s!=null){
-                    this.businessFacade.associaDoacaoProjeto(tipo, tipo);
-                    
+                    if(projeto!=null)
+                        this.businessFacade.associaDoacaoProjeto(projeto, s);
+                    if(evento!=null)
+                        this.businessFacade.associarDoacao(s, evento);
             }
+            new ErrorWindow("Adicionar", "Doação adicionada com Sucesso", "message", new JFrame()).wshow();
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarDOA.class.getName()).log(Level.SEVERE, null, ex);
         }
