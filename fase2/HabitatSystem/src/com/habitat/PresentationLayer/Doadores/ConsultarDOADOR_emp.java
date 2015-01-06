@@ -5,6 +5,11 @@
  */
 package com.habitat.PresentationLayer.Doadores;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Doadores.Doador;
+import com.habitat.BusinessLayer.Doadores.Empresa;
+import javax.swing.JFrame;
+
 /**
  *
  * @author filiperibeiro
@@ -14,11 +19,23 @@ public class ConsultarDOADOR_emp extends javax.swing.JDialog {
     /**
      * Creates new form ConsultarDOADOR_emp
      */
-    public ConsultarDOADOR_emp(java.awt.Frame parent, boolean modal) {
+    
+    private final Empresa d;
+    
+    public ConsultarDOADOR_emp(java.awt.Frame parent, boolean modal, Empresa doa) {
         super(parent, modal);
+        this.d = doa;
         initComponents();
+        init();;
     }
-
+    private ConsultarDOADOR_emp(JFrame jFrame, boolean b) {
+         super(jFrame, b);
+         this.d = null;
+         initComponents();
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -211,26 +228,8 @@ public class ConsultarDOADOR_emp extends javax.swing.JDialog {
 
     private void voltar_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar_btActionPerformed
         // TODO add your handling code here:
-        Calendar cal = Calendar.getInstance();
-        Date dateASSOC = new Date(cal.getTimeInMillis());
-        String nome = this.nome_tf.getText();
-        String contact = this.telefone_TF.getText();
-        String nif = this.nif_tf.getText();
-        String email = this.email_tf.getText();
-        String rua = this.rua_tf.getText();
-        String localidade = this.localidade_tf.getText();
-        String cod_postal = this.postal_tf.getText();
-
-        try {
-            Doador doa = new Doador("",nome,nif,rua,localidade,
-                cod_postal,contact,email,dateASSOC);
-
-            businessFacade.addDoador(doa);
-        } catch (SQLException ex) {
-            new ErrorWindow("Doador", ex.getMessage(), "error", new JFrame()).wshow();
-        }
-
-        clean();
+        ((JFrame)this.getParent()).dispose();
+                
     }//GEN-LAST:event_voltar_btActionPerformed
 
     /**
@@ -275,6 +274,22 @@ public class ConsultarDOADOR_emp extends javax.swing.JDialog {
         });
     }
 
+    
+    public void init(){
+            this.nome_lb.setText(this.d.getNome());
+            this.nif_lb.setText(this.d.getNIF());
+            this.contacto_lb.setText(this.d.getContacto());
+            this.localidade_lb.setText(this.d.getLocalidade());
+            this.rua_lb.setText(this.d.getRua());
+            this.codPstal_lb.setText(this.d.getCodPostal());
+            this.act_lb.setText(this.d.getSetor());
+            this.site_lb.setText(this.d.getSite());
+            this.pc_nome_lb.setText(this.d.getPContacto());
+            this.email_lb.setText(this.d.getEmail());
+           
+                    
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel act_lb;
     private javax.swing.JLabel codPstal_lb;

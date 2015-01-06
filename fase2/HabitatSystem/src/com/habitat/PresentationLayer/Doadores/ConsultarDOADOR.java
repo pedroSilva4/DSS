@@ -7,17 +7,23 @@ package com.habitat.PresentationLayer.Doadores;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.Doador;
+import com.habitat.BusinessLayer.Doadores.Empresa;
+import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.PresentationLayer.Doacoes.*;
+import com.habitat.PresentationLayer.Voluntários.ConsultarVol;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
  * @author filiperibeiro
  */
-public class ConsultarDOADOR extends javax.swing.JPanel {
+public class ConsultarDOADOR extends javax.swing.JPanel implements Observer{
 
     /**
      * Creates new form ConsultarDAO
@@ -29,7 +35,7 @@ public class ConsultarDOADOR extends javax.swing.JPanel {
     public ConsultarDOADOR(BusinessFacade bus) {
         this.businessFacade = bus;
         try{
-            this.doadores = businessFacade;
+            this.doadores = businessFacade.getListaDoadores();
             businessFacade.addObserver(this);
             initComponents();
             updateComboBox();
@@ -68,6 +74,18 @@ public class ConsultarDOADOR extends javax.swing.JPanel {
 
         jLabel2.setText("Filtrar:");
 
+        filtrar_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                filtrar_tfKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                filtrar_tfKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filtrar_tfKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,18 +123,56 @@ public class ConsultarDOADOR extends javax.swing.JPanel {
 
     private void consultar_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultar_btActionPerformed
         // TODO add your handling code here:
-        Doador vol = (Doador)this.voluntarios_drop.getSelectedItem();
+        Doador d = (Doador)this.doador_cb.getSelectedItem();
         String type = this.businessFacade.getActiveUser().getTipo();
+        String doaType;
         
-        if(type.equals("admin") || type.equals("angariação")){
-        new AtualizarVolDialog(new JFrame(), true, businessFacade, vol).setVisible(true);
-        }else
-        {
-            new ConsultarVolDialog(new JFrame(), true, vol, businessFacade).setVisible(true);
+        if(d.getClass() == Empresa.class){
+            Empresa emp = (Empresa) d;
+            new ConsultarDOADOR_emp(new JFrame(), true, emp).setVisible(true);
         }
+        else{
+            new ConsultarDOADOR_indv(new JFrame(), true, d).setVisible(true);
+        }
+            
     }//GEN-LAST:event_consultar_btActionPerformed
 
+    private void filtrar_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtrar_tfKeyPressed
+        // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_filtrar_tfKeyPressed
 
+    private void filtrar_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtrar_tfKeyReleased
+        // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_filtrar_tfKeyReleased
+
+    private void filtrar_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtrar_tfKeyTyped
+        // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_filtrar_tfKeyTyped
+
+    public void updateComboBox(){
+       this.doador_cb.removeAllItems(); 
+       for(Doador v : doadores)
+       {
+           if(v.getNome().startsWith(this.filtrar_tf.getText())) 
+                this.doador_cb.addItem(v);
+       }
+   }
+    
+    public void update(Observable o, Object arg) {
+        try {
+            this.doadores = businessFacade.getListaDoadores();
+            updateComboBox();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarVol.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consultar_bt;
     private javax.swing.JComboBox doador_cb;

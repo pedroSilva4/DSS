@@ -98,4 +98,9 @@ public class Doador {
 	public Date getDataAssoc() {
 		return this._dataAssociacao;
 	}
+
+        public String toString(){
+            return this.getCod()+": "+this.getNome();
+        }
+        
 }

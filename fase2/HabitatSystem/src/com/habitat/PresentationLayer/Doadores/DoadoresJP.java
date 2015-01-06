@@ -20,6 +20,7 @@ public class DoadoresJP extends javax.swing.JPanel {
      * Creates new form DoadoresJP
      */
     private final BusinessFacade businessFacade;
+    
     public DoadoresJP(BusinessFacade bus) {
         this.businessFacade = bus;
         System.out.println("initializing....");
@@ -135,7 +136,7 @@ public class DoadoresJP extends javax.swing.JPanel {
             this.add_.setEnabled(false);
         }
         
-        this.container.add(new ConsultarDOADOR(),"cons");
+        this.container.add(new ConsultarDOADOR(businessFacade),"cons");
         //--this.container.add(new )
         this.container.setVisible(false);
     }

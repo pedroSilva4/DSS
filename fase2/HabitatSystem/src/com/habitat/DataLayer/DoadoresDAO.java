@@ -186,7 +186,7 @@ public class DoadoresDAO {
             st = conn.createStatement();
             res = st.executeQuery(sql);
             while(res.next()){
-                if(res.getString("actividade").equals("null")){
+                if(res.getString("actividade") != null){
                     String[] parts = res.getString("dataAssociacao").split("-");
                     Date d1 = new Date(Integer.parseInt(parts[0]),
                         Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
