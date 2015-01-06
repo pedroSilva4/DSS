@@ -42,7 +42,7 @@ public class DoadoresDAO {
                 sql = "insert into Habitat.Doadores "
                     + "(nome,NIF,rua,localidade,codPostal,contacto,dataAssociacao,"
                     + "actividade, email, site,pessoaDeContacto)"
-                    + "values(?,?,?,?,?,?,?,?,?,?,?,?);";
+                    + "values(?,?,?,?,?,?,?,?,?,?,?);";
                 st = conn.prepareStatement(sql);
                 st.setString(1, aDoador.getNome());
                 st.setString(2, aDoador.getNIF());
