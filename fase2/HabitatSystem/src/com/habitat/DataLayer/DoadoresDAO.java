@@ -117,11 +117,11 @@ public class DoadoresDAO {
                Empresa e = (Empresa) aDoador;
                sql = "update Habitat.Doadores set "
                        + "nome = ?,"
+                       + "NIF = ?,"
                        + "rua = ?,"
                        + "localidade = ?,"
                        + "codPostal = ?,"
                        + "contacto = ?,"
-                       + "dataAssociacao = ?,"
                        + "actividade = ?,"
                        + "email = ?,"
                        + "site = ?,"
@@ -130,11 +130,11 @@ public class DoadoresDAO {
                //funcionario fica a null
                st = conn.prepareStatement(sql);
                st.setString(1, aDoador.getNome());
-               st.setString(2, aDoador.getRua());
-               st.setString(3, aDoador.getLocalidade());
-               st.setString(4, aDoador.getCodPostal());
-               st.setString(5, aDoador.getContacto());
-               st.setString(6, aDoador.getDataAssoc().toString());
+               st.setString(2, e.getNIF());
+               st.setString(3, aDoador.getRua());
+               st.setString(4, aDoador.getLocalidade());
+               st.setString(5, aDoador.getCodPostal());
+               st.setString(6, aDoador.getContacto());
                st.setString(7, e.getSetor());
                st.setString(8, aDoador.getEmail());
                st.setString(9, e.getSite());
@@ -145,22 +145,22 @@ public class DoadoresDAO {
             }
             sql = "update Habitat.Doadores set "
                        + "nome = ?,"
+                       + "NIF = ?, "
                        + "rua = ?,"
                        + "localidade = ?,"
                        + "codPostal = ?,"
                        + "contacto = ?,"
-                       + "dataAssociacao = ?,"
-                       + "email = ? "
+                       + "email = ?"
                        + "where id = ?;";
                //funcionario fica a null
                st = conn.prepareStatement(sql);
                st.setString(1, aDoador.getNome());
-               st.setString(2, aDoador.getRua());
-               st.setString(3, aDoador.getLocalidade());
-               st.setString(4, aDoador.getCodPostal());
-               st.setString(5, aDoador.getContacto());
-               st.setString(6, aDoador.getDataAssoc().toString());
-               st.setString(7, aDoador.getEmail());
+               st.setString(2, aDoador.getNIF());
+               st.setString(3, aDoador.getRua());
+               st.setString(4, aDoador.getLocalidade());
+               st.setString(5, aDoador.getCodPostal());
+               st.setString(6, aDoador.getContacto());
+               st.setString(7, aDoador.getEmail()); 
                st.setString(8, aDoador.getCod());
                st.executeUpdate();
                return true;
