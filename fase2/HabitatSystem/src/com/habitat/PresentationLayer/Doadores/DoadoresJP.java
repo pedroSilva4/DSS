@@ -38,7 +38,6 @@ public class DoadoresJP extends javax.swing.JPanel {
     private void initComponents() {
 
         add_ = new javax.swing.JButton();
-        rem_ = new javax.swing.JButton();
         container = new javax.swing.JPanel();
         cons_ = new javax.swing.JButton();
 
@@ -46,13 +45,6 @@ public class DoadoresJP extends javax.swing.JPanel {
         add_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_ActionPerformed(evt);
-            }
-        });
-
-        rem_.setText("Remover");
-        rem_.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rem_ActionPerformed(evt);
             }
         });
 
@@ -73,25 +65,22 @@ public class DoadoresJP extends javax.swing.JPanel {
                 .addGap(105, 105, 105)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(add_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rem_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cons_, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(add_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(rem_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(cons_, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -101,11 +90,6 @@ public class DoadoresJP extends javax.swing.JPanel {
         cl.show(container, "add");
         container.setVisible(true);
     }//GEN-LAST:event_add_ActionPerformed
-
-    private void rem_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rem_ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_rem_ActionPerformed
 
     private void cons_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cons_ActionPerformed
         // TODO add your handling code here:
@@ -119,7 +103,6 @@ public class DoadoresJP extends javax.swing.JPanel {
     private javax.swing.JButton add_;
     private javax.swing.JButton cons_;
     private javax.swing.JPanel container;
-    private javax.swing.JButton rem_;
     // End of variables declaration//GEN-END:variables
     private void init(){
         String type = this.businessFacade.getActiveUser().getTipo();
