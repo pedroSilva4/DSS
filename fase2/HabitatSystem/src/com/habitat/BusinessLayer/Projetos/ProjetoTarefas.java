@@ -26,8 +26,6 @@ public class ProjetoTarefas {
         return aTarefa;
     }
 
-
-
     public Date getaDataI() {
         return aDataI;
     }

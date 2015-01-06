@@ -24,9 +24,6 @@ public class Evento {
             this._nota = nota;
 	}
 
-	public void setCod(String aCod) {
-		this._cod = aCod;
-	}
 
 	public void setAngariacao(float aAnga) {
 		this._angariacao = aAnga;

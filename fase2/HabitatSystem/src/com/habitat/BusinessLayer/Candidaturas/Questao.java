@@ -16,8 +16,8 @@ public class Questao {
         this._pergunta = pergunta;
     }
 
-    public void SetResposta() {
-        throw new UnsupportedOperationException();
+    public void SetResposta(String resposta){
+        this._resposta = resposta;
     }
 
     public String getPergunta() {
@@ -32,9 +32,7 @@ public class Questao {
         return this._cod;
     }
 
-    public void setCod(String aCod) {
-        this._cod = aCod;
-    }
+
 
     @Override
     public String toString() {

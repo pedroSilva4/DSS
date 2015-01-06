@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Projeto {
     private String cod;   
-    //nao faz sentido ter aqui o id da candidatura, deve de estar o id do Projeto na Candidatura
     private String _candidatura;
     private Date _dataI;
     private Date _dataF;
