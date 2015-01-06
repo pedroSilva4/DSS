@@ -22,8 +22,8 @@
                   <Component id="add_" min="-2" pref="170" max="-2" attributes="0"/>
                   <Component id="cons_" min="-2" pref="170" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
-              <Component id="container" min="-2" pref="457" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="container" pref="457" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -33,14 +33,14 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="container" min="-2" pref="369" max="-2" attributes="0"/>
+                  <Component id="container" pref="369" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="add_" min="-2" pref="85" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cons_" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
