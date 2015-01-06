@@ -12,6 +12,7 @@ import com.habitat.BusinessLayer.Utilizadores.Utilizador;
 import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -32,16 +33,15 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
      * Creates new form ConsultarVol
      */
     private final BusinessFacade businessFacade;
+    private ArrayList<Voluntario> voluntarios;
     
     public ConsultarVol(BusinessFacade bus) {
         this.businessFacade = bus;
-        businessFacade.addObserver(this);
-        initComponents();
-        try {
-            for(Voluntario v : businessFacade.getListaVoluntario())
-            {
-                this.voluntarios_drop.addItem(v);
-            }
+        try{
+            this.voluntarios = businessFacade.getListaVoluntario();
+            businessFacade.addObserver(this);
+            initComponents();
+            updateComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarVol.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,6 +61,8 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
         voluntarios_drop = new javax.swing.JComboBox();
         consult = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        filtar_tf = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
@@ -73,30 +75,52 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
 
         jLabel1.setText("Voluntario :");
 
+        filtar_tf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                filtar_tfKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                filtar_tfKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filtar_tfKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Filtrar:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(consult)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(voluntarios_drop, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(filtar_tf)
+                            .addComponent(voluntarios_drop, 0, 170, Short.MAX_VALUE))))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filtar_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(voluntarios_drop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(consult)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -114,21 +138,44 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
         
     }//GEN-LAST:event_consultActionPerformed
 
+    private void filtar_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtar_tfKeyPressed
+        // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_filtar_tfKeyPressed
+
+    private void filtar_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtar_tfKeyReleased
+        // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_filtar_tfKeyReleased
+
+    private void filtar_tfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtar_tfKeyTyped
+        // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_filtar_tfKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consult;
+    private javax.swing.JTextField filtar_tf;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox voluntarios_drop;
     // End of variables declaration//GEN-END:variables
 
+   public void updateComboBox(){
+       this.voluntarios_drop.removeAllItems(); 
+       for(Voluntario v : voluntarios)
+       {
+           if(v.getNome().startsWith(this.filtar_tf.getText())) 
+                this.voluntarios_drop.addItem(v);
+       }
+   }
+    
     @Override
     public void update(Observable o, Object arg) {
         try {
-            this.voluntarios_drop.removeAllItems();
-            for(Voluntario v : businessFacade.getListaVoluntario())
-            {
-                this.voluntarios_drop.addItem(v);
-            }
+            this.voluntarios = businessFacade.getListaVoluntario();
+            updateComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarVol.class.getName()).log(Level.SEVERE, null, ex);
         }
