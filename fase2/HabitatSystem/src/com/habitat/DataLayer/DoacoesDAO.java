@@ -239,7 +239,7 @@ public class DoacoesDAO {
                         s = new Servicos(res.getString(1),d1,res.getString(2));
                         ds.put(res.getString("id"), s);
                     }
-
+                    if(res.getString(4).equals("monetário")){
                     Monetario m;
      //(String cod, Date data, String descricao,float valor)
                     String[] parts = res.getString(3).split("-");
@@ -249,6 +249,7 @@ public class DoacoesDAO {
                     Float f = new Float(res.getString(5));
                     m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
                     ds.put(res.getString("id"), m);
+                    }
                 }
                 return ds;
 	}
@@ -284,16 +285,17 @@ public class DoacoesDAO {
                         s = new Servicos(res.getString(1),d1,res.getString(2));
                         ds.put(res.getString("id"), s);
                     }
-
+                    if(res.getString(4).equals("monetário")){
                     Monetario m;
      //(String cod, Date data, String descricao,float valor)
                     String[] parts = res.getString(3).split("-");
                     Date d1 = new Date(Integer.parseInt(parts[0]),
                                     Integer.parseInt(parts[1]),
                                     Integer.parseInt(parts[2]));
-                    Float f = new Float(res.getString(5));
-                    m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                    float f = Float.parseFloat(res.getString(5));
+                    m = new Monetario(res.getString(1),d1,res.getString(2),f);
                     ds.put(res.getString("id"), m);
+                    }
                 }
                 return ds;
 	}
@@ -329,7 +331,7 @@ public class DoacoesDAO {
                         s = new Servicos(res.getString(1),d1,res.getString(2));
                         ds.put(res.getString("id"), s);
                     }
-
+                    if(res.getString(4).equals("monetário")){
                     Monetario m;
      //(String cod, Date data, String descricao,float valor)
                     String[] parts = res.getString(3).split("-");
@@ -339,6 +341,7 @@ public class DoacoesDAO {
                     Float f = new Float(res.getString(5));
                     m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
                     ds.put(res.getString("id"), m);
+                    }
                 }
                 return ds;
 	}

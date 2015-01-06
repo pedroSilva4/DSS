@@ -260,7 +260,7 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
               case "Monetário": try{
                                     valor = Float.parseFloat(this.montante.getText());
                                     String[] date =this.data.getText().split("/");
-                                    data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1])-1, Integer.parseInt(date[0]));
+                                    data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
                                    }catch(NumberFormatException ex){b=false;}
                                    if(!b || des.equals("")){
                                         new ErrorWindow("Doação","Formulário com dados errados", "warning", new JFrame()).wshow();
@@ -270,7 +270,7 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
                                 break;
               case "Serviços":  try{
                                     String[] date =this.data.getText().split("/");
-                                    data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1])-1, Integer.parseInt(date[0]));
+                                    data_ = new Date(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
                                    }catch(NumberFormatException ex){b=false;}
                                    if(!b || des.equals("")){
                                         new ErrorWindow("Doação","Formulário com dados errados", "warning", new JFrame()).wshow();
