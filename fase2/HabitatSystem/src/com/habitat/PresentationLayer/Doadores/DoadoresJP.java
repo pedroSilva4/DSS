@@ -108,7 +108,7 @@ public class DoadoresJP extends javax.swing.JPanel {
         String type = this.businessFacade.getActiveUser().getTipo();
         
         if(type.equals("admin") || type.equals("angariação")){
-
+                
                 this.container.add(new AdicionarDOADOR(businessFacade),"add");
                 this.cons_.setText("Consultar/Atualizar");
         }

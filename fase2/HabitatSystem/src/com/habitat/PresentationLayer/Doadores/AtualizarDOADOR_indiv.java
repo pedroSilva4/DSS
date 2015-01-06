@@ -38,7 +38,7 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         this.d = ut;
         this.businessFacade = bus;
         initComponents();
-     //   init();
+        init();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,10 +66,12 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         jLabel29 = new javax.swing.JLabel();
         nif_tf = new javax.swing.JTextField();
         email_tf = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        data_tf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Adicionar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Atualizar", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
         jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jPanel3jPanel1formMouseMoved(evt);
@@ -121,6 +123,8 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
 
         jLabel29.setText("NIF:");
 
+        jLabel1.setText("Data de Associação:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -129,39 +133,40 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(35, 35, 35)
-                        .addComponent(rua_tf))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(data_tf))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel27)
                             .addComponent(jLabel26)
-                            .addComponent(jLabel23))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nome_tf2)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel29)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nif_tf))
-                            .addComponent(email_tf)))
+                            .addComponent(email_tf, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rua_tf)
+                            .addComponent(nome_tf2)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(update_btt2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(back2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel25)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel28)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codPstal_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                                .addComponent(codPstal_tf)))))
                 .addGap(23, 23, 23))
         );
         jPanel3Layout.setVerticalGroup(
@@ -177,7 +182,11 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
                     .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29)
                     .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(data_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
                     .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,7 +204,7 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(update_btt2)
                     .addComponent(back2))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,7 +233,7 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
         String rua = this.rua_tf.getText();
         String local = this.localidade_tf.getText();
         String cod_postal = this.codPstal_tf.getText();
-        String email =  this.email_tf.getText();        
+        String email =  this.email_tf.getText(); 
         
         this.d.setNome(name);
         this.d.setContacto(contac);
@@ -305,7 +314,9 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
     private javax.swing.JButton back2;
     private javax.swing.JTextField codPstal_tf;
     private javax.swing.JTextField contacto_tf;
+    private javax.swing.JTextField data_tf;
     private javax.swing.JTextField email_tf;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -321,20 +332,18 @@ public class AtualizarDOADOR_indiv extends javax.swing.JDialog {
     private javax.swing.JButton update_btt2;
     // End of variables declaration//GEN-END:variables
 
-/*public void init(){
-            this.nome_tf.setText(this.vol.getNome());
-            this.team_tf.setText((this.vol.getNomeEquipa()));
-            this.job_tf.setText(this.vol.getProfissao());
-            this.phone_tf.setText(this.vol.getContacto());
-            this.bday_tf.setText(this.vol.getFormatedDateNasc());
-            this.dataAssoc.setText(this.vol.getFormatedDateAssoc());
-            System.out.println(this.vol.getMorada().getCodigo_postal());
-            this.postal_tf.setText(this.vol.getMorada().getCodigo_postal());
-            this.street_tf.setText(this.vol.getMorada().getRua());
-            this.local_tf.setText(this.vol.getMorada().getLocalidade());
-            
-                    
-    }*/
+public void init(){
+            this.nome_tf2.setText(this.d.getNome());
+            this.nif_tf.setText(this.d.getNIF());
+            this.contacto_tf.setText((this.d.getContacto()));
+            this.email_tf.setText(this.d.getEmail());
+            this.rua_tf.setText(this.d.getRua());
+            this.localidade_tf.setText(this.d.getLocalidade());
+            this.codPstal_tf.setText(this.d.getCodPostal());
+            Date dt = this.d.getDataAssoc();
+            this.data_tf.setText(dt.getYear()+"/"+(dt.getMonth()-1)+"/"+(dt.getDay()));
+            this.data_tf.setEnabled(false);
+    }
 
 
 

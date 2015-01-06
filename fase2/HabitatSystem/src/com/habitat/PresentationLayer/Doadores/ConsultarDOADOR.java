@@ -126,14 +126,26 @@ public class ConsultarDOADOR extends javax.swing.JPanel implements Observer{
         Doador d = (Doador)this.doador_cb.getSelectedItem();
         String type = this.businessFacade.getActiveUser().getTipo();
         System.out.println(d.getClass().toString());
-        if(d.getClass() == Empresa.class){
-            Empresa emp = (Empresa) d;
-            new ConsultarDOADOR_emp(new JFrame(), true, emp).setVisible(true);
+        
+        if(type.equals("admin") || type.equals("angariação")){
+            if(d.getClass() == Empresa.class){
+                Empresa emp = (Empresa) d;
+                    new ConsultarDOADOR_emp(new JFrame(), true, emp).setVisible(true);
+                    //mudar aqui
+            }
+            else{
+                    new AtualizarDOADOR_indiv(new JFrame(), true, businessFacade ,d).setVisible(true);
+            }
         }
         else{
-            new ConsultarDOADOR_indv(new JFrame(), true, d).setVisible(true);
-        }
-            
+                if(d.getClass() == Empresa.class){
+                    Empresa emp = (Empresa) d;
+                        new ConsultarDOADOR_emp(new JFrame(), true, emp).setVisible(true);
+                }
+            else{
+                        new ConsultarDOADOR_indv(new JFrame(), true ,d).setVisible(true);
+            }        
+        }   
     }//GEN-LAST:event_consultar_btActionPerformed
 
     private void filtrar_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtrar_tfKeyPressed
