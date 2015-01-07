@@ -42,16 +42,16 @@ public class ConsDoacaoDialog extends javax.swing.JDialog {
         DefaultTableModel model = ((DefaultTableModel)this.jTable1.getModel());
         if(d.getClass() == DMaterial.class){
                 DMaterial dm = (DMaterial)d;
-                model.addRow(new String[]{dm.getCod(),dm.getDescricao(),dm.getDate(),"Material",null,""+dm.getQuantidade(),dm.getUnidade()});
+                model.addRow(new String[]{dm.getCod(),dm.getDescricao(),dm.getData().toString(),"Material",null,""+dm.getQuantidade(),dm.getUnidade()});
             }
             
             if(d.getClass() == Monetario.class){
                 Monetario m = (Monetario)d;
-                model.addRow(new String[]{m.getCod(),m.getDescricao(),m.getDate(),"Monetária",String.valueOf(m.getValor()),null,null});
+                model.addRow(new String[]{m.getCod(),m.getDescricao(),m.getData().toString(),"Monetária",String.valueOf(m.getValor()),null,null});
             }
             if(d.getClass() == Servicos.class){
                 Servicos s = (Servicos)d;
-                model.addRow(new String[]{s.getCod(),s.getDescricao(),s.getDate(),"Serviço",null,null,null});
+                model.addRow(new String[]{s.getCod(),s.getDescricao(),s.getData().toString(),"Serviço",null,null,null});
             }
        
     }
@@ -64,16 +64,16 @@ public class ConsDoacaoDialog extends javax.swing.JDialog {
         {
             if(d.getClass() == DMaterial.class){
                 DMaterial dm = (DMaterial)d;
-                model.addRow(new String[]{dm.getCod(),dm.getDescricao(),dm.getDate(),"Material",null,""+dm.getQuantidade(),dm.getUnidade()});
+                model.addRow(new String[]{dm.getCod(),dm.getDescricao(),dm.getData().toString(),"Material",null,""+dm.getQuantidade(),dm.getUnidade()});
             }
             
             if(d.getClass() == Monetario.class){
                 Monetario m = (Monetario)d;
-                model.addRow(new String[]{m.getCod(),m.getDescricao(),m.getDate(),"Monetária",String.valueOf(m.getValor()),null,null});
+                model.addRow(new String[]{m.getCod(),m.getDescricao(),m.getData().toString(),"Monetária",String.valueOf(m.getValor()),null,null});
             }
             if(d.getClass() == Servicos.class){
                 Servicos s = (Servicos)d;
-                model.addRow(new String[]{s.getCod(),s.getDescricao(),s.getDate(),"Serviço",null,null,null});
+                model.addRow(new String[]{s.getCod(),s.getDescricao(),s.getData().toString(),"Serviço",null,null,null});
             }
        
         }

@@ -7,6 +7,8 @@ package com.habitat.BusinessLayer.Candidaturas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Material.Material;
+import com.habitat.BusinessLayer.Doadores.Doacao;
+import com.habitat.BusinessLayer.Doadores.Monetario;
 import com.habitat.BusinessLayer.Projetos.Projeto;
 import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
@@ -23,6 +25,20 @@ import java.util.ArrayList;
 public class TesteCarlos {
     public static void main(String args[]) throws SQLException, ParseException {
         BusinessFacade businessFacade = new BusinessFacade();
+        /*
+        
+        */
+        Date d1 = new Date(2012-1900,12-1,12);
+        Doacao doa = new Monetario("", new Date(2012-1900,12-1,12), "nova", (float) 1000.0);
+        
+        businessFacade.addDoacao("1", doa);
+        
+        System.out.println("a data 1 é "+d1.getDate()+"-"+(d1.getMonth()+1)+"-"+(d1.getYear()+1900));
+        System.out.println("a data 1 é "+d1.toString());
+        
+        Doacao doa2 = businessFacade.getDoacao("18");
+        System.out.println("a data 2 é "+doa2.getDate());
+        System.out.println("a data 2 é "+doa2.getData()+"ou"+doa2.getData().toString());
         
         /*teste Candidaturas*/
         /*

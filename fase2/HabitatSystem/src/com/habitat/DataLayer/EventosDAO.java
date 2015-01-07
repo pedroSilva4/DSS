@@ -84,6 +84,9 @@ public class EventosDAO {
                 st.setString(5, f.toString());
                 st.executeUpdate();
 	}
+        
+        
+        
 
 	public boolean associarDoador(String codD, String codE) throws SQLException {
 		PreparedStatement st;
@@ -110,7 +113,7 @@ public class EventosDAO {
                 st.setString(2, aCodD);
                 st.executeUpdate();
                 return true;
-	}
+	}                        
         
         public ArrayList<String> getListaIds() throws SQLException{
             ArrayList<String> ids  =new ArrayList<>();

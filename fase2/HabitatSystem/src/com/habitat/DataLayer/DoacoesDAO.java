@@ -52,8 +52,8 @@ public class DoacoesDAO {
                     Date d1 = new Date(Integer.parseInt(parts[0]),
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
-                    Integer i = new Integer(res.getString(6));
-                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                    Integer i = new Integer(res.getString(6));                                                            
+                    m = new DMaterial(res.getString(1),res.getDate(3),res.getString(2),res.getString(7),i.intValue());
                     return m;
                 }
                 if(res.getString(4).equals("serviço")){
@@ -63,10 +63,10 @@ public class DoacoesDAO {
                     Date d1 = new Date(Integer.parseInt(parts[0]),
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
-                    s = new Servicos(res.getString(1),d1,res.getString(2));
+                    s = new Servicos(res.getString(1),res.getDate(3),res.getString(2));
                     return s;
                 }
-                
+                if(res.getString(4).equals("monetário")){
                 Monetario m;
  //(String cod, Date data, String descricao,float valor)
                 String[] parts = res.getString(3).split("-");
@@ -74,8 +74,10 @@ public class DoacoesDAO {
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
                 Float f = new Float(res.getString(5));
-                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                m = new Monetario(res.getString(1),res.getDate(3),res.getString(2),f.floatValue());                
                 return m;
+                }
+                return null;
 	}
 
 	public String add(String aDoador, Doacao aDoacao) throws SQLException {
@@ -89,7 +91,7 @@ public class DoacoesDAO {
                             + "?,?,?,?,?,?);";
                     st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     st.setString(1, aDoacao.getDescricao());
-                    st.setString(2, aDoacao.getDate().toString());
+                    st.setDate(2, aDoacao.getData());
                     st.setString(3, "material");
                     Integer i = new Integer(((DMaterial)aDoacao).getQuantidade());
                     st.setString(4, i.toString());
@@ -109,7 +111,7 @@ public class DoacoesDAO {
                             + "values(?,?,?,?,?);";
                     st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     st.setString(1, aDoacao.getDescricao());
-                    st.setString(2, aDoacao.getDate().toString());
+                    st.setDate(2, aDoacao.getData());
                     st.setString(3, "monetário");
                     //Float f = ((Monetario)aDoacao).getValor();
                     st.setFloat(4, ((Monetario)aDoacao).getValor());
@@ -128,7 +130,7 @@ public class DoacoesDAO {
                             + "values(?,?,?,?);";
                     st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     st.setString(1, aDoacao.getDescricao());
-                    st.setString(2, aDoacao.getDate().toString());
+                    st.setDate(2, aDoacao.getData());
                     st.setString(3, "serviço");
                     st.setString(4, aDoador);
                     st.executeUpdate();
@@ -164,13 +166,15 @@ public class DoacoesDAO {
         }
         
         public ArrayList<Doacao> getLista(String projeto, String evento, String doador) throws SQLException{
+           
+            
             ArrayList<Doacao> ds = new ArrayList<>();
             PreparedStatement st;
             ResultSet res;
             String sql = "select * from Habitat.Doacoes";
             int contador = 0;
             if(projeto!=null){
-                sql += " where projeto = ?";
+                sql += " where projecto = ?";
                 contador++;
             }
             if(evento!=null){
@@ -189,21 +193,25 @@ public class DoacoesDAO {
                 contador++;                
             }                            
             sql+=";";
+            
+            //System.out.println(sql+"\ncontador="+contador+"\nprojeto"+projeto+";");
+            
             st = conn.prepareStatement(sql);
             
-            if(doador!=null){
+            if(doador!=null ){
                 st.setString(contador, doador);
                 contador--;
             }
-            if(evento!=null){
+            if(evento!=null ){
                 st.setString(contador, evento);
                 contador--;
             }
-            if(projeto!=null){
+            if(projeto!=null ){
                 st.setString(contador, projeto);
                 contador--;
-            }                                                
-            res = st.executeQuery(sql);
+            }    
+            System.out.println(st);
+            res = st.executeQuery();
  //(String cod, Date data, String descricao, String tipo,
 // String valor,String quant, String unidade)
             while(res.next()){
@@ -215,7 +223,7 @@ public class DoacoesDAO {
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
                     Integer i = new Integer(res.getString(6));
-                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                    m = new DMaterial(res.getString(1),res.getDate(3),res.getString(2),res.getString(7),i.intValue());
                     ds.add(m);
                 }
                 if(res.getString(4).equals("serviço")){
@@ -225,10 +233,10 @@ public class DoacoesDAO {
                     Date d1 = new Date(Integer.parseInt(parts[0]),
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
-                    s = new Servicos(res.getString(1),d1,res.getString(2));
+                    s = new Servicos(res.getString(1),res.getDate(3),res.getString(2));
                     ds.add(s);
                 }
-                
+                if(res.getString(4).equals("monetário")){
                 Monetario m;
  //(String cod, Date data, String descricao,float valor)
                 String[] parts = res.getString(3).split("-");
@@ -236,8 +244,9 @@ public class DoacoesDAO {
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
                 Float f = new Float(res.getString(5));
-                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                m = new Monetario(res.getString(1),res.getDate(3),res.getString(2),f.floatValue());
                 ds.add(m);
+                }
             }
             return ds;
         }
@@ -261,7 +270,7 @@ public class DoacoesDAO {
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
                     Integer i = new Integer(res.getString(6));
-                    m = new DMaterial(res.getString(1),d1,res.getString(2),res.getString(7),i.intValue());
+                    m = new DMaterial(res.getString(1),res.getDate(3),res.getString(2),res.getString(7),i.intValue());
                     ds.add(m);
                 }
                 if(res.getString(4).equals("serviço")){
@@ -271,10 +280,10 @@ public class DoacoesDAO {
                     Date d1 = new Date(Integer.parseInt(parts[0]),
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
-                    s = new Servicos(res.getString(1),d1,res.getString(2));
+                    s = new Servicos(res.getString(1),res.getDate(3),res.getString(2));
                     ds.add(s);
                 }
-                
+                if(res.getString(4).equals("monetário")){
                 Monetario m;
  //(String cod, Date data, String descricao,float valor)
                 String[] parts = res.getString(3).split("-");
@@ -282,8 +291,9 @@ public class DoacoesDAO {
                                 Integer.parseInt(parts[1]),
                                 Integer.parseInt(parts[2]));
                 Float f = new Float(res.getString(5));
-                m = new Monetario(res.getString(1),d1,res.getString(2),f.floatValue());
+                m = new Monetario(res.getString(1),res.getDate(3),res.getString(2),f.floatValue());
                 ds.add(m);
+                }
             }
             return ds;
         }
