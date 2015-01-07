@@ -6,16 +6,8 @@
 package com.habitat.PresentationLayer.Eventos;
 
 import com.habitat.BusinessLayer.BusinessFacade;
-import com.habitat.BusinessLayer.Doadores.Doador;
-import com.habitat.BusinessLayer.Doadores.Empresa;
 import com.habitat.BusinessLayer.Eventos.Evento;
-import com.habitat.BusinessLayer.Voluntarios.Voluntario;
-import com.habitat.PresentationLayer.Doacoes.*;
-import com.habitat.PresentationLayer.Doadores.AtualizarDOADOR_empr;
-import com.habitat.PresentationLayer.Doadores.AtualizarDOADOR_indiv;
 import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR;
-import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR_emp;
-import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR_indv;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -23,7 +15,6 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -75,11 +66,6 @@ public class ConsultarEVEN extends javax.swing.JPanel implements Observer {
         });
 
         evento_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-        evento_cb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                evento_cbActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,18 +98,13 @@ public class ConsultarEVEN extends javax.swing.JPanel implements Observer {
         String type = this.businessFacade.getActiveUser().getTipo(); 
         
         if(type.equals("admin") || type.equals("angariação")){
-                    //new AtualizarEVEN(new JFrame(), true, businessFacade).setVisible(true);
-            new ConsultarEVENDialog(new JFrame(), true, d,businessFacade).setVisible(true);
+                    new ActualiarEVENDialog(new JFrame(), true, businessFacade,d).setVisible(true);
             }
         else{
                     new ConsultarEVENDialog(new JFrame(), true, d,businessFacade).setVisible(true);
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void evento_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evento_cbActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_evento_cbActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -143,6 +124,11 @@ public class ConsultarEVEN extends javax.swing.JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        try {
+            this.eventos = businessFacade.getListaEventos();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarEVEN.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateComboBox();
     }
 }

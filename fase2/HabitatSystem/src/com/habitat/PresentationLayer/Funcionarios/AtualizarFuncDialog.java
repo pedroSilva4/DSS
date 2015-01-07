@@ -11,8 +11,6 @@ import com.habitat.BusinessLayer.Utilizadores.Utilizador;
 import com.habitat.BusinessLayer.Voluntarios.Morada;
 import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**

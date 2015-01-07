@@ -50,12 +50,12 @@ public class EventosDAO {
 	public void update(Evento aEvento) throws SQLException {
 		PreparedStatement st;
                 String sql;
-                sql = "update Habitat.Eventos set"
+                sql = "update Habitat.Eventos set "
                         + "data = ?,"
                         + "nrParticipantes = ?,"
                         + "observacoes = ?,"
                         + "funcionario = ?,"
-                        + "valorAngariado = ?"
+                        + "valorAngariado = ? "
                         + "where id = ?;";
                 st = conn.prepareStatement(sql);
                 st.setString(1, aEvento.getData().toString());
@@ -66,6 +66,7 @@ public class EventosDAO {
                 Float f = aEvento.getAngariacao();
                 st.setString(5, f.toString());
                 st.setString(6, aEvento.getCod());
+                st.executeUpdate();
 	}
 
 	public void add(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) throws SQLException {

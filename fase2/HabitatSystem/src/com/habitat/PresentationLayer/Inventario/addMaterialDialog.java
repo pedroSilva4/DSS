@@ -8,9 +8,6 @@ package com.habitat.PresentationLayer.Inventario;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.util.ErrorWindow;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

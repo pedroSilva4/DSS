@@ -6,8 +6,6 @@
 package com.habitat.PresentationLayer.Doadores;
 
 import com.habitat.BusinessLayer.BusinessFacade;
-import com.habitat.PresentationLayer.Doacoes.AdicionarDOA;
-import com.habitat.PresentationLayer.Doacoes.ConsultarDOA;
 import java.awt.CardLayout;
 
 /**
