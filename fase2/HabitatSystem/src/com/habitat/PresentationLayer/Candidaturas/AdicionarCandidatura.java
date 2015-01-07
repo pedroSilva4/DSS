@@ -6,6 +6,10 @@
 
 package com.habitat.PresentationLayer.Candidaturas;
 
+import com.habitat.PresentationLayer.Candidaturas.Perguntas.QuestPanel;
+import com.habitat.PresentationLayer.Candidaturas.Elementos.AddCandtoPanel;
+import com.habitat.PresentationLayer.Candidaturas.Elementos.ElemPanel;
+
 /**
  *
  * @author Pedro

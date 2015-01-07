@@ -6,6 +6,9 @@
 
 package com.habitat.PresentationLayer.Candidaturas;
 
+import com.habitat.PresentationLayer.Candidaturas.Perguntas.AddQuestaoPanel;
+import com.habitat.PresentationLayer.Candidaturas.Projectos.ConsultarProj;
+import com.habitat.PresentationLayer.Candidaturas.Perguntas.ConsultarQuest;
 import com.habitat.BusinessLayer.BusinessFacade;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -189,7 +192,7 @@ public class CandidaturaJP extends javax.swing.JPanel {
         this.container.add(new ConsultarCand(),"consCand");
         this.container.add(new ConsultarProj(),"consProj");
         this.container.add(new AddQuestaoPanel(),"addQuest");
-        this.container.add(new ConsultarQuest(),"conQuest");
+        this.container.add(new ConsultarQuest(this.businessFacade.getActiveUser().getTipo()),"conQuest");
         this.container.setVisible(false);
     }
 
