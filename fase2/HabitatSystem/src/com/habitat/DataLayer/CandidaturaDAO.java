@@ -310,7 +310,7 @@ public class CandidaturaDAO {
         st = conn.createStatement();
         res = st.executeQuery(sql);
         while(res.next()){
-            String cand = res.getString("id") + res.getString("dataDecisao");
+            String cand = res.getString("id") +": "+ res.getString("dataDecisao");
             cs.add(cand);
         }
         return cs;
