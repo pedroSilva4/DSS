@@ -5,13 +5,22 @@ public class Questao {
     private String _cod;
     private String _pergunta;
     private String _resposta;
+    private String _estado;
 
-    public Questao(String _cod, String _pergunta, String _resposta) {
+    public Questao(String _cod, String _pergunta, String _resposta, String _estado) {
         this._cod = _cod;
         this._pergunta = _pergunta;
         this._resposta = _resposta;
+        this._estado = _estado;
     }
-
+    public void setEstado(String estado){
+        this._estado = estado;
+    }
+    
+    public String getEstado(){
+        return this._estado;
+    }
+    
     public void setPergunta(String pergunta) {
         this._pergunta = pergunta;
     }

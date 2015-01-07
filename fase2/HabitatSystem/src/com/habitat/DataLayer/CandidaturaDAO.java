@@ -29,7 +29,20 @@ public class CandidaturaDAO {
         res = st.executeQuery(sql);
         ArrayList<Questao> questionario = new ArrayList<>();
         while (res.next()) {
-            Questao q = new Questao(res.getString("id"), res.getString("descricao"), "");
+            Questao q = new Questao(res.getString("id"), res.getString("descricao"), "",res.getString("estado"));
+            questionario.add(q);
+        }
+        return questionario;
+    }
+    public ArrayList<Questao> getQuestoes() throws SQLException {
+        Statement st;
+        ResultSet res;
+        String sql = "select * from Habitat.Perguntas;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        ArrayList<Questao> questionario = new ArrayList<>();
+        while (res.next()) {
+            Questao q = new Questao(res.getString("id"), res.getString("descricao"), "",res.getString("estado"));
             questionario.add(q);
         }
         return questionario;
@@ -81,7 +94,8 @@ public class CandidaturaDAO {
         resCQ = stCQ.executeQuery();
         boolean continua=true;
         while (continua && resCQ.next()) {
-            Questao q = new Questao(resCQ.getString("pergunta"), "", resCQ.getString("resposta"));
+            Questao q = new Questao(resCQ.getString("id"),resCQ.getString("pergunta"),
+                                resCQ.getString("resposta"),resCQ.getString("estado"));
             stQ = conn.prepareStatement(sqlQ);
             stQ.setString(1,q.getCod());
             resQ = stQ.executeQuery();
@@ -316,5 +330,15 @@ public class CandidaturaDAO {
             cs.add(cand);
         }
         return cs;
+    }
+    
+    public void addPergunta(Questao q) throws SQLException{
+        PreparedStatement st;
+        String sql = "insert into Habitat.Perguntas (descricao,estado)"
+                        + "values(?,?);";
+        st = conn.prepareStatement(sql);
+        st.setString(1, q.getPergunta());
+        st.setString(2, q.getEstado());
+        st.executeUpdate();
     }
 }
