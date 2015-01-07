@@ -1,6 +1,5 @@
 package com.habitat.BusinessLayer.Projetos;
 
-import com.habitat.BusinessLayer.Tarefas.Tarefa;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -43,6 +42,7 @@ public class Projeto {
         return _dataF;
     }
     
+    /*
     public String getDateI(){
         return (this._dataI.getYear()+"-"+this._dataI.getMonth()+"-"+this._dataI.getDate());
     }
@@ -50,6 +50,7 @@ public class Projeto {
     public String getDateF(){
         return (this._dataF.getYear()+"-"+this._dataF.getMonth()+"-"+this._dataF.getDate());
     }
+    */
 
     public String getEstado() {
         return _estado;

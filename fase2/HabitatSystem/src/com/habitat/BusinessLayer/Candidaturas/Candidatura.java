@@ -1,32 +1,30 @@
 package com.habitat.BusinessLayer.Candidaturas;
 
 import java.util.ArrayList;
-import com.habitat.BusinessLayer.Candidaturas.Questao;
-import com.habitat.BusinessLayer.Candidaturas.Elemento;
 import java.sql.Date;
-import java.util.Calendar;
 
 public class Candidatura {
-	private String _cod;
-        private Date _dataAbertura;
-	private Date _dataDecisao;
-	private String _obs;
-	private String _estado;
-	private String _funcionario;
-        private ArrayList<Questao> _questionario = new ArrayList<Questao>();
-        private ArrayList<Elemento> _elementos = new ArrayList<Elemento>();
-	private float _rendimentoBruto;
-	private String _rua;
-	private String _localidade;
-	private String _codPostal;		
-	private Elemento _candidato;
-        private String _contacto;
+
+    private String _cod;
+    private Date _dataAbertura;
+    private Date _dataDecisao;
+    private String _obs;
+    private String _estado;
+    private String _funcionario;
+    private ArrayList<Questao> _questionario = new ArrayList<>();
+    private ArrayList<Elemento> _elementos = new ArrayList<>();
+    private float _rendimentoBruto;
+    private String _rua;
+    private String _localidade;
+    private String _codPostal;
+    private Elemento _candidato;
+    private String _contacto;
 
     public Candidatura(String cod, Date dataAbertura, Date dataDecisao,
-                       String obs, String estado, String funcionario,
-                       ArrayList<Questao> quest,ArrayList<Elemento> elems,
-                       float rendimentoBruto, String rua, String localidade,
-                       String codPostal, Elemento candidato, String contacto) {
+            String obs, String estado, String funcionario,
+            ArrayList<Questao> quest, ArrayList<Elemento> elems,
+            float rendimentoBruto, String rua, String localidade,
+            String codPostal, Elemento candidato, String contacto) {
         this._cod = cod;
         this._dataAbertura = dataAbertura;
         this._dataDecisao = dataDecisao;
@@ -41,25 +39,29 @@ public class Candidatura {
         this._codPostal = codPostal;
         this._candidato = candidato;
         this._contacto = contacto;
-        
     }
 
-    public ArrayList<Questao> getQuestionario(){
+    public ArrayList<Questao> getQuestionario() {
         return this._questionario;
     }
-    public void stQuestionario(ArrayList<Questao> questionario){
+
+    public void stQuestionario(ArrayList<Questao> questionario) {
         this._questionario = questionario;
     }
-    public ArrayList<Elemento> getElementos(){
+
+    public ArrayList<Elemento> getElementos() {
         return this._elementos;
     }
-    public void setElementos(ArrayList<Elemento>elems){
+
+    public void setElementos(ArrayList<Elemento> elems) {
         this._elementos = elems;
     }
-    public String getContacto(){
+
+    public String getContacto() {
         return this._contacto;
     }
-    public void setContacto(String contacto){
+
+    public void setContacto(String contacto) {
         this._contacto = contacto;
     }
 
@@ -70,8 +72,7 @@ public class Candidatura {
     public Date getDataAbertura() {
         return _dataAbertura;
     }
-    
-    
+
     public Date getDataDecisao() {
         return _dataDecisao;
     }
@@ -103,43 +104,46 @@ public class Candidatura {
     public Elemento getCandidato() {
         return _candidato;
     }
-    public void setCandidato(Elemento c){
+
+    public void setCandidato(Elemento c) {
         this._candidato = c;
     }
 
     public String getFuncionario() {
         return this._funcionario;
     }
-    
-    
+
     public void setFuncionario(String aFuncionario) {
-	this._funcionario = aFuncionario;
-    }
-    
-    public String getDateAbertura(){
-        return (this._dataAbertura.getYear()+"-"+this._dataAbertura.getMonth()+"-"+this._dataAbertura.getDate());
-    }
-    
-    public String getDateDecisao(){
-        return (this._dataDecisao.getYear()+"-"+this._dataDecisao.getMonth()+"-"+this._dataDecisao.getDate());
+        this._funcionario = aFuncionario;
     }
 
-    public String toString(){
+    /*
+    public String getDateAbertura() {
+        return (this._dataAbertura.getYear() + "-" + this._dataAbertura.getMonth() + "-" + this._dataAbertura.getDate());
+    }
+
+    public String getDateDecisao() {
+        return (this._dataDecisao.getYear() + "-" + this._dataDecisao.getMonth() + "-" + this._dataDecisao.getDate());
+    }
+    */
+
+    public String toString() {
         StringBuilder res = new StringBuilder();
         res.append("*** Candidatura ***\n");
-        res.append("cod: "+this._cod+"\ndataAbertura: "+this.getDateAbertura()+"\ndataDecisao"+
-                this.getDateDecisao()+"\nobs: "+this._obs+"\nestado: "+this._estado+
-                "\nFuncionario: "+this._funcionario);
-        
+        res.append("cod: " + this._cod + "\ndataAbertura: " + this.getDataAbertura().toString() + "\ndataDecisao"
+                + this.getDataDecisao().toString() + "\nobs: " + this._obs + "\nestado: " + this._estado
+                + "\nFuncionario: " + this._funcionario);
+
         res.append("\n->Elementos");
-        for(Elemento aux : this._elementos)
+        for (Elemento aux : this._elementos) {
             res.append(aux.toString());
+        }
         res.append("\n->Qustionario");
-        for(Questao aux : this._questionario)
+        for (Questao aux : this._questionario) {
             res.append(aux.toString());
-        
+        }
+
         return res.toString();
     }
-        
-        
+
 }

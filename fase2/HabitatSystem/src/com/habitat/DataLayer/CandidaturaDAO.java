@@ -20,17 +20,16 @@ public class CandidaturaDAO {
     public CandidaturaDAO(Connection conn) {
         this.conn = conn;
     }
-    
-    public ArrayList<Questao> getQuestoesActivas() throws SQLException{
+
+    public ArrayList<Questao> getQuestoesActivas() throws SQLException {
         Statement st;
         ResultSet res;
         String sql = "select * from Habitat.Perguntas where estado = activo;";
         st = conn.createStatement();
         res = st.executeQuery(sql);
-        ArrayList<Questao> questionario = new ArrayList<Questao>();
-        while(res.next()){
-        //(String _cod, String _pergunta, String _resposta)
-            Questao q = new Questao(res.getString("id"),res.getString("pergunta"),"");
+        ArrayList<Questao> questionario = new ArrayList<>();
+        while (res.next()) {
+            Questao q = new Questao(res.getString("id"), res.getString("pergunta"), "");
             questionario.add(q);
         }
         return questionario;
@@ -48,46 +47,41 @@ public class CandidaturaDAO {
     }
 
     public Candidatura get(String aCod) throws SQLException {
-        PreparedStatement stCand;
-        PreparedStatement stFam;
-        ResultSet resCand;
-        ResultSet resFam;
-        String sqlCand;
-        String sqlFam;
+        PreparedStatement stCand, stFam;         
+        ResultSet resCand, resFam;        
+        String sqlCand, sqlFam;
+        
         sqlCand = "select * from Habitat.Candidaturas where id = ?;";
         stCand = conn.prepareStatement(sqlCand);
         stCand.setString(1, aCod);
         resCand = stCand.executeQuery();
-        if(resCand.next() == false) return null;
+        if (resCand.next() == false) {
+            return null;
+        }
+        
         sqlFam = "select * from Habitat.Familias where id = ?;";
         stFam = conn.prepareStatement(sqlFam);
         stFam.setString(1, resCand.getString("familia"));
         resFam = stFam.executeQuery();
-        String[] parts = resCand.getString("dataAbertura").split("-");
-        Date d1 = new Date(Integer.parseInt(parts[1]),
-                        Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
-        String[] parts2 = resCand.getString("dataDecisao").split("-");
-        Date d2 = new Date(Integer.parseInt(parts2[1]),
-                        Integer.parseInt(parts2[2]),Integer.parseInt(parts2[3]));
         Float f = new Float(resFam.getString("rendimentoBruto"));
-        Candidatura c = new Candidatura(resCand.getString("id"),d1,d2,resCand.getString("observacoes"),
-                        resCand.getString("estado"),resCand.getString("funcionario"),
-                        null,null,f.floatValue(),resFam.getString("rua"),
-                        resFam.getString("localidade"),resFam.getString("codPostal"),null,resFam.getString("contacto"));
-        /*ir buscar as questoes*/
-        ArrayList<Questao> qs = new ArrayList<Questao>();
+        Candidatura c = new Candidatura(resCand.getString("id"), resCand.getDate("dataAbertura"), 
+                resCand.getDate("dataDecisao"), resCand.getString("observacoes"),
+                resCand.getString("estado"), resCand.getString("funcionario"),
+                null, null, f.floatValue(), resFam.getString("rua"),
+                resFam.getString("localidade"), resFam.getString("codPostal"), null, resFam.getString("contacto"));
+        /*vai buscar as questoes*/
+        ArrayList<Questao> qs = new ArrayList<>();
         PreparedStatement stQ, stCQ;
-        ResultSet resQ,resCQ;
+        ResultSet resQ, resCQ;
         String sqlCQ = "select * from Habitat.CandidaturaPerguntas where id = ?;";
         String sqlQ = "select * from Habitat.Perguntas where id = ?;";
         stCQ = conn.prepareStatement(sqlCQ);
         resCQ = stCQ.executeQuery();
-        while(resCQ.next()){
-            //(String _cod, String _pergunta, String _resposta)
-            Questao q = new Questao(resCQ.getString("pergunta"),"",resCQ.getString("resposta"));
+        while (resCQ.next()) {
+            Questao q = new Questao(resCQ.getString("pergunta"), "", resCQ.getString("resposta"));
             stQ = conn.prepareStatement(sqlQ);
             resQ = stQ.executeQuery();
-            if(resQ.next()){
+            if (resQ.next()) {
                 q.setPergunta(resQ.getString("descricao"));
             }
             qs.add(q);
@@ -97,14 +91,11 @@ public class CandidaturaDAO {
         PreparedStatement stElems = conn.prepareStatement(sqlQ);
         stElems.setString(1, resFam.getString("responsavel"));
         ResultSet resC = stElems.executeQuery();
-        if(resC.next()){
-        String[] parts3 = resC.getString("dataNasc").split("-");
-        Date d3 = new Date(Integer.parseInt(parts3[1]),
-                        Integer.parseInt(parts3[2]),Integer.parseInt(parts3[3]));
-            Elemento cand = new Elemento(resC.getString("id"),resC.getString("nome"),
-                            d3,resC.getString("escolaridade"),resC.getString("estadoCivil"),
-                            resC.getString("parentesco"),resC.getString("ocupacao"),
-                            resC.getString("naturalidade"),resC.getString("nacionalidade"));
+        if (resC.next()) {
+            Elemento cand = new Elemento(resC.getString("id"), resC.getString("nome"),
+                    resC.getDate("dataNasc"), resC.getString("escolaridade"), resC.getString("estadoCivil"),
+                    resC.getString("parentesco"), resC.getString("ocupacao"),
+                    resC.getString("naturalidade"), resC.getString("nacionalidade"));
             c.setCandidato(cand);
         }
         /*buscar elementos*/
@@ -113,14 +104,11 @@ public class CandidaturaDAO {
         stElems.setString(1, resFam.getString("id"));
         ArrayList<Elemento> el = new ArrayList<Elemento>();
         ResultSet resElems = stElems.executeQuery();
-        while(resElems.next()){
-            String[] parts4 = resElems.getString("dataNasc").split("-");
-            Date d4 = new Date(Integer.parseInt(parts4[1]),
-                        Integer.parseInt(parts4[2]),Integer.parseInt(parts4[3]));
-            Elemento e = new Elemento(resElems.getString("id"),resElems.getString("nome"),
-                            d4,resElems.getString("escolaridade"),resElems.getString("estadoCivil"),
-                            resElems.getString("parentesco"),resElems.getString("ocupacao"),
-                            resElems.getString("naturalidade"),resElems.getString("nacionalidade"));
+        while (resElems.next()) {
+            Elemento e = new Elemento(resElems.getString("id"), resElems.getString("nome"),
+                    resElems.getDate("dataNasc"), resElems.getString("escolaridade"), resElems.getString("estadoCivil"),
+                    resElems.getString("parentesco"), resElems.getString("ocupacao"),
+                    resElems.getString("naturalidade"), resElems.getString("nacionalidade"));
             el.add(e);
         }
         c.setElementos(el);
@@ -160,8 +148,8 @@ public class CandidaturaDAO {
                 + "funcionario = ?"
                 + "where id = ?";
         st = conn.prepareStatement(sql);
-        st.setString(1, aC.getDataAbertura().toString());
-        st.setString(2, aC.getDataDecisao().toString());
+        st.setDate(1, aC.getDataAbertura());
+        st.setDate(2, aC.getDataDecisao());
         st.setString(3, aC.getObs());
         st.setString(4, aC.getEstado());
         st.setString(5, aC.getFuncionario());
@@ -172,7 +160,7 @@ public class CandidaturaDAO {
                 + "resposta = ?"
                 + "where candidatura = ? and pergunta = ?;";
         st = conn.prepareStatement(sql);
-        for(Questao q : aC.getQuestionario()){
+        for (Questao q : aC.getQuestionario()) {
             st.setString(1, q.getResposta());
             st.setString(2, aC.getCod());
             st.setString(3, q.getCod());
@@ -191,7 +179,7 @@ public class CandidaturaDAO {
                 + "where familia = ?;";
         st = conn.prepareStatement(sql);
         st.setString(1, aC.getCandidato().getNome());
-        st.setString(2, aC.getCandidato().getDataNasc().toString());
+        st.setDate(2, aC.getCandidato().getDataNasc());
         st.setString(3, aC.getCandidato().getEscolaridade());
         st.setString(4, aC.getCandidato().getEstCivil());
         st.setString(5, aC.getCandidato().getParentesco());
@@ -201,9 +189,9 @@ public class CandidaturaDAO {
         st.setString(9, aC.getCod());
         st.executeUpdate();
         /*actualizar elementos*/
-        for(Elemento e : aC.getElementos()){
+        for (Elemento e : aC.getElementos()) {
             st.setString(1, e.getNome());
-            st.setString(2, e.getDataNasc().toString());
+            st.setDate(2, e.getDataNasc());
             st.setString(3, e.getEscolaridade());
             st.setString(4, e.getEstCivil());
             st.setString(5, e.getParentesco());
@@ -222,7 +210,7 @@ public class CandidaturaDAO {
         /*inserir familia*/
         sql = "insert into Habitat.Familias (rendimento,rua,localidade,codPostal,contacto,funcionario)"
                 + "values(?,?,?,?,?,?)";
-        st = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+        st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         Float f = new Float(aC.getRendimentoBruto());
         st.setString(1, f.toString());
         st.setString(2, aC.getRua());
@@ -240,7 +228,7 @@ public class CandidaturaDAO {
         st = conn.prepareStatement(sql);
         Elemento c = aC.getCandidato();
         st.setString(1, c.getNome());
-        st.setString(2, c.getDataNasc().toString());
+        st.setDate(2, c.getDataNasc());
         st.setString(3, c.getEscolaridade());
         st.setString(4, c.getEstCivil());
         st.setString(5, c.getParentesco());
@@ -252,8 +240,9 @@ public class CandidaturaDAO {
         /*associar responsavel a familia*/
         String codCandidato = null;
         res = st.getGeneratedKeys();
-        if(res.next())
+        if (res.next()) {
             codCandidato = res.getString(1);
+        }
         sql = "update Habitat.Familias set responsavel = ?"
                 + "where id = ?";
         st = conn.prepareStatement(sql);
@@ -265,9 +254,9 @@ public class CandidaturaDAO {
                 + "ocupacao,naturalidade,nacionalidade,familia)"
                 + "values(?,?,?,?,?,?,?,?,?)";
         st = conn.prepareStatement(sql);
-        for(Elemento e : aC.getElementos()){
+        for (Elemento e : aC.getElementos()) {
             st.setString(1, e.getNome());
-            st.setString(2, e.getDataNasc().toString());
+            st.setDate(2, e.getDataNasc());
             st.setString(3, e.getEscolaridade());
             st.setString(4, e.getEstCivil());
             st.setString(5, e.getParentesco());
@@ -281,8 +270,8 @@ public class CandidaturaDAO {
         sql = "insert into Habitat.Candidaturas (dataAbertura,dataDecisao,"
                 + "observacoes,estado,funcionario)"
                 + "values(?,?,?,?,?);";
-        st.setString(1, aC.getDataAbertura().toString());
-        st.setString(2, aC.getDataDecisao().toString());
+        st.setDate(1, aC.getDataAbertura());
+        st.setDate(2, aC.getDataDecisao());
         st.setString(3, aC.getObs());
         st.setString(4, aC.getEstado());
         st.setString(5, aC.getFuncionario());
@@ -293,24 +282,25 @@ public class CandidaturaDAO {
         sql = "insert into Habitat.CandidaturaPerguntas(resposta,candidatura,pergunta)"
                 + "values(?,?,?);";
         st = conn.prepareStatement(sql);
-        for(Questao q : aC.getQuestionario()){
+        for (Questao q : aC.getQuestionario()) {
             st.setString(1, q.getResposta());
             st.setString(2, codCandidatura);
             st.setString(3, q.getCod());
-            st.executeUpdate();       
-        }   
+            st.executeUpdate();
+        }
     }
-    public ArrayList<String> getAprovadasSemProjecto() throws SQLException{
+
+    public ArrayList<String> getAprovadasSemProjecto() throws SQLException {
         Statement st;
         ResultSet res;
         ArrayList<String> cs = new ArrayList<>();
-        String sql = "select id, dataDecisao from Habitat.Candidaturas\n" +
-                        "where estado = 'aprovado' and id not in (select id from Habitat.Projectos)\n" +
-                        "order by dataDecisao desc;";
+        String sql = "select id, dataDecisao from Habitat.Candidaturas\n"
+                + "where estado = 'aprovado' and id not in (select id from Habitat.Projectos)\n"
+                + "order by dataDecisao desc;";
         st = conn.createStatement();
         res = st.executeQuery(sql);
-        while(res.next()){
-            String cand = res.getString("id") +": "+ res.getString("dataDecisao");
+        while (res.next()) {
+            String cand = res.getString("id") + ": " + res.getString("dataDecisao");
             cs.add(cand);
         }
         return cs;
