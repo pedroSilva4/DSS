@@ -48,7 +48,6 @@ public class EventosDAO {
                 res.getString(5), res.getString(4));
     }
 
-<<<<<<< HEAD
 	public void update(Evento aEvento) throws SQLException {
 		PreparedStatement st;
                 String sql;
@@ -70,28 +69,7 @@ public class EventosDAO {
                 st.setString(6, aEvento.getCod());
                 st.executeUpdate();
 	}
-=======
-    public void update(Evento aEvento) throws SQLException {
-        PreparedStatement st;
-        String sql;
-        sql = "update Habitat.Eventos set"
-                + "data = ?,"
-                + "nrParticipantes = ?,"
-                + "observacoes = ?,"
-                + "funcionario = ?,"
-                + "valorAngariado = ?"
-                + "where id = ?;";
-        st = conn.prepareStatement(sql);
-        st.setDate(1, aEvento.getData());
-        Integer i = aEvento.getNPessoas();
-        st.setString(2, i.toString());
-        st.setString(3, aEvento.getNota());
-        st.setString(4, aEvento.getorganisador());
-        Float f = aEvento.getAngariacao();
-        st.setString(5, f.toString());
-        st.setString(6, aEvento.getCod());
-    }
->>>>>>> FETCH_HEAD
+
 
     public void add(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) throws SQLException {
         PreparedStatement st;

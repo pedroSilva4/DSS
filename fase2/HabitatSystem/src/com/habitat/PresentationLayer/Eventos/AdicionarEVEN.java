@@ -31,15 +31,10 @@ public class AdicionarEVEN extends javax.swing.JPanel {
         businessFacade = bus;
         initComponents();
         setVisible(true);
-<<<<<<< HEAD
         //this.init();
        
         this.submetar_but.setEnabled(true);
-=======
-        this.init();
 
-        this.submetar_but.setEnabled(false);
->>>>>>> FETCH_HEAD
     }
 
     public void clean() {
@@ -165,19 +160,13 @@ public class AdicionarEVEN extends javax.swing.JPanel {
         String num = this.nunParticipantes_tf.getText();
         int num_i = Integer.parseInt(num);
         String codProj = null;
-<<<<<<< HEAD
         //if(this.codProj_cbox.getSelectedItem()!=null)
         //{
         //    codProj =((String)codProj_cbox.getSelectedItem()).split(":")[1].trim();
         //   
         //} 
         
-=======
-        if (this.codProj_cbox.getSelectedItem() != null) {
-            codProj = ((String) codProj_cbox.getSelectedItem()).split(":")[1].trim();
-        }
-        System.out.println(codProj);
->>>>>>> FETCH_HEAD
+
         String val_s = this.tf_valorAnga.getText();
         float val_f = Float.parseFloat(val_s.replace(",", "."));
         
@@ -211,7 +200,6 @@ public class AdicionarEVEN extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField tf_valorAnga;
     // End of variables declaration//GEN-END:variables
 
-<<<<<<< HEAD
 
 /*public void init(){
         try {
@@ -222,18 +210,6 @@ public class AdicionarEVEN extends javax.swing.JPanel {
                     
                     this.codProj_cbox.addItem("Projeto: "+s);
                 }
-                
-=======
-    public void init() {
-        try {
-            this.codProj_cbox.removeAllItems();
-            this.codProj_cbox.addItem(null);
-
-            for (String s : businessFacade.getListaIdsEventos()) {
-                this.codProj_cbox.addItem("Evento: " + s);
-            }
-
->>>>>>> FETCH_HEAD
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarDOA.class.getName()).log(Level.SEVERE, null, ex);
         }
