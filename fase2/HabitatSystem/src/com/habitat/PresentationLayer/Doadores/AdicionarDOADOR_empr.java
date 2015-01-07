@@ -167,7 +167,7 @@ public class AdicionarDOADOR_empr extends javax.swing.JPanel {
         
         //data de associação
             Calendar cal = Calendar.getInstance();
-            Date dateASSOC = new Date(cal.getTimeInMillis());
+        Date dateASSOC = new Date(cal.getTimeInMillis());
         String nome = this.nome_tf.getText();
         String contact = this.telefone_TF.getText();
         String nif = this.nif_tf.getText();

@@ -270,8 +270,8 @@ public class AtualizarVolDialog extends javax.swing.JDialog {
 
         String[] dateArr = this.bday_tf.getText().split("/");
 
-        Date date = new Date(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
-       // System.out.println(date.getDate()+"-"+date.getMonth()+"-"+date.getYear());
+        Date date = new Date(Integer.parseInt(dateArr[2])-1900, Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
+        // System.out.println(date.getDate()+"-"+date.getMonth()+"-"+date.getYear());
         String rua = this.street_tf.getText();
         String local = this.local_tf.getText();
         String cod_postal = this.postal_tf.getText();
@@ -384,7 +384,7 @@ public class AtualizarVolDialog extends javax.swing.JDialog {
             this.job_tf.setText(this.vol.getProfissao());
             this.phone_tf.setText(this.vol.getContacto());
             this.bday_tf.setText(this.vol.getFormatedDateNasc());
-            this.dataAssoc.setText(this.vol.getFormatedDateAssoc());
+            this.dataAssoc.setText(this.vol.getDataAssociacao().toString());
             System.out.println(this.vol.getMorada().getCodigo_postal());
             this.postal_tf.setText(this.vol.getMorada().getCodigo_postal());
             this.street_tf.setText(this.vol.getMorada().getRua());

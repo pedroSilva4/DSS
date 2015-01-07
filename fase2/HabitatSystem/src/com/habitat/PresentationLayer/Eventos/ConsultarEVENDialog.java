@@ -212,8 +212,12 @@ public class ConsultarEVENDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
 public void init(){
+<<<<<<< HEAD
             Date d = e.getData();
             this.data_lb.setText((d.getDate()-1900)+"/"+(d.getMonth()+1)+"/"+d.getYear());
+=======
+            this.data_lb.setText(e.getData().toString());
+>>>>>>> FETCH_HEAD
             this.np_lb.setText(this.e.getNPessoas()+"");
             this.fun_lb.setText(this.e.getorganisador());
             this.val_lb.setText(this.e.getAngariacao()+"");

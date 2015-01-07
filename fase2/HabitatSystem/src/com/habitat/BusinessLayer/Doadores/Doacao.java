@@ -26,9 +26,12 @@ public class Doacao {
 	public Date getData() {
 		return this._data;
 	}
+        
+        /*
         public String getDate(){
         return ((this._data.getYear()+1900)+"-"+(this._data.getMonth()+1)+"-"+this._data.getDate());
     }
+        */
 
 	public void setData(Date aData) {
 		this._data = aData;

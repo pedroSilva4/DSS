@@ -300,4 +300,19 @@ public class CandidaturaDAO {
             st.executeUpdate();       
         }   
     }
+    public ArrayList<String> getAprovadasSemProjecto() throws SQLException{
+        Statement st;
+        ResultSet res;
+        ArrayList<String> cs = new ArrayList<>();
+        String sql = "select id, dataDecisao from Habitat.Candidaturas\n" +
+                        "where estado = 'aprovado' and id not in (select id from Habitat.Projectos)\n" +
+                        "order by dataDecisao desc;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        while(res.next()){
+            String cand = res.getString("id") +": "+ res.getString("dataDecisao");
+            cs.add(cand);
+        }
+        return cs;
+    }
 }

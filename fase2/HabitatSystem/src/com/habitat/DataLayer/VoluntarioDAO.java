@@ -32,9 +32,9 @@ public class VoluntarioDAO {
                     + "values(?,?,?,?,?,?,?,?,?);";
             st = conn.prepareStatement(sql);
             st.setString(1, aVol.getNome());
-            st.setString(2, aVol.getDateAssociacao());
+            st.setDate(2, aVol.getDataAssociacao());
             st.setString(3, aVol.getContacto());
-            st.setString(4, aVol.getDateNasc());
+            st.setDate(4, aVol.getDataNasc());
             st.setString(5, aVol.getProfissao());
             st.setString(6, aVol.getMorada().getRua());
             st.setString(7, aVol.getMorada().getLocalidade());
@@ -66,13 +66,8 @@ public class VoluntarioDAO {
             if(res.next()){
                 Morada m = new Morada(res.getString("rua"),res.getString("localidade"),
                         res.getString("dataNascimento"));
-                String[] parts = res.getString("dataNascimento").split("-");
-                Date d1 = new Date(Integer.parseInt(parts[0]),
-                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
-                String[] parts2 = res.getString("dataAssociacao").split("-");
-                Date d2 = new Date(Integer.parseInt(parts2[0]),
-                        Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
-                return new Voluntario(res.getString("id"),res.getString("nome"),d1,d2,
+
+                return new Voluntario(res.getString("id"),res.getString("nome"),res.getDate("dataNascimento"),res.getDate("dataAssociacao"),
                             res.getString("contacto"),res.getString("nomeEquipa"),
                             res.getString("profissao"),m);
                 
@@ -97,9 +92,9 @@ public class VoluntarioDAO {
                     + "where id = ? ;";
             st = conn.prepareStatement(sql);
             st.setString(1, aVol.getNome());
-            st.setString(2, aVol.getDateAssociacao());
+            st.setDate(2, aVol.getDataAssociacao());
             st.setString(3, aVol.getContacto());
-            st.setString(4, aVol.getDateNasc());
+            st.setDate(4, aVol.getDataNasc());
             st.setString(5, aVol.getProfissao());
             st.setString(6, aVol.getMorada().getRua());
             st.setString(7, aVol.getMorada().getLocalidade());
@@ -118,15 +113,8 @@ public class VoluntarioDAO {
             while(res.next()){
                 Morada m = new Morada(res.getString("rua"),
                         res.getString("localidade"),res.getString("codPostal"));
-                String[] parts = res.getString("dataNascimento").split("-");
-                
-                Date d1 = new Date(Integer.parseInt(parts[0]),
-                        Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
-                String[] parts2 = res.getString("dataAssociacao").split("-");
-                Date d2 = new Date(Integer.parseInt(parts2[0]),
-                       Integer.parseInt(parts2[1]),Integer.parseInt(parts2[2]));
                 Voluntario v;
-                v = new Voluntario(res.getString("id"),res.getString("nome"),d1,d2,
+                v = new Voluntario(res.getString("id"),res.getString("nome"),res.getDate("dataNascimento"),res.getDate("dataAssociacao"),
                             res.getString("contacto"),res.getString("nomeEquipa"),
                             res.getString("profissao"),m);
                 vs.add(v);
