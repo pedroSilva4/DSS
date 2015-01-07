@@ -69,12 +69,12 @@ public class Evento {
 		return this._nota;
 	}
         
-        /*
+        
         public String toString(){
             
             Date d = this.getData();
-            return this.getCod()+": "+d.getYear()+"/"+(d.getMonth()-1)+"/"+d.getDate();
+            return this.getCod()+": "+d.getYear()+"/"+d.getMonth()+"/"+d.getDate();
         }
-        */
+        
 
 }

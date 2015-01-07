@@ -36,7 +36,7 @@
                   <Component id="container" pref="296" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="add_bt" min="-2" pref="85" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="con_bt" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
               </Group>

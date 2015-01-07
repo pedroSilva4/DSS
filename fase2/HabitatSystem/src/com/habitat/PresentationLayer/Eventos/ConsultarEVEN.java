@@ -55,8 +55,10 @@ public class ConsultarEVEN extends javax.swing.JPanel implements Observer {
         evento_cb = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Evento:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, -1, -1));
 
         jButton3.setText("Consultar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -64,32 +66,10 @@ public class ConsultarEVEN extends javax.swing.JPanel implements Observer {
                 jButton3ActionPerformed(evt);
             }
         });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 53, 115, -1));
 
         evento_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
-                .addComponent(evento_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(evento_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(122, 122, 122))
-        );
+        add(evento_cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 54, 131, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

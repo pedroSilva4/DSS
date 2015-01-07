@@ -77,13 +77,13 @@ public class ActualiarEVENDialog extends javax.swing.JDialog {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 72, -1, -1));
 
         jLabel2.setText("Observações:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 106, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
         obs_lb.setColumns(20);
         obs_lb.setRows(5);
         jScrollPane1.setViewportView(obs_lb);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 106, 358, 48));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 106, 330, 48));
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

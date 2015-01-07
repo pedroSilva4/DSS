@@ -17,13 +17,13 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="add_" min="-2" pref="170" max="-2" attributes="0"/>
                   <Component id="cons_" min="-2" pref="170" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="container" pref="457" max="32767" attributes="0"/>
+              <Component id="container" pref="501" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -31,12 +31,12 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="container" pref="369" max="32767" attributes="0"/>
+                  <Component id="container" pref="372" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="add_" min="-2" pref="85" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cons_" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
               </Group>
