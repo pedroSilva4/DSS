@@ -6,8 +6,11 @@ import java.awt.Component;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+=======
+>>>>>>> FETCH_HEAD
 import javax.swing.JTextField;
 
 /*

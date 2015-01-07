@@ -7,7 +7,6 @@ package com.habitat.PresentationLayer.Doadores;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.Doador;
-import com.habitat.BusinessLayer.Doadores.Empresa;
 import com.habitat.util.ErrorWindow;
 import java.awt.Component;
 import java.sql.Date;

@@ -6,17 +6,12 @@
 
 package com.habitat.PresentationLayer.Voluntários;
 
-import com.habitat.PresentationLayer.Funcionarios.*;
 import com.habitat.BusinessLayer.BusinessFacade;
-import com.habitat.BusinessLayer.Utilizadores.Utilizador;
 import com.habitat.BusinessLayer.Voluntarios.Morada;
 import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.util.ErrorWindow;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
 import javax.swing.JFrame;
 
 /**

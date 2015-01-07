@@ -6,21 +6,14 @@
 
 package com.habitat.PresentationLayer.Voluntários;
 
-import com.habitat.PresentationLayer.Funcionarios.*;
 import com.habitat.BusinessLayer.BusinessFacade;
-import com.habitat.BusinessLayer.Utilizadores.Utilizador;
 import com.habitat.BusinessLayer.Voluntarios.Voluntario;
-import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 /**

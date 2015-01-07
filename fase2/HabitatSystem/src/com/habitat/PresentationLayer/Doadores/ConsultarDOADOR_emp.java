@@ -5,8 +5,6 @@
  */
 package com.habitat.PresentationLayer.Doadores;
 
-import com.habitat.BusinessLayer.BusinessFacade;
-import com.habitat.BusinessLayer.Doadores.Doador;
 import com.habitat.BusinessLayer.Doadores.Empresa;
 import java.sql.Date;
 import javax.swing.JFrame;

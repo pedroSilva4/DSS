@@ -8,8 +8,6 @@ package com.habitat.PresentationLayer.Doadores;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.Doador;
 import com.habitat.BusinessLayer.Doadores.Empresa;
-import com.habitat.BusinessLayer.Voluntarios.Voluntario;
-import com.habitat.PresentationLayer.Doacoes.*;
 import com.habitat.PresentationLayer.Voluntários.ConsultarVol;
 import java.sql.SQLException;
 import java.util.ArrayList;
