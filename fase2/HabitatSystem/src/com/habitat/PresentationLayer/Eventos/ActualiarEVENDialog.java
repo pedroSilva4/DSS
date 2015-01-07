@@ -8,10 +8,13 @@ package com.habitat.PresentationLayer.Eventos;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Eventos.Evento;
 import com.habitat.util.ErrorWindow;
+import java.awt.Component;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 /**
  *
@@ -36,6 +39,15 @@ public class ActualiarEVENDialog extends javax.swing.JDialog {
         this.businessFacade = bus;
         initComponents();
         init();
+    }
+    
+    public void clean() {
+        for (Component c : this.getComponents()) {
+            if (c.getClass() == JTextField.class || c.getClass() == JFormattedTextField.class) {
+                ((JTextField) c).setText("");
+            }
+        }
+
     }
 
     /**
@@ -146,6 +158,8 @@ public class ActualiarEVENDialog extends javax.swing.JDialog {
             ex.printStackTrace();
             new ErrorWindow("Evento", ex.getMessage(), "error", new JFrame()).wshow();
         }
+        clean();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
