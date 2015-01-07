@@ -349,4 +349,8 @@ public class BusinessFacade extends Observable{
      public ArrayList<String> getListaIdProjectos() throws SQLException{
          return this._projetos.getListaIdProjectos();
      }
+     
+     public ArrayList<Evento> getListaEventos() throws SQLException{
+         return this._eventos.getListaEventos();
+     }
 }

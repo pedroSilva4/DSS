@@ -5,7 +5,23 @@
  */
 package com.habitat.PresentationLayer.Eventos;
 
-import com.habitat.PresentationLayer.Doacoes.*;
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Voluntarios.Morada;
+import com.habitat.util.ErrorWindow;
+import java.awt.Component;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.Calendar;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import org.jdatepicker.JDatePicker;
+import com.habitat.DataLayer.EventosDAO;
+import com.habitat.PresentationLayer.Doacoes.AdicionarDOA;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -16,8 +32,24 @@ public class AdicionarEVEN extends javax.swing.JPanel {
     /**
      * Creates new form AdicionarDOA
      */
-    public AdicionarEVEN() {
+    private BusinessFacade businessFacade;
+    //private TipoDOAListener tipoDOA;
+    public AdicionarEVEN(BusinessFacade bus) {
+        businessFacade =bus;
         initComponents();
+        setVisible(true);
+        this.init();
+       
+        this.submetar_but.setEnabled(false);
+    }
+    
+    public void clean()
+    {
+       for(Component c : this.getComponents())
+           if(c.getClass()==JTextField.class || c.getClass()==JFormattedTextField.class)
+              ((JTextField)c).setText("");
+       
+      
     }
 
     /**
@@ -49,12 +81,19 @@ public class AdicionarEVEN extends javax.swing.JPanel {
         jLabel7.setText("Nº Participantes:");
 
         submetar_but.setText("Submeter");
+        submetar_but.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submetar_butActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Observações:");
 
         jLabel3.setText("Data:");
 
         jLabel6.setText("Cód.Projeto:");
+
+        data_tf.setText("  /  /    ");
 
         codProj_cbox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
 
@@ -127,6 +166,36 @@ public class AdicionarEVEN extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void submetar_butActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submetar_butActionPerformed
+        // TODO add your handling code here:
+        String num = this.nunParticipantes_tf.getText();
+        int num_i = Integer.parseInt(num);
+        String codProj = null;
+        if(this.codProj_cbox.getSelectedItem()!=null)
+        {
+            codProj =((String)codProj_cbox.getSelectedItem()).split(":")[1].trim();
+           
+        } 
+        System.out.println(codProj);
+        String val_s = this.tf_valorAnga.getText();
+        float val_f = Float.parseFloat(val_s);
+        String observ = this.observacoes_ta.getText();
+
+        String[] dateArr = this.data_tf.getText().split("/");
+   
+        Date date = new Date(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
+        System.out.println(date.getDate()+"-"+date.getMonth()+"-"+date.getYear());
+        
+        String fun = this.businessFacade.getActiveUser().getUsername();
+        try {
+           businessFacade.addEvento(date,val_f,num_i,fun,observ); 
+        } catch (SQLException ex) {
+            new ErrorWindow("Voluntário", ex.getMessage(), "error", new JFrame()).wshow();
+        }
+    
+        clean();
+    }//GEN-LAST:event_submetar_butActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox codProj_cbox;
@@ -142,4 +211,22 @@ public class AdicionarEVEN extends javax.swing.JPanel {
     private javax.swing.JButton submetar_but;
     private javax.swing.JTextField tf_valorAnga;
     // End of variables declaration//GEN-END:variables
+
+
+public void init(){
+        try {
+            this.codProj_cbox.removeAllItems();
+            this.codProj_cbox.addItem(null);
+          
+                for(String s : businessFacade.getListaIdsEventos()){
+                    
+                    this.codProj_cbox.addItem("Evento: "+s);
+                }
+                
+        } catch (SQLException ex) {
+            Logger.getLogger(AdicionarDOA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
 }

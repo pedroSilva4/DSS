@@ -68,4 +68,11 @@ public class Evento {
 	public String getNota() {
 		return this._nota;
 	}
+        
+        public String toString(){
+            
+            Date d = this.getData();
+            return this.getCod()+": "+d.getYear()+"/"+d.getMonth()+"/"+d.getDate();
+        }
+
 }

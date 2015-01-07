@@ -5,7 +5,21 @@
  */
 package com.habitat.PresentationLayer.Eventos;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Doadores.Doador;
+import com.habitat.BusinessLayer.Doadores.Empresa;
+import com.habitat.BusinessLayer.Eventos.Evento;
 import com.habitat.PresentationLayer.Doacoes.*;
+import com.habitat.PresentationLayer.Doadores.AtualizarDOADOR_empr;
+import com.habitat.PresentationLayer.Doadores.AtualizarDOADOR_indiv;
+import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR;
+import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR_emp;
+import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR_indv;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -16,8 +30,17 @@ public class ConsultarEVEN extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarDAO
      */
-    public ConsultarEVEN() {
-        initComponents();
+    private final BusinessFacade businessFacade;
+    private ArrayList<Evento> eventos;
+    
+    public ConsultarEVEN(BusinessFacade bus) {
+        this.businessFacade = bus;
+        try{
+            this.eventos = businessFacade.getListaEventos();
+            initComponents();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarDOADOR.class.getName()).log(Level.SEVERE, null, ex);
+        }   
     }
 
     /**
@@ -30,29 +53,66 @@ public class ConsultarEVEN extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        evento_cb = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Código:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 58, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 52, 101, -1));
-
-        jButton2.setText("Listar Tudo");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 88, -1, -1));
+        jLabel1.setText("Evento:");
 
         jButton3.setText("Consultar");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(212, 53, 115, -1));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        evento_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addGap(12, 12, 12)
+                .addComponent(evento_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(evento_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addGap(122, 122, 122))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Evento d = (Evento)this.evento_cb.getSelectedItem();
+        String type = this.businessFacade.getActiveUser().getTipo(); 
+        
+        if(type.equals("admin") || type.equals("angariação")){
+                    //new AtualizarEVEN(new JFrame(), true, businessFacade).setVisible(true);
+            new ConsultarEVENDialog(new JFrame(), true, d,businessFacade).setVisible(true);
+            }
+        else{
+                    new ConsultarEVENDialog(new JFrame(), true, d,businessFacade).setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox evento_cb;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

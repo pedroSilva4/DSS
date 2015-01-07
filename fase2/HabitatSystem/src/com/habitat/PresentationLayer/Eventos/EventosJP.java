@@ -5,6 +5,9 @@
  */
 package com.habitat.PresentationLayer.Eventos;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import java.awt.CardLayout;
+
 /**
  *
  * @author filiperibeiro
@@ -14,8 +17,11 @@ public class EventosJP extends javax.swing.JPanel {
     /**
      * Creates new form EventosJP
      */
-    public EventosJP() {
+    BusinessFacade businessfacade;
+    public EventosJP(BusinessFacade bus) {
+        this.businessfacade = bus;
         initComponents();
+        init();
     }
 
     /**
@@ -27,15 +33,25 @@ public class EventosJP extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        add_bt = new javax.swing.JButton();
+        consultar_bt = new javax.swing.JButton();
+        container = new javax.swing.JPanel();
 
-        jButton1.setText("Adicionar");
+        add_bt.setText("Adicionar");
+        add_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_btActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Consultar");
+        consultar_bt.setText("Consultar");
+        consultar_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultar_btActionPerformed(evt);
+            }
+        });
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        container.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -44,31 +60,59 @@ public class EventosJP extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(consultar_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(add_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(53, 53, 53)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                .addGap(59, 59, 59))
+                .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(add_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 91, Short.MAX_VALUE)))
-                .addGap(106, 106, 106))
+                        .addComponent(consultar_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void add_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout)this.container.getLayout();
+        cl.show(container, "add");
+        container.setVisible(true);
+    }//GEN-LAST:event_add_btActionPerformed
+
+    private void consultar_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultar_btActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout)this.container.getLayout();
+        cl.show(container, "cons");
+        container.setVisible(true);
+    }//GEN-LAST:event_consultar_btActionPerformed
+
+    private void init(){
+        String type = this.businessfacade.getActiveUser().getTipo();
+        
+        if(type.equals("admin") || type.equals("angariação")){
+                
+                this.container.add(new AdicionarEVEN(businessfacade),"add");
+                this.consultar_bt.setText("Consultar/Atualizar");
+        }
+        else{
+            this.add_bt.setEnabled(false);
+        }
+        this.container.add(new ConsultarEVEN(businessfacade),"cons");
+        //--this.container.add(new )
+        this.container.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton add_bt;
+    private javax.swing.JButton consultar_bt;
+    private javax.swing.JPanel container;
     // End of variables declaration//GEN-END:variables
 }

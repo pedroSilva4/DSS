@@ -122,6 +122,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Submeter"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submetar_butActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -139,6 +142,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="data_tf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="  /  /    "/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="codProj_cbox">
       <Properties>
