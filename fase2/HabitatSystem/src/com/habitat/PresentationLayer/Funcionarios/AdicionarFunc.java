@@ -1,11 +1,13 @@
 package com.habitat.PresentationLayer.Funcionarios;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.util.ErrorWindow;
 import java.awt.Component;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /*
@@ -235,6 +237,7 @@ public class AdicionarFunc extends javax.swing.JPanel {
            boolean b = this.businessFacade.addUtilizador(username, password, name, nif,tipo, rua, local, cod_postal);
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarFunc.class.getName()).log(Level.SEVERE, null, ex);
+            new ErrorWindow("ERRO", "Funcionario já existe", "erro", new JFrame()).wshow();
         }
         
         
