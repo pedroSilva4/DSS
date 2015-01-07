@@ -412,8 +412,7 @@ public void init(){
             this.rua_tf.setText(this.d.getRua());
             this.localidade_tf.setText(this.d.getLocalidade());
             this.codPstal_tf.setText(this.d.getCodPostal());
-            Date dt = this.d.getDataAssoc();
-            this.data_tf.setText(dt.getYear()+"/"+(dt.getMonth()+1)+"/"+(dt.getDate()));
+            this.data_tf.setText(this.d.getDataAssoc().toString());
             this.atividade_tf.setText(this.d.getSetor());
             this.site_tf.setText(this.d.getSite());
             this.pc_nome_tf.setText(this.d.getPContacto());

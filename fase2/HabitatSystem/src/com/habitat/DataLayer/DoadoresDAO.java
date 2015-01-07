@@ -50,7 +50,7 @@ public class DoadoresDAO {
                 st.setString(4, aDoador.getLocalidade());
                 st.setString(5, aDoador.getCodPostal());
                 st.setString(6, aDoador.getContacto());
-                st.setString(7, aDoador.getDataAssoc().toString());
+                st.setDate(7, aDoador.getDataAssoc());
                 st.setString(8, ((Empresa)aDoador).getSetor());
                 st.setString(9, aDoador.getEmail());
                 st.setString(10, ((Empresa)aDoador).getSite());
@@ -68,7 +68,7 @@ public class DoadoresDAO {
                 st.setString(4, aDoador.getLocalidade());
                 st.setString(5, aDoador.getCodPostal());
                 st.setString(6, aDoador.getContacto());
-                st.setString(7, aDoador.getDataAssoc().toString());
+                st.setDate(7, aDoador.getDataAssoc());
                 st.setString(8, aDoador.getEmail());
                 //campo voluntario fica a null po enquanto
             }
@@ -86,26 +86,14 @@ public class DoadoresDAO {
             if(res.next() == false) return null;
             if(res.getString(9)!= null){
                 Empresa e;
-                String[] parts = res.getString(8).split("-");
-                Date d1 = new Date(Integer.parseInt(parts[1]),
-                        Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
-//(String cod,String nome,String nif,String rua,String localidade,
-   //String codP,String contacto,String email,Date dataAssoc,
-   //String sector, String site,String pContacto)
                 e = new Empresa(res.getString(1),res.getString(2),res.getString(3),res.getString(4),
                                 res.getString(5),res.getString(6),res.getString(7),res.getString(10),
-                                d1,res.getString(9),res.getString(11),res.getString(12));
+                                res.getDate(8),res.getString(9),res.getString(11),res.getString(12));
                 return e;
             }
             Doador d;
-            String[] parts = res.getString(8).split("-");
-            Date d1 = new Date(Integer.parseInt(parts[1]),
-                                Integer.parseInt(parts[2]),
-                                Integer.parseInt(parts[3]));
-//(String cod,String nome,String nif,String rua,String localidade,
-//String codP,String contacto,String email,Date dataAssoc)
             d = new Doador(res.getString(1),res.getString(2),res.getString(3),res.getString(4),
-                           res.getString(5),res.getString(6),res.getString(7),res.getString(10),d1);
+                           res.getString(5),res.getString(6),res.getString(7),res.getString(10),res.getDate(8));
             return d;
 	}
 
@@ -187,21 +175,15 @@ public class DoadoresDAO {
             res = st.executeQuery(sql);
             while(res.next()){
                 if(res.getString("actividade") == null){
-                    String[] parts = res.getString("dataAssociacao").split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[0]),
-                        Integer.parseInt(parts[1])-1,Integer.parseInt(parts[2]));
                     Doador d = new Doador(res.getString("id"),res.getString("nome"),res.getString("NIF"),
                             res.getString("rua"),res.getString("localidade"),res.getString("codPostal"),
-                            res.getString("contacto"),res.getString("email"),d1);
+                            res.getString("contacto"),res.getString("email"),res.getDate("dataAssociacao"));
                     ds.add(d);
                 }
                 else{
-                    String[] parts = res.getString("dataAssociacao").split("-");
-                    Date d1 = new Date(Integer.parseInt(parts[0]),
-                        Integer.parseInt(parts[1])-1,Integer.parseInt(parts[2]));
                     Empresa e = new Empresa(res.getString("id"),res.getString("nome"),res.getString("NIF"),
                             res.getString("rua"),res.getString("localidade"),res.getString("codPostal"),
-                            res.getString("contacto"),res.getString("email"),d1,res.getString("actividade"),
+                            res.getString("contacto"),res.getString("email"),res.getDate("dataAssociacao"),res.getString("actividade"),
                             res.getString("site"),res.getString("pessoaDeContacto"));
                     ds.add(e);
                 }
