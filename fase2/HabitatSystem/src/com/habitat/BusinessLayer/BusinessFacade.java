@@ -71,6 +71,12 @@ public class BusinessFacade extends Observable{
     public ArrayList<Questao> getQuestoesActivas() throws SQLException{
         return this._candidaturas.getQuestoesActivas();
     }
+    public ArrayList<Questao> getQuestoes() throws SQLException{
+        return this._candidaturas.getQuestoes();
+    }
+    public void addQuestao(Questao q) throws SQLException{
+        this._candidaturas.addPergunta(q);
+    }
 
     public Candidatura getCandidatura(String aCod) throws SQLException {
         return this._candidaturas.get(aCod);
