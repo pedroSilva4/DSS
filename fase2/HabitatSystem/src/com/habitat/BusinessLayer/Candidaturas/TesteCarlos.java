@@ -37,7 +37,7 @@ public class TesteCarlos {
         System.out.println("a data 1 é "+d1.toString());
         
         Doacao doa2 = businessFacade.getDoacao("18");
-        System.out.println("a data 2 é "+doa2.getDate());
+        //System.out.println("a data 2 é "+doa2.getDate());
         System.out.println("a data 2 é "+doa2.getData()+"ou"+doa2.getData().toString());
         
         /*teste Candidaturas*/

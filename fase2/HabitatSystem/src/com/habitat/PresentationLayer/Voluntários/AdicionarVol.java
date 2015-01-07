@@ -278,8 +278,8 @@ public class AdicionarVol extends javax.swing.JPanel {
 
         String[] dateArr = this.bday_tf.getText().split("/");
    
-        Date date = new Date(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
-        System.out.println(date.getDate()+"-"+date.getMonth()+"-"+date.getYear());
+        Date date = new Date(Integer.parseInt(dateArr[2])-1900, Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
+        //System.out.println(date.getDate()+"-"+date.getMonth()+"-"+date.getYear());
         
         Calendar cal = Calendar.getInstance();
         Date dateNow = new Date(cal.getTimeInMillis());

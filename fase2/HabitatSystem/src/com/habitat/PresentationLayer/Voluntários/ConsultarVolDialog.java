@@ -277,7 +277,7 @@ public class ConsultarVolDialog extends javax.swing.JDialog {
     public void init(){
             this.nome.setText(this.vol.getNome());
             this.dataNasc.setText(this.vol.getFormatedDateNasc());
-            this.dataAssoc.setText(this.vol.getFormatedDateAssoc());
+            this.dataAssoc.setText(this.vol.getDataAssociacao().toString());
             this.contacto.setText(this.vol.getContacto());
             this.equipa.setText(this.vol.getNomeEquipa());
             this.codpostal.setText(this.vol.getMorada().getCodigo_postal());
