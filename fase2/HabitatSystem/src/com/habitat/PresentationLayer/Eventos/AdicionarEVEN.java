@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author filiperibeiro
@@ -33,23 +32,25 @@ public class AdicionarEVEN extends javax.swing.JPanel {
      * Creates new form AdicionarDOA
      */
     private BusinessFacade businessFacade;
+
     //private TipoDOAListener tipoDOA;
+
     public AdicionarEVEN(BusinessFacade bus) {
-        businessFacade =bus;
+        businessFacade = bus;
         initComponents();
         setVisible(true);
         this.init();
-       
+
         this.submetar_but.setEnabled(false);
     }
-    
-    public void clean()
-    {
-       for(Component c : this.getComponents())
-           if(c.getClass()==JTextField.class || c.getClass()==JFormattedTextField.class)
-              ((JTextField)c).setText("");
-       
-      
+
+    public void clean() {
+        for (Component c : this.getComponents()) {
+            if (c.getClass() == JTextField.class || c.getClass() == JFormattedTextField.class) {
+                ((JTextField) c).setText("");
+            }
+        }
+
     }
 
     /**
@@ -120,28 +121,24 @@ public class AdicionarEVEN extends javax.swing.JPanel {
         String num = this.nunParticipantes_tf.getText();
         int num_i = Integer.parseInt(num);
         String codProj = null;
-        if(this.codProj_cbox.getSelectedItem()!=null)
-        {
-            codProj =((String)codProj_cbox.getSelectedItem()).split(":")[1].trim();
-           
-        } 
+        if (this.codProj_cbox.getSelectedItem() != null) {
+            codProj = ((String) codProj_cbox.getSelectedItem()).split(":")[1].trim();
+        }
         System.out.println(codProj);
         String val_s = this.tf_valorAnga.getText();
         float val_f = Float.parseFloat(val_s);
         String observ = this.observacoes_ta.getText();
 
         String[] dateArr = this.data_tf.getText().split("/");
-   
-        Date date = new Date(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
-        System.out.println(date.getDate()+"-"+date.getMonth()+"-"+date.getYear());
-        
+        Date date = new Date(Integer.parseInt(dateArr[2]) - 1900, Integer.parseInt(dateArr[1]) - 1, Integer.parseInt(dateArr[0]));
+
         String fun = this.businessFacade.getActiveUser().getUsername();
         try {
-           businessFacade.addEvento(date,val_f,num_i,fun,observ); 
+            businessFacade.addEvento(date, val_f, num_i, fun, observ);
         } catch (SQLException ex) {
             new ErrorWindow("Voluntário", ex.getMessage(), "error", new JFrame()).wshow();
         }
-    
+
         clean();
     }//GEN-LAST:event_submetar_butActionPerformed
 
@@ -161,21 +158,18 @@ public class AdicionarEVEN extends javax.swing.JPanel {
     private javax.swing.JTextField tf_valorAnga;
     // End of variables declaration//GEN-END:variables
 
-
-public void init(){
+    public void init() {
         try {
             this.codProj_cbox.removeAllItems();
             this.codProj_cbox.addItem(null);
-          
-                for(String s : businessFacade.getListaIdsEventos()){
-                    
-                    this.codProj_cbox.addItem("Evento: "+s);
-                }
-                
+
+            for (String s : businessFacade.getListaIdsEventos()) {
+                this.codProj_cbox.addItem("Evento: " + s);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarDOA.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 
 }
