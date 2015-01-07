@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -27,7 +28,7 @@ public class TesteCarlos {
         BusinessFacade businessFacade = new BusinessFacade();
         /*
         
-        */
+        
         Date d1 = new Date(2012-1900,12-1,12);
         Doacao doa = new Monetario("", new Date(2012-1900,12-1,12), "nova", (float) 1000.0);
         
@@ -38,13 +39,54 @@ public class TesteCarlos {
         
         Doacao doa2 = businessFacade.getDoacao("18");
         //System.out.println("a data 2 é "+doa2.getDate());
-        System.out.println("a data 2 é "+doa2.getData()+"ou"+doa2.getData().toString());
+        System.out.println("a data 2 é "+doa2.getData()+"ou"+doa2.getData().toString());*/
         
         /*teste Candidaturas*/
+        
+        //quetoes ativas
+        
+        ArrayList<Questao> questA = businessFacade.getQuestoesActivas();        
+            
+        //preencher respostas
+        int i=1;
+        for(Questao q: questA){
+            q.SetResposta("esta é a resposta "+i);
+            i++;
+        }
+        
+        i=1;
+        for(Questao q: questA){
+            System.out.println("questao "+i+" : "+q.toString());
+            i++;
+        }
+        
+        //contruir elementos        
+        Elemento e1 = new Elemento("","Jose",new Date(1978-1900,10-1,11),"12ºano","sol","pai","arrumador de carros","portuguesa","portuguesa");
+        Elemento e2 = new Elemento("","carlos",new Date(2000-1900,5-1,19),"12ºano","sol","irmao","arrumador de vacas","portuguesa","portuguesa");
+        Elemento e3 = new Elemento("","Morais",new Date(2002-1900,2-1,22),"12ºano","casado","filho","vadio","portuguesa","portuguesa");
+        ArrayList<Elemento> elems = new ArrayList<>();
+        elems.add(e1);
+        elems.add(e2);
+        elems.add(e3);
+        
+        Calendar cal = Calendar.getInstance();
+        Candidatura nova = new Candidatura("", new Date(cal.getTimeInMillis()), new Date(2014-1900,5-1,19),
+            "opah, nada a observar", "analise, ou outro...", "pedro",
+            questA, elems, (float) 1000.00, "nua do césamo", "berço","1233-222", e1,"708242424");
+        
+        System.out.println(nova.toString());
+        
+        businessFacade.addCandidatura(nova);
+        
+        Candidatura nova2 = businessFacade.getCandidatura("21");
+        
+        System.out.println(nova2.toString());
+        
+        
         /*
         Candidatura c = businessFacade.getCandidatura("1");
         System.out.println(c.toString());
-        /*
+        
         if (businessFacade.containsCadidatura("1"))
             System.out.println("existe a candidatura 1");
         else
@@ -55,7 +97,10 @@ public class TesteCarlos {
         else
             System.out.println("nao existe a candidatura 2222");
         
+        */
         
+        
+        /*
         Questao q1 = new Questao("1","pergunta?","nao quero");
         Questao q2 = new Questao("2","pergunta?","2000");
         Questao q3 = new Questao("3","pergunta?","sei la");
@@ -65,7 +110,7 @@ public class TesteCarlos {
         quest.add(q2);
         quest.add(q3);
         
-        Date d1 = new Date(2010,10,10);
+        
         Date d2 = new Date(2220,1,1);
  
         Elemento e1 = new Elemento("","Jose",d1,"12ºano","sol","pai","arrumador de carros");
@@ -75,8 +120,7 @@ public class TesteCarlos {
         
         Candidatura nova = new Candidatura("",d1,d2,"nada a dizer","em analise","xavier",quest, elems);
         System.out.println(nova.toString());
-        businessFacade.addCandidatura(nova);        
-        */
+        businessFacade.addCandidatura(nova);                
         
         /*Teste Material*/
         /*

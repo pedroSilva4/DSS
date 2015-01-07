@@ -57,6 +57,11 @@ public class Candidatura {
         this._elementos = elems;
     }
 
+    public void setQuestionario(ArrayList<Questao> _questionario) {
+        this._questionario = _questionario;
+    }
+        
+
     public String getContacto() {
         return this._contacto;
     }
@@ -132,15 +137,20 @@ public class Candidatura {
         res.append("*** Candidatura ***\n");
         res.append("cod: " + this._cod + "\ndataAbertura: " + this.getDataAbertura().toString() + "\ndataDecisao"
                 + this.getDataDecisao().toString() + "\nobs: " + this._obs + "\nestado: " + this._estado
-                + "\nFuncionario: " + this._funcionario);
+                + "\nFuncionario: " + this._funcionario +"Rendimento: "+this._rendimentoBruto + "\nRua: "+this._rua +"\nlocalidade: "+this._localidade
+                +"\ncodPostal: "+this._codPostal
+                + "\nCandidato:"+this._candidato.toString()
+                +"\nContacto: "+this._contacto);
 
-        res.append("\n->Elementos");
+    
+    
+        res.append("\n\n->Elementos");
         for (Elemento aux : this._elementos) {
-            res.append(aux.toString());
+            res.append("\n"+aux.toString());
         }
-        res.append("\n->Qustionario");
+        res.append("\n\n->Qustionario");
         for (Questao aux : this._questionario) {
-            res.append(aux.toString());
+            res.append("\n"+aux.toString());
         }
 
         return res.toString();

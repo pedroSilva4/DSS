@@ -24,12 +24,12 @@ public class CandidaturaDAO {
     public ArrayList<Questao> getQuestoesActivas() throws SQLException {
         Statement st;
         ResultSet res;
-        String sql = "select * from Habitat.Perguntas where estado = activo;";
+        String sql = "select * from Habitat.Perguntas where estado = 'activa';";
         st = conn.createStatement();
         res = st.executeQuery(sql);
         ArrayList<Questao> questionario = new ArrayList<>();
         while (res.next()) {
-            Questao q = new Questao(res.getString("id"), res.getString("pergunta"), "");
+            Questao q = new Questao(res.getString("id"), res.getString("descricao"), "");
             questionario.add(q);
         }
         return questionario;
@@ -63,7 +63,8 @@ public class CandidaturaDAO {
         stFam = conn.prepareStatement(sqlFam);
         stFam.setString(1, resCand.getString("familia"));
         resFam = stFam.executeQuery();
-        Float f = new Float(resFam.getString("rendimentoBruto"));
+        resFam.next();
+        Float f = new Float(resFam.getString("rendimento"));
         Candidatura c = new Candidatura(resCand.getString("id"), resCand.getDate("dataAbertura"), 
                 resCand.getDate("dataDecisao"), resCand.getString("observacoes"),
                 resCand.getString("estado"), resCand.getString("funcionario"),
@@ -73,22 +74,28 @@ public class CandidaturaDAO {
         ArrayList<Questao> qs = new ArrayList<>();
         PreparedStatement stQ, stCQ;
         ResultSet resQ, resCQ;
-        String sqlCQ = "select * from Habitat.CandidaturaPerguntas where id = ?;";
+        String sqlCQ = "select * from Habitat.CandidaturaPerguntas where candidatura = ?;";
         String sqlQ = "select * from Habitat.Perguntas where id = ?;";
         stCQ = conn.prepareStatement(sqlCQ);
+        stCQ.setString(1, aCod);
         resCQ = stCQ.executeQuery();
-        while (resCQ.next()) {
+        boolean continua=true;
+        while (continua && resCQ.next()) {
             Questao q = new Questao(resCQ.getString("pergunta"), "", resCQ.getString("resposta"));
             stQ = conn.prepareStatement(sqlQ);
+            stQ.setString(1,q.getCod());
             resQ = stQ.executeQuery();
             if (resQ.next()) {
                 q.setPergunta(resQ.getString("descricao"));
+                qs.add(q);
             }
-            qs.add(q);
+            else continua = false;
+            
         }
+        c.setQuestionario(qs);
         /*buscar candidato*/
         String sqlElems = "select * from elementos where id = ?";
-        PreparedStatement stElems = conn.prepareStatement(sqlQ);
+        PreparedStatement stElems = conn.prepareStatement(sqlElems);
         stElems.setString(1, resFam.getString("responsavel"));
         ResultSet resC = stElems.executeQuery();
         if (resC.next()) {
@@ -100,7 +107,7 @@ public class CandidaturaDAO {
         }
         /*buscar elementos*/
         sqlElems = "select * from elementos where familia = ?";
-        stElems = conn.prepareStatement(sqlQ);
+        stElems = conn.prepareStatement(sqlElems);
         stElems.setString(1, resFam.getString("id"));
         ArrayList<Elemento> el = new ArrayList<Elemento>();
         ResultSet resElems = stElems.executeQuery();
@@ -220,12 +227,13 @@ public class CandidaturaDAO {
         st.setString(6, aC.getFuncionario());
         st.executeUpdate();
         res = st.getGeneratedKeys();
+        res.next();
         String codFamilia = res.getString(1);
         /*inserir candidato*/
         sql = "insert into Habitat.Elementos (nome,dataNasc,escolaridade,estadoCivil,parentesco,"
                 + "ocupacao,naturalidade,nacionalidade,familia)"
                 + "values(?,?,?,?,?,?,?,?,?)";
-        st = conn.prepareStatement(sql);
+        st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         Elemento c = aC.getCandidato();
         st.setString(1, c.getNome());
         st.setDate(2, c.getDataNasc());
@@ -253,7 +261,7 @@ public class CandidaturaDAO {
         sql = "insert into Habitat.Elementos (nome,dataNasc,escolaridade,estadoCivil,parentesco,"
                 + "ocupacao,naturalidade,nacionalidade,familia)"
                 + "values(?,?,?,?,?,?,?,?,?)";
-        st = conn.prepareStatement(sql);
+        st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         for (Elemento e : aC.getElementos()) {
             st.setString(1, e.getNome());
             st.setDate(2, e.getDataNasc());
@@ -268,17 +276,21 @@ public class CandidaturaDAO {
         }
         /*inserir candidatura*/
         sql = "insert into Habitat.Candidaturas (dataAbertura,dataDecisao,"
-                + "observacoes,estado,funcionario)"
-                + "values(?,?,?,?,?);";
+                + "observacoes,estado,funcionario,familia)"
+                + "values(?,?,?,?,?,?);";
+        st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         st.setDate(1, aC.getDataAbertura());
         st.setDate(2, aC.getDataDecisao());
         st.setString(3, aC.getObs());
         st.setString(4, aC.getEstado());
         st.setString(5, aC.getFuncionario());
+        st.setString(6, codFamilia);
         st.executeUpdate();
         /*inserir respostas*/
         res = st.getGeneratedKeys();
-        String codCandidatura = res.getString(1);
+        String codCandidatura=null;
+        if(res.next())
+            codCandidatura = res.getString(1);
         sql = "insert into Habitat.CandidaturaPerguntas(resposta,candidatura,pergunta)"
                 + "values(?,?,?);";
         st = conn.prepareStatement(sql);
