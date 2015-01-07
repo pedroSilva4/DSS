@@ -9,6 +9,7 @@ import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.Doador;
 import com.habitat.BusinessLayer.Doadores.Empresa;
 import com.habitat.BusinessLayer.Eventos.Evento;
+import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.PresentationLayer.Doacoes.*;
 import com.habitat.PresentationLayer.Doadores.AtualizarDOADOR_empr;
 import com.habitat.PresentationLayer.Doadores.AtualizarDOADOR_indiv;
@@ -17,15 +18,18 @@ import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR_emp;
 import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR_indv;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author filiperibeiro
  */
-public class ConsultarEVEN extends javax.swing.JPanel {
+public class ConsultarEVEN extends javax.swing.JPanel implements Observer {
 
     /**
      * Creates new form ConsultarDAO
@@ -35,9 +39,12 @@ public class ConsultarEVEN extends javax.swing.JPanel {
     
     public ConsultarEVEN(BusinessFacade bus) {
         this.businessFacade = bus;
+        this.businessFacade.addObserver(this);
+        
         try{
             this.eventos = businessFacade.getListaEventos();
             initComponents();
+            updateComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarDOADOR.class.getName()).log(Level.SEVERE, null, ex);
         }   
@@ -68,6 +75,11 @@ public class ConsultarEVEN extends javax.swing.JPanel {
         });
 
         evento_cb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        evento_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                evento_cbActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,10 +121,28 @@ public class ConsultarEVEN extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void evento_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_evento_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_evento_cbActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox evento_cb;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    public void updateComboBox(){
+    
+        this.evento_cb.removeAllItems(); 
+       for(Evento v : eventos)
+       {
+                this.evento_cb.addItem(v);
+       }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        updateComboBox();
+    }
 }

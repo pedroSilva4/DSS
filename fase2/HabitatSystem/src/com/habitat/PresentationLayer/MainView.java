@@ -11,6 +11,7 @@ import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.PresentationLayer.Candidaturas.CandidaturaJP;
 import com.habitat.PresentationLayer.Doacoes.DoacoesJP;
 import com.habitat.PresentationLayer.Doadores.DoadoresJP;
+import com.habitat.PresentationLayer.Eventos.EventosJP;
 import com.habitat.PresentationLayer.Funcionarios.FuncionariosJP;
 import com.habitat.PresentationLayer.Inventario.InventarioJP;
 import com.habitat.PresentationLayer.Voluntários.VoluntarioJP;
@@ -265,6 +266,7 @@ public class MainView extends javax.swing.JFrame {
        this.voluntarios_jp.add(new VoluntarioJP(businessFacade));
        this.doacoes_jp.add(new DoacoesJP(businessFacade));
        this.doadoresJP.add(new DoadoresJP(businessFacade));
+       this.eventos_jp.add(new EventosJP(businessFacade));
        
         // this.groupBox_func.setVisible(false);
     }

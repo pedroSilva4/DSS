@@ -75,10 +75,15 @@ public class AdicionarEVEN extends javax.swing.JPanel {
         observacoes_ta = new javax.swing.JTextArea();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Adicionar"));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("Valor Angariado:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 82, -1, -1));
+        add(tf_valorAnga, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 76, 117, -1));
 
         jLabel7.setText("Nº Participantes:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 36, -1, -1));
+        add(nunParticipantes_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 30, 116, -1));
 
         submetar_but.setText("Submeter");
         submetar_but.addActionListener(new java.awt.event.ActionListener() {
@@ -86,84 +91,28 @@ public class AdicionarEVEN extends javax.swing.JPanel {
                 submetar_butActionPerformed(evt);
             }
         });
+        add(submetar_but, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 192, -1, -1));
 
         jLabel2.setText("Observações:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 123, -1, -1));
 
         jLabel3.setText("Data:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 36, -1, -1));
 
         jLabel6.setText("Cód.Projeto:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 82, -1, -1));
 
         data_tf.setText("  /  /    ");
+        add(data_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 30, 120, -1));
 
         codProj_cbox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        add(codProj_cbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 78, 120, -1));
 
         observacoes_ta.setColumns(20);
         observacoes_ta.setRows(5);
         jScrollPane1.setViewportView(observacoes_ta);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(submetar_but)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(data_tf)
-                                .addComponent(codProj_cbox, 0, 120, Short.MAX_VALUE))
-                            .addGap(12, 12, 12)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tf_valorAnga, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(nunParticipantes_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(17, 17, 17)
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(data_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nunParticipantes_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(codProj_cbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addComponent(tf_valorAnga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(submetar_but)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(119, 123, 354, 51));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submetar_butActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submetar_butActionPerformed

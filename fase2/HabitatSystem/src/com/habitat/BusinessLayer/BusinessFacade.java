@@ -95,10 +95,14 @@ public class BusinessFacade extends Observable{
 
     public void updateEvento(Evento aEvento) throws SQLException {
         this._eventos.update(aEvento);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addEvento(Date aData, float aMont, int aNpessoas, String aOrg, String aNota) throws SQLException {
         this._eventos.add(aData, aMont, aNpessoas, aOrg, aNota);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public Doador getDoador(String aCod) throws SQLException {
