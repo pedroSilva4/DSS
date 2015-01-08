@@ -6,7 +6,14 @@
 
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Candidaturas.Questao;
+import com.habitat.util.ErrorWindow;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractButton;
+import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 
 /**
@@ -18,10 +25,13 @@ public class AddQuestaoPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddQuestaoPanel
      */
-    public AddQuestaoPanel() {
+    BusinessFacade businessFacade ;
+    public AddQuestaoPanel(BusinessFacade bus) {
+        this.businessFacade =bus;
         initComponents();
                 this.buttonGroup1.add(jRadioButton1);
                 this.buttonGroup1.add(jRadioButton2);
+                this.jButton1.setEnabled(false);
     }
 
     /**
@@ -46,6 +56,15 @@ public class AddQuestaoPanel extends javax.swing.JPanel {
         jLabel1.setText("Questão :");
 
         jLabel2.setText("Estado :");
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jRadioButton1.setText("Ativado");
 
@@ -98,10 +117,37 @@ public class AddQuestaoPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-       if(this.jRadioButton1.isSelected())System.out.println("ativado");
-       if(this.jRadioButton2.isSelected())System.out.println("desativado");
+        String estado = "ativado";
+        //if(this.jRadioButton1.isSelected())estado = "ativado";
+        if(this.jRadioButton2.isSelected())estado = "desativado";
+                                            
+      
+        String pergunta = this.jTextField1.getText();
+       
+        Questao q = new Questao("", pergunta, "", estado);
+        try {
+            this.businessFacade.addQuestao(q);
+            this.jTextField1.setText("");
+            this.jButton1.setEnabled(false);
+            this.jRadioButton1.setSelected(false);
+            this.jRadioButton2.setSelected(false);
+            
+        } catch (SQLException ex) {
+            new ErrorWindow("Questao", ex.getMessage(), "error",new JFrame()).wshow();
+        }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+            this.jButton1.setEnabled(!this.jTextField1.getText().isEmpty());
+       
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+         this.jButton1.setEnabled(!this.jTextField1.getText().isEmpty());
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
