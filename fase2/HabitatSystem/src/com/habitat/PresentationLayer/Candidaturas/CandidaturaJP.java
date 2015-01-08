@@ -155,7 +155,7 @@ public class CandidaturaJP extends javax.swing.JPanel {
 
     private void add_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btActionPerformed
         // TODO add your handling code here:
-        new AdicionarCandidatura(new JFrame(), true).setVisible(true);
+        new AdicionarCandidatura(new JFrame(), true,businessFacade).setVisible(true);
     }//GEN-LAST:event_add_btActionPerformed
 
     private void addQuest_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuest_btActionPerformed

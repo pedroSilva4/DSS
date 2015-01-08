@@ -6,6 +6,15 @@
 
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Candidaturas.Questao;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Pedro
@@ -15,8 +24,18 @@ public class QuestPanel extends javax.swing.JPanel {
     /**
      * Creates new form QuestPanel
      */
-    public QuestPanel() {
+    private ArrayList<Questao> questionario;
+    ComboBoxListener itLst;
+    public QuestPanel(BusinessFacade bus) {
+        try {
+            this.questionario = bus.getQuestoesActivas();
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
+        updateComboBox();
+        itLst = new ComboBoxListener();
+        this.jComboBox1.addItemListener(itLst);
     }
 
     /**
@@ -44,6 +63,11 @@ public class QuestPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Responder");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Resposta :");
 
@@ -88,6 +112,13 @@ public class QuestPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Questao q = (Questao) jComboBox1.getSelectedItem();
+        q.SetResposta(this.jTextArea1.getText());
+        //this.jTextArea1.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -97,4 +128,31 @@ public class QuestPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
+
+    private void updateComboBox() {
+        this.jComboBox1.removeAllItems();
+        for(Questao q : questionario)
+            jComboBox1.addItem(q);
+        
+        this.jTextArea1.setText(((Questao)jComboBox1.getSelectedItem()).getResposta());
+    }
+    
+    public ArrayList<Questao> getQuestionario()
+    {
+        for(Questao q : questionario)
+            if(q.getResposta().isEmpty())
+                return null;
+        
+        return this.questionario;
+    }
+    
+    class ComboBoxListener implements ItemListener{
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+           String s = ((Questao)jComboBox1.getSelectedItem()).getResposta();
+           jTextArea1.setText(s);
+        }
+        
+    }
 }
