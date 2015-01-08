@@ -6,20 +6,45 @@
 package com.habitat.PresentationLayer.Candidaturas.Projectos;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Projetos.Projeto;
+import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
+import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author xavier
  */
-public class AddProjectoJP extends javax.swing.JPanel {
+public class AddProjectoJP extends javax.swing.JPanel implements Observer {
 
     /**
      * Creates new form addProjectoJP
      */
     private BusinessFacade bus;
+    private ArrayList<String> candidaturas;
     public AddProjectoJP(BusinessFacade b) {
-        this.bus = b;
-        initComponents();
+        try{
+            this.bus = b;
+            this.candidaturas = bus.getIdCandidaturasSemProjecto();
+            this.bus.addObserver(this);
+            initComponents();
+            updateComboBox();
+        }catch (SQLException ex) {
+            Logger.getLogger(AddProjectoJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void updateComboBox(){
+        this.candidaturaCB.removeAllItems();
+        for(String s : this.candidaturas){
+            this.candidaturaCB.addItem(s);
+        }
     }
 
     /**
@@ -31,41 +56,55 @@ public class AddProjectoJP extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
+        candidaturaCB = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        descricao_ta = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        addProjectoBT = new javax.swing.JButton();
+        data_tf = new javax.swing.JFormattedTextField();
+        orcamento_tf = new javax.swing.JFormattedTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Adiciona Projeto"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        candidaturaCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        candidaturaCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                candidaturaCBActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Candidatura");
 
         jLabel2.setText("Data de Início:");
 
-        jTextField1.setText("jTextField1");
-
         jLabel3.setText("Descrição:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        descricao_ta.setColumns(20);
+        descricao_ta.setRows(5);
+        jScrollPane1.setViewportView(descricao_ta);
 
         jLabel4.setText("Orçamento:");
 
-        jTextField2.setText("jTextField2");
-
         jLabel5.setText("(EUR)");
 
-        jButton1.setText("Adicionar");
+        addProjectoBT.setText("Adicionar");
+        addProjectoBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProjectoBTActionPerformed(evt);
+            }
+        });
+
+        try {
+            data_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        orcamento_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,7 +114,7 @@ public class AddProjectoJP extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(candidaturaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -84,15 +123,16 @@ public class AddProjectoJP extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(194, 194, 194)
+                                .addComponent(addProjectoBT))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(orcamento_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5))))
+                                .addComponent(jLabel5))
+                            .addComponent(data_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel1))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,36 +141,68 @@ public class AddProjectoJP extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(candidaturaCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(data_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(orcamento_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(addProjectoBT)
                 .addGap(62, 62, 62))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void candidaturaCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_candidaturaCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_candidaturaCBActionPerformed
+
+    private void addProjectoBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjectoBTActionPerformed
+        // TODO add your handling code here:
+        Projeto p;
+        String [] parse =((String) this.candidaturaCB.getSelectedItem()).split(":");
+        String cand = parse[0];
+        System.out.println("candidatura "+cand );
+        String[] dateArr = this.data_tf.getText().split("/");
+        Date date = new Date(Integer.parseInt(dateArr[2]) - 1900, Integer.parseInt(dateArr[1]) - 1,
+                Integer.parseInt(dateArr[0]));
+        String val_s = this.orcamento_tf.getText();
+        double d = Double.parseDouble(val_s.replace(",", "."));
+//(String cod,String cand, Date _dataI, Date _dataF, String _estado,
+//String _descricao, double _orcamento, String Funcionario, ArrayList<ProjetoTarefas> tarefas)
+        p = new Projeto("",cand,date,date,"iniciado",this.descricao_ta.getText(),
+                        d,this.bus.getActiveUser().getUsername(),new ArrayList<ProjetoTarefas>());
+        try {
+            this.bus.addProjeto(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddProjectoJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_addProjectoBTActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton addProjectoBT;
+    private javax.swing.JComboBox candidaturaCB;
+    private javax.swing.JFormattedTextField data_tf;
+    private javax.swing.JTextArea descricao_ta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JFormattedTextField orcamento_tf;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        updateComboBox();
+    }
 }

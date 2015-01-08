@@ -79,7 +79,10 @@ public class BusinessFacade extends Observable{
         setChanged();
         notifyObservers();
     }
-
+    
+    public ArrayList<String> getIdCandidaturasSemProjecto() throws SQLException{
+        return this._candidaturas.getAprovadasSemProjecto();
+    }
     public Candidatura getCandidatura(String aCod) throws SQLException {
         return this._candidaturas.get(aCod);
     }
