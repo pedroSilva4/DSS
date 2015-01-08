@@ -181,12 +181,21 @@ public class CandidaturaJP extends javax.swing.JPanel {
     {
         if(this.businessFacade.getActiveUser().getTipo().equals("famílias") || 
                 this.businessFacade.getActiveUser().getTipo().equals("admin") ){
-            this.consCand_bt.setText("Atual./Consultar\n Candidatura");
-            this.consProj.setText("Atual./Consultar\n Projecto");
-            this.conQuest_bt.setText("Atual./Consultar\n Questão");
+                this.consCand_bt.setText("Atual./Consultar\n Candidatura");
+              //  this.consProj.setText("Atual./Consultar\n Projecto");
+                this.conQuest_bt.setText("Atual./Consultar\n Questão");
         }
         else{
             this.add_bt.setEnabled(false);
+            this.addQuest_bt.setEnabled(false);
+        }
+        if(this.businessFacade.getActiveUser().getTipo().equals("obras") || 
+                this.businessFacade.getActiveUser().getTipo().equals("admin") ){
+    
+            this.consProj.setText("Atual./Consultar\n Projecto");
+        
+        }else{
+            //
         }
         
         this.container.add(new ConsultarCand(),"consCand");

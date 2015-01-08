@@ -125,7 +125,7 @@ public class ConsultarQuest extends javax.swing.JPanel implements Observer{
                 new AtualizarQuestDialog(new JFrame(), true,q,bus).setVisible(true);
         }else
         {
-          //  new ConsultarQuestDialog(new JFrame(), true,q).setVisible(true);
+            new ConsultarQuestDialog(new JFrame(), true,q).setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
