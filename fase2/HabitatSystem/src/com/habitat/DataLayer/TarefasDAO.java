@@ -1,6 +1,7 @@
 package com.habitat.DataLayer;
 
 import com.habitat.BusinessLayer.Material.Material;
+import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TarefasDAO {
     
@@ -97,5 +99,21 @@ public class TarefasDAO {
             ts.add(t);
         }
         return ts;
+    }
+    public HashMap<String,ProjetoTarefas> getProjetoTarefa(String codProj) throws SQLException{
+        PreparedStatement st;
+        ResultSet res;
+        HashMap<String,ProjetoTarefas> pts = new HashMap<String,ProjetoTarefas>();
+        String sql = "select * from ProjectoTarefas where projecto = ?;";
+        st = conn.prepareStatement(sql);
+        st.setString(1, codProj);
+        res = st.executeQuery();
+        while(res.next()){
+            //Date aDataI, Date aDataF, String aTarefa
+            ProjetoTarefas pt = new ProjetoTarefas(res.getDate("dataInicio"),
+                    res.getDate("dataFim"),res.getString("tarefas"));
+            pts.put(pt.getaTarefa(), pt);
+        }
+        return pts;
     }
 }

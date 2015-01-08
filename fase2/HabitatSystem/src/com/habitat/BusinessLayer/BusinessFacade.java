@@ -7,6 +7,7 @@ import com.habitat.BusinessLayer.Doadores.Doador;
 import com.habitat.BusinessLayer.Eventos.Evento;
 import com.habitat.BusinessLayer.Material.Material;
 import com.habitat.BusinessLayer.Projetos.Projeto;
+import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
 import com.habitat.BusinessLayer.Utilizadores.Utilizador;
 import com.habitat.BusinessLayer.Voluntarios.Morada;
@@ -377,6 +378,12 @@ public class BusinessFacade extends Observable{
      }
      public ArrayList<Tarefa> getListaTarefas() throws SQLException{
          return this._tarefas.getTarefas();
+     }
+     public HashMap<String,ProjetoTarefas> getListaProjetoTarefa(String codProj) throws SQLException{
+         return this._tarefas.getProjetoTarefa(codProj);
+     }
+     public ArrayList<Voluntario> getListaVolProjTar(String cProj, String cTar) throws SQLException{
+         return this._voluntarios.getListaVolProjTar(cProj, cTar);
      }
      
      public void updateQuestao(Questao q) throws SQLException{

@@ -65,7 +65,7 @@ public class VoluntarioDAO {
             res = st.executeQuery();
             if(res.next()){
                 Morada m = new Morada(res.getString("rua"),res.getString("localidade"),
-                        res.getString("dataNascimento"));
+                        res.getString("codPostal"));
 
                 return new Voluntario(res.getString("id"),res.getString("nome"),res.getDate("dataNascimento"),res.getDate("dataAssociacao"),
                             res.getString("contacto"),res.getString("nomeEquipa"),
@@ -121,5 +121,27 @@ public class VoluntarioDAO {
             }
             return vs;
 
+        }
+        public ArrayList<Voluntario> getListaVolProjTar(String cProj, String cTar) throws SQLException{
+            PreparedStatement st;
+            ResultSet res;
+            ArrayList<Voluntario> vs = new ArrayList<Voluntario>();
+            String sql = "select * from voluntarios " +
+                            "where id in(select voluntarios from ProjectoTarefaVoluntario\n" +
+                                            "where tarefas = ? and projecto = ?);";
+            st = conn.prepareStatement(sql);
+            st.setString(1, cTar);
+            st.setString(2, cProj);
+            res = st.executeQuery();
+            while(res.next()){
+         //(String rua, String localidade, String codPostal)
+//(String cod, String nome, Date dataNasc,Date dataAssoc, String contacto, String equipa,String profissao,Morada m)
+                Morada m = new Morada(res.getString("rua"),res.getString("localidade"),res.getString("codPostal"));
+                Voluntario v = new Voluntario(res.getString("id"),res.getString("nome"),
+                                res.getDate("dataNascimento"),res.getDate("dataAssociacao"),
+                                res.getString("contacto"),res.getString("equipa"),res.getString("profissao"),m);
+                vs.add(v);
+            }
+            return vs;
         }
 }

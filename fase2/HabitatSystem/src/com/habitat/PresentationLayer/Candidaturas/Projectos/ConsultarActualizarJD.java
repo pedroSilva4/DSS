@@ -7,10 +7,14 @@ package com.habitat.PresentationLayer.Candidaturas.Projectos;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Projetos.Projeto;
+import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Level;
@@ -30,6 +34,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private Projeto p;
     private ArrayList<Tarefa> tarefas;
     private ArrayList<Tarefa> tarefasAssociadas;
+    private HashMap<String,ProjetoTarefas> projetoTarefas;
     public ConsultarActualizarJD(java.awt.Frame parent, boolean modal,BusinessFacade b, String idProjecto) {
         super(parent, modal);
         this.bus = b;
@@ -49,6 +54,15 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             this.data_tf.setText(p.getDataF().toString());
         updateCBTarefas();
         updateCBTarefasAssociadas();
+        ItemListener it = new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                String s = ((String)e.getItem()).split(":")[0];
+                dataProjetoTarefa_tf.setText(projetoTarefas.get(s).getaDataF().toString());
+            }
+        };
+        cbTarefasAssociadas.addItemListener(it);
     }
     
     void updateCBTarefas(){
@@ -67,9 +81,12 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         try {
             cbTarefasAssociadas.removeAllItems();
             this.tarefasAssociadas = bus.getTarefasAssociadas(idProjecto);
+            this.projetoTarefas = bus.getListaProjetoTarefa(idProjecto);
             for(Tarefa t : this.tarefasAssociadas){
                 cbTarefasAssociadas.addItem(t.getCod()+": "+t.getDescricao());
             }
+            String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
+            dataProjetoTarefa_tf.setText(projetoTarefas.get(s).getaDataF().toString());
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,7 +131,6 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         jLabel13 = new javax.swing.JLabel();
         cbTarefasAssociadas = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
@@ -126,13 +142,14 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        dataProjetoTarefa_tf = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox();
         jLabel19 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -326,8 +343,6 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
 
         jLabel14.setText("Data de Fim:");
 
-        jTextField4.setText("jTextField4");
-
         jLabel15.setText("Voluntário:");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -359,6 +374,12 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
 
         jButton6.setText("Atualizar");
 
+        try {
+            dataProjetoTarefa_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -383,22 +404,22 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                                         .addComponent(jLabel16)))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel17)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(36, 36, 36)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jLabel14)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(dataProjetoTarefa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(31, 31, 31)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,7 +429,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                     .addComponent(jLabel13)
                     .addComponent(cbTarefasAssociadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataProjetoTarefa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
@@ -424,7 +445,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                         .addComponent(jButton4)
                         .addGap(18, 18, 18)
                         .addComponent(jButton5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addGap(30, 30, 30))
         );
@@ -437,11 +458,11 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
 
         jLabel19.setText("Quantidade:");
 
-        jTextField7.setText("jTextField7");
-
         jLabel20.setText("aparece a unidade");
 
         jButton7.setText("Adicionar ao projeto");
+
+        jFormattedTextField1.setText("jFormattedTextField1");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -450,19 +471,21 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton7)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel19)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel20))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel18)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(320, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton7)
+                        .addGap(12, 12, 12))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20)))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,11 +497,11 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                 .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
+                    .addComponent(jLabel20)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(jButton7)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adicionar Material", jPanel4);
@@ -487,7 +510,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -586,6 +609,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JFormattedTextField dataAssociaFim_tf;
     private javax.swing.JFormattedTextField dataAssociaInicio_tf;
     private javax.swing.JLabel dataLabel;
+    private javax.swing.JFormattedTextField dataProjetoTarefa_tf;
     private javax.swing.JFormattedTextField data_tf;
     private javax.swing.JTextArea descricao_ta;
     private javax.swing.JLabel funcLabel;
@@ -596,6 +620,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -622,10 +647,8 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField tf_novaTarefa;
     // End of variables declaration//GEN-END:variables
 
