@@ -292,16 +292,15 @@ public class CandidaturaDAO {
             st.executeUpdate();
         }
         /*inserir candidatura*/
-        sql = "insert into Habitat.Candidaturas (dataAbertura,dataDecisao,"
+        sql = "insert into Habitat.Candidaturas (dataAbertura,"
                 + "observacoes,estado,funcionario,familia)"
-                + "values(?,?,?,?,?,?);";
+                + "values(?,?,?,?,?);";
         st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         st.setDate(1, aC.getDataAbertura());
-        st.setDate(2, aC.getDataDecisao());
-        st.setString(3, aC.getObs());
-        st.setString(4, aC.getEstado());
-        st.setString(5, aC.getFuncionario());
-        st.setString(6, codFamilia);
+        st.setString(2, aC.getObs());
+        st.setString(3, aC.getEstado());
+        st.setString(4, aC.getFuncionario());
+        st.setString(5, codFamilia);
         st.executeUpdate();
         /*inserir respostas*/
         res = st.getGeneratedKeys();
