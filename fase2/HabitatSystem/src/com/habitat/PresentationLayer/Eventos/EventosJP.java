@@ -37,14 +37,18 @@ public class EventosJP extends javax.swing.JPanel {
         consultar_bt = new javax.swing.JButton();
         container = new javax.swing.JPanel();
 
-        add_bt.setText("Adicionar");
+        add_bt.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        add_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/add-icon.png"))); // NOI18N
+        add_bt.setText("   Adicionar");
         add_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_btActionPerformed(evt);
             }
         });
 
-        consultar_bt.setText("Consultar");
+        consultar_bt.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        consultar_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/Search-icon.png"))); // NOI18N
+        consultar_bt.setText("   Consultar");
         consultar_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultar_btActionPerformed(evt);

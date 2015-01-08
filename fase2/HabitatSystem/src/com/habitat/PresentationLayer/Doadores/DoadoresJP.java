@@ -39,7 +39,10 @@ public class DoadoresJP extends javax.swing.JPanel {
         container = new javax.swing.JPanel();
         cons_ = new javax.swing.JButton();
 
-        add_.setText("Adicionar");
+        add_.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        add_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/add-icon.png"))); // NOI18N
+        add_.setText("   Adicionar");
+        add_.setToolTipText("");
         add_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_ActionPerformed(evt);
@@ -48,7 +51,9 @@ public class DoadoresJP extends javax.swing.JPanel {
 
         container.setLayout(new java.awt.CardLayout());
 
-        cons_.setText("Consultar");
+        cons_.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        cons_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/Search-icon.png"))); // NOI18N
+        cons_.setText("   Consultar");
         cons_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cons_ActionPerformed(evt);

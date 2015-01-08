@@ -200,7 +200,7 @@ public class MainView extends javax.swing.JFrame {
         jMenu1.add(logout_bt);
 
         exit_bt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        exit_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/exit1.png"))); // NOI18N
+        exit_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/exit2.png"))); // NOI18N
         exit_bt.setText("Sair");
         exit_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,7 +221,7 @@ public class MainView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+            .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

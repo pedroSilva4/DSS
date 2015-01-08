@@ -37,14 +37,18 @@ public class DoacoesJP extends javax.swing.JPanel {
         cons_ = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
 
-        add_.setText("Adicionar");
+        add_.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        add_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/add-icon.png"))); // NOI18N
+        add_.setText("   Adicionar");
         add_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_ActionPerformed(evt);
             }
         });
 
-        cons_.setText("Consultar");
+        cons_.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        cons_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/Search-icon.png"))); // NOI18N
+        cons_.setText("   Consultar");
         cons_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cons_ActionPerformed(evt);
