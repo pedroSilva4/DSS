@@ -6,6 +6,9 @@
 
 package com.habitat.PresentationLayer.Candidaturas.Projectos;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Pedro
@@ -15,7 +18,9 @@ public class ConsultarProj extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarCand
      */
-    public ConsultarProj() {
+    private BusinessFacade bus;
+    public ConsultarProj(BusinessFacade b) {
+        this.bus = b;
         initComponents();
     }
 
@@ -29,14 +34,19 @@ public class ConsultarProj extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        cons_btt = new javax.swing.JButton();
+        consBT = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
         jLabel1.setText("Projeto:");
 
-        cons_btt.setText("Consultar");
+        consBT.setText("Consultar");
+        consBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consBTActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -50,7 +60,7 @@ public class ConsultarProj extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(cons_btt)
+                .addComponent(consBT)
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -60,14 +70,19 @@ public class ConsultarProj extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cons_btt))
+                    .addComponent(consBT))
                 .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void consBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consBTActionPerformed
+        // TODO add your handling code here:
+        new ConsultarActualizarJD(new JFrame(),true,this.bus).setVisible(true);
+    }//GEN-LAST:event_consBTActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cons_btt;
+    private javax.swing.JButton consBT;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
