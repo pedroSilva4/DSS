@@ -324,7 +324,7 @@ public class CandidaturaDAO {
         ResultSet res;
         ArrayList<String> cs = new ArrayList<>();
         String sql = "select id, dataDecisao from Habitat.Candidaturas\n"
-                + "where estado = 'aprovado' and id not in (select id from Habitat.Projectos)\n"
+                + "where estado = 'aprovado' and id not in (select candidatura from Habitat.Projectos)\n"
                 + "order by dataDecisao desc;";
         st = conn.createStatement();
         res = st.executeQuery(sql);

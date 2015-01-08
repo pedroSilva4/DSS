@@ -37,7 +37,7 @@ public class ProjetosDAO {
 
     public void add(Projeto aProjeto) throws SQLException {
         PreparedStatement st;
-        String sql = "INSERT INTO `Habitat`.`Projectos` (`candidatura`, `dataInicio`, `estado`, `descricao`, `orcamento`, `funcionario`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO `Habitat`.`Projectos` (`candidatura`, `dataInicio`, `estado`, `descricao`, `orcamento`, `funcionario`) VALUES (?, ?, ?, ?, ?, ?);";
 
         st = conn.prepareStatement(sql);
         st.setInt(1, Integer.parseInt(aProjeto.getCandidatura()));

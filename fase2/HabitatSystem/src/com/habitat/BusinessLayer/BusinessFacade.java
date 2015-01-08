@@ -290,6 +290,8 @@ public class BusinessFacade extends Observable{
     
     public void addProjeto(Projeto p) throws SQLException{
         this._projetos.add(p);
+        this.setChanged();
+        notifyObservers();
     }
     
     public boolean existeProjeto(String cod) throws SQLException{

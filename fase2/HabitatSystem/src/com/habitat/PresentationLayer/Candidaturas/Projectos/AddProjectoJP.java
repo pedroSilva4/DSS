@@ -203,6 +203,11 @@ public class AddProjectoJP extends javax.swing.JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        try {
+            this.candidaturas = bus.getIdCandidaturasSemProjecto();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddProjectoJP.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateComboBox();
     }
 }
