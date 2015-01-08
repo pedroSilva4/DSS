@@ -80,7 +80,7 @@ public final class InventarioJP extends javax.swing.JPanel implements Observer{
         }
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/add_peq.png"))); // NOI18N
-        jButton1.setText("   Adicionar");
+        jButton1.setText("  Adicionar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

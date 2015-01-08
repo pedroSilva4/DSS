@@ -40,7 +40,7 @@ public class VoluntarioJP extends javax.swing.JPanel {
 
         add_bt.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         add_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/add-icon.png"))); // NOI18N
-        add_bt.setText("   Adicionar");
+        add_bt.setText("  Adicionar");
         add_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_btActionPerformed(evt);
@@ -49,7 +49,7 @@ public class VoluntarioJP extends javax.swing.JPanel {
 
         con_bt.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         con_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/Search-icon.png"))); // NOI18N
-        con_bt.setText("   Consultar");
+        con_bt.setText("  Consultar");
         con_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 con_btActionPerformed(evt);
@@ -63,12 +63,12 @@ public class VoluntarioJP extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(con_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(add_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(con_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                    .addComponent(add_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
                 .addGap(91, 91, 91)
-                .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                 .addGap(86, 86, 86))
         );
         layout.setVerticalGroup(

@@ -17,13 +17,13 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="cons_" pref="170" max="32767" attributes="0"/>
-                  <Component id="add_" pref="170" max="32767" attributes="0"/>
+                  <Component id="cons_" pref="197" max="32767" attributes="0"/>
+                  <Component id="add_" pref="197" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="322" max="32767" attributes="0"/>
+              <Component id="jPanel1" pref="349" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -55,7 +55,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/com/habitat/PresentationLayer/ICONs/add-icon.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="   Adicionar"/>
+        <Property name="text" type="java.lang.String" value="  Adicionar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="add_ActionPerformed"/>
@@ -69,7 +69,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/com/habitat/PresentationLayer/ICONs/Search-icon.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="   Consultar"/>
+        <Property name="text" type="java.lang.String" value="  Consultar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cons_ActionPerformed"/>

@@ -39,7 +39,7 @@ public class DoacoesJP extends javax.swing.JPanel {
 
         add_.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         add_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/add-icon.png"))); // NOI18N
-        add_.setText("   Adicionar");
+        add_.setText("  Adicionar");
         add_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_ActionPerformed(evt);
@@ -48,7 +48,7 @@ public class DoacoesJP extends javax.swing.JPanel {
 
         cons_.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         cons_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/Search-icon.png"))); // NOI18N
-        cons_.setText("   Consultar");
+        cons_.setText("  Consultar");
         cons_.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cons_ActionPerformed(evt);
@@ -62,12 +62,12 @@ public class DoacoesJP extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cons_, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(add_, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                    .addComponent(cons_, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                    .addComponent(add_, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addGap(153, 153, 153))
         );
         layout.setVerticalGroup(
