@@ -31,12 +31,15 @@ public class ConsultarProj extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         id_tf = new javax.swing.JTextField();
         cons_btt = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
         jLabel1.setText("ID :");
 
         cons_btt.setText("Consultar");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -49,8 +52,10 @@ public class ConsultarProj extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -59,9 +64,11 @@ public class ConsultarProj extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
                 .addComponent(cons_btt)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -69,6 +76,7 @@ public class ConsultarProj extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cons_btt;
     private javax.swing.JTextField id_tf;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
