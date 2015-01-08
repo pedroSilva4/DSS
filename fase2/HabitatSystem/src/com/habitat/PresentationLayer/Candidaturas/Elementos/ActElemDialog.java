@@ -187,8 +187,8 @@ public class ActElemDialog extends javax.swing.JDialog {
         
         
         
-        
-        /*for(Component c : this.getComponents()){
+        /*
+        for(Component c : this.getComponents()){
             if(c.getClass().equals(JTextField.class) || c.getClass().equals(JFormattedTextField.class)){
 
                 if(((JTextField)c).getText().isEmpty()){
@@ -215,8 +215,8 @@ public class ActElemDialog extends javax.swing.JDialog {
             ((JFrame)this.getParent()).dispose();
         } catch (NumberFormatException e) {
             new ErrorWindow("Campos em Falta", "Campos em falta", "error", new JFrame()).wshow();
-        }
-*/
+        }*/
+
     }//GEN-LAST:event_sub_btActionPerformed
 
     private void voltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar1ActionPerformed
@@ -256,7 +256,7 @@ public static void main(String args[]) {
         //</editor-fold>
 
         /* Create and display the dialog */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ActElemDialog dialog = new ActElemDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -266,8 +266,9 @@ public static void main(String args[]) {
                     }
                 });
                 dialog.setVisible(true);
-            }*/
-        }
+            }
+            });
+}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

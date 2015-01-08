@@ -6,11 +6,16 @@
 package com.habitat.PresentationLayer.Candidaturas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Candidaturas.Elemento;
+import com.habitat.BusinessLayer.Candidaturas.Questao;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.ActCandPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.AddCandtoPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.ElemPanel;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.ActQuestPanel;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.QuestPanel;
+import com.habitat.util.ErrorWindow;
+import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -22,7 +27,7 @@ public class AtualizarCondidatura extends javax.swing.JPanel {
      * Creates new form AtualizarCondidatura
      */
     private BusinessFacade bus;
-    public AtualizarCondidatura(java.awt.Frame parent, boolean modal,BusinessFacade bus) {
+    public AtualizarCondidatura(BusinessFacade bus) {
         initComponents();
         //super(parent, modal);
         initComponents();
@@ -130,18 +135,18 @@ public class AtualizarCondidatura extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void act_bt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_act_bt2ActionPerformed
-        /* TODO add your handling code here:
-        Elemento cand = ((AddCandtoPanel)this.containerCand.getComponent(0)).getCandidato();
+        /* TODO add your handling code here:*/
+        Elemento cand = ((AddCandtoPanel)this.cand_cont.getComponent(0)).getCandidato();
         if(cand == null){
             new ErrorWindow("Adicionar Quandidatura", "Exitem Campos para o Candidato não preenchidos", "warning", new JFrame()).wshow();
             return;
         }
-        ArrayList<Questao> questionario = ((QuestPanel)this.containerQuest.getComponent(0)).getQuestionario();
+        ArrayList<Questao> questionario = ((QuestPanel)this.containerQuest2.getComponent(0)).getQuestionario();
         if(questionario == null){
             new ErrorWindow("Adicionar Quandidatura", "Questionario não respondido", "warning", new JFrame()).wshow();
             return;
         }
-        System.out.println("questionario ok");*/
+        System.out.println("questionario ok");
     }//GEN-LAST:event_act_bt2ActionPerformed
 
 

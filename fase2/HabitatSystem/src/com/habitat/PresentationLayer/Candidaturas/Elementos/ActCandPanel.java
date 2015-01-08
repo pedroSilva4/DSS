@@ -211,13 +211,26 @@ public class ActCandPanel extends javax.swing.JPanel {
         String ocupacao = this.ocup_tf.getText();
         String naturalidade = this.nat_tf.getText();
         String nacionalidade = this.nac_tf.getText();
-        this.cand = new Elemento("", name, date, escolaridade, estCivil, parentesco, ocupacao, naturalidade, nacionalidade);
+        
+        System.out.print(escolaridade);
+        System.out.print(estCivil);
+        System.out.print(parentesco);
+        System.out.print(ocupacao);
+        //this.cand.setDataNasc(date);
+        //this.cand.setEscolaridade(escolaridade);
+        //this.cand.setEstCivil(estCivil);
+        //this.cand.setParentesco(parentesco);
+        //this.cand.setParentesco(parentesco);
+    
+        
+        
+        //this.cand = new Elemento("", name, date, escolaridade, estCivil, parentesco, ocupacao, naturalidade, nacionalidade);
         return cand;
     }
 
 public void myinit(){
     
-   
+   /*
         this.name_tf.setText(this.cand.getNome());
         Date d = cand.getDataNasc();
             String dt = new SimpleDateFormat("dd/MM/yyyy").format(d);
@@ -229,7 +242,17 @@ public void myinit(){
         this.ocup_tf.setText(this.cand.getOcupacao());
         this.nat_tf.setText(this.cand.getNaturalidade());
         this.nac_tf.setText(this.cand.getNacionalidade());
-    
+    */
+    this.name_tf.setText("nome");
+        
+            this.data_tf.setText("12/12/1111");
+        
+        this.escol.setText("esc");
+        this.estCivil_tf.setText("est civil");
+        this.parent_tf.setText("parent");
+        this.ocup_tf.setText("ocup");
+        this.nat_tf.setText("natural");
+        this.nac_tf.setText("nac");
     
     }
 
