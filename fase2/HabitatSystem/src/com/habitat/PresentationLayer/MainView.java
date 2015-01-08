@@ -173,19 +173,19 @@ public class MainView extends javax.swing.JFrame {
         main_tabs.addTab("Candidaturas", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/doc.png")), candidaturas_jpanel); // NOI18N
 
         eventos_jp.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Eventos", eventos_jp);
+        main_tabs.addTab("Eventos", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/cal.png")), eventos_jp); // NOI18N
 
         doacoes_jp.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Doações", doacoes_jp);
+        main_tabs.addTab("Doações", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/doll.png")), doacoes_jp); // NOI18N
 
         doadoresJP.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Doadores", doadoresJP);
+        main_tabs.addTab("Doadores", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/doa.png")), doadoresJP); // NOI18N
 
         inventario_jp.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Inventário", inventario_jp);
+        main_tabs.addTab("Inventário", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/invent.png")), inventario_jp); // NOI18N
 
         voluntarios_jp.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Voluntários", voluntarios_jp);
+        main_tabs.addTab("Voluntários", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/vol.png")), voluntarios_jp); // NOI18N
 
         jMenu1.setText("Menu");
 

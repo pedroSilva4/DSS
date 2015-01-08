@@ -22,8 +22,8 @@
                   <Component id="add_" min="-2" pref="197" max="-2" attributes="0"/>
                   <Component id="cons_" min="-2" pref="197" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="container" pref="539" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <Component id="container" pref="492" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
