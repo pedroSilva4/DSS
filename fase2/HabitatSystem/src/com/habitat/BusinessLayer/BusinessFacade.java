@@ -315,9 +315,6 @@ public class BusinessFacade extends Observable{
         this._tarefas.add(aTarefa);
     }
     
-    public void addTarefa(String aTarefa) throws SQLException {
-        this._tarefas.add(aTarefa);
-    }
 
     public Tarefa getTarefa(String aCod) throws SQLException {
         return this._tarefas.get(aCod);
