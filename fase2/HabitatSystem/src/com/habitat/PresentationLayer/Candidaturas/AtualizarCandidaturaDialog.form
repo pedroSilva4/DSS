@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -16,16 +23,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" min="-2" pref="580" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jScrollPane1" min="-2" pref="591" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" min="-2" pref="464" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="508" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -36,7 +40,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel3">
+        <Container class="javax.swing.JPanel" name="jPanel1">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -45,17 +49,17 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="act_bt2" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="update_bt" min="-2" pref="95" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="canc_bt2" min="-2" pref="95" max="-2" attributes="0"/>
+                              <Component id="canc_bt" min="-2" pref="95" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="containerElem2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="containerQuest2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="triv_cont" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="cand_cont" alignment="1" pref="483" max="32767" attributes="0"/>
+                                  <Component id="containerElem" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="containerQuest" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="containerTrivia" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="containerCand" alignment="1" pref="483" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -67,17 +71,17 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="cand_cont" pref="94" max="32767" attributes="0"/>
+                      <Component id="containerCand" pref="103" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="triv_cont" pref="54" max="32767" attributes="0"/>
+                      <Component id="containerTrivia" pref="65" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="containerQuest2" pref="105" max="32767" attributes="0"/>
+                      <Component id="containerQuest" pref="114" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="containerElem2" pref="73" max="32767" attributes="0"/>
+                      <Component id="containerElem" pref="82" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="act_bt2" alignment="0" pref="30" max="32767" attributes="0"/>
-                          <Component id="canc_bt2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="update_bt" alignment="0" pref="30" max="32767" attributes="0"/>
+                          <Component id="canc_bt" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
@@ -85,33 +89,36 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="cand_cont">
+            <Container class="javax.swing.JPanel" name="containerCand">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
             </Container>
-            <Container class="javax.swing.JPanel" name="containerQuest2">
+            <Container class="javax.swing.JPanel" name="containerQuest">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
             </Container>
-            <Container class="javax.swing.JPanel" name="containerElem2">
+            <Container class="javax.swing.JPanel" name="containerElem">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
             </Container>
-            <Container class="javax.swing.JPanel" name="triv_cont">
+            <Container class="javax.swing.JPanel" name="containerTrivia">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
             </Container>
-            <Component class="javax.swing.JButton" name="canc_bt2">
+            <Component class="javax.swing.JButton" name="canc_bt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="canc_btActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="act_bt2">
+            <Component class="javax.swing.JButton" name="update_bt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atualizar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="act_bt2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="update_btActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

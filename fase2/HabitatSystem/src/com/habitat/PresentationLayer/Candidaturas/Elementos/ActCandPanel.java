@@ -32,7 +32,7 @@ public class ActCandPanel extends javax.swing.JPanel {
         businessFacade = null;
     }
     
-    public ActCandPanel(java.awt.Frame parent, boolean modal,BusinessFacade bus,Elemento ut) {
+    public ActCandPanel(BusinessFacade bus,Elemento ut) {
         //super(parent, modal);
         this.cand = ut;
         this.businessFacade = bus;
@@ -202,29 +202,18 @@ public class ActCandPanel extends javax.swing.JPanel {
                 if(t.getText().isEmpty())
                     return null;
            }
-        String name = name_tf.getText();
+         this.cand.setNome(name_tf.getText());
         String[] d = this.data_tf.getText().split("/");
         Date date = new Date(Integer.parseInt(d[2])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[0]));
-        String escolaridade = this.escol.getText();
-        String estCivil = this.estCivil_tf.getText();
-        String parentesco = this.parent_tf.getText();
-        String ocupacao = this.ocup_tf.getText();
-        String naturalidade = this.nat_tf.getText();
-        String nacionalidade = this.nac_tf.getText();
+        this.cand.setDataNasc(date);
+        this.cand.setEscolaridade(this.escol.getText());
         
-        System.out.print(escolaridade);
-        System.out.print(estCivil);
-        System.out.print(parentesco);
-        System.out.print(ocupacao);
-        //this.cand.setDataNasc(date);
-        //this.cand.setEscolaridade(escolaridade);
-        //this.cand.setEstCivil(estCivil);
-        //this.cand.setParentesco(parentesco);
-        //this.cand.setParentesco(parentesco);
-    
+        this.cand.setEstCivil(this.estCivil_tf.getText());
+        this.cand.setParentesco(this.parent_tf.getText());
+        this.cand.setOcupacao(this.ocup_tf.getText());
+        this.cand.setNacionalidade(this.nac_tf.getText());
+        this.cand.setNaturalidade(this.nat_tf.getText());
         
-        
-        //this.cand = new Elemento("", name, date, escolaridade, estCivil, parentesco, ocupacao, naturalidade, nacionalidade);
         return cand;
     }
 

@@ -6,6 +6,10 @@
 
 package com.habitat.PresentationLayer.Candidaturas;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Candidaturas.Candidatura;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Pedro
@@ -15,8 +19,12 @@ public class ConsultarCand extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarCand
      */
-    public ConsultarCand() {
+    private BusinessFacade bus;
+    public ConsultarCand(BusinessFacade bus) {
+        this.bus = bus;
         initComponents();
+        updateComboBox();
+        
     }
 
     /**
@@ -29,14 +37,21 @@ public class ConsultarCand extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        id_tf = new javax.swing.JTextField();
         cons_btt = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
-        jLabel1.setText("ID :");
+        jLabel1.setText("Candidatura :");
 
         cons_btt.setText("Consultar");
+        cons_btt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cons_bttActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -49,26 +64,40 @@ public class ConsultarCand extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(id_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(cons_btt)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cons_bttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cons_bttActionPerformed
+        // TODO add your handling code here:
+        String tipo = this.bus.getActiveUser().getTipo();
+        if(tipo.equals("admin") || tipo.equals("famílias"))
+        {
+            new AtualizarCandidaturaDialog(new JFrame(), true, bus,null);
+        }
+    }//GEN-LAST:event_cons_bttActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cons_btt;
-    private javax.swing.JTextField id_tf;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private void updateComboBox() {
+       // this.jComboBox1.removeAllItems();
+        //for(Candidatura c : this.bus.get)
+    }
 }

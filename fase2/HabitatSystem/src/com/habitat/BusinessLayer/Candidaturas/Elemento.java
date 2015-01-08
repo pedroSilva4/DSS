@@ -10,6 +10,14 @@ public class Elemento {
 	private String _estCivil;
 	private String _parentesco;
 	private String _ocupacao;
+
+    public void setNaturalidade(String _naturalidade) {
+        this._naturalidade = _naturalidade;
+    }
+
+    public void setNacionalidade(String _nacionalidade) {
+        this._nacionalidade = _nacionalidade;
+    }
         private String _naturalidade;
         private String _nacionalidade;
 

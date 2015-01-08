@@ -7,6 +7,42 @@ public class Candidatura {
 
     private String _cod;
     private Date _dataAbertura;
+
+    public void setCod(String _cod) {
+        this._cod = _cod;
+    }
+
+    public void setDataAbertura(Date _dataAbertura) {
+        this._dataAbertura = _dataAbertura;
+    }
+
+    public void setDataDecisao(Date _dataDecisao) {
+        this._dataDecisao = _dataDecisao;
+    }
+
+    public void setObs(String _obs) {
+        this._obs = _obs;
+    }
+
+    public void setEstado(String _estado) {
+        this._estado = _estado;
+    }
+
+    public void setRendimentoBruto(float _rendimentoBruto) {
+        this._rendimentoBruto = _rendimentoBruto;
+    }
+
+    public void setRua(String _rua) {
+        this._rua = _rua;
+    }
+
+    public void setLocalidade(String _localidade) {
+        this._localidade = _localidade;
+    }
+
+    public void setCodPostal(String _codPostal) {
+        this._codPostal = _codPostal;
+    }
     private Date _dataDecisao;
     private String _obs;
     private String _estado;
