@@ -66,7 +66,7 @@ public class AddQuestaoPanel extends javax.swing.JPanel {
             }
         });
 
-        jRadioButton1.setText("Ativado");
+        jRadioButton1.setText("Activado");
 
         jRadioButton2.setText("Desativado");
 
@@ -117,9 +117,9 @@ public class AddQuestaoPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String estado = "ativado";
+        String estado = "activa";
         //if(this.jRadioButton1.isSelected())estado = "ativado";
-        if(this.jRadioButton2.isSelected())estado = "desativado";
+        if(this.jRadioButton2.isSelected())estado = "desactivado";
                                             
       
         String pergunta = this.jTextField1.getText();

@@ -192,7 +192,7 @@ public class CandidaturaJP extends javax.swing.JPanel {
         this.container.add(new ConsultarCand(),"consCand");
         this.container.add(new ConsultarProj(),"consProj");
         this.container.add(new AddQuestaoPanel(businessFacade),"addQuest");
-        this.container.add(new ConsultarQuest(this.businessFacade.getActiveUser().getTipo()),"conQuest");
+        this.container.add(new ConsultarQuest(this.businessFacade),"conQuest");
         this.container.setVisible(false);
     }
 

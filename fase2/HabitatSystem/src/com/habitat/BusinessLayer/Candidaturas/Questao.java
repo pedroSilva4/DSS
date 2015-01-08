@@ -45,7 +45,7 @@ public class Questao {
 
     @Override
     public String toString() {
-        return "Questao{" + "_cod=" + _cod + ", _pergunta=" + _pergunta + ", _resposta=" + _resposta + '}';
+        return _cod+": "+ _pergunta;
     }
 
 }

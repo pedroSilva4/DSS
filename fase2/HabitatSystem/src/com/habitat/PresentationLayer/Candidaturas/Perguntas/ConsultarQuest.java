@@ -6,21 +6,39 @@
 
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
+import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Candidaturas.Questao;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
  *
  * @author Pedro
  */
-public class ConsultarQuest extends javax.swing.JPanel {
+public class ConsultarQuest extends javax.swing.JPanel implements Observer{
 
     /**
      * Creates new form ConsultarQuest
      */
-    private String tipo;
-    public ConsultarQuest(String tipo) {
-        this.tipo = tipo;
+    private final String tipo;
+    private ArrayList<Questao> quests;
+    private final BusinessFacade bus;
+    public ConsultarQuest(BusinessFacade bus) {
+        this.bus = bus;
+        this.tipo = bus.getActiveUser().getTipo();
+        try {
+            this.quests = bus.getQuestoes();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarQuest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bus.addObserver(this);
         initComponents();
+        updateComboBox();
     }
 
     /**
@@ -39,6 +57,15 @@ public class ConsultarQuest extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar Questão"));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -93,13 +120,24 @@ public class ConsultarQuest extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Questao q = (Questao)this.jComboBox1.getSelectedItem();
         if(tipo.equals("famílias")||tipo.equals("admin")){
-                new AtualizarQuestDialog(new JFrame(), true).setVisible(true);
+                new AtualizarQuestDialog(new JFrame(), true,q).setVisible(true);
         }else
         {
-            new ConsultarQuestDialog(new JFrame(), true).setVisible(true);
+          //  new ConsultarQuestDialog(new JFrame(), true,q).setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+          // TODO add your handling code here:
+        updateComboBox();
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -109,4 +147,23 @@ public class ConsultarQuest extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+    private void updateComboBox(){
+        
+        this.jComboBox1.removeAllItems();
+        for(Questao q : quests)
+        {
+            if(q.getPergunta().startsWith(this.jTextField1.getText()))
+                this.jComboBox1.addItem(q);
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        try {
+            this.quests = this.bus.getQuestoes();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarQuest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        updateComboBox();
+    }
 }

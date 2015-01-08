@@ -6,6 +6,8 @@
 
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
+import com.habitat.BusinessLayer.Candidaturas.Questao;
+
 /**
  *
  * @author Pedro
@@ -15,11 +17,23 @@ public class AtualizarQuestDialog extends javax.swing.JDialog {
     /**
      * Creates new form AtualizarQuestDialog
      */
+    private Questao q;
     public AtualizarQuestDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.buttonGroup1.add(jButton1);
         this.buttonGroup1.add(jButton2);
+    }
+    public AtualizarQuestDialog(java.awt.Frame parent, boolean modal,Questao q) {
+        super(parent, modal);
+        this.q= q;
+        initComponents();
+        this.jTextField1.setText(this.q.getPergunta());
+        this.buttonGroup1.add(jRadioButton1);
+        this.buttonGroup1.add(jRadioButton2);
+        
+        if(this.q.getEstado().equals("activa")) jRadioButton1.setSelected(true);
+        else jRadioButton2.setSelected(true);
     }
 
     /**
