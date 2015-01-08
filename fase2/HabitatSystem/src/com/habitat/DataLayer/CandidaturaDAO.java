@@ -268,7 +268,7 @@ public class CandidaturaDAO {
         if (res.next()) {
             codCandidato = res.getString(1);
         }
-        sql = "update Habitat.Familias set responsavel = ?"
+        sql = "update Habitat.Familias set responsavel = ? "
                 + "where id = ?";
         st = conn.prepareStatement(sql);
         st.setString(1, codCandidato);

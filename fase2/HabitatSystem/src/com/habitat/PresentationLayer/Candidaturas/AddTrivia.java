@@ -34,7 +34,6 @@ public class AddTrivia extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         contacto_tf = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        rend_tf = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         rua_tf = new javax.swing.JTextField();
@@ -46,6 +45,7 @@ public class AddTrivia extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         obs_tf = new javax.swing.JTextArea();
         data_tf = new javax.swing.JFormattedTextField();
+        rend_tf = new javax.swing.JFormattedTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Informação"));
 
@@ -70,6 +70,14 @@ public class AddTrivia extends javax.swing.JPanel {
         obs_tf.setColumns(20);
         obs_tf.setRows(5);
         jScrollPane1.setViewportView(obs_tf);
+
+        try {
+            data_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        rend_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00;(#,##0.00)"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,8 +131,8 @@ public class AddTrivia extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(rend_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(rend_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -159,10 +167,12 @@ public class AddTrivia extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField local_tf;
     private javax.swing.JTextArea obs_tf;
-    private javax.swing.JTextField rend_tf;
+    private javax.swing.JFormattedTextField rend_tf;
     private javax.swing.JTextField rua_tf;
     // End of variables declaration//GEN-END:variables
     public HashMap<String,String> getTrivia(){
+        
+        if(!allFieldsOk()) return null;
         
         HashMap<String,String> trivia = new HashMap<>();
         trivia.put("data",this.data_tf.getText());
@@ -175,4 +185,13 @@ public class AddTrivia extends javax.swing.JPanel {
         
         return trivia;
     }
+    
+    private boolean allFieldsOk()
+    {
+        return !this.data_tf.getText().isEmpty() && !this.data_tf.getText().isEmpty() &&
+                !this.contacto_tf.getText().isEmpty() && !this.rend_tf.getText().isEmpty() &&
+                  !this.rua_tf.getText().isEmpty() && !this.codPostal_tf.getText().isEmpty() &&
+                    !this.local_tf.getText().isEmpty() && !this.obs_tf.getText().isEmpty(); 
+    }
+      
   }

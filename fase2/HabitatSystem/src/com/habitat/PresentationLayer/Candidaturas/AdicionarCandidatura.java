@@ -34,6 +34,7 @@ public class AdicionarCandidatura extends javax.swing.JDialog {
     private BusinessFacade bus;
     public AdicionarCandidatura(java.awt.Frame parent, boolean modal,BusinessFacade bus) {
         super(parent, modal);
+        this.bus = bus;
         initComponents();
          containerCand.add(new AddCandtoPanel());
          containerTrivia.add(new AddTrivia());
@@ -75,6 +76,11 @@ public AdicionarCandidatura(java.awt.Frame parent, boolean modal)
         containerTrivia.setLayout(new java.awt.CardLayout());
 
         canc_bt.setText("Cancelar");
+        canc_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                canc_btActionPerformed(evt);
+            }
+        });
 
         add_bt.setText("Adicionar");
         add_bt.addActionListener(new java.awt.event.ActionListener() {
@@ -150,25 +156,40 @@ public AdicionarCandidatura(java.awt.Frame parent, boolean modal)
             return;
         }
         
-        ArrayList<Elemento> elems = ((ElemPanel)this.containerQuest.getComponent(0)).getElems();
-        HashMap<String,String> trivia = ((AddTrivia)this.containerQuest.getComponent(0)).getTrivia();
+        ArrayList<Elemento> elems = ((ElemPanel)this.containerElem.getComponent(0)).getElems();
+        
+        HashMap<String,String> trivia = ((AddTrivia)this.containerTrivia.getComponent(0)).getTrivia();
+        if(trivia == null){
+            new ErrorWindow("Adicionar Quandidatura", "Falta de informação", "warning", new JFrame()).wshow();
+            return;
+        }
         
         //(String cod, Date dataAbertura, Date dataDecisao, String obs, String estado, String funcionario, 
         // ArrayList<Questao> quest, ArrayList<Elemento> elems, float rendimentoBruto, 
         //String rua, String localidade, String codPostal, Elemento candidato, String contacto)
         String[] d = trivia.get("data").split("/");
         Date da = new Date(Integer.parseInt(d[2])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[0]));
+        Date dd = new Date(1,1,1);
         float rendimento = Float.parseFloat(trivia.get("rendimento"));
-        
-        Candidatura c = new Candidatura("",da,null,trivia.get("obs"),"pendente",this.bus.getActiveUser().getNome(),questionario,elems,
-               rendimento,trivia.get("rua"),trivia.get("local"),trivia.get("postal"),cand,trivia.get("contacto"));
+       
+
+        Candidatura candidatura;
+        candidatura = new Candidatura("",da,dd,trivia.get("obs"),"pendente",this.bus.getActiveUser().getUsername(),questionario,elems,
+                    rendimento,trivia.get("rua"),trivia.get("local"),trivia.get("postal"),cand,trivia.get("contacto"));
         try {
-            this.bus.addCandidatura(c);
+            this.bus.addCandidatura(candidatura);
+            new ErrorWindow("Candidatura", "Candidatura adicionada com sucesso", "message", new JFrame()).wshow();
+           ((JFrame) this.getParent()).dispose();
         } catch (SQLException ex) {
             Logger.getLogger(AdicionarCandidatura.class.getName()).log(Level.SEVERE, null, ex);
         }
        
     }//GEN-LAST:event_add_btActionPerformed
+
+    private void canc_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canc_btActionPerformed
+        // TODO add your handling code here:
+        ((JFrame) this.getParent()).dispose();
+    }//GEN-LAST:event_canc_btActionPerformed
 
     /**
      * @param args the command line arguments

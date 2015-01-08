@@ -7,9 +7,13 @@
 package com.habitat.PresentationLayer.Candidaturas.Elementos;
 
 import com.habitat.BusinessLayer.Candidaturas.Elemento;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -20,11 +24,24 @@ public class ElemPanel extends javax.swing.JPanel {
     /**
      * Creates new form ElemPanel
      */
+    ListListener ll;
     private ArrayList<Elemento> elementos;
     public ElemPanel() {
         this.elementos = new ArrayList<>();
         initComponents();
         updateList();
+        this.jList1.addListSelectionListener(ll);
+        this.rmv_bt.setEnabled(false);
+        MouseListener mouseListener = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                 if (jList1.getSelectedValuesList().size() > 0) {
+                 rmv_bt.setEnabled(true);
+                //System.out.println("Double clicked on Item " + index);
+                 }else rmv_bt.setEnabled(false);
+           }
+       };
+        this.jList1.addMouseListener(mouseListener);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,6 +119,7 @@ public class ElemPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         boolean remove = this.elementos.remove((Elemento)jList1.getSelectedValue());
         updateList();
+        rmv_bt.setEnabled(false);
     }//GEN-LAST:event_rmv_btActionPerformed
 
 
@@ -119,5 +137,18 @@ public class ElemPanel extends javax.swing.JPanel {
     public ArrayList<Elemento> getElems()
     {
         return this.elementos;
+    }
+
+    class ListListener implements ListSelectionListener{
+
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            if(jList1.getSelectedValuesList().size()>0)
+                rmv_bt.setEnabled(true);
+            else {
+                rmv_bt.setEnabled(false);
+            }
+        }
+        
     }
 }
