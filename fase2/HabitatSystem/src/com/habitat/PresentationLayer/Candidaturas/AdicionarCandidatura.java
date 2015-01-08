@@ -7,13 +7,19 @@
 package com.habitat.PresentationLayer.Candidaturas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Candidaturas.Candidatura;
 import com.habitat.BusinessLayer.Candidaturas.Elemento;
 import com.habitat.BusinessLayer.Candidaturas.Questao;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.QuestPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.AddCandtoPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.ElemPanel;
 import com.habitat.util.ErrorWindow;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -143,7 +149,25 @@ public AdicionarCandidatura(java.awt.Frame parent, boolean modal)
             new ErrorWindow("Adicionar Quandidatura", "Questionario não respondido", "warning", new JFrame()).wshow();
             return;
         }
-        System.out.println("questionario ok");
+        
+        ArrayList<Elemento> elems = ((ElemPanel)this.containerQuest.getComponent(0)).getElems();
+        HashMap<String,String> trivia = ((AddTrivia)this.containerQuest.getComponent(0)).getTrivia();
+        
+        //(String cod, Date dataAbertura, Date dataDecisao, String obs, String estado, String funcionario, 
+        // ArrayList<Questao> quest, ArrayList<Elemento> elems, float rendimentoBruto, 
+        //String rua, String localidade, String codPostal, Elemento candidato, String contacto)
+        String[] d = trivia.get("data").split("/");
+        Date da = new Date(Integer.parseInt(d[2])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[0]));
+        float rendimento = Float.parseFloat(trivia.get("rendimento"));
+        
+        Candidatura c = new Candidatura("",da,null,trivia.get("obs"),"pendente",this.bus.getActiveUser().getNome(),questionario,elems,
+               rendimento,trivia.get("rua"),trivia.get("local"),trivia.get("postal"),cand,trivia.get("contacto"));
+        try {
+            this.bus.addCandidatura(c);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdicionarCandidatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_add_btActionPerformed
 
     /**

@@ -115,4 +115,9 @@ public class ElemPanel extends javax.swing.JPanel {
     private void updateList() {
         this.jList1.setListData(elementos.toArray());
     }
+    
+    public ArrayList<Elemento> getElems()
+    {
+        return this.elementos;
+    }
 }
