@@ -54,8 +54,8 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="containerElem2" alignment="1" max="32767" attributes="0"/>
                                   <Component id="containerQuest2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="containerTrivia2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="containerCand2" alignment="1" pref="483" max="32767" attributes="0"/>
+                                  <Component id="triv_cont" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="cand_cont" alignment="1" pref="483" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -67,9 +67,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="containerCand2" pref="94" max="32767" attributes="0"/>
+                      <Component id="cand_cont" pref="94" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="containerTrivia2" pref="54" max="32767" attributes="0"/>
+                      <Component id="triv_cont" pref="54" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="containerQuest2" pref="105" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -85,7 +85,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="containerCand2">
+            <Container class="javax.swing.JPanel" name="cand_cont">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
             </Container>
@@ -97,7 +97,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
             </Container>
-            <Container class="javax.swing.JPanel" name="containerTrivia2">
+            <Container class="javax.swing.JPanel" name="triv_cont">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
             </Container>

@@ -24,7 +24,7 @@ public class ActCandPanel extends javax.swing.JPanel {
      */
     private final BusinessFacade businessFacade;
     private Elemento cand;
-    public ActCandPanel(java.awt.Frame parent, boolean modal) {
+    public ActCandPanel(BusinessFacade bus) {
         initComponents();
         myinit();
         //super(parent, modal);

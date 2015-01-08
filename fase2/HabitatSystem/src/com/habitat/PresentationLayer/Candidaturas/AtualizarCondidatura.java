@@ -6,8 +6,10 @@
 package com.habitat.PresentationLayer.Candidaturas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.PresentationLayer.Candidaturas.Elementos.ActCandPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.AddCandtoPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.ElemPanel;
+import com.habitat.PresentationLayer.Candidaturas.Perguntas.ActQuestPanel;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.QuestPanel;
 
 /**
@@ -24,10 +26,10 @@ public class AtualizarCondidatura extends javax.swing.JPanel {
         initComponents();
         //super(parent, modal);
         initComponents();
-         containerCand.add(new AddCandtoPanel());
-         containerTrivia.add(new AddTrivia());
-         containerQuest.add(new QuestPanel(bus));
-         containerElem.add(new ElemPanel());
+         cand_cont.add(new ActCandPanel(bus));
+         triv_cont.add(new ActuaTrivia(bus));
+         containerQuest2.add(new ActQuestPanel(bus));
+         //containerElem2.add(new ElemPanel());
     }
     
     public AtualizarCondidatura(java.awt.Frame parent, boolean modal)
@@ -47,20 +49,20 @@ public class AtualizarCondidatura extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
-        containerCand2 = new javax.swing.JPanel();
+        cand_cont = new javax.swing.JPanel();
         containerQuest2 = new javax.swing.JPanel();
         containerElem2 = new javax.swing.JPanel();
-        containerTrivia2 = new javax.swing.JPanel();
+        triv_cont = new javax.swing.JPanel();
         canc_bt2 = new javax.swing.JButton();
         act_bt2 = new javax.swing.JButton();
 
-        containerCand2.setLayout(new java.awt.CardLayout());
+        cand_cont.setLayout(new java.awt.CardLayout());
 
         containerQuest2.setLayout(new java.awt.CardLayout());
 
         containerElem2.setLayout(new java.awt.CardLayout());
 
-        containerTrivia2.setLayout(new java.awt.CardLayout());
+        triv_cont.setLayout(new java.awt.CardLayout());
 
         canc_bt2.setText("Cancelar");
 
@@ -87,17 +89,17 @@ public class AtualizarCondidatura extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(containerElem2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(containerQuest2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(containerTrivia2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(containerCand2, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))))
+                            .addComponent(triv_cont, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cand_cont, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))))
                 .addGap(67, 67, 67))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(containerCand2, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addComponent(cand_cont, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(containerTrivia2, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addComponent(triv_cont, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(containerQuest2, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -146,11 +148,11 @@ public class AtualizarCondidatura extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton act_bt2;
     private javax.swing.JButton canc_bt2;
-    private javax.swing.JPanel containerCand2;
+    private javax.swing.JPanel cand_cont;
     private javax.swing.JPanel containerElem2;
     private javax.swing.JPanel containerQuest2;
-    private javax.swing.JPanel containerTrivia2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel triv_cont;
     // End of variables declaration//GEN-END:variables
 }

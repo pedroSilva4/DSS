@@ -91,14 +91,14 @@ public class ActElemPanel extends javax.swing.JPanel {
 
     private void add_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btActionPerformed
         // TODO add your handling code here:
-        new AddElemDialog(new JFrame(), true,elementos).setVisible(true);
-        updateList();
+       // new AddElemDialog(new JFrame(), true,elementos).setVisible(true);
+       // updateList();
     }//GEN-LAST:event_add_btActionPerformed
 
     private void rmv_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmv_btActionPerformed
         // TODO add your handling code here:
-        boolean remove = this.elementos.remove((Elemento)jList1.getSelectedValue());
-        updateList();
+       // boolean remove = this.elementos.remove((Elemento)jList1.getSelectedValue());
+       // updateList();
     }//GEN-LAST:event_rmv_btActionPerformed
 
 

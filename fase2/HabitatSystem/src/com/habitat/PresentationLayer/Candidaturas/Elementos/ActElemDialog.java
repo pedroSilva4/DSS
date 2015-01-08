@@ -184,7 +184,11 @@ public class ActElemDialog extends javax.swing.JDialog {
 
     private void sub_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sub_btActionPerformed
         // TODO add your handling code here:
-        for(Component c : this.getComponents()){
+        
+        
+        
+        
+        /*for(Component c : this.getComponents()){
             if(c.getClass().equals(JTextField.class) || c.getClass().equals(JFormattedTextField.class)){
 
                 if(((JTextField)c).getText().isEmpty()){
@@ -212,18 +216,22 @@ public class ActElemDialog extends javax.swing.JDialog {
         } catch (NumberFormatException e) {
             new ErrorWindow("Campos em Falta", "Campos em falta", "error", new JFrame()).wshow();
         }
-
+*/
     }//GEN-LAST:event_sub_btActionPerformed
 
     private void voltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar1ActionPerformed
         // TODO add your handling code here:
-        ((JFrame)this.getParent()).dispose();
+       // ((JFrame)this.getParent()).dispose();
     }//GEN-LAST:event_voltar1ActionPerformed
 
+        
+        
+        
+        
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -248,7 +256,7 @@ public class ActElemDialog extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ActElemDialog dialog = new ActElemDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -258,9 +266,9 @@ public class ActElemDialog extends javax.swing.JDialog {
                     }
                 });
                 dialog.setVisible(true);
-            }
-        });
-    }
+            }*/
+        }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField data_tf;
