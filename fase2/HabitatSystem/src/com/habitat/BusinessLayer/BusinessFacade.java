@@ -84,6 +84,9 @@ public class BusinessFacade extends Observable{
     public ArrayList<String> getIdCandidaturasSemProjecto() throws SQLException{
         return this._candidaturas.getAprovadasSemProjecto();
     }
+    public ArrayList<Candidatura> getListaCandidaturas() throws SQLException{
+        return this._candidaturas.getLista();
+    }
     public Candidatura getCandidatura(String aCod) throws SQLException {
         return this._candidaturas.get(aCod);
     }

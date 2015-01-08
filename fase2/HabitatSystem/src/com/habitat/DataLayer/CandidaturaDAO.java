@@ -356,4 +356,17 @@ public class CandidaturaDAO {
         st.setString(3, q.getCod());
         st.executeUpdate();
     }
+    public ArrayList<Candidatura> getLista() throws SQLException{
+        Statement st;
+        ResultSet res;
+        ArrayList<Candidatura> cs = new ArrayList<Candidatura>();
+        String sql = "select id from Habitat.Candidaturas;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        while(res.next()){
+            Candidatura c = get(res.getString("id"));
+            cs.add(c);
+        }
+        return cs;
+    }
 }
