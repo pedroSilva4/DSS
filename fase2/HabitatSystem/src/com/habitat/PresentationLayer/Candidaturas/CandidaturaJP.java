@@ -10,6 +10,7 @@ import com.habitat.PresentationLayer.Candidaturas.Perguntas.AddQuestaoPanel;
 import com.habitat.PresentationLayer.Candidaturas.Projectos.ConsultarProj;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.ConsultarQuest;
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.PresentationLayer.Candidaturas.Projectos.AddProjectoJP;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 
@@ -42,7 +43,7 @@ public class CandidaturaJP extends javax.swing.JPanel {
         consCand_bt = new javax.swing.JButton();
         consProj = new javax.swing.JButton();
         container = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        addProjBT = new javax.swing.JButton();
         addQuest_bt = new javax.swing.JButton();
         conQuest_bt = new javax.swing.JButton();
 
@@ -71,7 +72,12 @@ public class CandidaturaJP extends javax.swing.JPanel {
 
         container.setLayout(new java.awt.CardLayout());
 
-        jButton1.setText("Criar Projeto");
+        addProjBT.setText("Criar Projeto");
+        addProjBT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProjBTActionPerformed(evt);
+            }
+        });
 
         addQuest_bt.setText("Criar Questão");
         addQuest_bt.addActionListener(new java.awt.event.ActionListener() {
@@ -97,14 +103,14 @@ public class CandidaturaJP extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(consProj, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(conQuest_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                        .addComponent(conQuest_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(add_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(consCand_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                            .addComponent(consCand_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addProjBT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addQuest_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
                 .addGap(52, 52, 52)
                 .addComponent(container, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
@@ -120,7 +126,7 @@ public class CandidaturaJP extends javax.swing.JPanel {
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(add_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(addProjBT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addQuest_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,15 +173,22 @@ public class CandidaturaJP extends javax.swing.JPanel {
         container.setVisible(true);
     }//GEN-LAST:event_conQuest_btActionPerformed
 
+    private void addProjBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProjBTActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout)this.container.getLayout();
+        cl.show(container, "addProj");
+        container.setVisible(true);
+    }//GEN-LAST:event_addProjBTActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addProjBT;
     private javax.swing.JButton addQuest_bt;
     private javax.swing.JButton add_bt;
     private javax.swing.JButton conQuest_bt;
     private javax.swing.JButton consCand_bt;
     private javax.swing.JButton consProj;
     private javax.swing.JPanel container;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
     public void myInit(/**tipo**/)
     {
@@ -202,6 +215,7 @@ public class CandidaturaJP extends javax.swing.JPanel {
         this.container.add(new ConsultarProj(),"consProj");
         this.container.add(new AddQuestaoPanel(businessFacade),"addQuest");
         this.container.add(new ConsultarQuest(this.businessFacade),"conQuest");
+        this.container.add(new AddProjectoJP(this.businessFacade),"addProj");
         this.container.setVisible(false);
     }
 
