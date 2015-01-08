@@ -336,7 +336,9 @@ public class BusinessFacade extends Observable{
     public void updateTarefa(Tarefa aTarefa) throws SQLException {
         this._tarefas.setTarefa(aTarefa);
     }
-    
+    public ArrayList<Tarefa> getTarefasAssociadas(String codProj) throws SQLException{
+        return this._tarefas.getTarefasAssociadas(codProj);
+    }
 
     public boolean login(String aUser, String aPasswd) {
         try {

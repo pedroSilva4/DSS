@@ -82,4 +82,20 @@ public class TarefasDAO {
         }
         return ts;
     }
+    
+    public ArrayList<Tarefa> getTarefasAssociadas(String codProj) throws SQLException{
+        PreparedStatement st;
+        ResultSet res;
+        ArrayList<Tarefa> ts = new ArrayList<Tarefa>();
+        String sql = "select * from Tarefas " +
+                        "where id in (Select tarefas from ProjectoTarefas where projecto = ?);";
+        st = conn.prepareStatement(sql);
+        st.setString(1, codProj);
+        res = st.executeQuery();
+        while(res.next()){
+            Tarefa t = new Tarefa(res.getString("id"),res.getString("descricao"));
+            ts.add(t);
+        }
+        return ts;
+    }
 }

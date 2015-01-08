@@ -29,6 +29,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private String idProjecto;
     private Projeto p;
     private ArrayList<Tarefa> tarefas;
+    private ArrayList<Tarefa> tarefasAssociadas;
     public ConsultarActualizarJD(java.awt.Frame parent, boolean modal,BusinessFacade b, String idProjecto) {
         super(parent, modal);
         this.bus = b;
@@ -47,6 +48,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         if(p.getDataF() !=null)
             this.data_tf.setText(p.getDataF().toString());
         updateCBTarefas();
+        updateCBTarefasAssociadas();
     }
     
     void updateCBTarefas(){
@@ -55,6 +57,18 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             this.tarefas = bus.getListaTarefas();
             for(Tarefa t : this.tarefas){
                 cbtarefa.addItem(t.getCod()+": "+t.getDescricao());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    void updateCBTarefasAssociadas(){
+        try {
+            cbTarefasAssociadas.removeAllItems();
+            this.tarefasAssociadas = bus.getTarefasAssociadas(idProjecto);
+            for(Tarefa t : this.tarefasAssociadas){
+                cbTarefasAssociadas.addItem(t.getCod()+": "+t.getDescricao());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
@@ -98,7 +112,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         dataAssociaFim_tf = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        cbTarefasAssociadas = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -308,7 +322,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
 
         jLabel13.setText("Tarefa:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbTarefasAssociadas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel14.setText("Data de Fim:");
 
@@ -362,7 +376,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                                     .addComponent(jLabel13))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbTarefasAssociadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -392,7 +406,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTarefasAssociadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
@@ -567,6 +581,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JButton btActualiza;
     private javax.swing.JButton btAddNovaTarefa;
     private javax.swing.JButton btAssociaTarefa;
+    private javax.swing.JComboBox cbTarefasAssociadas;
     private javax.swing.JComboBox cbtarefa;
     private javax.swing.JFormattedTextField dataAssociaFim_tf;
     private javax.swing.JFormattedTextField dataAssociaInicio_tf;
@@ -579,7 +594,6 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
@@ -618,5 +632,6 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     @Override
     public void update(Observable o, Object arg) {
         updateCBTarefas();
+        updateCBTarefasAssociadas();
     }
 }
