@@ -92,18 +92,19 @@ public class CandidaturaDAO {
         stCQ = conn.prepareStatement(sqlCQ);
         stCQ.setString(1, aCod);
         resCQ = stCQ.executeQuery();
-        boolean continua=true;
-        while (continua && resCQ.next()) {
-            Questao q = new Questao(resCQ.getString("id"),resCQ.getString("pergunta"),
-                                resCQ.getString("resposta"),resCQ.getString("estado"));
+        //boolean continua=true;
+        while ( resCQ.next()) {
+            Questao q = new Questao(resCQ.getString("pergunta"), "", resCQ.getString("resposta"),"");
+            
             stQ = conn.prepareStatement(sqlQ);
             stQ.setString(1,q.getCod());
             resQ = stQ.executeQuery();
             if (resQ.next()) {
                 q.setPergunta(resQ.getString("descricao"));
+                q.setEstado(resQ.getString("estado"));
                 qs.add(q);
             }
-            else continua = false;
+            //else continua = false;
             
         }
         c.setQuestionario(qs);
@@ -112,17 +113,19 @@ public class CandidaturaDAO {
         PreparedStatement stElems = conn.prepareStatement(sqlElems);
         stElems.setString(1, resFam.getString("responsavel"));
         ResultSet resC = stElems.executeQuery();
+        Elemento cand = null;
         if (resC.next()) {
-            Elemento cand = new Elemento(resC.getString("id"), resC.getString("nome"),
+            cand = new Elemento(resC.getString("id"), resC.getString("nome"),
                     resC.getDate("dataNasc"), resC.getString("escolaridade"), resC.getString("estadoCivil"),
                     resC.getString("parentesco"), resC.getString("ocupacao"),
                     resC.getString("naturalidade"), resC.getString("nacionalidade"));
             c.setCandidato(cand);
         }
         /*buscar elementos*/
-        sqlElems = "select * from elementos where familia = ?";
+        sqlElems = "select * from elementos where familia = ? and id != ?";
         stElems = conn.prepareStatement(sqlElems);
         stElems.setString(1, resFam.getString("id"));
+        stElems.setString(2, cand.getCod());
         ArrayList<Elemento> el = new ArrayList<Elemento>();
         ResultSet resElems = stElems.executeQuery();
         while (resElems.next()) {

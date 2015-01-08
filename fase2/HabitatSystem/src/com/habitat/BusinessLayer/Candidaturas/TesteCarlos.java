@@ -65,7 +65,7 @@ public class TesteCarlos {
         Elemento e2 = new Elemento("","carlos",new Date(2000-1900,5-1,19),"12ºano","sol","irmao","arrumador de vacas","portuguesa","portuguesa");
         Elemento e3 = new Elemento("","Morais",new Date(2002-1900,2-1,22),"12ºano","casado","filho","vadio","portuguesa","portuguesa");
         ArrayList<Elemento> elems = new ArrayList<>();
-        elems.add(e1);
+        //elems.add(e1);
         elems.add(e2);
         elems.add(e3);
         
@@ -78,7 +78,7 @@ public class TesteCarlos {
         
         businessFacade.addCandidatura(nova);
         
-        Candidatura nova2 = businessFacade.getCandidatura("21");
+        Candidatura nova2 = businessFacade.getCandidatura("26");
         
         System.out.println(nova2.toString());
         
