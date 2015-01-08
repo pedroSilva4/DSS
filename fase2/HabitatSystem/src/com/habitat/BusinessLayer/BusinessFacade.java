@@ -318,10 +318,14 @@ public class BusinessFacade extends Observable{
 
     public void addExeTarefaProjeto(String aTarefa, String aProjeto, String voluntario, Date aData, double aDuracao) throws SQLException {
         this._projetos.addExeTarefa(aTarefa, aProjeto, voluntario, aData, aDuracao);
+        setChanged();
+        notifyObservers();
     }
 
     public void addTarefa(Tarefa aTarefa) throws SQLException {
         this._tarefas.add(aTarefa);
+        setChanged();
+        notifyObservers();
     }
     
 
@@ -368,6 +372,9 @@ public class BusinessFacade extends Observable{
      
      public ArrayList<Evento> getListaEventos() throws SQLException{
          return this._eventos.getListaEventos();
+     }
+     public ArrayList<Tarefa> getListaTarefas() throws SQLException{
+         return this._tarefas.getTarefas();
      }
      
      public void updateQuestao(Questao q) throws SQLException{

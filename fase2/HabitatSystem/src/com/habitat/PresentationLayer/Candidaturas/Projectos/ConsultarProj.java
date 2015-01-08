@@ -103,7 +103,9 @@ public class ConsultarProj extends javax.swing.JPanel implements Observer {
 
     private void consBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consBTActionPerformed
         // TODO add your handling code here:
-        new ConsultarActualizarJD(new JFrame(),true,this.bus).setVisible(true);
+        String p = (String) this.cbProjectos.getSelectedItem();
+        new ConsultarActualizarJD(new JFrame(),true,this.bus,
+                p).setVisible(true);
     }//GEN-LAST:event_consBTActionPerformed
 
     private void cbProjectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProjectosActionPerformed

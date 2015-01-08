@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class TarefasDAO {
     
@@ -66,5 +68,18 @@ public class TarefasDAO {
         st.setString(1, aTarefa.getDescricao());
         st.setString(2, aTarefa.getCod());
         st.executeUpdate();
+    }
+    public ArrayList<Tarefa> getTarefas() throws SQLException{
+        Statement st;
+        ResultSet res;
+        ArrayList<Tarefa> ts = new ArrayList<Tarefa>();
+        String sql = "Select * from Habitat.Tarefas;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        while(res.next()){
+            Tarefa t = new Tarefa(res.getString("id"),res.getString("descricao"));
+            ts.add(t);
+        }
+        return ts;
     }
 }
