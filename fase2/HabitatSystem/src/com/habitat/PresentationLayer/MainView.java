@@ -15,6 +15,7 @@ import com.habitat.PresentationLayer.Eventos.EventosJP;
 import com.habitat.PresentationLayer.Funcionarios.FuncionariosJP;
 import com.habitat.PresentationLayer.Inventario.InventarioJP;
 import com.habitat.PresentationLayer.Voluntários.VoluntarioJP;
+import static java.awt.SystemColor.desktop;
 
 /**
  *
@@ -34,6 +35,9 @@ public class MainView extends javax.swing.JFrame {
         initComponents();
         this.init();
         this.setLocationByPlatform(true);
+        
+        
+        
     }
     
     public MainView() {
@@ -55,7 +59,10 @@ public class MainView extends javax.swing.JFrame {
 
         main_tabs = new javax.swing.JTabbedPane();
         Home_jp = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         name_label = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         type_label = new javax.swing.JLabel();
@@ -82,7 +89,13 @@ public class MainView extends javax.swing.JFrame {
         main_tabs.setMaximumSize(new java.awt.Dimension(327670000, 327670000));
         main_tabs.setMinimumSize(new java.awt.Dimension(109, 148));
 
-        jLabel1.setText("Funcionário : ");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/semFundo2.png"))); // NOI18N
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Funcionário"));
+
+        jLabel1.setText("Nome:");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/user1.png"))); // NOI18N
 
         name_label.setText("nome asdasd");
 
@@ -90,33 +103,64 @@ public class MainView extends javax.swing.JFrame {
 
         type_label.setText("jLabel3");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(name_label))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(type_label)))
+                .addContainerGap(65, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(name_label))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(type_label)))
+                    .addComponent(jLabel5))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout Home_jpLayout = new javax.swing.GroupLayout(Home_jp);
         Home_jp.setLayout(Home_jpLayout);
         Home_jpLayout.setHorizontalGroup(
             Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Home_jpLayout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
-                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(type_label)
-                    .addComponent(name_label))
-                .addContainerGap(612, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3)
+                .addContainerGap(338, Short.MAX_VALUE))
         );
         Home_jpLayout.setVerticalGroup(
             Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Home_jpLayout.createSequentialGroup()
-                .addContainerGap(356, Short.MAX_VALUE)
-                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(name_label))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(type_label))
-                .addContainerGap(91, Short.MAX_VALUE))
+            .addGroup(Home_jpLayout.createSequentialGroup()
+                .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Home_jpLayout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Home_jpLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel3)))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         main_tabs.addTab("Home", Home_jp);
@@ -146,6 +190,7 @@ public class MainView extends javax.swing.JFrame {
         jMenu1.setText("Menu");
 
         logout_bt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        logout_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/out1.png"))); // NOI18N
         logout_bt.setText("Logout");
         logout_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +200,7 @@ public class MainView extends javax.swing.JFrame {
         jMenu1.add(logout_bt);
 
         exit_bt.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        exit_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/exit1.png"))); // NOI18N
         exit_bt.setText("Sair");
         exit_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,7 +221,7 @@ public class MainView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(main_tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
         );
 
         pack();
@@ -241,8 +287,11 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel inventario_jp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem logout_bt;
     private javax.swing.JTabbedPane main_tabs;
     private javax.swing.JLabel name_label;

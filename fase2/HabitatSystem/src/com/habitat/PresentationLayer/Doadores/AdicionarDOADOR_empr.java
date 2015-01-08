@@ -85,17 +85,11 @@ public class AdicionarDOADOR_empr extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel9.setText("Contacto:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
-        add(rua_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 120, 308, -1));
 
         jLabel4.setText("Rua:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 126, -1, -1));
 
         jLabel8.setText("Actividade:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 198, -1, -1));
 
         submeter_bt.setText("Submeter");
         submeter_bt.addActionListener(new java.awt.event.ActionListener() {
@@ -103,52 +97,160 @@ public class AdicionarDOADOR_empr extends javax.swing.JPanel {
                 submeter_btActionPerformed(evt);
             }
         });
-        add(submeter_bt, new org.netbeans.lib.awtextra.AbsoluteConstraints(302, 328, -1, -1));
 
         jLabel5.setText("Email:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 88, -1, -1));
-        add(actividade_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 198, 310, -1));
 
         jLabel2.setText("Nome:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, -1, -1));
-        add(nif_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 44, 135, -1));
 
         nome_tf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nome_tfActionPerformed(evt);
             }
         });
-        add(nome_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 6, 308, -1));
 
         jLabel10.setText("Localidade:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 164, -1, -1));
 
         jLabel6.setText("NIF:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 47, -1, -1));
-        add(localidade_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(93, 158, 137, -1));
-        add(telefone_TF, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 44, 138, -1));
-        add(email_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 82, 308, -1));
 
         jLabel1.setText("Site:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 238, -1, -1));
-        add(site_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 238, 310, -1));
 
         jLabel3.setText("Pessoa de contacto :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 272, -1, -1));
 
         jLabel11.setText("Nome:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 300, -1, -1));
-        add(pc_nome_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 294, 310, -1));
+
+        pc_nome_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pc_nome_tfActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("CodPostal:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 164, -1, -1));
 
         try {
             postal_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        add(postal_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(309, 158, 93, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel2)
+                .addGap(44, 44, 44)
+                .addComponent(nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel9)
+                .addGap(22, 22, 22)
+                .addComponent(telefone_TF, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(6, 6, 6)
+                .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel5)
+                .addGap(47, 47, 47)
+                .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel4)
+                .addGap(58, 58, 58)
+                .addComponent(rua_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel10)
+                .addGap(12, 12, 12)
+                .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel7)
+                .addGap(6, 6, 6)
+                .addComponent(postal_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel8)
+                .addGap(12, 12, 12)
+                .addComponent(actividade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addGap(55, 55, 55)
+                .addComponent(site_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel3))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel11)
+                .addGap(29, 29, 29)
+                .addComponent(pc_nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(302, 302, 302)
+                .addComponent(submeter_bt))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2))
+                    .addComponent(nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel6))
+                            .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(telefone_TF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel5))
+                    .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel4))
+                    .addComponent(rua_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(localidade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postal_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel7))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(actividade_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(site_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(jLabel3)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pc_nome_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(6, 6, 6)
+                .addComponent(submeter_bt))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void nome_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_tfActionPerformed
@@ -190,6 +292,10 @@ public class AdicionarDOADOR_empr extends javax.swing.JPanel {
     
         clean();
     }//GEN-LAST:event_submeter_btActionPerformed
+
+    private void pc_nome_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pc_nome_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pc_nome_tfActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

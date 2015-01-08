@@ -39,21 +39,27 @@ public class FuncionariosJP extends javax.swing.JPanel {
         con_bt = new javax.swing.JButton();
         container = new javax.swing.JPanel();
 
-        add_bt.setText("Adicionar");
+        add_bt.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        add_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/add.png"))); // NOI18N
+        add_bt.setText("   Adicionar");
         add_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_btActionPerformed(evt);
             }
         });
 
-        rm_bt.setText("Remover");
+        rm_bt.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        rm_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/Remove.png"))); // NOI18N
+        rm_bt.setText("   Remover");
         rm_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rm_btActionPerformed(evt);
             }
         });
 
-        con_bt.setText("Consultar");
+        con_bt.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        con_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/Search-icon.png"))); // NOI18N
+        con_bt.setText("   Consultar");
         con_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 con_btActionPerformed(evt);
@@ -67,7 +73,7 @@ public class FuncionariosJP extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(con_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                     .addComponent(rm_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
