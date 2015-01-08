@@ -76,6 +76,8 @@ public class BusinessFacade extends Observable{
     }
     public void addQuestao(Questao q) throws SQLException{
         this._candidaturas.addPergunta(q);
+        setChanged();
+        notifyObservers();
     }
 
     public Candidatura getCandidatura(String aCod) throws SQLException {
@@ -88,6 +90,8 @@ public class BusinessFacade extends Observable{
 
     public void addCandidatura(Candidatura aCand) throws SQLException {
         this._candidaturas.add(aCand);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public Evento getEvento(String aCod) throws SQLException {
@@ -359,5 +363,11 @@ public class BusinessFacade extends Observable{
      
      public ArrayList<Evento> getListaEventos() throws SQLException{
          return this._eventos.getListaEventos();
+     }
+     
+     public void updateQuestao(Questao q) throws SQLException{
+         this._candidaturas.updatePergunta(q);
+         this.setChanged();
+         this.notifyObservers();
      }
 }

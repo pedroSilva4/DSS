@@ -122,7 +122,7 @@ public class ConsultarQuest extends javax.swing.JPanel implements Observer{
         // TODO add your handling code here:
         Questao q = (Questao)this.jComboBox1.getSelectedItem();
         if(tipo.equals("famílias")||tipo.equals("admin")){
-                new AtualizarQuestDialog(new JFrame(), true,q).setVisible(true);
+                new AtualizarQuestDialog(new JFrame(), true,q,bus).setVisible(true);
         }else
         {
           //  new ConsultarQuestDialog(new JFrame(), true,q).setVisible(true);

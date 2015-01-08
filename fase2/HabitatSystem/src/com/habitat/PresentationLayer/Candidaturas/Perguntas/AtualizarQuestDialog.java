@@ -6,7 +6,12 @@
 
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
+import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Candidaturas.Questao;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,15 +23,17 @@ public class AtualizarQuestDialog extends javax.swing.JDialog {
      * Creates new form AtualizarQuestDialog
      */
     private Questao q;
+    private BusinessFacade bus;
     public AtualizarQuestDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.buttonGroup1.add(jButton1);
         this.buttonGroup1.add(jButton2);
     }
-    public AtualizarQuestDialog(java.awt.Frame parent, boolean modal,Questao q) {
+    public AtualizarQuestDialog(java.awt.Frame parent, boolean modal,Questao q,BusinessFacade bus) {
         super(parent, modal);
         this.q= q;
+        this.bus = bus;
         initComponents();
         this.jTextField1.setText(this.q.getPergunta());
         this.buttonGroup1.add(jRadioButton1);
@@ -67,8 +74,18 @@ public class AtualizarQuestDialog extends javax.swing.JDialog {
         jRadioButton2.setText("Desativado");
 
         jButton1.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Atualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,6 +136,25 @@ public class AtualizarQuestDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ((JFrame)this.getParent()).dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String perg = this.jTextField1.getText();
+        if(!perg.isEmpty())
+            this.q.setPergunta(perg);
+        if(this.jRadioButton1.isSelected()) q.setEstado("activa");
+        if(this.jRadioButton2.isSelected())q.setEstado("desativado");
+        try {
+            this.bus.updateQuestao(q);
+        } catch (SQLException ex) {
+            Logger.getLogger(AtualizarQuestDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

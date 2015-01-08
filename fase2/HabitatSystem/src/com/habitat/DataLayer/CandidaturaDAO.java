@@ -344,4 +344,17 @@ public class CandidaturaDAO {
         st.setString(2, q.getEstado());
         st.executeUpdate();
     }
+    
+    public void updatePergunta(Questao q) throws SQLException{
+        PreparedStatement st;
+        String sql = "update Habitat.Perguntas set "
+                + "descricao = ?,"
+                + "estado = ? "
+                + "where id = ? ;";
+        st = conn.prepareStatement(sql);
+        st.setString(1, q.getPergunta());
+        st.setString(2, q.getEstado());
+        st.setString(3, q.getCod());
+        st.executeUpdate();
+    }
 }
