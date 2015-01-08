@@ -92,7 +92,7 @@ public class Elemento {
 
     @Override
     public String toString() {
-        return "Elemento{" + "_cod=" + _cod + ", _nome=" + _nome + ", _dataNasc=" + _dataNasc + ", _escolaridade=" + _escolaridade + ", _estCivil=" + _estCivil + ", _parentesco=" + _parentesco + ", _ocupacao=" + _ocupacao + '}';
+        return _nome;
     }
         
         

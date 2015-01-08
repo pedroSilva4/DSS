@@ -6,7 +6,10 @@
 
 package com.habitat.PresentationLayer.Candidaturas.Elementos;
 
+import com.habitat.BusinessLayer.Candidaturas.Elemento;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JList;
 
 /**
  *
@@ -17,10 +20,12 @@ public class ElemPanel extends javax.swing.JPanel {
     /**
      * Creates new form ElemPanel
      */
+    private ArrayList<Elemento> elementos;
     public ElemPanel() {
+        this.elementos = new ArrayList<>();
         initComponents();
+        updateList();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,8 +37,8 @@ public class ElemPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        add_bt = new javax.swing.JButton();
+        rmv_bt = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Agregado Familiar"));
 
@@ -45,14 +50,19 @@ public class ElemPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Adicionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        add_bt.setText("Adicionar");
+        add_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                add_btActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Remover");
+        rmv_bt.setText("Remover");
+        rmv_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rmv_btActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -63,8 +73,8 @@ public class ElemPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(add_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rmv_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,23 +85,34 @@ public class ElemPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(add_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(rmv_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void add_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btActionPerformed
         // TODO add your handling code here:
-        new AddElemDialog(new JFrame(), true).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        new AddElemDialog(new JFrame(), true,elementos).setVisible(true);
+        updateList();
+    }//GEN-LAST:event_add_btActionPerformed
+
+    private void rmv_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmv_btActionPerformed
+        // TODO add your handling code here:
+        boolean remove = this.elementos.remove((Elemento)jList1.getSelectedValue());
+        updateList();
+    }//GEN-LAST:event_rmv_btActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton add_bt;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton rmv_bt;
     // End of variables declaration//GEN-END:variables
+
+    private void updateList() {
+        this.jList1.setListData(elementos.toArray());
+    }
 }

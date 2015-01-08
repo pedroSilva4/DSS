@@ -7,6 +7,7 @@
 package com.habitat.PresentationLayer.Candidaturas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+import com.habitat.BusinessLayer.Candidaturas.Elemento;
 import com.habitat.BusinessLayer.Candidaturas.Questao;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.QuestPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.AddCandtoPanel;
@@ -132,6 +133,11 @@ public AdicionarCandidatura(java.awt.Frame parent, boolean modal)
 
     private void add_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btActionPerformed
         // TODO add your handling code here:
+        Elemento cand = ((AddCandtoPanel)this.containerCand.getComponent(0)).getCandidato();
+        if(cand == null){
+            new ErrorWindow("Adicionar Quandidatura", "Exitem Campos para o Candidato não preenchidos", "warning", new JFrame()).wshow();
+            return;
+        }
         ArrayList<Questao> questionario = ((QuestPanel)this.containerQuest.getComponent(0)).getQuestionario();
         if(questionario == null){
             new ErrorWindow("Adicionar Quandidatura", "Questionario não respondido", "warning", new JFrame()).wshow();
