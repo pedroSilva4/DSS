@@ -30,7 +30,7 @@ public class MainView extends javax.swing.JFrame {
     
     BusinessFacade businessFacade;
     public MainView(BusinessFacade bus) {
-        this.businessFacade = bus;
+        this.businessFacade = bus;        
         this.setTitle("Habitat");
         initComponents();
         this.init();
@@ -163,14 +163,14 @@ public class MainView extends javax.swing.JFrame {
                 .addContainerGap(134, Short.MAX_VALUE))
         );
 
-        main_tabs.addTab("Home", Home_jp);
+        main_tabs.addTab("Home", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/home.png")), Home_jp); // NOI18N
 
         funcionarios_jp.setMaximumSize(new java.awt.Dimension(32767000, 32767000));
         funcionarios_jp.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Funcionários", funcionarios_jp);
+        main_tabs.addTab("Funcionários", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/func.png")), funcionarios_jp); // NOI18N
 
         candidaturas_jpanel.setLayout(new java.awt.CardLayout());
-        main_tabs.addTab("Candidaturas", candidaturas_jpanel);
+        main_tabs.addTab("Candidaturas", new javax.swing.ImageIcon(getClass().getResource("/com/habitat/PresentationLayer/ICONs/doc.png")), candidaturas_jpanel); // NOI18N
 
         eventos_jp.setLayout(new java.awt.CardLayout());
         main_tabs.addTab("Eventos", eventos_jp);
