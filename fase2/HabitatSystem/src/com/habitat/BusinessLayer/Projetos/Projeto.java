@@ -100,6 +100,7 @@ public class Projeto {
     public String toString() {
         StringBuilder res = new StringBuilder();
         res.append("Projeto ID:").append(cod);
+        res.append(_dataI);
         return res.toString();
     }
 

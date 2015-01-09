@@ -62,7 +62,7 @@ public class ConsultarProj extends javax.swing.JPanel implements Observer {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar"));
 
-        jLabel1.setText("Projeto:");
+        jLabel1.setText("Projeto ID:");
 
         consBT.setText("Consultar");
         consBT.addActionListener(new java.awt.event.ActionListener() {
@@ -86,10 +86,10 @@ public class ConsultarProj extends javax.swing.JPanel implements Observer {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbProjectos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(cbProjectos, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(consBT)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,8 +123,9 @@ public class ConsultarProj extends javax.swing.JPanel implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        try {
-            this.projectos = this.bus.getListaIdProjectos();
+        try {            
+            this.projectos = this.bus.getListaIdProjectos();            
+            
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarProj.class.getName()).log(Level.SEVERE, null, ex);
         }
