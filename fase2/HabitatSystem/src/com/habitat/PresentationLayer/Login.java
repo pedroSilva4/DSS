@@ -9,6 +9,7 @@ package com.habitat.PresentationLayer;
 import com.alee.laf.WebLookAndFeel;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.util.ErrorWindow;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,6 +63,9 @@ public class Login extends javax.swing.JFrame{
         password_pf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 password_pfKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                password_pfKeyReleased(evt);
             }
         });
 
@@ -119,6 +123,8 @@ public class Login extends javax.swing.JFrame{
     private void password_pfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_password_pfKeyPressed
         // TODO add your handling code here:
         update();
+        if(evt.getKeyCode()==evt.VK_ENTER)
+            login_btActionPerformed(null);
     }//GEN-LAST:event_password_pfKeyPressed
 
     private void username_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_username_tfKeyPressed
@@ -153,6 +159,11 @@ public class Login extends javax.swing.JFrame{
         
        
     }//GEN-LAST:event_login_btActionPerformed
+
+    private void password_pfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_password_pfKeyReleased
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_password_pfKeyReleased
 
     /**
      * @param args the command line arguments
