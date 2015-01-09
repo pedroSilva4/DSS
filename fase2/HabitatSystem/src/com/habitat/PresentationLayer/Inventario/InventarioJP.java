@@ -33,7 +33,10 @@ public final class InventarioJP extends javax.swing.JPanel implements Observer{
         initComponents();
         init();
         update(null,null);
+        //inventory.setEnabled(false);
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,5 +159,6 @@ public final class InventarioJP extends javax.swing.JPanel implements Observer{
             this.jButton1.setEnabled(true);
         else this.jButton1.setEnabled(false);
     }
+    
 
 }

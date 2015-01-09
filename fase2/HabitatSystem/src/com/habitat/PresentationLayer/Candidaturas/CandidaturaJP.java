@@ -11,10 +11,8 @@ import com.habitat.PresentationLayer.Candidaturas.Projectos.ConsultarProj;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.ConsultarQuest;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.PresentationLayer.Candidaturas.Projectos.AddProjectoJP;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 /**
  *

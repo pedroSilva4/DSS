@@ -93,6 +93,8 @@ public class BusinessFacade extends Observable{
 
     public void setCandidatura(Candidatura aCand) throws SQLException {
         this._candidaturas.set(aCand);
+        setChanged();
+        notifyObservers();
     }
 
     public void addCandidatura(Candidatura aCand) throws SQLException {

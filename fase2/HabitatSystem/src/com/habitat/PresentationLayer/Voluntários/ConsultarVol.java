@@ -8,6 +8,7 @@ package com.habitat.PresentationLayer.Voluntários;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Voluntarios.Voluntario;
+import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -121,13 +122,14 @@ public class ConsultarVol extends javax.swing.JPanel implements Observer{
         // TODO add your handling code here:
         Voluntario vol = (Voluntario)this.voluntarios_drop.getSelectedItem();
         String type = this.businessFacade.getActiveUser().getTipo();
+        if(vol==null){new ErrorWindow("Voluntário","Voluntáio não Existe", "warning", new JFrame()).wshow();return;}
+            if(type.equals("admin") || type.equals("angariação")){
+            new AtualizarVolDialog(new JFrame(), true, businessFacade, vol).setVisible(true);
+            }else
+            {
+                new ConsultarVolDialog(new JFrame(), true, vol, businessFacade).setVisible(true);
+            }
         
-        if(type.equals("admin") || type.equals("angariação")){
-        new AtualizarVolDialog(new JFrame(), true, businessFacade, vol).setVisible(true);
-        }else
-        {
-            new ConsultarVolDialog(new JFrame(), true, vol, businessFacade).setVisible(true);
-        }
         
     }//GEN-LAST:event_consultActionPerformed
 
