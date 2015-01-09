@@ -6,11 +6,9 @@
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
-<<<<<<< HEAD
-=======
+
 import com.habitat.BusinessLayer.Candidaturas.Candidatura;
 import com.habitat.BusinessLayer.Candidaturas.Elemento;
->>>>>>> FETCH_HEAD
 import com.habitat.BusinessLayer.Candidaturas.Questao;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
