@@ -201,6 +201,7 @@ public class AdicionarEVEN extends javax.swing.JPanel {
         }
 
         clean(); 
+        this.observacoes_ta.setText("");
     }//GEN-LAST:event_submetar_butActionPerformed
 
 

@@ -209,7 +209,10 @@ public class BusinessFacade extends Observable{
     }
 
     public String addDoacao(String aDoador, Doacao aDoacao) throws SQLException {
-        return this._doacoes.add(aDoador, aDoacao);
+        String s = this._doacoes.add(aDoador, aDoacao);
+        setChanged();
+        notifyObservers();
+        return s;
     }
 
     public boolean containsDoador(String aCod) throws SQLException {
