@@ -6,7 +6,6 @@
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
-import com.habitat.BusinessLayer.Candidaturas.Elemento;
 import com.habitat.BusinessLayer.Candidaturas.Questao;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;

@@ -96,6 +96,11 @@ public class ConsultarCand extends javax.swing.JPanel implements Observer{
             if(cand!=null)
             new AtualizarCandidaturaDialog(new JFrame(), true, bus,cand).setVisible(true);
         }
+        else{
+            Candidatura cand = (Candidatura) this.jComboBox1.getSelectedItem();
+            if(cand!=null)
+            new ConsultaCandidaturaDialog(new JFrame(), true, bus,cand).setVisible(true);
+        }
     }//GEN-LAST:event_cons_bttActionPerformed
 
 
