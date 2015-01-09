@@ -210,7 +210,7 @@ public class CandidaturaDAO {
         st.setString(6, aC.getCandidato().getOcupacao());
         st.setString(7, aC.getCandidato().getNaturalidade());
         st.setString(8, aC.getCandidato().getNacionalidade());
-        st.setString(9, aC.getCod());
+        st.setString(9, aC.getCandidato().getCod());
         st.executeUpdate();
         /*actualizar elementos*/
         for (Elemento e : aC.getElementos()) {
@@ -222,7 +222,7 @@ public class CandidaturaDAO {
             st.setString(6, e.getOcupacao());
             st.setString(7, e.getNaturalidade());
             st.setString(8, e.getNacionalidade());
-            st.setString(9, aC.getCod());
+            st.setString(9, e.getCod());
             st.executeUpdate();
         }
     }
