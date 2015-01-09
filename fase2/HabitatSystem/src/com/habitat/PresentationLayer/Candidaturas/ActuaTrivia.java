@@ -225,15 +225,25 @@ public class ActuaTrivia extends javax.swing.JPanel {
 
     
     }
+    private boolean allFieldsOk()
+    {
+        return 
+                !this.contc_tf.getText().isEmpty() && !this.rend_tf.getText().isEmpty() &&
+                  !this.rua_tf.getText().isEmpty() && !this.codP_tf.getText().isEmpty() &&
+                    !this.loc_tf.getText().isEmpty() && !this.obs_tf.getText().isEmpty(); 
+    }
     
     public void updateTrivia()
     {
+        if(!allFieldsOk())return ;
+        
         this.cand.setContacto(this.contc_tf.getText());
         this.cand.setRendimentoBruto(Float.parseFloat(this.rend_tf.getText()));
         this.cand.setRua(this.rua_tf.getText());
         this.cand.setLocalidade(this.loc_tf.getText());
         this.cand.setCodPostal(this.codP_tf.getText());
         this.cand.setObs(this.obs_tf.getText());
+        
     }
     
     

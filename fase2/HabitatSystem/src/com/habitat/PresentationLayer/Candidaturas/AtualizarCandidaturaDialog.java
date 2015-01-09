@@ -12,6 +12,11 @@ import com.habitat.BusinessLayer.Candidaturas.Elemento;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.ActCandPanel;
 import com.habitat.PresentationLayer.Candidaturas.Elementos.ActElemPanel;
 import com.habitat.PresentationLayer.Candidaturas.Perguntas.ActQuestPanel;
+import com.habitat.util.ErrorWindow;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -33,7 +38,7 @@ public class AtualizarCandidaturaDialog extends javax.swing.JDialog {
         
         this.containerCand.add(new ActCandPanel(bus, cand.getCandidato()));
         this.containerTrivia.add(new ActuaTrivia(bus, cand));
-        this.containerQuest.add(new ActQuestPanel(bus));
+        this.containerQuest.add(new ActQuestPanel(cand));
         this.containerElem.add(new ActElemPanel(cand));
     }
     
@@ -147,10 +152,18 @@ public class AtualizarCandidaturaDialog extends javax.swing.JDialog {
     private void update_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_btActionPerformed
         // TODO add your handling code here:
       
-
-        //(String cod, Date dataAbertura, Date dataDecisao, String obs, String estado, String funcionario,
-            // ArrayList<Questao> quest, ArrayList<Elemento> elems, float rendimentoBruto,
-            //String rua, String localidade, String codPostal, Elemento candidato, String contacto)
+        ((ActCandPanel)this.containerCand.getComponents()[0]).setCandidato();
+        ((ActElemPanel)this.containerElem.getComponents()[0]).updateElems();
+        ((ActuaTrivia)this.containerTrivia.getComponents()[0]).updateTrivia();
+        
+        try {
+            this.businessFacade.setCandidatura(cand);
+            new ErrorWindow("Atualizar", "Atualizada com sucesso", "message", new JFrame()).wshow();
+            ((JFrame)this.getParent()).dispose();
+        } catch (SQLException ex) {
+            new ErrorWindow("Impossivel Atualizar", ex.getMessage(), "error", new JFrame()).wshow();
+        }
+        
       
 
     }//GEN-LAST:event_update_btActionPerformed

@@ -6,6 +6,11 @@
 package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
+<<<<<<< HEAD
+=======
+import com.habitat.BusinessLayer.Candidaturas.Candidatura;
+import com.habitat.BusinessLayer.Candidaturas.Elemento;
+>>>>>>> FETCH_HEAD
 import com.habitat.BusinessLayer.Candidaturas.Questao;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -23,16 +28,11 @@ public class ActQuestPanel extends javax.swing.JPanel {
     /**
      * Creates new form ActQuestPanel
      */
-    private final BusinessFacade businessFacade;
+    
     private ArrayList<Questao> questionario;
     ComboBoxListener itLst;
-    public ActQuestPanel(BusinessFacade bus) {
-        try {
-            this.questionario = bus.getQuestoesActivas();
-        } catch (SQLException ex) {
-            Logger.getLogger(QuestPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        this.businessFacade = bus;
+    public ActQuestPanel(Candidatura cand) {
+        this.questionario = cand.getQuestionario();
         initComponents();
         updateComboBox();
         itLst = new ComboBoxListener();
@@ -138,18 +138,7 @@ private void updateComboBox() {
         if(((Questao)jComboBox1.getSelectedItem())!= null)
             this.jTextArea1.setText(((Questao)jComboBox1.getSelectedItem()).getResposta());
     }
-    
-    public ArrayList<Questao> getQuestionario()
-    {
-        for(Questao q : questionario)
-            if(q.getResposta().isEmpty())
-                return null;
-        
-        return this.questionario;
-    }
-    
-    
-    
+   
     class ComboBoxListener implements ItemListener{
 
         @Override
