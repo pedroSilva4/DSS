@@ -136,8 +136,8 @@ private void updateComboBox() {
         this.jComboBox1.removeAllItems();
         for(Questao q : questionario)
             jComboBox1.addItem(q);
-        
-        this.jTextArea1.setText(((Questao)jComboBox1.getSelectedItem()).getResposta());
+        if(((Questao)jComboBox1.getSelectedItem())!= null)
+            this.jTextArea1.setText(((Questao)jComboBox1.getSelectedItem()).getResposta());
     }
     
     public ArrayList<Questao> getQuestionario()

@@ -8,22 +8,29 @@ package com.habitat.PresentationLayer.Candidaturas;
 
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Candidaturas.Candidatura;
+import java.sql.SQLException;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
  *
  * @author Pedro
  */
-public class ConsultarCand extends javax.swing.JPanel {
+public class ConsultarCand extends javax.swing.JPanel implements Observer{
 
     /**
      * Creates new form ConsultarCand
      */
-    private BusinessFacade bus;
+    private final BusinessFacade bus;
     public ConsultarCand(BusinessFacade bus) {
         this.bus = bus;
         initComponents();
+        this.bus.addObserver(this);
         updateComboBox();
+        
         
     }
 
@@ -85,7 +92,9 @@ public class ConsultarCand extends javax.swing.JPanel {
         String tipo = this.bus.getActiveUser().getTipo();
         if(tipo.equals("admin") || tipo.equals("famílias"))
         {
-            new AtualizarCandidaturaDialog(new JFrame(), true, bus,null);
+            Candidatura cand = (Candidatura) this.jComboBox1.getSelectedItem();
+            if(cand!=null)
+            new AtualizarCandidaturaDialog(new JFrame(), true, bus,cand).setVisible(true);
         }
     }//GEN-LAST:event_cons_bttActionPerformed
 
@@ -97,7 +106,19 @@ public class ConsultarCand extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void updateComboBox() {
-       // this.jComboBox1.removeAllItems();
-        //for(Candidatura c : this.bus.get)
+       this.jComboBox1.removeAllItems();
+        try {
+            for(Candidatura c : this.bus.getListaCandidaturas())
+            {
+                this.jComboBox1.addItem(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarCand.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+       updateComboBox();
     }
 }

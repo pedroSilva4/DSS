@@ -169,27 +169,7 @@ public class Candidatura {
     */
 
     public String toString() {
-        StringBuilder res = new StringBuilder();
-        res.append("*** Candidatura ***\n");
-        res.append("cod: " + this._cod + "\ndataAbertura: " + this.getDataAbertura().toString() + "\ndataDecisao"
-                + this.getDataDecisao().toString() + "\nobs: " + this._obs + "\nestado: " + this._estado
-                + "\nFuncionario: " + this._funcionario +"Rendimento: "+this._rendimentoBruto + "\nRua: "+this._rua +"\nlocalidade: "+this._localidade
-                +"\ncodPostal: "+this._codPostal
-                + "\nCandidato:"+this._candidato.toString()
-                +"\nContacto: "+this._contacto);
-
-    
-    
-        res.append("\n\n->Elementos");
-        for (Elemento aux : this._elementos) {
-            res.append("\n"+aux.toString());
-        }
-        res.append("\n\n->Qustionario");
-        for (Questao aux : this._questionario) {
-            res.append("\n"+aux.toString());
-        }
-
-        return res.toString();
+       return this._cod+ ": "+this._candidato.getNome();
     }
 
 }

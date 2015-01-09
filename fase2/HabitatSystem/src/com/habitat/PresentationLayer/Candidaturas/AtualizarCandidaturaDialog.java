@@ -34,7 +34,7 @@ public class AtualizarCandidaturaDialog extends javax.swing.JDialog {
         this.containerCand.add(new ActCandPanel(bus, cand.getCandidato()));
         this.containerTrivia.add(new ActuaTrivia(bus, cand));
         this.containerQuest.add(new ActQuestPanel(bus));
-        this.containerElem.add(new ActElemPanel());
+        this.containerElem.add(new ActElemPanel(cand));
     }
     
      public AtualizarCandidaturaDialog(java.awt.Frame parent, boolean modal) {
