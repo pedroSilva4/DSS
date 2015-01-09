@@ -207,7 +207,7 @@ public class ActualiarEVENDialog extends javax.swing.JDialog {
         String obs = this.obs_lb.getText();
         
         String[] dateArr = this.jFormattedTextField1.getText().split("/");
-        Date date = new Date(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1]), Integer.parseInt(dateArr[0]));
+        Date date = new Date(Integer.parseInt(dateArr[2])-1900, Integer.parseInt(dateArr[1])-1, Integer.parseInt(dateArr[0]));
         
         //System.out.println(date.toString());
 

@@ -59,8 +59,6 @@ public class AtualizarDOADOR_empr extends javax.swing.JDialog {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        contacto_tf = new javax.swing.JTextField();
-        codPstal_tf = new javax.swing.JTextField();
         back2 = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
         nif_tf = new javax.swing.JTextField();
@@ -74,6 +72,8 @@ public class AtualizarDOADOR_empr extends javax.swing.JDialog {
         pc_nome_tf = new javax.swing.JTextField();
         atividade_tf = new javax.swing.JTextField();
         site_tf = new javax.swing.JTextField();
+        contacto_tf = new javax.swing.JFormattedTextField();
+        codPstal_tf = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -139,6 +139,18 @@ public class AtualizarDOADOR_empr extends javax.swing.JDialog {
 
         jLabel5.setText("Nome:");
 
+        try {
+            contacto_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            codPstal_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -160,10 +172,10 @@ public class AtualizarDOADOR_empr extends javax.swing.JDialog {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nome_tf2)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel29)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(nif_tf)))))
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -186,7 +198,7 @@ public class AtualizarDOADOR_empr extends javax.swing.JDialog {
                                         .addComponent(update_btt2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(back2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 17, Short.MAX_VALUE))
+                                        .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel28)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -222,9 +234,9 @@ public class AtualizarDOADOR_empr extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29)
-                    .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nif_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contacto_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -376,8 +388,8 @@ public class AtualizarDOADOR_empr extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField atividade_tf;
     private javax.swing.JButton back2;
-    private javax.swing.JTextField codPstal_tf;
-    private javax.swing.JTextField contacto_tf;
+    private javax.swing.JFormattedTextField codPstal_tf;
+    private javax.swing.JFormattedTextField contacto_tf;
     private javax.swing.JLabel data_tf;
     private javax.swing.JTextField email_tf;
     private javax.swing.JLabel jLabel1;

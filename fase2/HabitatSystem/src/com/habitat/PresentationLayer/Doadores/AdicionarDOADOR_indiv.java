@@ -54,7 +54,6 @@ public class AdicionarDOADOR_indiv extends javax.swing.JPanel {
     private void initComponents() {
 
         nome_tf = new javax.swing.JTextField();
-        telefone_TF = new javax.swing.JTextField();
         rua_tf = new javax.swing.JTextField();
         submeter_bt = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -69,6 +68,7 @@ public class AdicionarDOADOR_indiv extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         postal_tf = new javax.swing.JFormattedTextField();
+        telefone_TF = new javax.swing.JFormattedTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -77,8 +77,7 @@ public class AdicionarDOADOR_indiv extends javax.swing.JPanel {
                 nome_tfActionPerformed(evt);
             }
         });
-        add(nome_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 6, 301, -1));
-        add(telefone_TF, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 46, 123, -1));
+        add(nome_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 6, 310, -1));
         add(rua_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 132, 307, -1));
 
         submeter_bt.setText("Submeter");
@@ -102,10 +101,10 @@ public class AdicionarDOADOR_indiv extends javax.swing.JPanel {
 
         jLabel5.setText("Email:");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 92, -1, -1));
-        add(nif_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 46, 141, -1));
+        add(nif_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 40, 141, -1));
 
         jLabel6.setText("NIF:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 52, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 46, -1, -1));
         add(email_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 86, 307, -1));
 
         jLabel9.setText("Contacto:");
@@ -120,6 +119,13 @@ public class AdicionarDOADOR_indiv extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         add(postal_tf, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 90, -1));
+
+        try {
+            telefone_TF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        add(telefone_TF, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 40, 126, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nome_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nome_tfActionPerformed
@@ -168,6 +174,6 @@ public class AdicionarDOADOR_indiv extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField postal_tf;
     private javax.swing.JTextField rua_tf;
     private javax.swing.JButton submeter_bt;
-    private javax.swing.JTextField telefone_TF;
+    private javax.swing.JFormattedTextField telefone_TF;
     // End of variables declaration//GEN-END:variables
 }

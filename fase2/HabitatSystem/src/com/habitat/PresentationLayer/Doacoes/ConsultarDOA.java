@@ -8,6 +8,8 @@ package com.habitat.PresentationLayer.Doacoes;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.Doacao;
 import com.habitat.util.ErrorWindow;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,6 +35,18 @@ public class ConsultarDOA extends javax.swing.JPanel implements Observer{
         businessFacade.addObserver(this);
         initComponents();
         init();
+        ItemListener it = new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(eventos_.getSelectedItem() != null || doadores_.getSelectedItem() != null
+                        || projetos_.getSelectedItem() != null)
+                    id_.setText("");
+            }
+        };
+        eventos_.addItemListener(it);
+        doadores_.addItemListener(it);
+        projetos_.addItemListener(it);
     }
 
     /**

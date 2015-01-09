@@ -9,6 +9,7 @@ import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Doadores.Doador;
 import com.habitat.BusinessLayer.Doadores.Empresa;
 import com.habitat.PresentationLayer.Voluntários.ConsultarVol;
+import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -123,7 +124,7 @@ public class ConsultarDOADOR extends javax.swing.JPanel implements Observer{
         // TODO add your handling code here:
         Doador d = (Doador)this.doador_cb.getSelectedItem();
         String type = this.businessFacade.getActiveUser().getTipo(); 
-        
+        if(d==null){new ErrorWindow("Doadores","Doador não Existe", "warning", new JFrame()).wshow();return;}
         if(type.equals("admin") || type.equals("angariação")){
             if(d.getClass() == Empresa.class){
                 Empresa emp = (Empresa) d;

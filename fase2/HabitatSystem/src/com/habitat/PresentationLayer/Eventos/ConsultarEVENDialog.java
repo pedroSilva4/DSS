@@ -56,7 +56,6 @@ public class ConsultarEVENDialog extends javax.swing.JDialog {
         np_lb = new javax.swing.JLabel();
         val_lb = new javax.swing.JLabel();
         obs_lb = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,8 +86,6 @@ public class ConsultarEVENDialog extends javax.swing.JDialog {
 
         obs_lb.setText("jLabel12");
 
-        jLabel1.setText("(EUR)");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,7 +97,7 @@ public class ConsultarEVENDialog extends javax.swing.JDialog {
                         .addComponent(jButton2)
                         .addGap(60, 60, 60))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -114,13 +111,11 @@ public class ConsultarEVENDialog extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(val_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(val_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(np_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1))
+                                        .addComponent(np_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,8 +138,7 @@ public class ConsultarEVENDialog extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(fun_lb)
                     .addComponent(jLabel5)
-                    .addComponent(val_lb)
-                    .addComponent(jLabel1))
+                    .addComponent(val_lb))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -209,7 +203,6 @@ public class ConsultarEVENDialog extends javax.swing.JDialog {
     private javax.swing.JLabel data_lb;
     private javax.swing.JLabel fun_lb;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -227,8 +220,7 @@ public void init(){
 
             this.np_lb.setText(this.e.getNPessoas()+"");
             this.fun_lb.setText(this.e.getorganisador());
-            this.val_lb.setText(this.e.getAngariacao()+"");
-            //this.cp_lb.setText(this.e.get);
+            this.val_lb.setText(this.e.getAngariacao()+" (EUR)");
             this.obs_lb.setText(this.e.getNota());
             
          
