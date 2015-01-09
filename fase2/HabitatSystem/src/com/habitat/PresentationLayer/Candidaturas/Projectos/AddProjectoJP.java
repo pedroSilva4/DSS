@@ -189,6 +189,9 @@ public class AddProjectoJP extends javax.swing.JPanel implements Observer {
         } catch (SQLException ex) {
             Logger.getLogger(AddProjectoJP.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.data_tf.setText("");
+        this.descricao_ta.setText("");
+        this.orcamento_tf.setText("");
         
     }//GEN-LAST:event_addProjectoBTActionPerformed
 
