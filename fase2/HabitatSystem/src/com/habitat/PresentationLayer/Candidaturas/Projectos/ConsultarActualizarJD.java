@@ -114,6 +114,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             }
             if(!this.tarefasAssociadas.isEmpty()){
                 String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
+                if(projetoTarefas.get(s)!= null)
                 dataProjetoTarefa_tf.setText(projetoTarefas.get(s).getaDataF().toString());
             }
             
