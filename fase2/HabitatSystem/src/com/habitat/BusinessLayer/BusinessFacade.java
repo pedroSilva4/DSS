@@ -307,6 +307,8 @@ public class BusinessFacade extends Observable{
 
     public void addTarefaProjeto(String aTarefa, String aProjeto, Date aDataI, Date aDataF) throws SQLException {
         this._projetos.addTarefa(aTarefa, aProjeto, aDataI, aDataF);
+        setChanged();
+        notifyObservers();
     }
 
     public Projeto getProjeto(String aProjeto) throws SQLException {
