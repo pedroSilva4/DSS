@@ -22,7 +22,8 @@ public class ConsElemDialog extends javax.swing.JDialog {
      */
     private final BusinessFacade bus;
     private Elemento e;
-    public ConsElemDialog(BusinessFacade bus, Elemento e) { 
+    public ConsElemDialog(java.awt.Frame parent, boolean modal,BusinessFacade bus, Elemento e) { 
+        super(parent,modal);
         initComponents();
         this.bus = bus;
         this.e = e;
@@ -199,8 +200,7 @@ public class ConsElemDialog extends javax.swing.JDialog {
 
     private void voltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar1ActionPerformed
         // TODO add your handling code here:
-        //((JFrame)this.getParent()).dispose();
-        this.dispose();
+        ((JFrame)this.getParent()).dispose();
     }//GEN-LAST:event_voltar1ActionPerformed
 
     /**

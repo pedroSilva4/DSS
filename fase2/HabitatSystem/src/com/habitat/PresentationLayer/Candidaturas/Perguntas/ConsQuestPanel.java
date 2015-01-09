@@ -19,10 +19,12 @@ public class ConsQuestPanel extends javax.swing.JPanel{
      * Creates new form ConsQuestPanel
      */ 
     private Candidatura cand;
-    private ArrayList<Questao> quest;
+    private ArrayList<Questao> quest = new ArrayList<Questao>();
     
     public ConsQuestPanel(Candidatura c) {
-        this.quest = cand.getQuestionario();
+        this.cand=c;
+        if(cand.getQuestionario()!=null)
+            this.quest = cand.getQuestionario();
         initComponents();
         updateComboBox();        
     }

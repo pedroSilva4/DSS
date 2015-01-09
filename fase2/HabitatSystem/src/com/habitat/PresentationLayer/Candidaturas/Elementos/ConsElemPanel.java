@@ -11,6 +11,8 @@ import com.habitat.BusinessLayer.Candidaturas.Elemento;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -91,7 +93,7 @@ public class ConsElemPanel extends javax.swing.JPanel {
         
         Elemento e = (Elemento)jList1.getSelectedValue();
         
-        new ConsElemDialog(bus,e).setVisible(true);
+        new ConsElemDialog(new JFrame(),true,bus,e).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

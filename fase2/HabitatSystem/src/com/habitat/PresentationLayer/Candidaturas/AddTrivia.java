@@ -177,7 +177,7 @@ public class AddTrivia extends javax.swing.JPanel {
         HashMap<String,String> trivia = new HashMap<>();
         trivia.put("data",this.data_tf.getText());
         trivia.put("contacto",this.contacto_tf.getText());
-        trivia.put("rendimento",this.rend_tf.getText());
+        trivia.put("rendimento",this.rend_tf.getText().replace(",", "."));
         trivia.put("rua", this.rua_tf.getText());
         trivia.put("postal", this.codPostal_tf.getText());
         trivia.put("local", this.local_tf.getText());
