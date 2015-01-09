@@ -320,6 +320,7 @@ public class AdicionarDOA extends javax.swing.JPanel implements Observer{
          for(Component c:this.getComponents())
             if(c.getClass() == javax.swing.JTextField.class ||c.getClass() == javax.swing.JTextArea.class  || c.getClass() == javax.swing.JFormattedTextField.class )
                 ((javax.swing.JTextField)c).setText("");
+        this.jTextArea1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

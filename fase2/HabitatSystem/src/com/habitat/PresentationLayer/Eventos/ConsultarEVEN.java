@@ -8,6 +8,7 @@ package com.habitat.PresentationLayer.Eventos;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Eventos.Evento;
 import com.habitat.PresentationLayer.Doadores.ConsultarDOADOR;
+import com.habitat.util.ErrorWindow;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -76,7 +77,7 @@ public class ConsultarEVEN extends javax.swing.JPanel implements Observer {
         // TODO add your handling code here:
         Evento d = (Evento)this.evento_cb.getSelectedItem();
         String type = this.businessFacade.getActiveUser().getTipo(); 
-        
+        if(d==null){new ErrorWindow("Evento","Evento não Existe", "warning", new JFrame()).wshow();return;}
         if(type.equals("admin") || type.equals("angariação")){
                     new ActualiarEVENDialog(new JFrame(), true, businessFacade,d).setVisible(true);
             }

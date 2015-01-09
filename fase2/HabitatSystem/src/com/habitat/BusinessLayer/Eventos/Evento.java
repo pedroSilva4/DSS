@@ -73,7 +73,7 @@ public class Evento {
         public String toString(){
             
             Date d = this.getData();
-            return this.getCod()+": "+d.getYear()+"/"+d.getMonth()+"/"+d.getDate();
+            return this.getCod()+": "+(d.getYear()+1900)+"/"+(d.getMonth()+1)+"/"+d.getDate();
         }
         
 
