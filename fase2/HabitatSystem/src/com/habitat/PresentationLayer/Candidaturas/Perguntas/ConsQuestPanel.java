@@ -7,6 +7,8 @@ package com.habitat.PresentationLayer.Candidaturas.Perguntas;
 
 import com.habitat.BusinessLayer.Candidaturas.Candidatura;
 import com.habitat.BusinessLayer.Candidaturas.Questao;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +29,7 @@ public class ConsQuestPanel extends javax.swing.JPanel{
             this.quest = cand.getQuestionario();
         initComponents();
         updateComboBox();        
+        jComboBox1.addItemListener(new JComboBoxListener());
     }
     
     
@@ -109,4 +112,17 @@ private void updateComboBox() {
             this.resp_tf.setText(((Questao)jComboBox1.getSelectedItem()).getResposta());
     }
     
+class JComboBoxListener implements ItemListener{
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            String s = ((Questao)jComboBox1.getSelectedItem()).getResposta();
+            resp_tf.setText(s);
+        }
+
+
+
+
+}
+
 }

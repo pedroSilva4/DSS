@@ -8,11 +8,8 @@ package com.habitat.PresentationLayer.Candidaturas.Elementos;
 import com.habitat.BusinessLayer.BusinessFacade;
 import com.habitat.BusinessLayer.Candidaturas.Candidatura;
 import com.habitat.BusinessLayer.Candidaturas.Elemento;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -26,7 +23,6 @@ public class ConsElemPanel extends javax.swing.JPanel {
     private ArrayList<Elemento> elementos;
     private Candidatura cand;
     private ActElemPanel.ListListener ll;
-    private boolean atualizar = false;
     private BusinessFacade bus;
     public ConsElemPanel(BusinessFacade bus, Candidatura cand) {
         this.cand = cand;
@@ -34,6 +30,8 @@ public class ConsElemPanel extends javax.swing.JPanel {
         this.elementos = this.cand.getElementos();
         initComponents();
         updateList();
+        if(elementos.isEmpty())
+              this.jButton1.setEnabled(false);
     }
 
     /**
