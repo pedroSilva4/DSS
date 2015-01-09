@@ -71,6 +71,8 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             public void itemStateChanged(ItemEvent e) {
                 String s = ((String)e.getItem()).split(":")[0];
                 dataProjetoTarefa_tf.setText(projetoTarefas.get(s).getaDataF().toString());
+                if(cbTarefasAssociadas.getSelectedItem() != null)
+                    updateTableVols();
             }
         };
         cbTarefasAssociadas.addItemListener(it);
@@ -146,7 +148,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     }
     void updateTableVols(){
         try {
-            String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
+            String s = ((String)cbTarefasAssociadas.getSelectedItem()).split(":")[0];
             voluntariosTarefas = bus.getListaVolProjTar(idProjecto, s);
             DefaultTableModel model = new DefaultTableModel(new String[]{"voluntario","tarefa","horas","data"}, 0);
             tableVols.setModel(model);
@@ -692,7 +694,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             
             //(String cVol, String cTar, String cProj,  Date dataR, int dHoras)
             String cVol =((String) this.cbVoluntarios.getSelectedItem()).split(":")[0];
-            String cTar = ((String)this.cbtarefa.getSelectedItem()).split(":")[0];
+            String cTar = ((String)this.cbTarefasAssociadas.getSelectedItem()).split(":")[0];
             String[] d1 = this.tfDataParticip.getText().split("-");
             Date date1 = new Date(Integer.parseInt(d1[0])-1900, Integer.parseInt(d1[1])-1, Integer.parseInt(d1[2]));
             Integer i = new Integer(tfHorasParticip.getText());
