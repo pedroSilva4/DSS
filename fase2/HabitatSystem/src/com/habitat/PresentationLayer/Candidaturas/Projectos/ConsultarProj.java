@@ -27,7 +27,9 @@ public class ConsultarProj extends javax.swing.JPanel implements Observer {
     private BusinessFacade bus;
     private ArrayList<String> projectos;
     public ConsultarProj(BusinessFacade b) {
+        
         this.bus = b;
+        this.bus.addObserver(this);
         try {
             this.projectos = bus.getListaIdProjectos();
             initComponents();

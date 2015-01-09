@@ -91,7 +91,9 @@ public class ProjetosDAO {
         String sql = "UPDATE Habitat.Projectos SET `dataInicio`=?, `dataFim`=?, `estado`=?, `descricao`=?, `orcamento`=?, funcionario=? WHERE `id`=?;";
         st = conn.prepareStatement(sql);
         st.setString(1, aProjeto.getDataI().toString());
-        st.setString(2, aProjeto.getDataF().toString());
+        if(aProjeto.getDataF()!= null)
+              st.setString(2, aProjeto.getDataF().toString());
+        else  st.setNull(2, java.sql.Types.DATE);
         st.setString(3, aProjeto.getEstado());
         st.setString(4, aProjeto.getDescricao());
         st.setDouble(5, aProjeto.getOrcamento());

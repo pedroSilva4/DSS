@@ -12,8 +12,10 @@ import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
 import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.util.ErrorWindow;
+import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.lang.invoke.MethodHandles;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -88,6 +91,8 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             
         };
         cbMaterial.addItemListener(itMat);
+        
+        this.bloqueartipo();
     }
     
     void updateCBTarefas(){
@@ -127,10 +132,12 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                 cbMaterial.addItem(material.get(m).getCod()+": "+material.get(m).getDescricao());
                 Integer i = new Integer(material.get(m).getQuantidade());
             }
-            String s = ((String)cbMaterial.getSelectedItem()).split(":")[0];
-            Integer i = new Integer(material.get(s).getQuantidade());
-            lbquant.setText(i.toString());
-            lbunidade.setText(material.get(s).getUnidade());
+            if(cbMaterial.getSelectedItem() != null){
+                String s = ((String)cbMaterial.getSelectedItem()).split(":")[0];
+                Integer i = new Integer(material.get(s).getQuantidade());
+                lbquant.setText(i.toString());
+                lbunidade.setText(material.get(s).getUnidade());
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
         }  
@@ -148,19 +155,21 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     }
     void updateTableVols(){
         try {
-            String s = ((String)cbTarefasAssociadas.getSelectedItem()).split(":")[0];
-            voluntariosTarefas = bus.getListaVolProjTar(idProjecto, s);
-            DefaultTableModel model = new DefaultTableModel(new String[]{"voluntario","tarefa","horas","data"}, 0);
-            tableVols.setModel(model);
-            tableVols.setCellSelectionEnabled(false);
-            for(int i=0;i<voluntariosTarefas.size();i++)
-            {
-                Voluntario v = voluntariosTarefas.get(i);
-                //(String cTar, String cProj, String cVol)
-                String dh = bus.getDuracaoParticipacao(s, idProjecto, v.getCod());
-                Date dr = bus.getDataParticipacao(s, idProjecto, v.getCod());
-                model.addRow(new String[]{v.getCod()+": "+v.getNome(),s,dh,dr.toString()});
-                model.fireTableDataChanged();
+            if(cbTarefasAssociadas.getSelectedItem()!=null){
+                String s = ((String)cbTarefasAssociadas.getSelectedItem()).split(":")[0];
+                voluntariosTarefas = bus.getListaVolProjTar(idProjecto, s);
+                DefaultTableModel model = new DefaultTableModel(new String[]{"voluntario","tarefa","horas","data"}, 0);
+                tableVols.setModel(model);
+                tableVols.setCellSelectionEnabled(false);
+                for(int i=0;i<voluntariosTarefas.size();i++)
+                {
+                    Voluntario v = voluntariosTarefas.get(i);
+                    //(String cTar, String cProj, String cVol)
+                    String dh = bus.getDuracaoParticipacao(s, idProjecto, v.getCod());
+                    Date dr = bus.getDataParticipacao(s, idProjecto, v.getCod());
+                    model.addRow(new String[]{v.getCod()+": "+v.getNome(),s,dh,dr.toString()});
+                    model.fireTableDataChanged();
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
@@ -635,14 +644,20 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private void btActualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizaActionPerformed
         // TODO add your handling code here:
         String[] d = this.data_tf.getText().split("-");
-        Date date = new Date(Integer.parseInt(d[0])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[2]));
-        p.setDataF(date);
+        try{
+            Date date = new Date(Integer.parseInt(d[0])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[2]));
+            p.setDataF(date);
+        }catch(NumberFormatException e){
+            p.setDataF(null);
+        }
+        
         p.setDescricao(this.descricao_ta.getText());
         try {
             this.bus.updateProjeto(p);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btActualizaActionPerformed
 
     private void btAddNovaTarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddNovaTarefaActionPerformed
@@ -693,12 +708,16 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             // TODO add your handling code here:
             
             //(String cVol, String cTar, String cProj,  Date dataR, int dHoras)
-            String cVol =((String) this.cbVoluntarios.getSelectedItem()).split(":")[0];
-            String cTar = ((String)this.cbTarefasAssociadas.getSelectedItem()).split(":")[0];
-            String[] d1 = this.tfDataParticip.getText().split("-");
-            Date date1 = new Date(Integer.parseInt(d1[0])-1900, Integer.parseInt(d1[1])-1, Integer.parseInt(d1[2]));
-            Integer i = new Integer(tfHorasParticip.getText());
-            bus.addParticipacaoTarefa(cVol, cTar, idProjecto, date1, i);
+            if(this.cbVoluntarios.getSelectedItem()!=null){
+                 String cVol =((String) this.cbVoluntarios.getSelectedItem()).split(":")[0];
+                 if(this.cbTarefasAssociadas.getSelectedItem()!=null){
+                    String cTar = ((String)this.cbTarefasAssociadas.getSelectedItem()).split(":")[0];
+                    String[] d1 = this.tfDataParticip.getText().split("-");
+                    Date date1 = new Date(Integer.parseInt(d1[0])-1900, Integer.parseInt(d1[1])-1, Integer.parseInt(d1[2]));
+                    Integer i = new Integer(tfHorasParticip.getText());
+                    bus.addParticipacaoTarefa(cVol, cTar, idProjecto, date1, i);
+                 }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -806,5 +825,17 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         updateCBMaterial();
         updateCBVoluntarios();
         updateTableVols();
+    }
+    
+    private void bloqueartipo(){
+        String s  = this.bus.getActiveUser().getTipo();
+        if(!s.equals("admin") || !s.equals("obras")){
+            this.btActualiza.setEnabled(false);
+            this.btAddMAtProj.setEnabled(false);
+            this.btAddNovaTarefa.setEnabled(false);
+            this.btAddParticipTarefa.setEnabled(false);
+            this.btAssociaTarefa.setEnabled(false);
+            this.btAtualizaData.setEnabled(false);
+        }
     }
 }
