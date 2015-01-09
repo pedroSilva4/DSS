@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MaterialDAO {
 
@@ -93,6 +94,22 @@ public class MaterialDAO {
         } else {
             return false;
         }
+    }
+    public HashMap<String,Material> getMap() throws SQLException{
+        Statement st;
+        ResultSet res;
+        String sql;
+        HashMap<String,Material> ms = new HashMap<String,Material>();
+        sql = "select * from Habitat.Material;";
+        st = conn.createStatement();
+        res = st.executeQuery(sql);
+        while(res.next()){
+            Integer i = new Integer(res.getString("quantidade"));
+            Material m = new Material(res.getString("id"),res.getString("descricao"),
+                            i,res.getString("unidade"));
+            ms.put(res.getString("id"), m);
+        }
+        return ms;
     }
     public ArrayList<Material> getLista() throws SQLException{
         Statement st;

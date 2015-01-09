@@ -155,4 +155,32 @@ public class ProjetosDAO {
         }
         return ps;
     }
+    public void associaMaterial(String cMat, String cProj,int quant) throws SQLException{
+        PreparedStatement st;
+        ResultSet res;
+        String sql = "select * from Habitat.ProjectoMaterial where material = ? and projecto = ?;";
+        st = conn.prepareStatement(sql);
+        st.setString(1, cMat);
+        st.setString(2, cProj);
+        res = st.executeQuery();
+        if(res.next()){
+            sql = "update Habitat.ProjectoMaterial "
+                    + "set quntidade = ?"
+                    + "where material = ? and projecto = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1, cMat);
+            st.setString(2, cProj);
+            st.executeUpdate();
+        }
+        else{
+            sql = "insert into Habitat.ProjectoMaterial (quantidade,material,projecto)"
+                    + "values(?,?,?)";
+            st = conn.prepareStatement(sql);
+            Integer i = new Integer(quant);
+            st.setString(1, i.toString());
+            st.setString(2, cMat);
+            st.setString(3, cProj);
+            st.executeUpdate();
+        }
+    }
 }

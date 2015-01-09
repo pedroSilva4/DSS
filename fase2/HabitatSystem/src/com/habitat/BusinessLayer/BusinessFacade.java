@@ -217,6 +217,9 @@ public class BusinessFacade extends Observable{
     public ArrayList<Material> getListaMaterial() throws SQLException{
         return this._materiais.getLista();
     }
+    public HashMap<String,Material> getMapMaterial() throws SQLException{
+        return this._materiais.getMap();
+    }
 
      public Material getMaterial(String aCod) throws SQLException {
         return this._materiais.get(aCod);
@@ -387,6 +390,11 @@ public class BusinessFacade extends Observable{
      }
      public ArrayList<Voluntario> getListaVolProjTar(String cProj, String cTar) throws SQLException{
          return this._voluntarios.getListaVolProjTar(cProj, cTar);
+     }
+     public void associaMaterialProjecto(String cMat, String cProj,int quant) throws SQLException{
+         this._projetos.associaMaterial(cMat, cProj, quant);
+         setChanged();
+         notifyObservers();
      }
      
      public void updateQuestao(Questao q) throws SQLException{
