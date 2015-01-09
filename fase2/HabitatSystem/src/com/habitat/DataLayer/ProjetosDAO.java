@@ -165,11 +165,15 @@ public class ProjetosDAO {
         res = st.executeQuery();
         if(res.next()){
             sql = "update Habitat.ProjectoMaterial "
-                    + "set quntidade = ?"
+                    + "set quantidade = ?"
                     + "where material = ? and projecto = ?;";
             st = conn.prepareStatement(sql);
-            st.setString(1, cMat);
-            st.setString(2, cProj);
+            Integer i = new Integer(res.getString("quantidade"));
+            Integer i2 = new Integer(quant);
+            i+=i2;
+            st.setString(1, i.toString());
+            st.setString(2, cMat);
+            st.setString(3, cProj);
             st.executeUpdate();
         }
         else{

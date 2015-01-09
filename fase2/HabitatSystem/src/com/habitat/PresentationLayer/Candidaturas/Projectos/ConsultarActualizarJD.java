@@ -617,9 +617,9 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         if(qtRequer <= qtDisp){
             try {
                 int i = qtDisp-qtRequer;
-                this.bus.associaMaterialProjecto(idProjecto, idProjecto, qtDisp);
                 String s = ((String)cbMaterial.getSelectedItem()).split(":")[0];
                 Material m = material.get(s);
+                this.bus.associaMaterialProjecto(m.getCod(), idProjecto, qtRequer);
                 m.setQuantidade(i);
                 this.bus.setMaterial(m);
             } catch (SQLException ex) {
