@@ -52,7 +52,6 @@ public class ActuaTrivia extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         contc_tf = new javax.swing.JTextField();
-        rend_tf = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -68,6 +67,7 @@ public class ActuaTrivia extends javax.swing.JPanel {
         data_decisao = new javax.swing.JLabel();
         decision = new javax.swing.JButton();
         dataInicial_lb = new javax.swing.JLabel();
+        rend_tf = new javax.swing.JFormattedTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Imformação"));
 
@@ -107,6 +107,8 @@ public class ActuaTrivia extends javax.swing.JPanel {
 
         dataInicial_lb.setText("jLabel11");
 
+        rend_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00"))));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,7 +131,7 @@ public class ActuaTrivia extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -140,9 +142,9 @@ public class ActuaTrivia extends javax.swing.JPanel {
                                 .addComponent(data_decisao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rend_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rend_tf)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel5)))
                         .addGap(62, 62, 62))
                     .addGroup(layout.createSequentialGroup()
@@ -172,8 +174,8 @@ public class ActuaTrivia extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(rend_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(rend_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -210,7 +212,8 @@ public class ActuaTrivia extends javax.swing.JPanel {
         String dt2 = new SimpleDateFormat("dd/MM/yyyy").format(d2);
         this.dataInicial_lb.setText(dt2);
         this.contc_tf.setText(this.cand.getContacto());
-        this.rend_tf.setText(this.cand.getRendimentoBruto()+"");
+        String s = this.cand.getRendimentoBruto()+"";
+        this.rend_tf.setText(s.replace(".", ","));
         this.rua_tf.setText(this.cand.getRua());
         this.loc_tf.setText(this.cand.getLocalidade());
         this.codP_tf.setText(this.cand.getCodPostal());
@@ -238,7 +241,7 @@ public class ActuaTrivia extends javax.swing.JPanel {
         if(!allFieldsOk())return ;
         
         this.cand.setContacto(this.contc_tf.getText());
-        this.cand.setRendimentoBruto(Float.parseFloat(this.rend_tf.getText()));
+        this.cand.setRendimentoBruto(Float.parseFloat(this.rend_tf.getText().replace(",", ".")));
         this.cand.setRua(this.rua_tf.getText());
         this.cand.setLocalidade(this.loc_tf.getText());
         this.cand.setCodPostal(this.codP_tf.getText());
@@ -271,7 +274,7 @@ public class ActuaTrivia extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField loc_tf;
     private javax.swing.JTextArea obs_tf;
-    private javax.swing.JTextField rend_tf;
+    private javax.swing.JFormattedTextField rend_tf;
     private javax.swing.JTextField rua_tf;
     // End of variables declaration//GEN-END:variables
 }

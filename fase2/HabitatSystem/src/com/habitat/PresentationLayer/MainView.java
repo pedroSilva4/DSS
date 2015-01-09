@@ -146,22 +146,22 @@ public class MainView extends javax.swing.JFrame {
         Home_jpLayout.setHorizontalGroup(
             Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Home_jpLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(63, 63, 63)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(122, 122, 122)
                 .addComponent(jLabel3)
-                .addContainerGap(338, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
         Home_jpLayout.setVerticalGroup(
             Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Home_jpLayout.createSequentialGroup()
                 .addGroup(Home_jpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Home_jpLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Home_jpLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3))
+                    .addGroup(Home_jpLayout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
 

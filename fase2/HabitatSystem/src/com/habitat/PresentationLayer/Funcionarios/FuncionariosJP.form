@@ -23,7 +23,7 @@
                   <Component id="rm_bt" pref="197" max="32767" attributes="0"/>
                   <Component id="add_bt" pref="197" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace pref="53" max="32767" attributes="0"/>
               <Component id="container" min="-2" pref="374" max="-2" attributes="0"/>
               <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>

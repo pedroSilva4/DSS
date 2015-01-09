@@ -92,6 +92,9 @@ public class AdicionarEVEN extends javax.swing.JPanel {
             ex.printStackTrace();
         }
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         observacoes_ta.setColumns(20);
         observacoes_ta.setRows(5);
         jScrollPane1.setViewportView(observacoes_ta);
@@ -132,10 +135,10 @@ public class AdicionarEVEN extends javax.swing.JPanel {
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel5)
                                 .addGap(5, 5, 5)
-                                .addComponent(tf_valorAnga, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel1))
-                            .addComponent(jScrollPane1))))
+                                .addComponent(tf_valorAnga, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel1)))
                 .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
