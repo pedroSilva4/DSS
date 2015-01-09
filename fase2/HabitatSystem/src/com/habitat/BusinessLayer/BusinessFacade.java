@@ -391,8 +391,26 @@ public class BusinessFacade extends Observable{
      public ArrayList<Voluntario> getListaVolProjTar(String cProj, String cTar) throws SQLException{
          return this._voluntarios.getListaVolProjTar(cProj, cTar);
      }
+     
+     public Date getDataParticipacao(String cTar, String cProj, String cVol) throws SQLException{
+         return this._voluntarios.getDataParticipacao(cTar, cProj, cVol);
+     }
+     public String getDuracaoParticipacao(String cTar, String cProj, String cVol) throws SQLException{
+         return this._voluntarios.getDuracaoParticipacao(cTar, cProj, cVol);
+     }
+     
      public void associaMaterialProjecto(String cMat, String cProj,int quant) throws SQLException{
          this._projetos.associaMaterial(cMat, cProj, quant);
+         setChanged();
+         notifyObservers();
+     }
+     
+     public void setProjectoTarefa(Date dataFim, String cProjecto, String cTarefa) throws SQLException{
+         this._tarefas.setProjectoTarefa(dataFim, cProjecto, cTarefa);
+     }
+     public void addParticipacaoTarefa(String cVol, String cTar, String cProj, 
+             Date dataR, int dHoras) throws SQLException{
+         this._voluntarios.addParticipacao(cVol, cTar, cProj, dataR, dHoras);
          setChanged();
          notifyObservers();
      }

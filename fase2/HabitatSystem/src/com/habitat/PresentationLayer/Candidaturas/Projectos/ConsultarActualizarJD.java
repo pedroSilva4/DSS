@@ -148,13 +148,16 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         try {
             String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
             voluntariosTarefas = bus.getListaVolProjTar(idProjecto, s);
-            DefaultTableModel model = new DefaultTableModel(new String[]{"id","tarefa","horas","data"}, 0);
+            DefaultTableModel model = new DefaultTableModel(new String[]{"voluntario","tarefa","horas","data"}, 0);
             tableVols.setModel(model);
             tableVols.setCellSelectionEnabled(false);
             for(int i=0;i<voluntariosTarefas.size();i++)
             {
                 Voluntario v = voluntariosTarefas.get(i);
-                model.addRow(new String[]{v.getCod(),s,"vazio","vazio"});
+                //(String cTar, String cProj, String cVol)
+                String dh = bus.getDuracaoParticipacao(s, idProjecto, v.getCod());
+                Date dr = bus.getDataParticipacao(s, idProjecto, v.getCod());
+                model.addRow(new String[]{v.getCod()+": "+v.getNome(),s,dh,dr.toString()});
                 model.fireTableDataChanged();
             }
         } catch (SQLException ex) {
@@ -204,15 +207,14 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         jLabel15 = new javax.swing.JLabel();
         cbVoluntarios = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableVols = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btAddParticipTarefa = new javax.swing.JButton();
+        btAtualizaData = new javax.swing.JButton();
         dataProjetoTarefa_tf = new javax.swing.JFormattedTextField();
+        tfHorasParticip = new javax.swing.JFormattedTextField();
+        tfDataParticip = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         cbMaterial = new javax.swing.JComboBox();
@@ -283,7 +285,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                                 .addComponent(dataLabel)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(data_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,7 +381,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                             .addComponent(dataAssociaFim_tf))
                         .addGap(32, 32, 32)
                         .addComponent(btAssociaTarefa)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,18 +423,11 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
 
         jLabel16.setText("horas:");
 
-        jTextField5.setText("jTextField5");
-
         jLabel17.setText("Data:");
-
-        jTextField6.setText("jTextField6");
 
         tableVols.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "id", "tarefa", "horas", "data"
@@ -440,14 +435,30 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         ));
         jScrollPane2.setViewportView(tableVols);
 
-        jButton4.setText("Adicionar");
+        btAddParticipTarefa.setText("Adicionar");
+        btAddParticipTarefa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddParticipTarefaActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Remover");
-
-        jButton6.setText("Atualizar");
+        btAtualizaData.setText("Atualizar data");
+        btAtualizaData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizaDataActionPerformed(evt);
+            }
+        });
 
         try {
             dataProjetoTarefa_tf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        tfHorasParticip.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
+
+        try {
+            tfDataParticip.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -458,40 +469,41 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbTarefasAssociadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel13))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbTarefasAssociadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(cbVoluntarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel16)))
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel17)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(dataProjetoTarefa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                                .addComponent(cbVoluntarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel16)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dataProjetoTarefa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(tfHorasParticip, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfDataParticip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btAtualizaData)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btAddParticipTarefa)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,25 +513,21 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                     .addComponent(jLabel13)
                     .addComponent(cbTarefasAssociadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
-                    .addComponent(dataProjetoTarefa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                    .addComponent(dataProjetoTarefa_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAtualizaData))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(cbVoluntarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfHorasParticip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfDataParticip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addGap(30, 30, 30))
+                    .addComponent(btAddParticipTarefa)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consultar/atualizar Tarefas", jPanel3);
@@ -666,6 +674,34 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         }
     }//GEN-LAST:event_btAddMAtProjActionPerformed
 
+    private void btAtualizaDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizaDataActionPerformed
+        try {
+            // TODO add your handling code here:
+            String[] d1 = this.dataProjetoTarefa_tf.getText().split("-");
+            Date date1 = new Date(Integer.parseInt(d1[0])-1900, Integer.parseInt(d1[1])-1, Integer.parseInt(d1[2]));
+            String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
+            this.bus.setProjectoTarefa(date1, idProjecto, s);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btAtualizaDataActionPerformed
+
+    private void btAddParticipTarefaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddParticipTarefaActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            //(String cVol, String cTar, String cProj,  Date dataR, int dHoras)
+            String cVol =((String) this.cbVoluntarios.getSelectedItem()).split(":")[0];
+            String cTar = ((String)this.cbtarefa.getSelectedItem()).split(":")[0];
+            String[] d1 = this.tfDataParticip.getText().split("-");
+            Date date1 = new Date(Integer.parseInt(d1[0])-1900, Integer.parseInt(d1[1])-1, Integer.parseInt(d1[2]));
+            Integer i = new Integer(tfHorasParticip.getText());
+            bus.addParticipacaoTarefa(cVol, cTar, idProjecto, date1, i);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btAddParticipTarefaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -712,7 +748,9 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JButton btActualiza;
     private javax.swing.JButton btAddMAtProj;
     private javax.swing.JButton btAddNovaTarefa;
+    private javax.swing.JButton btAddParticipTarefa;
     private javax.swing.JButton btAssociaTarefa;
+    private javax.swing.JButton btAtualizaData;
     private javax.swing.JComboBox cbMaterial;
     private javax.swing.JComboBox cbTarefasAssociadas;
     private javax.swing.JComboBox cbVoluntarios;
@@ -725,9 +763,6 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JTextArea descricao_ta;
     private javax.swing.JLabel funcLabel;
     private javax.swing.JLabel idLabel;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -753,11 +788,11 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lbquant;
     private javax.swing.JLabel lbunidade;
     private javax.swing.JTable tableVols;
+    private javax.swing.JFormattedTextField tfDataParticip;
+    private javax.swing.JFormattedTextField tfHorasParticip;
     private javax.swing.JTextField tf_novaTarefa;
     private javax.swing.JFormattedTextField tf_quantRequer;
     // End of variables declaration//GEN-END:variables

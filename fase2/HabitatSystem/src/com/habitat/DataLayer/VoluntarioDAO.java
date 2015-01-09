@@ -152,8 +152,8 @@ public class VoluntarioDAO {
                              + "where voluntarios = ? and tarefas = ? and projecto = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, cVol);
-            st.setString(1, cTar);
-            st.setString(1, cProj);
+            st.setString(2, cTar);
+            st.setString(3, cProj);
             res = st.executeQuery();
             if(res.next())
                 return res.getDate("dataRealizacao");
@@ -162,15 +162,51 @@ public class VoluntarioDAO {
         public String getDuracaoParticipacao(String cTar, String cProj, String cVol) throws SQLException{
             PreparedStatement st;
             ResultSet res;
-            String sql = "select dataRealizacao from Habitat.ProjectoTarefaVoluntario "
+            String sql = "select duracaoHoras from Habitat.ProjectoTarefaVoluntario "
                              + "where voluntarios = ? and tarefas = ? and projecto = ?;";
             st = conn.prepareStatement(sql);
             st.setString(1, cVol);
-            st.setString(1, cTar);
-            st.setString(1, cProj);
+            st.setString(2, cTar);
+            st.setString(3, cProj);
             res = st.executeQuery();
             if(res.next())
                 return res.getString("duracaoHoras");
             return null;
+        }
+        public void addParticipacao(String cVol, String cTar, String cProj, Date dataR, int dHoras) throws SQLException{
+            PreparedStatement st;
+            ResultSet res;
+            String sql = "select * from Habitat.ProjectoTarefaVoluntario "
+                            + "where voluntarios = ? and tarefas = ? and projecto = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1, cVol);
+            st.setString(2, cTar);
+            st.setString(3, cProj);
+            res = st.executeQuery();
+            if(res.next()){
+                Integer h = new Integer(res.getString("duracaoHoras"));
+                h+=dHoras;
+                sql = "update Habitat.ProjectoTarefaVoluntario "
+                        + "set duracaoHoras = ? "
+                        + "where voluntarios = ? and tarefas = ? and projecto = ?;";
+                st = conn.prepareStatement(sql);
+                st.setString(1, h.toString());
+                st.setString(2, cVol);
+                st.setString(3, cTar);
+                st.setString(4, cProj);
+                st.executeUpdate();
+            }
+            else{
+                sql = "insert into Habitat.ProjectoTarefaVoluntario (duracaoHoras, dataRealizacao, voluntarios, tarefas, projecto) "
+                        + "values(?,?,?,?,?);";
+                st = conn.prepareStatement(sql);
+                Integer h = new Integer(dHoras);
+                st.setString(1, h.toString());
+                st.setDate(2, dataR);
+                st.setString(3, cVol);
+                st.setString(4, cTar);
+                st.setString(5, cProj);
+                st.executeUpdate();
+            }
         }
 }

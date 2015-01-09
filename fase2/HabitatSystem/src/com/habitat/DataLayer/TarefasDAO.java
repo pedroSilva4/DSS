@@ -4,6 +4,7 @@ import com.habitat.BusinessLayer.Material.Material;
 import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -115,5 +116,17 @@ public class TarefasDAO {
             pts.put(pt.getaTarefa(), pt);
         }
         return pts;
+    }
+    
+    public void setProjectoTarefa(Date dataFim, String cProjecto, String cTarefa) throws SQLException{
+        PreparedStatement st;
+        String sql = "update Habitat.ProjectoTarefas set "
+                        + "dataFim = ? "
+                        + "where projecto = ? and tarefas = ?;";
+        st = conn.prepareStatement(sql);
+        st.setDate(1, dataFim);
+        st.setString(2, cProjecto);
+        st.setString(3, cTarefa);
+        st.executeUpdate();
     }
 }
