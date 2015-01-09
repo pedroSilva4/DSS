@@ -10,6 +10,7 @@ import com.habitat.BusinessLayer.Material.Material;
 import com.habitat.BusinessLayer.Projetos.Projeto;
 import com.habitat.BusinessLayer.Projetos.ProjetoTarefas;
 import com.habitat.BusinessLayer.Tarefas.Tarefa;
+import com.habitat.BusinessLayer.Voluntarios.Voluntario;
 import com.habitat.util.ErrorWindow;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -22,6 +23,7 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,6 +41,8 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private ArrayList<Tarefa> tarefasAssociadas;
     private HashMap<String,Material> material;
     private HashMap<String,ProjetoTarefas> projetoTarefas;
+    private ArrayList<Voluntario> voluntarios;
+    private ArrayList<Voluntario> voluntariosTarefas;
     public ConsultarActualizarJD(java.awt.Frame parent, boolean modal,BusinessFacade b, String idProjecto) {
         super(parent, modal);
         this.bus = b;
@@ -59,6 +63,8 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         updateCBTarefas();
         updateCBTarefasAssociadas();
         updateCBMaterial();
+        updateCBVoluntarios();
+        updateTableVols();
         ItemListener it = new ItemListener() {
 
             @Override
@@ -102,8 +108,11 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             for(Tarefa t : this.tarefasAssociadas){
                 cbTarefasAssociadas.addItem(t.getCod()+": "+t.getDescricao());
             }
-            String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
-            dataProjetoTarefa_tf.setText(projetoTarefas.get(s).getaDataF().toString());
+            if(!this.tarefasAssociadas.isEmpty()){
+                String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
+                dataProjetoTarefa_tf.setText(projetoTarefas.get(s).getaDataF().toString());
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -122,8 +131,35 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             lbunidade.setText(material.get(s).getUnidade());
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
+    void updateCBVoluntarios(){
+        try {
+            cbVoluntarios.removeAllItems();
+            this.voluntarios = bus.getListaVoluntario();
+            for(Voluntario v : this.voluntarios){
+                cbVoluntarios.addItem(v.getCod()+": "+v.getNome());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+    void updateTableVols(){
+        try {
+            String s = ((String)cbtarefa.getSelectedItem()).split(":")[0];
+            voluntariosTarefas = bus.getListaVolProjTar(idProjecto, s);
+            DefaultTableModel model = new DefaultTableModel(new String[]{"id","tarefa","horas","data"}, 0);
+            tableVols.setModel(model);
+            tableVols.setCellSelectionEnabled(false);
+            for(int i=0;i<voluntariosTarefas.size();i++)
+            {
+                Voluntario v = voluntariosTarefas.get(i);
+                model.addRow(new String[]{v.getCod(),s,"vazio","vazio"});
+                model.fireTableDataChanged();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarActualizarJD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -166,13 +202,13 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         cbTarefasAssociadas = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        cbVoluntarios = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableVols = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -381,7 +417,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
 
         jLabel15.setText("Voluntário:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVoluntarios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel16.setText("horas:");
 
@@ -391,7 +427,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
 
         jTextField6.setText("jTextField6");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableVols.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -402,7 +438,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                 "id", "tarefa", "horas", "data"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tableVols);
 
         jButton4.setText("Adicionar");
 
@@ -435,7 +471,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbTarefasAssociadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbVoluntarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel16)))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,7 +505,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbVoluntarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
@@ -516,15 +552,14 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addComponent(btAddMAtProj)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                            .addComponent(jLabel19)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tf_quantRequer, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btAddMAtProj, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_quantRequer, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
@@ -680,6 +715,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JButton btAssociaTarefa;
     private javax.swing.JComboBox cbMaterial;
     private javax.swing.JComboBox cbTarefasAssociadas;
+    private javax.swing.JComboBox cbVoluntarios;
     private javax.swing.JComboBox cbtarefa;
     private javax.swing.JFormattedTextField dataAssociaFim_tf;
     private javax.swing.JFormattedTextField dataAssociaInicio_tf;
@@ -692,7 +728,6 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -718,11 +753,11 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lbquant;
     private javax.swing.JLabel lbunidade;
+    private javax.swing.JTable tableVols;
     private javax.swing.JTextField tf_novaTarefa;
     private javax.swing.JFormattedTextField tf_quantRequer;
     // End of variables declaration//GEN-END:variables
@@ -732,5 +767,7 @@ public class ConsultarActualizarJD extends javax.swing.JDialog implements Observ
         updateCBTarefas();
         updateCBTarefasAssociadas();
         updateCBMaterial();
+        updateCBVoluntarios();
+        updateTableVols();
     }
 }

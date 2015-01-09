@@ -139,9 +139,38 @@ public class VoluntarioDAO {
                 Morada m = new Morada(res.getString("rua"),res.getString("localidade"),res.getString("codPostal"));
                 Voluntario v = new Voluntario(res.getString("id"),res.getString("nome"),
                                 res.getDate("dataNascimento"),res.getDate("dataAssociacao"),
-                                res.getString("contacto"),res.getString("equipa"),res.getString("profissao"),m);
+                                res.getString("contacto"),res.getString("nomeEquipa"),res.getString("profissao"),m);
                 vs.add(v);
             }
             return vs;
+        }
+        
+        public Date getDataParticipacao(String cTar, String cProj, String cVol) throws SQLException{
+            PreparedStatement st;
+            ResultSet res;
+            String sql = "select dataRealizacao from Habitat.ProjectoTarefaVoluntario "
+                             + "where voluntarios = ? and tarefas = ? and projecto = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1, cVol);
+            st.setString(1, cTar);
+            st.setString(1, cProj);
+            res = st.executeQuery();
+            if(res.next())
+                return res.getDate("dataRealizacao");
+            return null;
+        }
+        public String getDuracaoParticipacao(String cTar, String cProj, String cVol) throws SQLException{
+            PreparedStatement st;
+            ResultSet res;
+            String sql = "select dataRealizacao from Habitat.ProjectoTarefaVoluntario "
+                             + "where voluntarios = ? and tarefas = ? and projecto = ?;";
+            st = conn.prepareStatement(sql);
+            st.setString(1, cVol);
+            st.setString(1, cTar);
+            st.setString(1, cProj);
+            res = st.executeQuery();
+            if(res.next())
+                return res.getString("duracaoHoras");
+            return null;
         }
 }
