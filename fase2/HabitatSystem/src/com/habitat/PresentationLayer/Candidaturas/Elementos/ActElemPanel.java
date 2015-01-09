@@ -30,7 +30,7 @@ public class ActElemPanel extends javax.swing.JPanel {
     private boolean atualizar = false;
     public ActElemPanel(Candidatura cand) {
         this.cand = cand;
-        this.elementos = this.cand.getElementos();
+        this.elementos = new ArrayList<>(this.cand.getElementos());
         initComponents();
         updateList();
         this.jList1.addListSelectionListener(ll);
@@ -66,7 +66,6 @@ public class ActElemPanel extends javax.swing.JPanel {
         jList1 = new javax.swing.JList();
         add_bt = new javax.swing.JButton();
         rmv_bt = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         reset_bt = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Elemento"));
@@ -93,8 +92,6 @@ public class ActElemPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Consultar");
-
         reset_bt.setText("Reset");
         reset_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,23 +110,21 @@ public class ActElemPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(add_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(rmv_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(reset_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addComponent(add_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(rmv_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(reset_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(reset_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -137,6 +132,10 @@ public class ActElemPanel extends javax.swing.JPanel {
     private void add_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_btActionPerformed
         // TODO add your handling code here:
         if(atualizar){
+            new ActElemDialog(new JFrame(), true,(Elemento)jList1.getSelectedValue()).setVisible(true);
+            updateList();
+            this.add_bt.setText("Adicionar");
+            atualizar = false;
             
         }
         else{
@@ -149,18 +148,19 @@ public class ActElemPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         boolean remove = this.elementos.remove((Elemento)jList1.getSelectedValue());
         updateList();
+        
     }//GEN-LAST:event_rmv_btActionPerformed
 
     private void reset_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_btActionPerformed
         // TODO add your handling code here:
-        this.elementos = cand.getElementos();
+        this.elementos = new ArrayList<>(cand.getElementos());
         updateList();
+        
     }//GEN-LAST:event_reset_btActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_bt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton reset_bt;
@@ -168,6 +168,7 @@ public class ActElemPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
      private void updateList() {
         this.jList1.setListData(elementos.toArray());
+        this.jList1.getMouseListeners()[0].mouseClicked(null);
     }
     
     public void updateElems()

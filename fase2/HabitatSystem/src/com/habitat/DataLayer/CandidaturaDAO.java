@@ -126,7 +126,7 @@ public class CandidaturaDAO {
         stElems = conn.prepareStatement(sqlElems);
         stElems.setString(1, resFam.getString("id"));
         stElems.setString(2, cand.getCod());
-        ArrayList<Elemento> el = new ArrayList<Elemento>();
+        ArrayList<Elemento> el = new ArrayList<>();
         ResultSet resElems = stElems.executeQuery();
         while (resElems.next()) {
             Elemento e = new Elemento(resElems.getString("id"), resElems.getString("nome"),
@@ -143,15 +143,15 @@ public class CandidaturaDAO {
         PreparedStatement st;
         String sql;
         /*actualizar Familia*/
-        sql = "update Habitat.Familias set"
-                + "rendimento = ?,"
-                + "rua = ?,"
-                + "localidade = ?,"
-                + "codPostal = ?,"
-                + "contacto = ?,"
-                + "responsavel = ?,"
-                + "funcionario = ?"
-                + "where id = ?";
+        sql = "update Habitat.Familias set "
+                + "rendimento = ?, "
+                + "rua = ?, "
+                + "localidade = ?, "
+                + "codPostal = ?, "
+                + "contacto = ?, "
+                + "responsavel = ?, "
+                + "funcionario = ? "
+                + "where id = ? ;";
         Float f = new Float(aC.getRendimentoBruto());
         st = conn.prepareStatement(sql);
         st.setString(1, f.toString());
@@ -164,13 +164,13 @@ public class CandidaturaDAO {
         st.setString(8, aC.getCod());
         st.executeUpdate();
         /*actualizar candidatura*/
-        sql = "update Habitat.Candidaturas set"
-                + "dataAbertura = ?,"
-                + "dataDecisao = ?,"
-                + "observacoes = ?,"
-                + "estado = ?,"
-                + "funcionario = ?"
-                + "where id = ?";
+        sql = "update Habitat.Candidaturas set "
+                + "dataAbertura = ?, "
+                + "dataDecisao = ?, "
+                + "observacoes = ?, "
+                + "estado = ?, "
+                + "funcionario = ? "
+                + "where id = ?; ";
         st = conn.prepareStatement(sql);
         st.setDate(1, aC.getDataAbertura());
         st.setDate(2, aC.getDataDecisao());
@@ -180,8 +180,8 @@ public class CandidaturaDAO {
         st.setString(6, aC.getCod());
         st.executeUpdate();
         /*actualizar perguntas*/
-        sql = "update Habitat.CandidaturaPerguntas set"
-                + "resposta = ?"
+        sql = "update Habitat.CandidaturaPerguntas set "
+                + "resposta = ? "
                 + "where candidatura = ? and pergunta = ?;";
         st = conn.prepareStatement(sql);
         for (Questao q : aC.getQuestionario()) {
@@ -191,16 +191,16 @@ public class CandidaturaDAO {
             st.executeUpdate();
         }
         /*actualizar candidato*/
-        sql = "update Habitat.Elementos set"
-                + "nome = ?,"
-                + "dataNasc = ?,"
-                + "escolaridade = ?,"
-                + "estadoCivil = ?,"
-                + "parentesco = ?,"
-                + "ocupacao = ?,"
-                + "naturalidade = ?,"
-                + "nacionalidade = ?,"
-                + "where familia = ?;";
+        sql = "update Habitat.Elementos set "
+                + "nome = ?, "
+                + "dataNasc = ?, "
+                + "escolaridade = ?, "
+                + "estadoCivil = ?, "
+                + "parentesco = ?, "
+                + "ocupacao = ?, "
+                + "naturalidade = ?, "
+                + "nacionalidade = ? "
+                + "where id = ? ; ";
         st = conn.prepareStatement(sql);
         st.setString(1, aC.getCandidato().getNome());
         st.setDate(2, aC.getCandidato().getDataNasc());

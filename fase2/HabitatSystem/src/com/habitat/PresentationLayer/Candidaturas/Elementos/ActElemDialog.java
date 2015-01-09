@@ -5,6 +5,15 @@
  */
 package com.habitat.PresentationLayer.Candidaturas.Elementos;
 
+import com.habitat.BusinessLayer.Candidaturas.Elemento;
+import com.habitat.util.ErrorWindow;
+import java.awt.Component;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
 /**
  *
  * @author filiperibeiro
@@ -14,9 +23,12 @@ public class ActElemDialog extends javax.swing.JDialog {
     /**
      * Creates new form ActElemDialog
      */
-    public ActElemDialog(java.awt.Frame parent, boolean modal) {
+    private Elemento elem;
+    public ActElemDialog(java.awt.Frame parent, boolean modal,Elemento elem) {
         super(parent, modal);
+        this.elem = elem;
         initComponents();
+        init();
     }
 
     /**
@@ -187,7 +199,7 @@ public class ActElemDialog extends javax.swing.JDialog {
         
         
         
-        /*
+        
         for(Component c : this.getComponents()){
             if(c.getClass().equals(JTextField.class) || c.getClass().equals(JFormattedTextField.class)){
 
@@ -198,30 +210,27 @@ public class ActElemDialog extends javax.swing.JDialog {
 
             }
         }
-        String name = name_tf.getText();
-        System.out.println(this.data_tf.getText());
+        elem.setNome(name_tf.getText());
         String[] d = this.data_tf.getText().split("/");
         try {
-            Date date = new Date(Integer.parseInt(d[2])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[0]));
-            String escolaridade = this.escol.getText();
-            String estCivil = this.estCivil_tf.getText();
-            String parentesco = this.parent_tf.getText();
-            String ocupacao = this.ocup_tf.getText();
-            String naturalidade = this.nat_tf.getText();
-            String nacionalidade = this.nac_tf.getText();
-
-            Elemento elem = new Elemento("", name, date, escolaridade, estCivil, parentesco, ocupacao, naturalidade, nacionalidade);
-            boolean add = this.elementos.add(elem);
+            this.elem.setDataNasc(new Date(Integer.parseInt(d[2])-1900, Integer.parseInt(d[1])-1, Integer.parseInt(d[0])));
+            this.elem.setEscolaridade(this.escol.getText());
+            this.elem.setEstCivil(this.estCivil_tf.getText());
+            this.elem.setParentesco(this.parent_tf.getText());
+            this.elem.setOcupacao(this.ocup_tf.getText());
+            this.elem.setNaturalidade(this.nat_tf.getText());
+            this.elem.setNacionalidade(this.nac_tf.getText());
+            new ErrorWindow("Elemento", "Elemento alterado com Sucesso", "message", new JFrame()).wshow();
             ((JFrame)this.getParent()).dispose();
         } catch (NumberFormatException e) {
             new ErrorWindow("Campos em Falta", "Campos em falta", "error", new JFrame()).wshow();
-        }*/
+        }
 
     }//GEN-LAST:event_sub_btActionPerformed
 
     private void voltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltar1ActionPerformed
         // TODO add your handling code here:
-       // ((JFrame)this.getParent()).dispose();
+        ((JFrame)this.getParent()).dispose();
     }//GEN-LAST:event_voltar1ActionPerformed
 
         
@@ -258,7 +267,7 @@ public static void main(String args[]) {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ActElemDialog dialog = new ActElemDialog(new javax.swing.JFrame(), true);
+                ActElemDialog dialog = new ActElemDialog(new javax.swing.JFrame(), true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -292,4 +301,20 @@ public static void main(String args[]) {
     private javax.swing.JButton voltar;
     private javax.swing.JButton voltar1;
     // End of variables declaration//GEN-END:variables
+
+    private void init() {
+        
+       this.name_tf.setText(this.elem.getNome());
+        Date d = elem.getDataNasc();
+            String dt = new SimpleDateFormat("dd/MM/yyyy").format(d);
+            this.data_tf.setText(dt);
+        
+        this.escol.setText(this.elem.getEscolaridade());
+        this.estCivil_tf.setText(this.elem.getEstCivil());
+        this.parent_tf.setText(this.elem.getParentesco());
+        this.ocup_tf.setText(this.elem.getOcupacao());
+        this.nat_tf.setText(this.elem.getNaturalidade());
+        this.nac_tf.setText(this.elem.getNacionalidade());
+        
+    }
 }

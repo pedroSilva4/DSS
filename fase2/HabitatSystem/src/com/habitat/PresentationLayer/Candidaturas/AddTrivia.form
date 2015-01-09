@@ -182,7 +182,7 @@
     <Component class="javax.swing.JFormattedTextField" name="rend_tf">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="#,##0.00;(#,##0.00)" subtype="-1" type="4"/>
+          <Format format="###0.00;(#,##0.00)" subtype="-1" type="4"/>
         </Property>
       </Properties>
     </Component>

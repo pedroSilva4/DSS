@@ -195,12 +195,12 @@ public class ActCandPanel extends javax.swing.JPanel {
     private javax.swing.JTextField parent_tf;
     // End of variables declaration//GEN-END:variables
 
-    public Elemento getCandidato() {
+    public void setCandidato() {
         for(Component c : this.getComponents())
            if(c.getClass().equals(JTextField.class) || c.getClass().equals(JFormattedTextField.class)){
                 JTextField t = (JTextField)c;
                 if(t.getText().isEmpty())
-                    return null;
+                    return;
            }
         this.cand.setNome(name_tf.getText());
         String[] d = this.data_tf.getText().split("/");
@@ -214,7 +214,7 @@ public class ActCandPanel extends javax.swing.JPanel {
         this.cand.setNacionalidade(this.nac_tf.getText());
         this.cand.setNaturalidade(this.nat_tf.getText());
         
-        return cand;
+        //return cand;
     }
 
 public void myinit(){
